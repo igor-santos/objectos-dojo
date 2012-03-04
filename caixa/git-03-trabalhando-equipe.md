@@ -1,11 +1,14 @@
 ---
-layout: post
+layout: post-alpha
 title: "Git :: Trabalhando em equipe"
 author: "Hellen Carla Paixão Escarate"
 published: true
 tags:
 - git
 - aprendizes
+partof: git
+num: 3
+outof: 3
 ---
 
 ## Introdução

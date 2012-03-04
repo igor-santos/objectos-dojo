@@ -1,3 +1,13 @@
+---
+layout: post-alpha
+title: "Processos :: Integração contínua"
+author: "Hellen Carla Paixão Escarate"
+published: true
+partof: processo
+num: 1
+---
+
+
 Depois de você ter praticado o TDD, nosso próximo passo é aprender sobre integração contínua.
 
 “Integração Contínua é uma pratica de desenvolvimento de software onde os membros de um time integram seu trabalho frequentemente, geralmente cada pessoa integra pelo menos diariamente – podendo haver multiplas integrações por dia. Cada integração é verificada por um build automatizado (incluindo testes) para detectar erros de integração o mais rápido possível. Muitos times acham que essa abordagem leva a uma significante redução nos problemas de integração e permite que um time desenvolva software coeso mais rapidamente.” Martin Fowler

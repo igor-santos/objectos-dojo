@@ -1,3 +1,17 @@
+---
+layout: post-alpha
+title: "Git :: Sistemas de controle de versão"
+author: "Hellen Carla Paixão Escarate"
+published: true
+tags:
+- git
+- aprendizes
+- introdução
+- commit não aparece
+partof: git
+num: 0
+---
+
 Agora, vamos de falar de algo muito importante, principalmente quando se trata de desenvolvimento de software em equipes. 
 
 Vou usar como exemplo algo que aconteceu na faculdade a pouco tempo.  

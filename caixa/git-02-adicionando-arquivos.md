@@ -1,11 +1,13 @@
 ---
-layout post-alpha
+layout: post-alpha
 title: "Git :: Adicionando arquivos"
 author: "Hellen Carla Paixão Escarate"
 published: true
 tags:
 - git
 - aprendizes
+partof: git
+num: 2
 ---
 
 Depois de ter feito um fork do projeto, antes de adicionarmos arquivos, vamos começar criando uma branch. 

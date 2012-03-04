@@ -8,6 +8,8 @@ tags:
 - aprendizes
 - introdução
 - commit não aparece
+partof: git
+num: 1
 ---
 
 ## Introdução 

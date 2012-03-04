@@ -4,10 +4,18 @@ title: "Caixa de ferramentas"
 ---
 <div class="row">
   <div class="span4">
-    <h3>Git</h3>
+    <h3>Processos</h3>
+    
+    {% assign section_list = "processo" %}
+    {% include obj/section_list %}
+        
   </div>
   <div class="span4">
-    <h3></h3>
+    <h3>Git</h3>
+    
+    {% assign section_list = "git" %}
+    {% include obj/section_list %}
+         
   </div>
   <div class="span4">
     <h3></h3>

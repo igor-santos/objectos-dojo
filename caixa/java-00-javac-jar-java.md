@@ -1,14 +1,10 @@
 ---
 layout: post-alpha
-title: "Git :: Trabalhando em equipe"
+title: "javac :: jar :: java"
 author: "Hellen Carla Paixão Escarate"
 published: true
-tags:
-- javac
-- java
-- jar 
-- compilar
-- aprendizes
+partof: java
+num: 0
 ---
 
 ## Introdução

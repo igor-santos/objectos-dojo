@@ -1,16 +1,10 @@
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=<$Encoding$>"/>
-</head>
-
 ---
 layout: post-alpha
 title: "Stack Traces"
 author: "Marcos Piazzolla"
 published: true
-tags:
-- stack traces
-- erros eclipse 
-- aprendizes
+partof: java
+num: 1
 ---
 
 ## Stack Traces

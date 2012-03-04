@@ -4,11 +4,9 @@ title: "Vim"
 author: "Marcos Piazzolla"
 user: "mpiazzolla"
 published: true
-tags:
-- alpha
-- vim
-- wiki
-- aprendizes
+partof: linux
+num: 0
+outof: 0
 ---
 
 ## Um pouco de História 

@@ -3,10 +3,8 @@ layout: post
 title: "SQL :: Join"
 author: "Hellen Carla Paixão Escarate"
 published: true
-tags:
-- sql 
-- join 
-- aprendizes
+partof: sql
+num: 0
 ---
 
 Nesse Dojo vamos praticar os comandos INNER JOIN, LEFT JOIN e RIGHT JOIN.

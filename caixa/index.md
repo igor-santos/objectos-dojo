@@ -8,35 +8,43 @@ title: "Caixa de ferramentas"
     
     {% assign section_list = "processo" %}
     {% include obj/section_list %}
-        
   </div>
   <div class="span4">
     <h3>Git</h3>
     
     {% assign section_list = "git" %}
     {% include obj/section_list %}
-         
   </div>
   <div class="span4">
-    <h3></h3>
+    <h3>Linux</h3>
+    
+    {% assign section_list = "linux" %}
+    {% include obj/section_list %}
   </div>
 </div>
 
-<div class="span10">
+<div class="row">
+  <div class="span4">
+    <h3>SQL / MySQL</h3>
 
-  <h3>Aprendizes <small>katas faixa branca</small></h3>
-  <p>Treinamento b&aacute;sico de todos os aprendizes objectos.</p>
-  <ul>
-  {% for post in site.tags.aprendizes %}
-    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-  {% endfor %}
-  </ul>
+    {% assign section_list = "sql" %}
+    {% include obj/section_list %}
+  </div>
+  <div class="span4">
+  </div>
+  <div class="span4">
+  </div>
+</div>
 
-  <h3>Git</h3>
-  <ul>
-  {% for post in site.tags.git %}
-    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-  {% endfor %}
-  </ul>
-  
+<div class="row">
+  <div class="span4">
+    <h3>Java</h3>
+
+    {% assign section_list = "java" %}
+    {% include obj/section_list %}
+  </div>
+  <div class="span4">
+  </div>
+  <div class="span4">
+  </div>
 </div>

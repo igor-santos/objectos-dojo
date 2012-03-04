@@ -1,13 +1,13 @@
 ---
-layout: post
-title: "Git :: Debugger"
+layout: post-alpha
+title: "Debugger"
 published: true
-tags:
-- git
-- aprendizes
+partof: java
+num: 2
+outof: 2
 ---
 
-#Introdução
+# Introdução
 
 Por mais capacitado que seja um desenvolvedor existem momentos onde é necessário analisar uma aplicação mais a fundo, pois alguns componentes da mesma começaram a se
 comportar de forma muito estranha, para isso o desenvolvedor possui um recurso muito interessante chamado "Debugger" ou depurador. Com isso o desenvolvedor pode 
@@ -58,60 +58,53 @@ que no final das contas acabará ficando desta maneira:
 
 *Classe Debugging*
 
-```java
-package com.objectos.depurador;
-
-/**
- * @author marcos.piazzolla@objectos.com.br (Marcos Piazzolla)
- */
-public class Debugging {
-
-  void tabelaAscii() {
-    byte b = 0;
-    int i = 0;
-
-    while(i < 255) {
-      System.out.printf("Nº: %d Valor: %c\n", i, b);
-      i++;
-      b++;
+  package com.objectos.depurador;
+  
+  /**
+   * @author marcos.piazzolla@objectos.com.br (Marcos Piazzolla)
+   */
+  public class Debugging {
+  
+    void tabelaAscii() {
+      byte b = 0;
+      int i = 0;
+  
+      while(i < 255) {
+        System.out.printf("Nº: %d Valor: %c\n", i, b);
+        i++;
+        b++;
+      }
     }
+  
   }
-
-}
-```
 
 *Classe Principal*
 
-```java
-package com.objectos.depurador;
-
-/**
- * @author marcos.piazzolla@objectos.com.br (Marcos Piazzolla)
- */
-public class TestDebugging {
-  public static void main(String[] args) {
-
-    Debugging d = new Debugging();
-    d.tabelaAscii();
-
+  package com.objectos.depurador;
+  
+  /**
+   * @author marcos.piazzolla@objectos.com.br (Marcos Piazzolla)
+   */
+  public class TestDebugging {
+    public static void main(String[] args) {
+  
+      Debugging d = new Debugging();
+      d.tabelaAscii();
+  
+    }
   }
-}
-```
 
 A principio tudo parece estar certo, ok ? 
 Mas quando executamos nossa aplicação nos deparamos com a seguinte mensagem:
 
-```
-Nº: 128 Valor: Exception in thread "main" java.util.IllegalFormatCodePointException: Code point = 0xffffff80
-	at java.util.Formatter$FormatSpecifier.printCharacter(Unknown Source)
-	at java.util.Formatter$FormatSpecifier.print(Unknown Source)
-	at java.util.Formatter.format(Unknown Source)
-	at java.io.PrintStream.format(Unknown Source)
-	at java.io.PrintStream.printf(Unknown Source)
-	at com.objectos.depurador.Debugging.tabelaAscii(Debugging.java:19)
-	at com.objectos.depurador.TestDebugging.main(TestDebugging.java:16)
-
-```
+  Nº: 128 Valor: Exception in thread "main" java.util.IllegalFormatCodePointException: Code point = 0xffffff80
+  	at java.util.Formatter$FormatSpecifier.printCharacter(Unknown Source)
+  	at java.util.Formatter$FormatSpecifier.print(Unknown Source)
+  	at java.util.Formatter.format(Unknown Source)
+  	at java.io.PrintStream.format(Unknown Source)
+  	at java.io.PrintStream.printf(Unknown Source)
+  	at com.objectos.depurador.Debugging.tabelaAscii(Debugging.java:19)
+  	at com.objectos.depurador.TestDebugging.main(TestDebugging.java:16)
 
 Temos um Stack Trace na tela, podemos observar a pilha de execução do programa e acompanhar o fluxo de execução para encontrar o erro e acabar com essa exceção de uma
 vez por todas, mas quando observamos os pontos do Stack Trace que indicam onde a exceção ocorreu em nosso código, justamente a chamada ao método tabelaAscii() e a 
@@ -181,19 +174,15 @@ está errado em nossa aplicação para que tal erro ocorra. Analisando novamente
 analisando o fluxo nada aparenta estar errado, mas quando olhamos as declarações mais afundo percebemos que algo bem estranho acabou passando dspercebido por nós. Atente
 a amostra de código de nossa aplicação mostrando o possível suspeito de nossas dores de cabeça:
 
-``` java
-
-void tabelaAcii() {
-    byte b = 0;//mas o que este byte está fazendo aqui????
-    int i = 0;
-
-    while(i < 255) {
-      System.out.printf("Nº: %d Valor: %c\n", i, b);
-      i++;
-      b++;
-    }
- 
-``` 
+  void tabelaAcii() {
+      byte b = 0;//mas o que este byte está fazendo aqui????
+      int i = 0;
+  
+      while(i < 255) {
+        System.out.printf("Nº: %d Valor: %c\n", i, b);
+        i++;
+        b++;
+      }
 
 Quer dizer que a fonte de nossas dores de cabeça era esta simples declaração de "byte"?
 Mas afinal de contas quais problemas existem em utilizar um byte para representar os caracteres da tabela ASCII em nossa aplicação?

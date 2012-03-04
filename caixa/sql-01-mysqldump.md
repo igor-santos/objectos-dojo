@@ -3,12 +3,10 @@ layout: post
 title: "Backup de Banco de Dados - mysqldump"
 author: "Afonso Jardim Filgueiras"
 user: "afilgueiras"
-published: true 
-tags:
-- backup
-- procedimento
-- mysqldump
-- mysql
+published: true
+partof: sql
+num: 1
+outof: 1 
 ---
 
 ## mysqldump

@@ -16,7 +16,7 @@ title: "home"
         <li>Compartilhar conhecimento com a comunidade</li>
       </ol>
       
-      <a href="" class="btn btn-large btn-info">Contribua!</a>
+      <a href="contribua.html" class="btn btn-large btn-info">Contribua!</a>
       <a href="https://github.com/objectos/objectos-dojo" class="btn btn-large">Projeto no GitHub</a>
     </div>
 

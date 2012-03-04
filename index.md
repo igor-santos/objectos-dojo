@@ -3,19 +3,11 @@ layout: default
 title: "home"
 ---
 
-<div id="splash">
-  <div class="container">
-    <h1>objectos doj&ocirc;</h1>
-    <h2>cultura de aprendizado contínuo</h2>
-  </div>
-</div>
-
-<div class="container page">
-
-  <div class="row">
-    <div class="span10">
+<div class="container landing">
+  <div class="row wellcome">
     
-      <h2>objectos dojô</h2>
+    <div class="span5">
+      <h1>objectos doj&ocirc;</h1>
       <p>
         Tutoriais, artigos técnicos, procedimentos, etc com o objetivo de:
       </p>
@@ -24,9 +16,28 @@ title: "home"
         <li>Compartilhar conhecimento com a comunidade</li>
       </ol>
       
+      <a href="" class="btn btn-large btn-info">Contribua!</a>
+      <a href="https://github.com/objectos/objectos-dojo" class="btn btn-large">Projeto no GitHub</a>
+    </div>
+
+    <div class="span7">
+      <img src="img/dojo-book.jpg" />
+    </div>
+    
+  </div>
+
+  <hr />
+  
+  <h2>cultura de aprendizado contínuo</h2>
+
+  <hr />
+  
+  <div class="row">
+  
+    <div class="span4">
       <h3>
         <a href="#">Novos estagiários, funcionários</a>
-        <span class="label notice">todo</span>
+        <span class="label label-notice">todo</span>
       </h3>
       <p>
         Seja bem vindo à objectos. Aqui você encontrará:
@@ -37,48 +48,48 @@ title: "home"
           <li>obrigações e o que é esperado de você</li>
         </ul>
       </p>
-      
+    </div>
+
+    <div class="span4">
       <h3>
         <a href="caixa">Caixa de ferramentas</a>
-        <span class="label success">em progresso</span>
+        <span class="label label-success">em progresso</span>
       </h3>
       <p>       
         Tutorias, artigos, katas, exercícios, entre outros. 
         Conceitos essencias que todo membro da equipe de desenvolvimento deve saber compartilhados com a comunidade.
       </p>
       <p>Java, Eclipse, GIT, Maven, Bash, Jenkis, SQL, entre outros.</p>
-      
+    </div>
+
+    <div class="span4">
       <h3>
         <a href="procedimento">Procedimentos</a>
-        <span class="label success">em progresso</span>
+        <span class="label label-success">em progresso</span>
       </h3>
       <p>
         Até que certos conceitos fundamentais fiquem sedimentados, 
         procedimentos trazem produtividade. Aprenda aqui!
       </p>
     </div>
+  
+  </div>
+  
+  <hr />
 
-    <div class="offset1 span5">
+  <div class="row contribua">
+    <div class="span4">
       <h2>Contribua!</h2>
+    </div>
+
+    <div class="span8">
       <p>
         objectos dojo é um projeto de código aberto! Você encontra todos os textos, artigos e 
         códigos-fontes no <a href="http://github.com/objectos/objectos-dojo">GitHub</a>. 
       </p>
-      
-      <h2>Quem?</h2>
-      
-      <p>os responsáveis por este site:</p>
-      
-      {% include gravatar-mendo.html %}
-      
-      {% include gravatar-hescarate.html %}
-      
-      {% include gravatar-mpiazzolla.html %}
-      
-      {% include gravatar-afilgueiras.html %}
-      
     </div>
   </div>
 
-
+  <hr />
+    
 </div>

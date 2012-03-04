@@ -3,14 +3,14 @@ layout: default
 ---
 <div class="container page">
   <div class="row">
-    <div class="span10">
+    <div class="span8">
       
       <div class="post-meta">
         <h1>{{ page.title }}</h1>
-        <h2>{{ page.author }} <small>em {{ page.date | date: "%d/%m/%Y"}}</small></h2>
+        <h2>{{ page.author }}</h2>
       </div>
   
-      <div class="alert-message warning">
+      <div class="alert alert-block">
         <p><strong>Versão ALPHA!</strong> Este artigo está em versão 'Alpha' e, portanto, 
         não foi ainda revisado corretamente</p>
       </div>
@@ -21,29 +21,7 @@ layout: default
       
     </div>
     
-    <div class="offset1 span5">
-      <h4>Indíce</h4>
-    
-      <h4>Sobre o autor(a):</h4>
-    
-      {% if page.user == 'afilgueiras' %}
-        
-        {% include gravatar-afilgueiras.html %}
-        
-      {% elsif page.user == 'hescarate' %}
-      
-        {% include gravatar-hescarate.html %}
-
-      {% elsif page.user == 'mendo' %}
-      
-        {% include gravatar-mendo.html %}
-
-      {% elsif page.user == 'mpiazzolla' %}
-      
-        {% include gravatar-mpiazzolla.html %}
-      
-      {% endif %}      
-    
+    <div class="span4">
     </div>
   </div>
 </div>

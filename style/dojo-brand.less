@@ -1,0 +1,74 @@
+.fixed(@top: 0, @left: 0, @right: 0) {
+	position: fixed;
+	top: @top;
+	left: @left;
+	right: @right;
+	z-index: 10000;
+	overflow: visible;
+}
+
+body {
+	padding-top: 60px;
+}
+
+.navbar {
+	.navbar-inner {
+		background: #2E4971;
+		.box-shadow(0 1px 4px @grayLight);
+		height: 60px;		
+	}
+}
+
+#hd {
+	background: @black;
+	color: @grayLight;
+	height: 40px;
+	padding: 10px;
+	
+	.container {
+		height: 40px;
+	}
+}
+
+#bd {
+	background-color: @white;
+}
+
+#ft {
+	min-height: 800px;
+	padding-top: 40px;
+  
+	font-family: 'Josefin Sans', sans-serif;
+	
+	a {
+		color: #C0D0E8;
+		text-decoration: underline;	
+	}
+	
+	p {
+		font-size: @baseFontSize * 1.2;
+	}
+}
+
+#splash {
+	background: url('../../img/dojo-book.jpg') no-repeat center top;
+	border-top: 1px solid @grayDark;
+	border-bottom: 1px solid @grayDark;
+	height: 250px;
+	
+	h1, h2 {
+		margin: 0;
+	
+		color: @white;
+		font-family: 'Josefin Sans', sans-serif;
+		font-size: @baseFontSize * 4;
+		font-weight: 100;
+		line-height: @baseLineHeight * 4;
+		//text-align: center;
+		text-shadow: 1px 1px 1px @black;
+	}
+	
+	h1 {
+		margin-top: 40px;
+	}
+}

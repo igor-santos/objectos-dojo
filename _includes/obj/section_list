@@ -1,0 +1,18 @@
+{% for pg in site.pages %}
+  {% if pg.partof == section_list and pg.outof %}
+   {% assign sectionTotal = pg.outof %}  
+  {% endif %}
+{% endfor %}
+  
+{% if sectionTotal %}
+  <ol>
+  {% for i in (0..sectionTotal) %}
+    {% for pg in site.pages %}
+      {% if pg.partof == section_list and pg.num and pg.num == i %}
+        <li><a href="{{ pg.url }}">{{ pg.title }}</a></li> 
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+  </ol>
+{% else %} **ERROR**. Couldn't find the total number of pages in this set of tutorial articles. Have you declared the `outof` tag in your YAML front matter?
+{% endif %}     

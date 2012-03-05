@@ -1,15 +1,10 @@
 ---
 layout: post
-title: "Como contribuir"
+title: "objectos-dojo :: Contribuindo"
 author: "Marcio Endo"
 user: "mendo"
 published: true
 ---
-
-## Para os impacientes
-
-1. Faça um fork do projeto no [GitHub](https://github.com/objectos/objectos-dojo)
-1. Importe o projeto para o Eclipse
 
 ## Um lugar para equipes aprenderem juntas
 
@@ -44,31 +39,22 @@ Neste contexto, o objectos-dojo é o local para que equipes e programadores:
 
 1. Adquiram conhecimento por conta própria;
 1. Criem conhecimento por conta própria; e
-1. Propaguem conhecimento por contat própria.
+1. Transmitam conhecimento por conta própria.
 
-## Primeiros passos
+## Organização
 
 O projeto é totalmente de código aberto hospedado no [GitHub](https://github.com/objectos/objectos-dojo). 
 Este possui duas partes principais:
 
-1. Este site em que estão hospedados artigos, tutoriais, faqs, procedimentos.
-1. Códigos-fonte que servem como laboratório e como exemplos.
+1. __Artigos e documentação__: compõem este site que você está lendo agora. O escopo dos artigos pode variar 
+desde guias completos e detalhados a textos mais simples do tipo 'perguntas e repostas'.
+1. __Códigos-fonte__: servem de laboratório para os documentos e artigos.
 
-### Implementação
+Implementados da seguinte maneira:.
 
-É muito importante notar o seguinte.
+1. Os _artigos e documentos_ ficam hospedados na branch [master](https://github.com/objectos/objectos-dojo)
+1. Já os _códigos fonte_ ficam hospedados na branch [gh-pages](https://github.com/objectos/objectos-dojo/tree/gh-pages)
 
-* Códigos-fonte ficam hospedados na branch [master](https://github.com/objectos/objectos-dojo)
-* Artigos, páginas, e documentos ficam hospedados na branch [gh-pages](https://github.com/objectos/objectos-dojo/tree/gh-pages)
+## Importando o projeto 
 
-## Importando os projetos para o Eclipse
-
-Praticamente todo desenvolvimento na objectos é feito no Eclipse.
-
-    $ cd
-    $ mkdir -p kdo/projetos
-    $ cd kdo/projetos
-    $ git clone git@github.com:username/objectos-dojo.git objectos-dojo
-    $ git clone git@github.com:username/objectos-dojo.git objectos-dojo-pages
-    $ cd objectos-dojo-pages
-    $ git checkout gh-pages
+O próximo passo é importar o projeto para a sua máquina <a href="{{ site.baseurl }}/contribua/00-importar.html" class="btn btn-success">Continuar!</a>

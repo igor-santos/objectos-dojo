@@ -5,11 +5,13 @@
     
   <body>
   
-    <div id="hd">
-      <div class="container">
-        <a href="{{ site.baseurl }}" class="brand">
-          <img src="{{ site.baseurl }}/img/logo-blog.png" alt="objectos dojô" />
-        </a>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a href="{{ site.baseurl }}" class="brand">
+            objectos dojo
+          </a>
+        </div>
       </div>
     </div>
     
@@ -17,7 +19,13 @@
       {{ content }}
     </div>
     
-    {% include obj-ft.html %}
+    <div class="container">
+    
+      <hr />
+      
+      {% include obj-ft.html %}
+    
+    </div>
     
   </body>
 </html>

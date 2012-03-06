@@ -1,13 +1,12 @@
 ---
 layout: post-alpha
-title: "Enum :: Conversão de Enum"
+title: "Como tratar enums nos loaders?"
 author: "Afonso Jardim Filgueiras"
 user: "afilgueiras"
 published: true 
-tags:
-- dojo
-- aprendizes
-- enum
+partof: faq-crud-entidade
+num: 1
+outof: 1
 ---
 
 ## Conversão de Enum

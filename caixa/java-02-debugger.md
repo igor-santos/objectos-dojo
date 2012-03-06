@@ -58,41 +58,41 @@ que no final das contas acabará ficando desta maneira:
 
 *Classe Debugging*
 
-  package com.objectos.depurador;
-  
-  /**
-   * @author marcos.piazzolla@objectos.com.br (Marcos Piazzolla)
-   */
-  public class Debugging {
-  
-    void tabelaAscii() {
-      byte b = 0;
-      int i = 0;
-  
-      while(i < 255) {
-        System.out.printf("Nº: %d Valor: %c\n", i, b);
-        i++;
-        b++;
-      }
-    }
-  
-  }
+	package com.objectos.depurador;
+		  
+	/**
+	 * @author marcos.piazzolla@objectos.com.br (Marcos Piazzolla)
+	 */
+	public class Debugging {
+	
+	  void tabelaAscii() {
+	    byte b = 0;
+	    int i = 0;
+	
+	    while (i < 255) {
+	      System.out.printf("Nº: %d Valor: %c\n", i, b);
+	      i++;
+	      b++;
+	    }
+	  }
+	
+	}
 
 *Classe Principal*
 
-  package com.objectos.depurador;
-  
-  /**
-   * @author marcos.piazzolla@objectos.com.br (Marcos Piazzolla)
-   */
-  public class TestDebugging {
-    public static void main(String[] args) {
-  
-      Debugging d = new Debugging();
-      d.tabelaAscii();
-  
-    }
-  }
+	package com.objectos.depurador;
+	  
+	/**
+	 * @author marcos.piazzolla@objectos.com.br (Marcos Piazzolla)
+	 */
+	public class TestDebugging {
+	  public static void main(String[] args) {
+	
+	    Debugging d = new Debugging();
+	    d.tabelaAscii();
+	
+	  }
+	}
 
 A principio tudo parece estar certo, ok ? 
 Mas quando executamos nossa aplicação nos deparamos com a seguinte mensagem:
@@ -207,7 +207,7 @@ Após o término deste artigo o leitor será capaz de:
 
 -Compreender o fluxo de execuções de um programa utilizando o depurador.
 
-## *  Referências: *
+## Referências:
 
 http://pt.wikipedia.org/wiki/Depurador
 
@@ -216,8 +216,6 @@ http://lcadfs2.lcad.icmc.usp.br/~junio/mat/depurador.pdf
 http://www.infoblogs.com.br/view.action?contentId=208621&Depuracao-no-Eclipse-Debugger.html
 
 http://www.guj.com.br/java/6033-debug-no-eclipse
-
-http://hotwork.sourceforge.net/hotwork/manual/eclipse/eclipse-user*guide.html
 
 http://pt.wikipedia.org/wiki/Depuração
 

@@ -33,7 +33,7 @@ usada para associar seu commit a sua conta do Github.
 (O nome deve ser seu nome real e não seu nome de usuário no Github)
 
 É importante certificar-se que no Github o e-mail é o mesmo que foi adicionado acima. Caso contrário pode ser que os
-seus commits não apareçam. Para confirmar essa informação, no Github vá em ****
+seus commits não apareçam. Para confirmar essa informação, no Github vá em 
 
 
 ## Praticando

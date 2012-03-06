@@ -5,7 +5,6 @@ author: "noobie"
 published: true
 partof: faq-crud-entidade
 num: 0
-outof: 0
 ---
 
 ## Sintoma

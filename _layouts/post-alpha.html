@@ -1,24 +1,22 @@
 ---
-layout: default
+layout: base
+styleClass: post
 ---
 <div class="container page">
-  <div class="row">
-    <div class="offset2 span8">
-      
-      <div class="post-meta">
-        <h1>{{ page.title }}</h1>
-        <h2>{{ page.author }}</h2>
-      </div>
+  <div class="alert alert-block">
+    <p><strong>Versão ALPHA!</strong> Este artigo está em versão 'Alpha' e, portanto, 
+    não foi ainda revisado corretamente</p>
+  </div>
 
-      <div class="alert alert-block">
-        <p><strong>Versão ALPHA!</strong> Este artigo está em versão 'Alpha' e, portanto, 
-        não foi ainda revisado corretamente</p>
-      </div>
-  
-      <div class="post">
-      {{ content }}
-      </div>
+  <div class="row post">
+    <div class="offset2 span8">
+      <h1>{{ page.title }}</h1>
       
+      {% if page.author %}
+      <h2>{{ page.author }}</h2>
+      {% endif %}
+
+      {{ content }}
     </div>
   </div>
 </div>

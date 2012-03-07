@@ -1,9 +1,6 @@
 ---
 layout: post
 title: "objectos-dojo :: Tutorial gh-pages"
-author: "Marcio Endo"
-user: "mendo"
-published: true
 ---
 
 ## 1. No GitHub crie um fork deste projeto.

@@ -1,23 +1,50 @@
-.landing {
-	padding-top: 40px;
+body.landing {
+	#hd {
+		background: @black;
+		color: @grayLight;
+		
+		margin-bottom: 40px;
+	}
+	
+	#hd-inner {
+		border: 0;
+	}
+	
+	.hd {
+		h1, h2 {
+			margin: 0;
+		}
+		
+		h1 {
+			color: @gray;
+		}
+		
+		h2 {
+			color: @grayLighter;
+		}
+	}
 
-	h1, h2 {
-		color: @black;
-		font-family: 'Josefin Sans', sans-serif;
-		font-size: @baseFontSize * 4;
-		font-weight: 100;
-		line-height: @baseLineHeight * 3;
-	}
+	div.landing {
 	
-	h1 {
-		margin: 0 0 40px;
-	}
+		h1, h2 {
+			color: @black;
+			font-family: 'ratio', sans-serif;
+			font-size: @baseFontSize * 4;
+			font-weight: 300;
+			line-height: @baseLineHeight * 3;
+		}
+		
+		h1 {
+			margin: 0 0 40px;
+		}
+		
+		h2 {
+			text-align: center;
+		}
+		
+		hr {
+			margin: 40px 0;
+		}
 	
-	h2 {
-		text-align: center;
-	}
-	
-	hr {
-		margin: 40px 0;
 	}
 }

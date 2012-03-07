@@ -1,31 +1,7 @@
-<!doctype html>
-<html>
-  
-  {% include head.html %}
-    
-  <body>
-  
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a href="{{ site.baseurl }}" class="brand">
-            objectos dojo
-          </a>
-        </div>
-      </div>
-    </div>
-    
-    <div id="bd">
-      {{ content }}
-    </div>
-    
-    <div class="container">
-    
-      <hr />
-      
-      {% include obj-ft.html %}
-    
-    </div>
-    
-  </body>
-</html>
+---
+layout: base
+styleClass: base
+---
+<div id="bd">
+  {{ content }}
+</div>

@@ -1,3 +1,5 @@
+@objectosBlue: #2E4971;
+
 .fixed(@top: 0, @left: 0, @right: 0) {
 	position: fixed;
 	top: @top;
@@ -7,27 +9,38 @@
 	overflow: visible;
 }
 
-body {
-	padding-top: 60px;
-}
-
 .navbar {
 	.navbar-inner {
-		background: #2E4971;
+		background: @objectosBlue;
 		.box-shadow(0 1px 4px @grayLight);
 		height: 60px;		
 	}
 }
 
-#hd {
-	background: @black;
-	color: @grayLight;
-	height: 40px;
-	padding: 10px;
+.hd {
+	background: url('../../img/logo-dojo-brand.png') no-repeat 60px center;
 	
-	.container {
-		height: 40px;
+	h1, h2 {
+		font-family: 'tilden-sans-light', sans-serif;
+		font-size: @baseFontSize;
+		font-weight: bold;
+		line-height: @baseLineHeight;
+		
+		margin: 0;
 	}
+	
+	h2 {
+		color: @grayLight;
+	}
+	 
+	.objectos {
+		color: lighten(@objectosBlue, 25%);
+	}
+}
+
+#hd-inner {
+	border-bottom: 1px solid @grayLighter;
+	padding: 60px 0;
 }
 
 #bd {

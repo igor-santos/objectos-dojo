@@ -8,8 +8,6 @@ partof: processo
 num: 0
 ---
 
-# TDD - Test Driven Development
-
 O Test Driven Development, em português, Desenvolvimento Dirigido a Testes, é uma técnica de desenvolvimento de
 Software muito usada em metodologias de desenvolvimento ágil. 
 

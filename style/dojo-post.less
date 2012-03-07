@@ -1,16 +1,49 @@
+body.post {
+	border-top: 4px solid @objectosBlue;
+
+	div.post {
+
+		h1, h2, h3, h4, h5, h6 {
+			font-family: "botanika-web", sans-serif;
+		}
+	
+		h1 {
+			font-size: @baseFontSize * 3;
+			font-weight: 100;
+			line-height: @baseLineHeight * 3;
+			
+			margin-bottom: 20px;
+		}
+		
+		h2:first-child {
+			margin-top: 0;
+		}
+		
+		h2, h3, h4, h5, h6 {
+			margin: 40px 0 8px;
+		}
+	
+		p, li {
+			font-family: "botanika-web", sans-serif;
+			font-size: @baseFontSize * 1.4;
+			line-height: @baseLineHeight * 1.7;
+		}
+	
+		li > p {
+			margin-bottom: 0;
+		}
+		
+		p, pre {
+			margin-bottom: @baseLineHeight * 1.1;
+		}
+		
+	}
+}
+
 .post-container {
 }
 
 .post-meta {
-	h1 {
-		color: #4673A6;
-		font-family: georgia, "times new roman", serif;
-		font-size: @baseFontSize * 3;
-		font-weight: normal;
-		line-height: @baseLineHeight * 3;
-		text-shadow: 0 1px 1px @grayLighter;
-	}
-	
 	h2 {
 		color: @black;
 		font-family: georgia, "times new roman", serif;

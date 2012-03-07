@@ -1,13 +1,15 @@
 <head>
-<title>{{ page.title }} :: objectos dojô</title>
+<title>objectos dojô :: {{ page.title }}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="img/favicon.ico" type="image/vnd.microsoft.icon" rel="shortcut icon">
 <link href="img/favicon.ico" type="image/vnd.microsoft.icon" rel="icon">
-<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
-<link rel="stylesheet/less" type="text/css" href="{{ site.baseurl }}/style/sheet.less">
+<link href="{{ site.baseurl }}/style/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="{{ site.baseurl }}/style/sheet.less" rel="stylesheet/less" type="text/css">
 <script type="text/javascript" src="{{ site.baseurl }}/js/less-1.2.2.min.js"></script>
 <script type="text/javascript" src="{{ site.baseurl }}/js/google-code-prettify/prettify.js"></script>
 <script type="text/javascript" src="{{ site.baseurl }}/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="http://use.typekit.com/cun3vsi.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push([ '_setAccount', 'UA-25755750-1' ]);
@@ -21,11 +23,5 @@
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(ga, s);
   })();
-</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('pre').addClass('prettyprint linenums');
-    prettyPrint();
-  });
 </script>
 </head>

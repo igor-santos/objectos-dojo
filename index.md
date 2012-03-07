@@ -1,8 +1,7 @@
 ---
-layout: default
-title: "home"
+layout: base
+styleClass: landing
 ---
-
 <div class="container landing">
   <div class="row wellcome">
     

@@ -1,18 +1,13 @@
 ---
 layout: post
 title: "objectos-dojo :: Artigos"
-author: "Marcio Endo"
-user: "mendo"
-published: true
 ---
 
 ## Organização
 
 Os artigos (até o momento) estão organizados em duas categorias:
 
-1. __Caixa de ferramentas__: as ferramentas básicas (e mínimas) que todo programador **deve** saber
-para chamar-se um programador. Incluem mas não se restrigem a:
-
+1. __Caixa de ferramentas__: as ferramentas básicas (e mínimas) que todo programador **deve** saber para chamar-se um programador. Incluem mas não se restrigem a:
     - Sistemas de controle de versão
     - Orientação a objetos
     - Compiladores
@@ -21,9 +16,7 @@ para chamar-se um programador. Incluem mas não se restrigem a:
     - IDEs
     - Java (conceitos básicos da linguagem)
     - Processos como integração contínua e todos os conceitos relacionados: testes, build, revisão de código.
- 
-2. __Procedimentos__: Até que certos conceitos fundamentais fiquem sedimentados, 
-procedimentos trazem produtividade. 
+2. __Procedimentos__: Até que certos conceitos fundamentais fiquem sedimentados, procedimentos trazem produtividade. 
 
 ## Contribuindo com artigos
 

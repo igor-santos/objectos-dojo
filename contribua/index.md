@@ -1,9 +1,6 @@
 ---
 layout: post
 title: "objectos-dojo :: Contribuindo"
-author: "Marcio Endo"
-user: "mendo"
-published: true
 ---
 
 ## Um lugar para equipes aprenderem juntas

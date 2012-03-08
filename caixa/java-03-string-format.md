@@ -55,10 +55,37 @@ decimais e assim por diante).
 
 ## public static String format(Locale l, String format, Object... args);
 
+Vejamos o seguinte exemplo (moeda nacional e internacional):
 
+	public class Moeda {
+	
+	  public static void main(String[] args) {
+	
+	    double real = 1000000.50;
+	    double dolar = 12000000.50;
+	
+	    Locale brasil = new Locale("pt", "BR");
+	    Locale eua = new Locale("en", "US");
+	
+	    String realConvertido = String.format(brasil, "R$%,.2f", real);
+	    String dolarConvertido = String.format(eua, "$%,.2f", dolar);
+	
+	    System.out.println(realConvertido);
+	    System.out.println(dolarConvertido);
+	  }
+	
+	}
 
-Para saber mais padrões de formatação além de String, isto é,
-números decimais, datas, entre outros, consulte [aqui](http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#detail).
+Note que desta vez o objeto _Locale_ definido o padrão de formatação monetária de cada país
+(Estados Unidos e Brasil).
+
+> R$1.000.000,50<br>
+> $12,000,000.50<br>
+
+_Você já deve ter visto esta diferença em calculadoras de computadores em inglês e em português_
+
+Para saber mais padrões de formatação além de String e número decimal consulte 
+[aqui](http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax).
 
 
 

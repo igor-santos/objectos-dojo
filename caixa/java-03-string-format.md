@@ -22,50 +22,42 @@ Temos uma sobrecarga do método format:
 
 ## public static String format(String format, Object... args);
 
-Vejamos o seguinte exemplo (enviar e receber e-mails):
+Vejamos o seguinte exemplo (fazer uma reserva em um restaurante):
 
-	public class Email {
 	
-	  private String mensagem;
+	public class TesteReservaRestaurante {
 	
-	  public String receberMensagem() {
-	    return mensagem;
-	  }
+	  public static void main(String[] args) {
+	  
+	    // Criar reserva no restaurante
+	    String nome = "Smith";
+	    int qtdDePessoas = 4;
+	    double preco = 100.9;
 	
-	  public void enviarMensagem(String mensagem) {
-	    this.mensagem = mensagem;
-	  }
+	    String reserva = String.format("Nome: %s\nQuantidade de pessoas: %d\n" + 
+	    "Preço: R$%.2f", nome, qtdDePessoas, preco);
 	
-	}	
-
-	@Test
-	public class TesteEMail {
-	
-	  public void enviar_mensagem_sem_metodo_string_format() {
-	
-	    String para = "teste@teste.com.br";
-	    String cc = "teste2@teste2.com.br";
-	    String msg = "Testando String.format";
-	
-	    Email email = new Email();
-	
-	    String mensagem = String.format("Para: %s\nCc: %s\nMensagem: %s", para, cc, msg);
-	    email.enviarMensagem(mensagem);
-	
-	    assertEquals(email.receberMensagem(), "Para: teste@teste.com.br\n"
-	        + "Cc: teste2@teste2.com.br\n" + "Mensagem: Testando String.format");
+	    System.out.println(reserva);
 	  }
 	
 	}	
 	
-Note que com este método temos a vantagem de apenas alterar o conteúdo das variáveis __para__
-__cc__ e __msg__ e a mensagem será enviada corretamente no formato que definimos:
+Note que com este método temos a vantagem de apenas alterar o conteúdo das variáveis __nome__,
+__qtdDePessoas__ e __preco__ e a mensagem será enviada corretamente no formato que definimos:
 
-> Para: teste@teste.com.br<br>
-> Cc: teste2@teste2.com.br<br>
-> Mensagem: Testando String.format<br>
+> Nome: Smith<br>
+> Quantidade de pessoas: 4<br>
+> Preço: R$100,90<br>
 
-Isto é feito pelo conjunto de caracteres __%s__. Para saber mais padrões de formatação além de String, isto é,
+Isto é feito pelo conjunto de caracteres __%s__ (para String), __%d__ (para decimal) e __%.2f__ 
+(para elementos fracionários onde o elemento _.%2f_ indica duas casas decimais, _%.3f_ três casas
+decimais e assim por diante).
+
+## public static String format(Locale l, String format, Object... args);
+
+
+
+Para saber mais padrões de formatação além de String, isto é,
 números decimais, datas, entre outros, consulte [aqui](http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#detail).
 
 

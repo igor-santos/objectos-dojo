@@ -1,5 +1,5 @@
 ---
-layout: post-alpha
+layout: post
 title: Método String.format
 author: "Tiago Aguiar"
 published: true
@@ -20,24 +20,26 @@ Temos uma sobrecarga do método format:
     1. public static String format(String format, Object... args);
     2. public static String format(Locale l, String format, Object... args);
 
-## public static String format(String format, Object... args);
+## String.format(String format, Object... args);
 
 Vejamos o seguinte exemplo (fazer uma reserva em um restaurante):
 
 	
-	public class TesteReservaRestaurante {
+	@Test
+	public class ReservaRestaurante {
 	
-	  public static void main(String[] args) {
-	  
-	    // Criar reserva no restaurante
+	  public void fazer_reserva_no_restaurante_com_metodo_string_format() {
+	
 	    String nome = "Smith";
 	    int qtdDePessoas = 4;
-	    double preco = 100.9;
+	    double preco = 100.90;
 	
-	    String reserva = String.format("Nome: %s\nQuantidade de pessoas: %d\n" + 
-	    "Preço: R$%.2f", nome, qtdDePessoas, preco);
+	    String formatar = "Nome: %s\nQuantidade de pessoas: %d\nPreço: R$%.2f";
+	    String resultado = "Nome: Smith\nQuantidade de pessoas: 4\nPreço: R$100,90";
 	
-	    System.out.println(reserva);
+	    String reserva = String.format(formatar, nome, qtdDePessoas, preco);
+	
+	    assertEquals(reserva, resultado);
 	  }
 	
 	}	
@@ -53,13 +55,14 @@ Isto é feito pelo conjunto de caracteres __%s__ (para String), __%d__ (para dec
 (para elementos fracionários onde o elemento _.%2f_ indica duas casas decimais, _%.3f_ três casas
 decimais e assim por diante).
 
-## public static String format(Locale l, String format, Object... args);
+## String.format(Locale l, String format, Object... args);
 
 Vejamos o seguinte exemplo (moeda nacional e internacional):
 
+	@Test
 	public class Moeda {
 	
-	  public static void main(String[] args) {
+	  public void conversor_monetario_com_metodo_string_format() {
 	
 	    double real = 1000000.50;
 	    double dolar = 12000000.50;
@@ -70,8 +73,8 @@ Vejamos o seguinte exemplo (moeda nacional e internacional):
 	    String realConvertido = String.format(brasil, "R$%,.2f", real);
 	    String dolarConvertido = String.format(eua, "$%,.2f", dolar);
 	
-	    System.out.println(realConvertido);
-	    System.out.println(dolarConvertido);
+	    assertEquals(realConvertido, "R$1.000.000,50");
+	    assertEquals(dolarConvertido, "$12,000,000.50");
 	  }
 	
 	}
@@ -86,6 +89,11 @@ _Você já deve ter visto esta diferença em calculadoras de computadores em ing
 
 Para saber mais padrões de formatação além de String e número decimal consulte 
 [aqui](http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax).
+
+Para mais informações acesse os códigos nos links abaixo:
+
+[ReservaRestaurante](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/test/java/br/com/objectos/dojo/taguiar/string/ReservaRestaurante.java)<br>
+[Moeda](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/test/java/br/com/objectos/dojo/taguiar/string/Moeda.java)
 
 
 

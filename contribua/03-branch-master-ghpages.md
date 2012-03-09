@@ -27,10 +27,14 @@ Onde _gh-pages-contribua_ é o nome de uma branch
 
 ##__3. Atribua suas mudanças ao GitHub__
 
-Após concluída as alterações do projeto devemos colocá-las no github através do seguinte comando:
+Após concluída as alterações do projeto devemos colocá-las no github através dos seguintes comandos:
 
+	$ git add <nome do arquivo>
+	$ git commit -m "mensagem do commit"
 	$ git push origin gh-pages-contribua
 	
+_Importante: Para visualizar o nome do arquivo corretamente utilize o comando git status_.
+
 Entre no github e faça um [Pull Request](http://help.github.com/send-pull-requests/) de sua branch _gh-pages-contribua_ para a branch _gh-pages_
 da objectos.
 

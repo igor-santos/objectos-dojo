@@ -1,3 +1,0 @@
-o: config importante
-x: config mais importante
-o: esta config não é tão importante

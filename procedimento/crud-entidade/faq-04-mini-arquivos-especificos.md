@@ -1,0 +1,67 @@
+---
+layout: post-alpha
+title: "Mini-Arquivos especifícos"
+author: "Marcos Piazzolla"
+user: "MarcosPiazzolla"
+published: true 
+partof: faq-crud-entidade
+num: 4
+outof: 4
+---
+
+## Assertion Errors em testes de buscadores
+
+Ao executar um teste de buscador/consulta nos deparamos com um AssertionError e os asserts que
+aparentemente deveriam estar corretos pois estão de acordo com o mini-arquivo estão errados
+de acordo com o teste. Abaixo nosso STACKTRACE: 
+
+    java.lang.AssertionError: 
+    Expected: "ITALIA"
+         got: "ITA"
+
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:21)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
+	at br.com.objectos.TesteDeConsultaDePais.ordenacao_padrao_deve_ser_por_codigo(TesteDeConsultaDePais.java:72)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:81)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:673)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:842)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1166)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.runWorkers(TestRunner.java:1172)
+	at org.testng.TestRunner.privateRun(TestRunner.java:757)
+	at org.testng.TestRunner.run(TestRunner.java:608)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1158)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1083)
+	at org.testng.TestNG.run(TestNG.java:999)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:203)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:174)
+
+__Causa:__
+
++ O mini-arquivo que deveria ser utilizado no teste não está sendo chamado, provavelmente é
+um mini-arquivo específico para o tipo de tarefa realizada e não foi definido no módulo de 
+testes (ModuloDeTesteEmpresaXYZ.java)
+
+__Solução:__
+
++ Basta chamar manualmente o mini-arquivo em seu código:
+<pre>
+	<code>
+		public void carregarDadosDeTeste() {
+			dbUnitLoadDefaultDataSet()
+			dbUnit.load(new ClasseDoMiniArquivoEspecifico);
+		}
+	</code>
+</pre>

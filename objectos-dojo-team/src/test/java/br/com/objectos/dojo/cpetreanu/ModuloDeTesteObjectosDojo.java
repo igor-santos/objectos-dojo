@@ -15,24 +15,15 @@
  */
 package br.com.objectos.dojo.cpetreanu;
 
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
+import com.google.inject.AbstractModule;
 
 /**
  * @author caio.petreanu@objectos.com.br (Caio Petreanu)
  */
-public interface Funcionario {
+public class ModuloDeTesteObjectosDojo extends AbstractModule {
 
-  int getId();
-
-  String getMatricula();
-
-  String getNome();
-
-  LocalDate getDataNascimento();
-
-  DateTime getDataAdmissao();
-
-  DateTime getDataDemissao();
+  @Override
+  protected void configure() {
+  }
 
 }

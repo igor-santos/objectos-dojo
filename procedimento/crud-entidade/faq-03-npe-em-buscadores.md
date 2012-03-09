@@ -6,8 +6,9 @@ user: "MarcosPiazzolla"
 published: true 
 partof: faq-crud-entidade
 num: 3
-outof: 3
 ---
+
+## Npe's em buscadores
 
 Ao executarmos um teste de buscador nos deparamos com uma série de NullPointerExceptions, todos os
 testes que buscam um entidade por algum critério falham, como por exemplo o seguinte código de Buscador:
@@ -63,10 +64,10 @@ Abaixo temos uma amostra de seu STACKTRACE quando executamos o teste:
 		
 __Causas:__
 
-NullPointers geralmente ocorrem quando tentamos acessar propriedades de algo que não foi instânciado,
+NullPointers geralmente ocorrem quando tentamos acessar propriedades de algo que não foi instanciado,
 ou seja, temos duas possíveis causas para esta série de NullPointers:
 
-+ Buscador não foi instânciado;
++ Buscador não foi instanciado;
 
 + Seus dados de teste estão corretos, ou seja através destes dados é possível encontrar alguma
 entidade no banco de dados ?

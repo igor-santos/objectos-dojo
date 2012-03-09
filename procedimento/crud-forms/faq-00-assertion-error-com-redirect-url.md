@@ -1,26 +1,29 @@
 ---
 layout: post-alpha
-title: "Erro 404 em serviços"
+title: "RedirectURL errada"
 author: "Marcos Piazzolla"
 user: "MarcosPiazzolla"
-published: true 
-partof: faq-crud-web
+published: true
+partof: faq-crud-forms
 num: 0
-outof: 1
+outof: 0
 ---
 
-## Erro 404 em Serviços - Causas e possíveis soluções
+## Assertion Error de redirectUrl
 
-Quando executamos um teste de Serviço, nos deparamos com o seguinte STACKTRACE:
+Quando se trata de forms de criação é bem comum a realização de um teste de redirect, ou seja
+após a entidade ser gravada no bd, o sistema deve redirecionar o usuário para a página de detalhes 
+dessa entidade.
 
-    FAILED: usuarios_devem_listar
-    java.lang.AssertionError: 
-    Expected: <200>
-         got: <404>
+Abaixo em nosso STACKTRACE temos um erro bem comum em relação a testes de redirectURL em forms:
+
+	java.lang.AssertionError: 
+	Expected: a string ending with "api/crud/cliente/CLI_ABC"
+         got: "http://localhost:4000/bd/cliente/CLI_ABC"
 
 	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:21)
 	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
-	at br.com.objectos.dojo.TesteDeServicoDeProduto.usuarios_devem_listar(TesteDeServicoDeProduto.java:42)
+	at br.com.objectos.dojo.TesteDeFormDeClienteCreate.form_deve_gravar_no_bd(TesteDeFormDeClienteCreate.java:72)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
@@ -47,23 +50,22 @@ Quando executamos um teste de Serviço, nos deparamos com o seguinte STACKTRACE:
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:203)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:174)
 
-Ou seja o recurso a ser acessado em seu teste não existe;
 
-__Causas:__ 
+__Causa:__
 
-*URL incorreta;
++ O redirectURL que foi definido no teste está incorreto pois é análogo a url que foi definida 
+logo no inicio do teste para acessar o form, é necessário especificar o caminho completo da 
+entidade que foi cadastrada.
 
-*Anotação @Get na classe do serviço
+__Solução:__
 
-__Soluções:__
++ Basta corrigir o assert do redirectUrl para: 
 
-+ A url foi definida corretamente, ou seja os parametros definidos nela realmente direcionam
-para uma entidade que existe no banco de dados?
+<pre>
+	<code>
+	    assertThat(redirectUrl, endsWith("bd/cliente/CLI_ABC"));
+	</code>
+</pre>
 
-+ A url que foi definida no módulo 'ModuloMeuProjeto.java' está de acordo com a URL que foi
-definida em seu teste?
- 
-+ Foi definida a anotação @Get no método reply() na classe do serviço?
-
-
-
+Com isso será possível testar se realmente foi possível acessar a página de detalhes da
+entidade cadastrada.

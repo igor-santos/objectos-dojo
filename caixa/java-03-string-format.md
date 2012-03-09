@@ -29,7 +29,6 @@ Vejamos o seguinte exemplo (fazer uma reserva em um restaurante):
 	public class ReservaRestaurante {
 	
 	  public void fazer_reserva_no_restaurante_com_metodo_string_format() {
-	
 	    String nome = "Smith";
 	    int qtdDePessoas = 4;
 	    double preco = 100.90;
@@ -63,7 +62,6 @@ Vejamos o seguinte exemplo (moeda nacional e internacional):
 	public class Moeda {
 	
 	  public void conversor_monetario_com_metodo_string_format() {
-	
 	    double real = 1000000.50;
 	    double dolar = 12000000.50;
 	

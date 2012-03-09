@@ -7,5 +7,6 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>objectos-dojo-team</artifactId>
+	<name>objectos dojô :: team</name>
 	<packaging>jar</packaging>
 </project>

@@ -4,7 +4,6 @@ title: "Debugger"
 published: true
 partof: java
 num: 2
-outof: 2
 ---
 
 # Introdução

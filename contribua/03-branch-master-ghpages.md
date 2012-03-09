@@ -3,7 +3,7 @@ layout: post
 title: "objectos-dojo :: Branch master e gh-pages"
 ---
 
-##Trabalhando com branches no dojo
+## Trabalhando com branches no dojo
 
 Você já deve saber que a branch _gh-pages_ é responsável por armazenar todos os arquivos que montam as 
 páginas estáticas, ou seja, todos os arquivos de markdown, html, less, entre outros. 
@@ -13,11 +13,11 @@ nos exemplos das páginas.
 _Importante: Esta branch é opcional, se em sua página não há códigos para linguagem de programação
 não se preocupe com ela_.
 
-##__1. Utilize a branch master (opcional)__
+## 1. Utilize a branch master (opcional)
 
 Se sua página tem códigos, será necessário utilizar a branch _master_ do projeto para criar estes
 códigos e guardá-los para futuras consultas.
-###__1.1. Importe o projeto do GitHub__
+### 1.1. Importe o projeto do GitHub
 
 Primeiro faça um _fork_ do projeto _objectos-dojo_ contido no usuário _objectos_.<br> 
 Agora execute os seguintes comandos:
@@ -35,7 +35,7 @@ acontecer ao trabalhar em um único projeto com várias branches)._
 _Veremos a branch gh-pages (projeto objectos-dojo-pages) no item 2._
 
 
-###__1.2. Criando códigos na branch master
+### 1.2. Criando códigos na branch master
 
 Com o projeto em sua máquina, crie uma _package_ nos seguintes diretórios:
 
@@ -44,7 +44,7 @@ Com o projeto em sua máquina, crie uma _package_ nos seguintes diretórios:
 
 Os códigos JAVA devem ficar nestas _packages_.
 
-_Nota: TODOS os códigos DEVEM possuir um cabeçalho padrão como este:
+_Nota: TODOS os códigos DEVEM possuir um cabeçalho padrão como este:_
 
     /*
      * Copyright 2011 Objectos, Fábrica de Software LTDA.
@@ -64,7 +64,7 @@ _Nota: TODOS os códigos DEVEM possuir um cabeçalho padrão como este:
 
 _Veja o exemplo de um código completo com cabeçalho [aqui](https://github.com/objectos/objectos-dojo/blob/master/objectos-dojo-team/src/test/java/br/com/objectos/dojo/taguiar/string/Moeda.java)_. 
 
-###__1.3. Atribua suas alterações ao GitHub
+### 1.3. Atribua suas alterações ao GitHub
 Após concluída as criações/alterações do códigos, devemos colocá-los no github através dos seguintes
 comandos:
 
@@ -81,13 +81,13 @@ Agora todos os códigos que serviram de exemplos nas páginas poderão ser acess
 através do github! Veja [aqui](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team).
 
 
-##__2. Utilize a branch gh-pages__
+## 2. Utilize a branch gh-pages
 
-###__2.1. Importe o projeto do GitHub__
+### 2.1. Importe o projeto do GitHub
 
 Para importar o projeto veja [aqui](http://dojo.objectos.com.br/contribua/00-importar.html).
 
-###__2.2. Atribua suas alterações ao GitHub__
+### 2.2. Atribua suas alterações ao GitHub
 
 Após concluída as alterações das páginas devemos colocá-las no github através dos seguintes comandos:
 
@@ -101,7 +101,7 @@ Entre no github e faça um [Pull Request](http://help.github.com/send-pull-reque
 
 Agora os arquivos do projeto poderão ser acessadas através do github! Veja [aqui](https://github.com/objectos/objectos-dojo/tree/gh-pages)
 
-###__2.3. Utilize outra branch (opcional)__
+### 2.3. Utilize outra branch (opcional)
 
 Com o projeto em sua máquina trabalhe em uma branch diferente de _gh-pages_. Para isso, execute o seguinte
 comando:

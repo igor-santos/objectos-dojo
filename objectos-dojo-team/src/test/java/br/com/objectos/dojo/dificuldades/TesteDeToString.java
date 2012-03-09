@@ -31,7 +31,7 @@ public class TesteDeToString {
   public void teste_de_to_string_ADD() {
     TesteDeStringAdd res = new TesteDeStringAdd();
 
-    assertThat(res, hasToString("TesteStringAdd{afonso=AFONSO, marcos=MARCOS, hellen=null}"));
+    assertThat(res, hasToString("TesteDeStringAdd{afonso=AFONSO, marcos=MARCOS, hellen=null}"));
   }
 
   public void teste_de_to_string_ADD_VALUE() {

@@ -23,6 +23,7 @@ import org.testng.annotations.Test;
  * @author afonso.filgueiras@objectos.com.br (Afonso J. Filgueiras)
  */
 @Test
+@SuppressWarnings("null")
 public class TesteDeNullPointer {
 
   public void calling_the_instance_method_of_a_null_object() {
@@ -77,20 +78,12 @@ public class TesteDeNullPointer {
   }
 
   private class Usuario {
-    private String login;
-
-    public String getLogin() {
-      return login;
-    }
-
     public void setLogin(String login) {
-      this.login = login;
     }
 
     public void lanca_excecao() {
       throw new NullPointerException();
     }
-
   }
 
 }

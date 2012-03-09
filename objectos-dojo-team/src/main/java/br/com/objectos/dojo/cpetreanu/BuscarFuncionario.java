@@ -4,7 +4,7 @@
  * Propriedade de Objectos Fábrica de Software LTDA.
  * Reprodução parcial ou total proibida.
  */
-package main;
+package br.com.objectos.dojo.cpetreanu;
 
 /**
  * @author caio.petreanu@objectos.com.br (Caio Petreanu)

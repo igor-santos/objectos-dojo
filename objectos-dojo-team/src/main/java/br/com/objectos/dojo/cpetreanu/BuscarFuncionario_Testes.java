@@ -18,7 +18,7 @@ package br.com.objectos.dojo.cpetreanu;
 /**
  * @author caio.petreanu@objectos.com.br (Caio Petreanu)
  */
-public interface BuscarFuncionario {
+public interface BuscarFuncionario_Testes {
 
   Funcionario porId(int id);
 

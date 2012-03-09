@@ -35,7 +35,7 @@ import com.google.inject.Inject;
 public class TesteDeBuscarFuncionario {
 
   @Inject
-  private BuscarFuncionario buscarFuncionario;
+  private BuscarFuncionario_Buscadores buscarFuncionario;
 
   @Inject
   private DBUnit dbUnit;

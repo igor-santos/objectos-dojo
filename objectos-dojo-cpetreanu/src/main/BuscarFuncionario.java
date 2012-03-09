@@ -13,6 +13,4 @@ public interface BuscarFuncionario {
 
   Funcionario porId(int id);
 
-  Funcionario porSuperior(Superior superior);
-
 }

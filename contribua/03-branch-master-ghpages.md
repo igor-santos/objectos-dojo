@@ -28,8 +28,11 @@ Agora execute os seguintes comandos:
 
 Na listagem acima substitua o _username_ para o nome correto de seu usuário GitHub
 
-_Nota: Teremos dois projetos para trabalhar: objectos-dojo (códigos) e objectos-dojo-pages (páginas)_.
-_Sendo que o segundo veremos no item 2._
+_Nota: Teremos dois projetos na máquina: objectos-dojo (branch master) e objectos-dojo-pages (branch gh-pages)_.
+_Com isso o mesmo projeto objectos-dojo terá suas branches em diretórios diferentes, isto é, serão_
+_projetos diferentes, evitando assim, eventuais alterações de arquivos em branches erradas (isto pode_
+_acontecer ao trabalhar em um único projeto com várias branches)_.<br>
+_Veremos a branch gh-pages (projeto objectos-dojo-pages) no item 2_.
 
 
 ###__1.2. Criando códigos na branch master
@@ -41,8 +44,25 @@ Com o projeto em sua máquina, crie uma _package_ nos seguintes diretórios:
 
 Os códigos JAVA devem ficar nestas _packages_.
 
-_Nota: TODOS os códigos DEVEM possuir um cabeçalho padrão. Veja o exemplo de um código pronto_
-_com cabeçalho [aqui](https://github.com/objectos/objectos-dojo/blob/master/objectos-dojo-team/src/test/java/br/com/objectos/dojo/taguiar/string/Moeda.java)_. 
+_Nota: TODOS os códigos DEVEM possuir um cabeçalho padrão como este:
+
+	/*
+	* Copyright 2011 Objectos, Fábrica de Software LTDA.
+	*
+	* Licensed under the Apache License, Version 2.0 (the "License"); you may not
+	* use this file except in compliance with the License. You may obtain a copy of
+	* the License at
+	*
+	* http://www.apache.org/licenses/LICENSE-2.0
+	*
+	* Unless required by applicable law or agreed to in writing, software
+	* distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+	* WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+	* License for the specific language governing permissions and limitations under
+	* the License.
+	*/
+
+_Veja o exemplo de um código completo com cabeçalho [aqui](https://github.com/objectos/objectos-dojo/blob/master/objectos-dojo-team/src/test/java/br/com/objectos/dojo/taguiar/string/Moeda.java)_. 
 
 ###__1.3. Atribua suas alterações ao GitHub
 Após concluída as criações/alterações do códigos, devemos colocá-los no github através dos seguintes

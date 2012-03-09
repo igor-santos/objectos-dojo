@@ -13,17 +13,15 @@
 * License for the specific language governing permissions and limitations under
 * the License.
 */
-package br.com.objectos.dojo.mpizzolla.regex;
+package br.com.objectos.dojo.mpiazzolla.regex;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.testng.annotations.Test;
-
-import br.com.objectos.dojo.mpiazzolla.regex.Pessoa;
 
 /**
  * @author afonso.filgueiras@objectos.com.br (Afonso J. Filgueiras)
@@ -32,13 +30,12 @@ import br.com.objectos.dojo.mpiazzolla.regex.Pessoa;
 public class TesteDeRegex {
 
   public void expressao_regular_deve_validar_propriedade() {
-    Pessoa pessoa = new Pessoa("login-invalido");
+    Pessoa pessoa = new Pessoa("login-inválido");
 
     Pattern expressaoRegular = Pattern.compile("[a-zA-Z-]*");
     Matcher matcher = expressaoRegular.matcher(pessoa.getLogin());
-    boolean resultado = matcher.matches();
 
-    assertThat(resultado, equalTo(false));
+    assertThat(matcher.matches(), is(false));
   }
 
 }

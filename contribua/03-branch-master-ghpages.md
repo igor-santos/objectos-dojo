@@ -28,6 +28,10 @@ Agora execute os seguintes comandos:
 
 Na listagem acima substitua o _username_ para o nome correto de seu usuário GitHub
 
+_Nota: Teremos dois projetos para trabalhar: objectos-dojo (códigos) e objectos-dojo-pages (páginas)_.
+_Sendo que o segundo veremos no item 2._
+
+
 ###__1.2. Criando códigos na branch master
 
 Com o projeto em sua máquina, crie uma _package_ nos seguintes diretórios:
@@ -36,6 +40,9 @@ Com o projeto em sua máquina, crie uma _package_ nos seguintes diretórios:
 > objectos-dojo-team/src/test/java/br/com/objectos/dojo/seu-login-de-rede-objectos
 
 Os códigos JAVA devem ficar nestas _packages_.
+
+_Nota: TODOS os códigos DEVEM possuir um cabeçalho padrão. Veja o exemplo de um código pronto_
+_com cabeçalho [aqui](https://github.com/objectos/objectos-dojo/blob/master/objectos-dojo-team/src/test/java/br/com/objectos/dojo/taguiar/string/Moeda.java)_. 
 
 ###__1.3. Atribua suas alterações ao GitHub
 Após concluída as criações/alterações do códigos, devemos colocá-los no github através dos seguintes

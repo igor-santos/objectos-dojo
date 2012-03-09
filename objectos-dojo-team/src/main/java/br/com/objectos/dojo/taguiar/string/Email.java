@@ -18,7 +18,6 @@ package br.com.objectos.dojo.taguiar.string;
 /**
  * @author tiago.aguiar@objectos.com.br (Tiago Aguiar)
  */
-
 public class Email {
 
   private String mensagem;

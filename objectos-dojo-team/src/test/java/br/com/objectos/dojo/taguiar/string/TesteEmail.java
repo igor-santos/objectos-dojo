@@ -26,7 +26,6 @@ import org.testng.annotations.Test;
 public class TesteEmail {
 
   public void enviar_mensagem_sem_metodo_string_format() {
-
     String para = "teste@teste.com.br";
     String cc = "teste2@teste2.com.br";
     String msg = "Testando String.format";

@@ -22,12 +22,10 @@ import org.testng.annotations.Test;
 /**
  * @author tiago.aguiar@objectos.com.br (Tiago Aguiar)
  */
-
 @Test
 public class ReservaRestaurante {
 
   public void fazer_reserva_no_restaurante_com_metodo_string_format() {
-
     String nome = "Smith";
     int qtdDePessoas = 4;
     double preco = 100.90;

@@ -24,12 +24,10 @@ import org.testng.annotations.Test;
 /**
  * @author tiago.aguiar@objectos.com.br (Tiago Aguiar)
  */
-
 @Test
 public class Moeda {
 
   public void conversor_monetario_com_metodo_string_format() {
-
     double real = 1000000.50;
     double dolar = 12000000.50;
 

@@ -9,11 +9,11 @@ num: 0
 
 ## Introdução<a id="topo"> </a>
 
-Fazer um passo a passo com breves explicações, códigos, erros mais comuns e Checklist para a construção de Testes de Buscadores.
+>Qualquer aplicação que busque por informações em uma base persistente precisa implementar o conceito do que chamamos de Buscador.
 
 ## Checklist: Especificação
 
-<div class="alert alert-block">Perguntas cujas respostas você tem que saber para implementar esse tipo de teste</div>
+<div class="alert alert-block">Perguntas cujas respostas você deve saber extrair para implementar o Teste.</div>
 
 <table class="table table-striped">
  <tr>
@@ -23,7 +23,7 @@ Fazer um passo a passo com breves explicações, códigos, erros mais comuns e C
  </tr>
  <tr>
    <td><a id="topo_0_1"><input type="checkbox" /></a></td>
-   <td>Quais métodos de busca haverão em BuscadorFuncionario?</td>
+   <td>Quais métodos de busca haverão em BuscarFuncionario?</td>
    <td><a href="#0_1">help!</a></td>
  </tr>
 </table>
@@ -49,9 +49,22 @@ Fazer um passo a passo com breves explicações, códigos, erros mais comuns e C
 
 + Estruturar<a id="1_0"> </a>o código com as Anotações, Buscadores, DBUnit, métodos e funções necessários
 
-Primeiro fazemos o link com o Módulo __do projeto__ para usar de seus recursos e estrutura definidos, que serão necessários para realizar o teste (banco de dados ou arquivos .xml, autenticação no banco, etc).
+Primeiramente, criamos a classe de Teste.
 
-    @Test    
+    public class TesteDeBuscarFuncionario {
+    
+    }
+
+A partir dela, colocamos nela a notação @Test:
+
+    @Test
+    public class TesteDeBuscarFuncionario {
+    
+    }
+
+E fazemos um bind link com o Módulo __do projeto__ para usar de seus recursos e estrutura definidos, que serão necessários para realizar o teste (banco de dados ou arquivos .xml, autenticação no banco, etc).
+
+    @Test
     @Guice(modules = { ModuloDeTeste.class })
     public class TesteDeBuscarFuncionario {
     
@@ -163,21 +176,171 @@ Para o teste:
         assertThat(res.getDataNascimento(), equalTo(new LocalDate(1980, 6, 01)));
         assertThat(res.getDataAdmissao(), equalTo(new DateTime(2004, 12, 10, 9, 0)));
         assertThat(res.getDataDemissao(), equalTo(new DateTime(2012, 1, 3, 12, 30)));
-  }
+    }
 
 <div class="alert alert-block">É importantíssimo se certificar que os valores nos asserts vão de acordo com as fontes de dados usadas. Sempre revise-os para ter certeza de que está implementando corretamente seus Testes!</div>
 
 <p><a href="#topo_1_1">Voltar</a></p>
 
-+ Implementar<a id="1_2"> </a>os testes dos demais Buscadores
++ Implementar<a id="1_2"> </a>os testes dos demais métodos do Buscador
 
-Para os demais casos, seguem alguns exemplos detalhados para facilitar seu entendimento:
+Para os demais casos, seguem alguns exemplos detalhados para facilitar o entendimento:
 
 * <a href="#var_0">Variação 1: Buscador para relacionamentos</a>
 
 * <a href="#var_1">Variação 2: Buscadores com relacionamento que retornam Listas</a>
 
 <p><a href="#topo_1_2">Voltar</a></p>
+
+## Variação 1: Buscador para relacionamentos
+
+Não existe necessidade de testar todas as propriedades das entidades relacionadas.
+
+### Solução<a id="var_0"> </a>A: Usando o Buscador da Classe relacionada:
+
+    @Inject
+    private BuscarCinema buscarCinema;
+    
+    @Inject
+    private BuscarIngresso buscarIngresso;
+    
+    public void busca_por_ingresso() {
+        Ingresso ingresso = buscarIngresso.porId(50);
+        Cinema cinema = buscarCinema.porIngresso(ingresso);
+        
+        assertThat(cinema.getId(), equalTo(2));
+    }
+
+### Solução B: Usando a Classe Falsa:
+
+      @Inject
+      private BuscarCaixaEletronico buscarCaixa;
+    
+      public void busca_por_supermercado() {
+        Supermercado supermercado = SupermercadosFalsos.EXTRA_SAO_CAETANO;
+    
+        CaixaEletronico caixa = buscarCaixa.porSupermercado(supermercado);
+        assertThat(caixa.getId(), equalTo(1001708));
+      }
+
+### Solução C: Verificar por alguma propriedade do Funcionário relacionado:
+
+      public void busca_por_superior() {
+        Superior superior = buscarSuperior.porId(3);
+        Funcionario esperado = buscarFuncionario.porSuperior(superior);
+        Funcionario buscado = buscarFuncionario.porId(3);
+        Superior superiorId = buscado.getSuperior();
+    
+        assertThat (esperado.getSuperior().getId(), equalTo(superiorId));
+      }
+
+<p><a href="#1_2">Voltar: Demais Buscadores</a></p>
+
+## Variação<a id="var_1"> </a>2: Buscadores com relacionamento que retornam Listas
+
+Neste exemplo, Funcionário relaciona-se com Superior. Atualizemos o novo mini-empresa.xml para:
+
+<p></p>
+
+      <?xml version="1.0" encoding="UTF-8"?>
+      <dataset>
+    
+          <!-- Funcionário -->
+          <DATABASE.FUNCIONARIO
+          ID="1"
+          MATRICULA="F0050000"
+          NOME="Renato Augusto Machado"
+          DATA_NASCIMENTO="1970-01-20"
+          SUPERIOR_ID="1"
+          ADMISSAO="2001-02-06 18:30"
+          />
+          
+          <DATABASE.FUNCIONARIO
+          ID="2"
+          MATRICULA="F0050001"
+          NOME="Priscilla Cardoso"
+          DATA_NASCIMENTO="1989-05-29"
+          SUPERIOR_ID="2"
+          ADMISSAO="2002-02-06 18:30"
+          DEMISSAO="2005-09-16 10:20"
+          />
+          
+          <DATABASE.FUNCIONARIO
+          ID="3"
+          MATRICULA="T0033000"
+          NOME="Briann Adams"
+          DATA_NASCIMENTO="1980-06-01"
+          SUPERIOR_ID="3"
+          ADMISSAO="2004-12-10 09:00"
+          DEMISSAO="2012-01-03 12:30"
+          />
+          
+          <!-- Superior -->
+          <DATABASE.SUPERIOR
+          ID="1"
+          POSICAO="M"
+          />
+          
+          <DATABASE.SUPERIOR
+          ID="2"
+          POSICAO="M"
+          />
+          
+          <DATABASE.SUPERIOR
+          ID="3"
+          POSICAO="G"
+          />
+    
+      </dataset>
+
+Será portanto adicionado um novo teste para a nova busca do Buscador.
+
+      public void busca_por_superior() {
+        Superior superior = buscarSuperior.porId(1);
+        Funcionario res = buscarFuncionario.porSuperior(superior);
+    
+        assertThat(res.getId(), equalTo(1));
+      }
+
+O uso de inner classes como Funções está vinculado a resultados de queries em que há uma lista de registros, ao invés de apenas um registro.
+
+Digamos que Superior poderá se relacionar com vários Funcionários. E adicionemos um novo funcionário, conforme:
+
+<p></p>
+
+          <DATABASE.FUNCIONARIO
+          ID="4"
+          MATRICULA="T0033001"
+          NOME="Roberto Williams Cardoso"
+          DATA_NASCIMENTO="1979-02-02"
+          SUPERIOR_ID="2"
+          ADMISSAO="2009-12-01 11:10"
+          />
+
+Sabendo que na especificação a ordenação será feita pelo FUNCIONARIO.ID asc, o busca_por_superior() será implementado assim::
+
+      @Inject
+      private BuscarFuncionario buscarFuncionario;
+    
+      @Inject
+      private BuscarSuperior buscarSuperior;
+    
+      public void busca_por_superior() {
+        Superior superior = buscarSuperior.porId(2);
+        List<Funcionario> res = buscarFuncionario.porSuperior(superior);
+    
+        List<Integer> ids = transform(res, new ToId());
+        assertThat(ids.get(0), equalTo(2));
+        assertThat(ids.get(1), equalTo(4));
+      }
+    
+      private class ToId implements Function<Funcionario, Integer> {
+      @Override
+      public int apply(Funcionario input) {
+        return input.getId();
+      }
+
+<p><a href="#1_2">Voltar: Demais Buscadores</a></p>
 
 O método busca_por_superior() é o responsável por verificar que os Funcionários recebidos do Superior sejam os esperados.
 
@@ -227,158 +390,7 @@ Exemplo:
 
         assertThat(res.getMatricula(), equalTo("F0050001"));
         assertThat(res.getNome(), equalTo("Priscilla Cardoso"));
-
-## Variação 1: Buscador para relacionamentos
-
-Não existe necessidade de testar todas as propriedades das entidades relacionadas.
-
-### Solução<a id="var_0"> </a>A: Usando o Buscador da Classe relacionada:
-
-    @Inject
-    private BuscarCinema buscarCinema;
-    
-    @Inject
-    private BuscarIngresso buscarIngresso;
-    
-    public void busca_por_ingresso() {
-        
-        Ingresso ingresso = buscarIngresso.porId(50);
-        Cinema cinema = buscarCinema.porIngresso(ingresso);
-        assertThat(cinema.getId(), equalTo(2));
-        
     }
-
-### Solução B: Usando a Classe Falsa:
-
-      @Inject
-      private BuscarCaixaEletronico buscarCaixa;
-    
-      public void busca_por_supermercado() {
-        Supermercado supermercado = SupermercadosFalsos.EXTRA_SAO_CAETANO;
-    
-        CaixaEletronico caixa = buscarCaixa.porSupermercado(supermercado);
-        assertThat(caixa.getId(), equalTo(1001708));
-      }
-
-### Solução C: Verificar por alguma propriedade do Funcionário relacionado:
-
-      public void busca_por_superior() {
-        Superior superior = buscarSuperior.porId(3);
-        Funcionario esperado = buscarFuncionario.porSuperior(superior);
-        Funcionario buscado = buscarFuncionario.porId(3);
-        Superior superiorId = buscado.getSuperior();
-    
-        assertThat (esperado.getSuperior().getId(), equalTo(superiorId));
-      }
-
-<p><a href="#1_2">Voltar: Demais Buscadores</a></p>
-
-## Variação<a id="var_1"> </a>2: Buscadores com relacionamento que retornam Listas
-
-Neste exemplo, Funcionário relaciona-se com Superior. Atualizemos o novo mini-empresa.xml para:
-
-<p></p>
-
-      <?xml version="1.0" encoding="UTF-8"?>
-      <dataset>
-    
-          <!-- Funcionário -->
-          <DATABASE.FUNCIONARIO
-          ID="1"
-          MATRICULA="F0050000"
-          NOME="Renato Augusto Machado"
-          DATA_NASCIMENTO="1970-01-20"
-          SUPERIOR_ID="1"
-          ADMISSAO="2001-02-06 18:30"
-          DEMISSAO=""
-          />
-          
-          <DATABASE.FUNCIONARIO
-          ID="2"
-          MATRICULA="F0050001"
-          NOME="Priscilla Cardoso"
-          DATA_NASCIMENTO="1989-05-29"
-          SUPERIOR_ID="2"
-          ADMISSAO="2002-02-06 18:30"
-          DEMISSAO="2005-09-16 10:20"
-          />
-          
-          <DATABASE.FUNCIONARIO
-          ID="3"
-          MATRICULA="T0033000"
-          NOME="Briann Adams"
-          DATA_NASCIMENTO="1980-06-01"
-          SUPERIOR_ID="3"
-          ADMISSAO="2004-12-10 09:00"
-          DEMISSAO="2012-01-03 12:30"
-          />
-          
-          <!-- Superior -->
-          <DATABASE.SUPERIOR
-          ID="1"
-          POSICAO="M"
-          />
-          
-          <DATABASE.SUPERIOR
-          ID="2"
-          POSICAO="M"
-          />
-          
-          <DATABASE.SUPERIOR
-          ID="3"
-          POSICAO="G"
-          />
-    
-      </dataset>
-
-Será portanto adicionado um novo teste para a nova busca do Buscador.
-
-      public void busca_por_superior() {
-        Superior superior = buscarSuperior.porId(1);
-        Funcionario res = buscarFuncionario.porSuperior(superior);
-    
-        assertThat(res.getId(), equalTo(1));
-    }
-
-O uso de inner classes como Funções está vinculado a resultados de queries em que há uma lista de registros, ao invés de apenas um registro.
-
-Digamos que Superior poderá se relacionar com vários Funcionários. E adicionemos um novo funcionário, conforme:
-
-<p></p>
-
-          <DATABASE.FUNCIONARIO
-          ID="4"
-          MATRICULA="T0033001"
-          NOME="Roberto Williams Cardoso"
-          DATA_NASCIMENTO="1979-02-02"
-          SUPERIOR_ID="2"
-          />
-
-Sabendo que na especificação a ordenação será feita pelo FUNCIONARIO.ID asc, o busca_por_superior() será implementado assim::
-
-      @Inject
-      private BuscarFuncionario buscarFuncionario;
-    
-      @Inject
-      private BuscarSuperior buscarSuperior;
-    
-      public void busca_por_superior() {
-        Superior superior = buscarSuperior.porId(2);
-        List<Funcionario> res = buscarFuncionario.porSuperior(superior);
-    
-        List<Integer> ids = transform(res, new ToId());
-        assertThat(ids.get(0), equalTo(2));
-        assertThat(ids.get(1), equalTo(4));
-      }
-    
-      private class ToId implements Function<Funcionario, Integer> {
-      @Override
-      public int apply(Funcionario input) {
-        return input.getId();
-      }
-    }### Ler códigos!
-
-<p><a href="#1_2">Voltar: Demais Buscadores</a></p>
 
 + Quais<a id="0_0"> </a>os atributos de Funcionário que devemos testar?
 
@@ -413,7 +425,7 @@ Portanto, Funcionário conhece:
 
 <p><a href="#topo_0_0">Voltar</a></p>
 
-+ Quais<a id="0_1"> </a>métodos de busca haverão em BuscadorFuncionario?
++ Quais<a id="0_1"> </a>métodos de busca haverão em BuscarFuncionario?
 
 Verifique a especificação. Neste caso, existem dois buscadores elegíveis: porId() e porMatricula().
 
@@ -421,15 +433,15 @@ Verifique a especificação. Neste caso, existem dois buscadores elegíveis: por
 
 <p><a href="#topo">Voltar: Topo</a></p>
 
-Vamos para os <a href="{{ site.baseurl }}/procedimento/crud-entidade/01-implementando_buscador_buscadores.html" class="btn btn-success">Buscadores</a> ? Ou
+Seguir em frente? <a href="{{ site.baseurl }}/procedimento/crud-entidade/01-implementando_buscador_buscadores.html" class="btn btn-success">Buscadores!</a>
 
 ### Ler códigos!
 
 <table class="table table-striped">
  <tr>
-   <td>Exemplo: <a href="https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/test/java/br/com/objectos/dojo/cpetreanu/artigos/buscadores/TesteDeBuscarFuncionario.java">TesteDeBuscarFuncionario.java</a></td>
+   <td>Exemplo: <a href="https://github.com/objectos/objectos-dojo/blob/master/objectos-dojo-team/src/test/java/br/com/objectos/dojo/cpetreanu/TesteDeBuscarFuncionario.java">TesteDeBuscarFuncionario.java</a></td>
  </tr>
  <tr>
-   <td>Mini arquivo: <a href="https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/test/resources/dbunit/mini-empresa.xml>mini-empresa.xml</a></td>
+   <td>Mini arquivo: <a href="https://github.com/objectos/objectos-dojo/blob/master/objectos-dojo-team/src/test/resources/mini-funcionario.xml">mini-empresa.xml</a></td>
  </tr>
 </table>

@@ -12,38 +12,37 @@ num: 3
 
 Para este FAQ, considere o seguinte bloco de código:
 
-	@Test
-	@Guice(modules = {ModuloDeTesteEmpresaXPTO.class})
-	public class TesteDeBuscarCliente {
+    @Test
+    @Guice(modules = {ModuloDeTesteEmpresaXPTO.class})
+    public class TesteDeBuscarCliente {
+      @Inject
+	  private BuscarCliente buscarCliente;
+	  
+	  @Inject
+	  private DBUnit dbUnit;
+	  
+	  @BeforeClass
+	  public void prepararDBUnit() {
+	    dbUnit.loadDefaultDataSet();
+	  }
+	  
+      public void busca_por_id_deve_funcionar() {
+        int id = 10;
+        
+		Cliente res = buscarCliente.porId(id);
+		assertThat(res, is(notNullValue()));
 		
-		@Inject
-		private BuscarCliente buscarCliente;
-		
-		@Inject
-		private DBUnit dbUnit;
-		
-		@BeforeClass
-		public void prepararDBUnit() {
-			dbUnit.loadDefaultDataSet();
-		}
-		
-		public void busca_por_id_deve_funcionar() {
-			int id = 10;
-			
-			Cliente res = buscarCliente.porId(id);
-			assertThat(res, is(notNullValue()));
-			
-			assertThat(res.getId, equalTo(id));
-			assertThat(res.getNome(), equalTo("Godofredo Diaz"));
-			assertThat(res.getTelefone(), equalTo("(11) 1234 - 6789"));
-			assertThat(res.getEndereco(), equalTo("Avenida do Oratório, 5000"));
-			assertThat(res.getBairro(), equalTo("Vila Industrial"));
-			assertThat(res.getCidade(), equalTo("São Paulo"));
-		}
-		
-	}
+		assertThat(res.getId, equalTo(id));
+		assertThat(res.getNome(), equalTo("Godofredo Diaz"));
+		assertThat(res.getTelefone(), equalTo("(11) 1234 - 6789"));
+		assertThat(res.getEndereco(), equalTo("Avenida do Oratório, 5000"));
+		assertThat(res.getBairro(), equalTo("Vila Industrial"));
+		assertThat(res.getCidade(), equalTo("São Paulo"));
+      }
+      
+    }
 	
-### Quando executo o meu teste é lançada uma "NullPointerException" : 
+### Foi adicionada a anotação `@Guice` logo abaixo da anotação `@Test` ? 
 
 	RemoteTestNG starting
 	FAILED CONFIGURATION: @BeforeClass prepararClasse
@@ -51,16 +50,15 @@ Para este FAQ, considere o seguinte bloco de código:
 		at br.com.objectos.dojo.TesteDeBuscarCliente.prepararClasse(TesteDeBuscarCliente.java:42)
 		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 
-+ Foi adicionada a anotação `@Guice` logo abaixo da anotação `@Test` ?
+A npe acontecerá exatamente onde não foi definido a anotação `@Guice` em sua classe de teste:
  	
 		@Test
-		@Guice (modules = {ModuloDeTesteEmpresaXPTO.class})  //carrega os mini-arquivos
+		@Guice (modules = {ModuloDeTesteEmpresaXPTO.class})
 			public class TesteDeBuscarCliente {
 		}
  
- Caso contrário não foi possível carregar os mini-arquivos, por isso não existem dados de teste;
  
-### O problema ainda continua.
+### Você adicionou a anotação `@Inject` logo após declarar o seu Buscador em seu teste ?
  
  	FAILED: busca_por_id_deve_funcionar
 	java.lang.NullPointerException
@@ -69,9 +67,11 @@ Para este FAQ, considere o seguinte bloco de código:
  		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:56)
  
- + Você adicionou a anotação `@Inject` logo após declarar o seu Buscador em seu teste ?
+Lembrando que uma das causas das NullPointers é tentar acessar propriedades de uma instância onde seu
+valor é "null": [Atente a primeira das causas no javadoc] (http://docs.oracle.com/javase/6/docs/api/java/lang/NullPointerException.html)
+, sem a presença da anotação `@Inject` uma NPE será lançada logo que se chamar o buscador:
   
-		@Inject  //sem o @Inject o buscador é null
+		@Inject
 		private BuscarCliente buscarCliente;
 		 
 		public void busca_por_id_deve_funcionar() {
@@ -80,10 +80,8 @@ Para este FAQ, considere o seguinte bloco de código:
 			Cliente res = buscarCliente.porId(id);
 		}
 	
-Lembrando que uma das causas das NullPointers é tentar acessar propriedades de uma instância onde seu
-valor é "null": [Atente a primeira das causas] (http://docs.oracle.com/javase/6/docs/api/java/lang/NullPointerException.html)
 
-### Estou sem sorte....
+### Os seus dados de teste estão razoáveis?
 
  	FAILED: busca_por_id_deve_funcionar
 	java.lang.NullPointerException
@@ -92,9 +90,9 @@ valor é "null": [Atente a primeira das causas] (http://docs.oracle.com/javase/6
  		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
 		
-+ Os seus dados de teste estão razoáveis? Ou seja existe uma entidade no mini-arquivo com os dados
-que você esta utilizando?
-
+Existe no mini-arquivo um cliente com o `id = 10`? Agora sim, percebemos o quão importantes são os dados
+a serem utilizados em seu teste: 
+		
 		public void busca_por_id_deve_funcionar() {
 		
 			int id = 10;
@@ -102,6 +100,3 @@ que você esta utilizando?
 			Cliente res = buscarCliente.porId(id);
 			assertThat(res, is(notNullValue()));//epa!!! aqui não pode ser null
 		}
-
- Existe no mini-arquivo um cliente com este id? Agora sim, percebemos o quão importantes são os dados
-a serem utilizados em seu teste. 

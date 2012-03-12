@@ -48,20 +48,20 @@ de acordo com o teste. Abaixo nosso STACKTRACE:
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:203)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:174)
 
-__Causa:__
+### Causa:
 
 + O mini-arquivo que deveria ser utilizado no teste não está sendo chamado, provavelmente é
 um mini-arquivo específico para o tipo de tarefa realizada e não foi definido no módulo de 
 testes (ModuloDeTesteEmpresaXYZ.java)
 
-__Solução:__
+### Solução:
 
 + Basta chamar manualmente o mini-arquivo em seu código:
 <pre>
 	<code>
 		public void carregarDadosDeTeste() {
-			dbUnitLoadDefaultDataSet()
-			dbUnit.load(new ClasseDoMiniArquivoEspecifico);
+			dbUnit.loadDefaultDataSet();
+			dbUnit.load(new ClasseDoMiniArquivoEspecifico());
 		}
 	</code>
 </pre>

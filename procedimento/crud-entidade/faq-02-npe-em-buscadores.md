@@ -26,19 +26,19 @@ Para este FAQ, considere o seguinte bloco de código:
 	    dbUnit.loadDefaultDataSet();
 	  }
 	  
-      public void busca_por_id_deve_funcionar() {
-        int id = 10;
-        
-		Cliente res = buscarCliente.porId(id);
-		assertThat(res, is(notNullValue()));
+	public void busca_por_id_deve_funcionar() {
+	  int id = 10;
+	    
+	  Cliente res = buscarCliente.porId(id);
+	  assertThat(res, is(notNullValue()));
 		
-		assertThat(res.getId, equalTo(id));
-		assertThat(res.getNome(), equalTo("Godofredo Diaz"));
-		assertThat(res.getTelefone(), equalTo("(11) 1234 - 6789"));
-		assertThat(res.getEndereco(), equalTo("Avenida do Oratório, 5000"));
-		assertThat(res.getBairro(), equalTo("Vila Industrial"));
-		assertThat(res.getCidade(), equalTo("São Paulo"));
-      }
+	  assertThat(res.getId, equalTo(id));
+	  assertThat(res.getNome(), equalTo("Godofredo Diaz"));
+	  assertThat(res.getTelefone(), equalTo("(11) 1234 - 6789"));
+	  assertThat(res.getEndereco(), equalTo("Avenida do Oratório, 5000"));
+	  assertThat(res.getBairro(), equalTo("Vila Industrial"));
+	  assertThat(res.getCidade(), equalTo("São Paulo"));
+	  }
       
     }
 	
@@ -90,13 +90,13 @@ valor é "null": [Atente a primeira das causas no javadoc] (http://docs.oracle.c
  		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
 		
-Existe no mini-arquivo um cliente com o `id = 10`? Agora sim, percebemos o quão importantes são os dados
-a serem utilizados em seu teste: 
+Existe no mini-arquivo algum cliente com o `id = 10`? Caso não, basta substituir o `id` e seus respectivos
+asserts para que a npe seja corrigida: 
 		
 		public void busca_por_id_deve_funcionar() {
 		
 			int id = 10;
 		
 			Cliente res = buscarCliente.porId(id);
-			assertThat(res, is(notNullValue()));//epa!!! aqui não pode ser null
+			assertThat(res, is(notNullValue()));
 		}

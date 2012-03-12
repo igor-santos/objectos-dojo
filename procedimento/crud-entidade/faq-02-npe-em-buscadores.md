@@ -5,7 +5,7 @@ author: "Marcos Piazzolla"
 user: "MarcosPiazzolla"
 published: true 
 partof: faq-crud-entidade
-num: 3
+num: 1
 ---
 
 ## NPEs em buscadores e consultas

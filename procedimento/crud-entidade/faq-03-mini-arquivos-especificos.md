@@ -5,8 +5,8 @@ author: "Marcos Piazzolla"
 user: "MarcosPiazzolla"
 published: true 
 partof: faq-crud-entidade
-num: 4
-outof: 4
+num: 2
+outof: 2
 ---
 
 ## Assertion Errors em testes de buscadores

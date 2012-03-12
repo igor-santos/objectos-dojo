@@ -1,6 +1,6 @@
 ---
 layout: post-alpha
-title: "NullPointerException em Buscadores"
+title: "NPEs em buscadores e consultas"
 author: "Marcos Piazzolla"
 user: "MarcosPiazzolla"
 published: true 
@@ -8,72 +8,73 @@ partof: faq-crud-entidade
 num: 3
 ---
 
-## Npe's em buscadores
+## NPEs em buscadores e consultas
 
-Ao executarmos um teste de buscador nos deparamos com uma série de NullPointerExceptions, todos os
-testes que buscam um entidade por algum critério falham, como por exemplo o seguinte código de Buscador:
+Para este FAQ, considere o seguinte bloco de código:
 
-<pre>
-	<code>
-@Test
-@GuiceModules(ModuloDeTesteClientesABC.class)
-public class TesteDeBuscarCliente {
-
-    private BuscarCliente buscarCliente;
-
-    public void busca_por_id_deve_funcionar() {
-        Cliente cliente = buscarCliente.porId(1);
+	@Test
+	@Guice(modules = {ModuloDeTesteEmpresaXPTO.class})
+	public class TesteDeBuscarCliente {
 		
-        assertThat(cliente.getId(), equlaTo(1));
-        //outros asserts
-    }
-}
-	</code>
-</pre>	
-
-Abaixo temos uma amostra de seu STACKTRACE quando executamos o teste:
+		@Inject
+		private BuscarCliente buscarCliente;
+		
+		@Inject
+		private DBUnit dbUnit;
+		
+		@BeforeClass
+		public void prepararDBUnit() {
+			dbUnit.loadDefaultDataSet();
+		}
+		
+		public void busca_por_id_deve_funcionar() {
+			int id = 10;
+			
+			Cliente res = buscarCliente.porId(id);
+			
+			assertThat(res.getId, equalTo(id));
+			assertThat(res.getNome(), equalTo("Godofredo Diaz"));
+			assertThat(res.getTelefone(), equalTo("(11) 1234 - 6789"));
+			assertThat(res.getEndereco(), equalTo("Avenida do Oratório, 5000"));
+			assertThat(res.getBairro(), equalTo("Vila Industrial"));
+			assertThat(res.getCidade(), equalTo("São Paulo"));
+		}
+		
+	}
 	
-	FAILED: busca_por_id_deve_funcionar
+### Quando executo o meu teste é lançada uma "NullPointerException" : 
+
+	RemoteTestNG starting
+	FAILED CONFIGURATION: @BeforeClass prepararClasse
+		java.lang.NullPointerException
+		at br.com.objectos.dojo.TesteDeBuscarCliente.prepararClasse(TesteDeBuscarCliente.java:42)
+		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+
++ Foi adicionada a anotação `@Guice` logo abaixo da anotação `@Test` ?
+ 	
+	@Test
+	@Guice(modules = {ModuloDeTesteEmpresaXPTO.class})  //carrega os mini-arquivos
+		public class TesteDeBuscarCliente {
+		}
+ 
+ Caso contrário não foi possível carregar os mini-arquivos, por isso não existem dados de teste;
+ 
+ 	FAILED: busca_por_id_deve_funcionar
 	java.lang.NullPointerException
- 		at br.com.objectos.dojo.TesteDeBuscarCliente.busca_por_id_deve_funcionar(TesteDeBuscarCliente.java:56)
+	
+	 	at br.com.objectos.dojo.TesteDeBuscarCliente.busca_por_id_deve_funcionar(TesteDeBuscarCliente.java:47)
  		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
-		at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
-		at java.lang.reflect.Method.invoke(Method.java:597)
-		at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:81)
-		at org.testng.internal.Invoker.invokeMethod(Invoker.java:673)
-		at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:842)
-		at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1166)
-		at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
-		at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-		at org.testng.TestRunner.runWorkers(TestRunner.java:1172)
-		at org.testng.TestRunner.privateRun(TestRunner.java:757)
-		at org.testng.TestRunner.run(TestRunner.java:608)
-		at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
-		at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
-		at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
-		at org.testng.SuiteRunner.run(SuiteRunner.java:240)
-		at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-		at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
-		at org.testng.TestNG.runSuitesSequentially(TestNG.java:1158)
-		at org.testng.TestNG.runSuitesLocally(TestNG.java:1083)
-		at org.testng.TestNG.run(TestNG.java:999)
-		at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
-		at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:203)
-		at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:174)
+ 
+ + Você adicionou a anotação `@Inject` logo após declarar o seu Buscador em seu teste ? 
+ 
+ 	public void busca_por_id_deve_funcionar() {
+		int id = 10;
 		
-__Causas:__
+		@Inject //  sem o @Inject o buscador é null
+		Cliente res = buscarCliente.porId(id);
+	}
+	
+Lembrando que uma das causas das NullPointers é tentar acessar propriedades de uma instância onde seu
+valor é "null": [Atente a primeira das causas] (http://docs.oracle.com/javase/6/docs/api/java/lang/NullPointerException.html)
 
-NullPointers geralmente ocorrem quando tentamos acessar propriedades de algo que não foi instanciado,
-ou seja, temos duas possíveis causas para esta série de NullPointers:
-
-+ Buscador não foi instanciado;
-
-+ Seus dados de teste estão corretos, ou seja através destes dados é possível encontrar alguma
-entidade no banco de dados ?
-
-__Soluções:__
-
-+ Foram utilizados dados de que existem de fato no banco de dados (mini-arquivo) ?
-
-+ Foi adicionada a anotação @Inject na declaração de seu buscador ?

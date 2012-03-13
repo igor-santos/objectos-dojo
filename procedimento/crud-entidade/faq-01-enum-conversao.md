@@ -1,5 +1,5 @@
 ---
-layout: post-alpha
+layout: post
 title: "Como tratar enums nos loaders?"
 author: "Afonso Jardim Filgueiras"
 user: "afilgueiras"

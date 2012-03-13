@@ -8,14 +8,14 @@ num: 1
 outof: 1
 ---
 
-## Introdução<a id="topo"> </a>
+# Introdução<a id="topo"> </a>
 <p></p>
 
-Seguimos agora com a implementação do Buscador.
+Seguimos agora para a implementação do Buscador.
+
+# Especificação
 
 ## Checklist
-
-### Especificação
 
 <div class="alert alert-box">Perguntas cujas respostas você precisa se certificar para implementar o Guice com sucesso.</div>
 
@@ -32,7 +32,15 @@ Seguimos agora com a implementação do Buscador.
  </tr>
 </table>
 
-### Implementação
+## Passo a passo
+
+### O<a id="know_1"> </a>TesteDeBuscarFuncionario foi devidamente implementado?
+
+### Os<a id="know_1"> </a>métodos da Interface são o suficiente, e não mais que o suficiente?
+
+# Implementação
+
+## Checklist
 
 <table class="table table-striped">
  <tr>
@@ -67,7 +75,7 @@ Seguimos agora com a implementação do Buscador.
 
 ## Passo a passo
 
-+ Adicionando<a id="impl_0"> </a>as notações na Interface (BuscarFuncionario)
+### Adicionando<a id="impl_0"> </a>as notações na Interface (BuscarFuncionario)
 
 Primeiramente abra a interface do Buscador, que no nosso caso é BuscarFuncionario:
 
@@ -92,17 +100,17 @@ Você verá um alerta de erro de compilação. Ele dirá que a classe Guice não
 
 <p><a href="#topo_impl_0">Voltar</a></p>
 
-+ Criar<a id="impl_1"> </a>a classe (BuscarFuncionário)Guice
+### Criar<a id="impl_1"> </a>a classe (BuscarFuncionário)Guice
 
 <p></p>
 
-Dê {Ctrl+'1' e ENTER} para criá-la, e vamos na sequência começar a implementar seu código, que por enquanto estará assim:
+Dê um {Ctrl + '1' e ENTER} para criá-la, e vamos na sequência começar a implementar seu código, que por enquanto estará assim:
 
       public class BuscarFuncionarioGuice {
       
       }
 
-<div class="alert alert-error">As classes Guice serão acessadas hierarquicamente pelo Framework. Portanto, <b>não se esqueça desse detalhe: a classe não será pública, portanto seu escopo deverá ser o seguinte:</b></div>
+<div class="alert alert-box">As classes Guice serão acessadas hierarquicamente pelo Framework. Portanto, <b>não se esqueça desse detalhe: a classe não será pública, portanto seu escopo deverá ser o seguinte:</b></div>
 
       class BuscarFuncionarioGuice {
       
@@ -118,7 +126,7 @@ Dê {Ctrl+'1' e ENTER} para criá-la, e vamos na sequência começar a implement
 
 <p><a href="#topo_impl_1">Voltar</a></p>
 
-+ Declarar<a id="impl_2"> </a>o SqlProvider e definí-lo no Construtor
+### Declarar<a id="impl_2"> </a>o SqlProvider e definí-lo no Construtor
 
 <p></p>
 
@@ -149,7 +157,7 @@ Não se esqueça de remover o __super()__. Fazendo assim, a classe ficará por e
 
 <p><a href="#topo_impl_2">Voltar</a></p>
 
-+ Implementar<a id="impl_3"> </a>o método newSelect()
+### Implementar<a id="impl_3"> </a>o método newSelect()
 
 <div class="alert alert-info">Esse método é responsável por promover uma consulta completa, ou seja, com todas as colunas da entidade no Banco de Dados, e com todos os relacionamentos dela.</div>
 
@@ -230,7 +238,7 @@ A classe estará agora com essa cara:
 
 <p><a href="#topo_impl_3">Voltar</a></p>
 
-+ Implementar<a id="impl_4"> </a>os métodos de Filtro, como públicos
+### Implementar<a id="impl_4"> </a>os métodos de Filtro, como públicos
 
 <p></p>
 
@@ -303,7 +311,7 @@ A classe BuscarFuncionarioGuice está agora com essa implementação:
 
 <p><a href="#topo_impl_4">Voltar</a></p>
 
-+ Verificar<a id="impl_5"> </a>se a Inteface está correta
+### Verificar<a id="impl_5"> </a>se a Inteface está correta
 
 Verifique na Interface se os métodos dela correspondem com os <b>métodos públicos</b> implementados no <a href="#guice">Guice</a>.
 

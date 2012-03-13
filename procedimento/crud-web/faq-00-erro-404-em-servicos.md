@@ -49,13 +49,13 @@ Quando executamos um teste de Serviço, nos deparamos com o seguinte STACKTRACE:
 
 Ou seja o recurso a ser acessado em seu teste não existe;
 
-__Causas:__ 
+### Causas:
 
 *URL incorreta;
 
 *Anotação @Get na classe do serviço
 
-__Soluções:__
+### Soluções:
 
 + A url foi definida corretamente, ou seja os parametros definidos nela realmente direcionam
 para uma entidade que existe no banco de dados?

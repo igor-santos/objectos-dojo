@@ -71,8 +71,21 @@ em que o DBUnit é chamado
     }
  	
 
-### Você adicionou a anotação `@Inject` logo após declarar o seu Buscador em seu teste ?
+### Você adicionou a anotação @Inject logo após declarar o Buscador em seu teste ?
  
+Verifique se foi adicionada a anotação `@Inject` antes de declarar o buscador na sua classe de teste
+
+    @Inject
+      private BuscarCliente buscarCliente;
+		 
+      public void busca_por_id_deve_funcionar() {
+        int id = 10;
+		
+        Cliente res = buscarCliente.porId(id);
+      }
+	
+Caso não adicionada a anotação o seguinte _stacktrace_ aparecerá: 
+
  	FAILED: busca_por_id_deve_funcionar
 	java.lang.NullPointerException
 	
@@ -80,21 +93,59 @@ em que o DBUnit é chamado
  		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:56)
  
+De acordo com o _stacktrace_ a NPE acontece exatamente quando o buscador é chamado em seus métodos
+de testes
+
+      public void busca_por_id_deve_funcionar() {
+        int id = 10;
+
+        Cliente res = buscarCliente.porId(id);
+ 
 Lembrando que uma das causas das NullPointers é tentar acessar propriedades de uma instância onde seu
-valor é "null": [Atente a primeira das causas no javadoc] (http://docs.oracle.com/javase/6/docs/api/java/lang/NullPointerException.html)
+valor é _null_: [Atente a primeira das causas no javadoc] (http://docs.oracle.com/javase/6/docs/api/java/lang/NullPointerException.html)
 , sem a presença da anotação `@Inject` uma NPE será lançada logo que se chamar o buscador:
   
-		@Inject
-		private BuscarCliente buscarCliente;
-		 
-		public void busca_por_id_deve_funcionar() {
-			int id = 10;
-		
-			Cliente res = buscarCliente.porId(id);
-		}
-	
 
 ### Os seus dados de teste estão razoáveis?
+
+Verifique se os dados utilizados em seu teste existem no mini-arquivo
+
+Mini-arquivo
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<dataset>
+		<XPT_ELETRONICOS.CLIENTE ID="1"
+		 NOME="João Dias" 
+		 TELEFONE="1234-5674" />
+		 ENDERECO="Rua das Figueiras, 33" 
+		 BAIRRO="Limão"
+		 CIDADE="São Paulo"
+		 
+		<XPT_ELETRONICOS.CLIENTE ID="2"
+		 NOME="Pedro de Souza" 
+		 TELEFONE="7778-9874" />
+		 ENDERECO="Avenida das Pedras, 1024" 
+		 BAIRRO="Vila Nova"
+		 CIDADE="São Paulo"
+		
+		<XPT_ELETRONICOS.CLIENTE ID="3"
+		 NOME="Carlos da Silva" 
+		 TELEFONE="8987-5689" />
+		 ENDERECO="Rua Torre Azul, 345" 
+		 BAIRRO="Vila das Torres"
+		 CIDADE="São Paulo"
+
+Classe de teste
+
+      public void busca_por_id_deve_funcionar() {
+
+        int id = 10;
+       
+        Cliente res = buscarCliente.porId(id);
+        assertThat(res, is(notNullValue()));
+     }	
+
+Caso os dados utilizados no teste não existam no mini-arquivo, o seguinte _stacktrace_ aparecerá
 
  	FAILED: busca_por_id_deve_funcionar
 	java.lang.NullPointerException
@@ -103,13 +154,18 @@ valor é "null": [Atente a primeira das causas no javadoc] (http://docs.oracle.c
  		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
 		
-Existe no mini-arquivo algum cliente com o `id = 10`? Caso não, basta substituir o `id` e seus respectivos
-asserts para que a npe seja corrigida: 
-		
-		public void busca_por_id_deve_funcionar() {
-		
-			int id = 10;
-		
-			Cliente res = buscarCliente.porId(id);
-			assertThat(res, is(notNullValue()));
-		}
+De acordo com o _stacktrace_ a NPE ocorre exatamente na linha onde o resultado do buscador é acessado,
+ou seja nos asserts
+
+      public void busca_por_id_deve_funcionar() {
+        int id = 10;
+        
+        Cliente res = buscarCliente.porId(id);
+        assertThat(res, is(notNullValue()));
+        
+        assertThat(res.getId, equalTo(id));
+        assertThat(res.getNome(), equalTo("Godofredo Diaz"));
+      }
+
+Como não existe nada no mini-arquivo com id especificado no teste o buscador irá retorna _null_, em
+seguida os testes irão falhar pois tentam acessar propriedades de algo que é _null_. 

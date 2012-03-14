@@ -2,41 +2,70 @@
 layout: post-alpha
 title: "Implementando Buscador: Testes"
 author: "Caio C. Petreanu"
-published: true
+user: "cpetreanu"
+date: 2012-03-01
 partof: procedimento-crud-entidade
 num: 0
 ---
 
-# Introdução<a id="topo"> </a>
+## Introdução<a id="topo"> </a>
 
-Qualquer aplicação que busque por informações em uma base persistente precisa implementar o conceito do que chamamos de Buscador.
+Praticamente todas as aplicações desenvolvidas hoje em dia necessitam que as informações obtidas, 
+calculadas, processadas sobrevivam a uma falta de energia ou àquele estagiário quem perguntou 
+_"o que acontece se eu desligar esta tomada?"_. Soluções para tanto são várias, 
+desde um simples arquivo texto gravado em seu computador 
+até as mais novas soluções [NoSQL](http://en.wikipedia.org/wiki/NoSQL). 
 
-# Especificação
+A mais tradicional, no entanto, ainda são as soluções SQL, ou os bancos de dados relacionais.
 
-<div class="alert alert-block">Perguntas cujas respostas você deve saber extrair para implementar o Teste. Sem elas a probabilidade da implementação ser um fracasso ou de baixa qualidade será alta. </div>
+Na [objectos](www.objectos.com.br), quando este for o caso, implementam-se os buscadores.       
 
-## Checklist
+## Antes de iniciar
 
-<table class="table table-striped">
- <tr>
-   <td><a id="topo_0_0"><input type="checkbox" /></a></td>
-   <td>Quais os atributos de Funcionário que devemos testar?</td>
-   <td><a href="#0_0">help!</a></td>
- </tr>
- <tr>
-   <td><a id="topo_0_1"><input type="checkbox" /></a></td>
-   <td>Quais métodos de busca haverão em BuscarFuncionario?</td>
-   <td><a href="#0_1">help!</a></td>
- </tr>
-</table>
+Este artigo assume conhecimento prévio em:
+
+- [Especificação](/caixa/processo-especificacao.html)
+- [TDD](/caixa/processo-00-TDD.html)
+- [mini-arquivos DBUnit](/caixa/)
 
 ## Passo-a-passo
 
-### Quais<a id="0_0"> </a>os atributos de Funcionário que devemos testar?
+### Especificação
 
-Busque valores dos atributos no <a href="#mini_0">mini-projeto.xml</a> (nome padrão).
+Siga o checklist abaixo:
 
-E, se necessário, na sua Interface:
+<table class="table table-bordered">
+ <tr>
+   <td class="tac col2em">
+    <a id="topo_0_0"><input type="checkbox" /></a>
+   </td>
+   <td>
+    Quais os atributos da entidade devemos testar?
+   </td>
+   <td>
+    <a href="#0_0">help!</a>
+   </td>
+ </tr>
+ <tr>
+   <td class="tac col2em">
+    <a id="topo_0_1"><input type="checkbox" /></a>
+   </td>
+   <td>
+    Quais métodos de busca devemos testar?
+   </td>
+   <td>
+    <a href="#0_1">help!</a>
+   </td>
+ </tr>
+</table>
+
+#### <a id="0_0"> </a>Quais os atributos da entidade devemos testar?
+
+Devem ser testados __todos__ as propriedades cujo valor está direta ou indiretamente 
+associado a informações vindas do banco de dados.
+
+Em 80% dos casos é seguro dizer que se deve testar todos os _getters_ definidos na interface. 
+No nosso exemplo, portanto:
 
       public interface Funcionario {
     
@@ -54,70 +83,83 @@ E, se necessário, na sua Interface:
     
       }
 
-Portanto, Funcionário conhece:
+Para os demais 20% dos casos, refira-se a este [artigo](/crud/). Este último explica com mais 
+detalhes os casos em que, por exemplo, o valor de propriedades vêm de duas ou mais colunas.  
 
-      int id;
-      int matricula;
-      String nome;
-      LocalDate dataNascimento;
-      DateTime dataAdmissao;
-      DateTime dataDemissao;
+#### <a id="0_1"> </a>Quais métodos de busca devemos testar?
 
-<p><a href="#topo_0_0">Voltar</a></p>
+Idealmente você deve ser capaz de decidir quais métodos serão necessários a partir do 
+contexto em que seu buscador será utilizado. Exemplos:
 
-### Quais<a id="0_1"> </a>métodos de busca haverão em BuscarFuncionario?
+- Há uma parte do sistema que irá exibir o funcionário baseado em sua matrícula.
+- Há uma pagina que lista os aniversariantes do mês corrente.
+- Funcionários com mais de 3 anos de casa precisam receber um e-mail com seus novos benefícios.  
 
-Verifique a especificação. Neste caso, existem dois buscadores elegíveis: porId() e porMatricula().
+Na dúvida, no entanto, __sempre__ pergunte ao seu líder de projeto! Lembre-se: 
 
-<p><a href="#topo_0_1">Voltar</a></p>
+> "a responsabilidade é sempre do programador de certificar-se de que entendeu _de fato_
+> qual problema do mundo real está sendo resolvido com o seu código."
 
-# Implementação
+Para este artigo, e por motivos puramente didáticos, ficou decidido:
 
-<div class="alert alert-block">O procedimento para implementar esses Testes, uma vezs que você tenha as especificações necessárias. </div>
+1. Buscar funcionários pelo id
+1. Buscar funcionários pela matrícula
 
-## Checklist
+### Implementação
 
-<table class="table table-striped">
+Siga o checklist abaixo:
+
+<table class="table table-bordered">
  <tr>
-   <td><a id="topo_1_0"><input type="checkbox" /></a></td>
-   <td><a href="#1_0">Estruturar o código com as Anotações, Buscadores, DBUnit, métodos e funções necessários</a></td>
+   <td class="tac col2em">
+    <a id="topo_1_0"><input type="checkbox" /></a>
+   </td>
+   <td>
+    <a href="#1_0">Estruturar o código com as Anotações, Buscadores, DBUnit, métodos e funções necessários</a>
+   </td>
  </tr>
  <tr>
-   <td><a id="topo_1_1"><input type="checkbox" /></a></td>
-   <td><a href="#1_1">Implementar o teste responsável por verificar cada atributo do Funcionário</a></td>
+   <td class="tac col2em">
+    <a id="topo_1_1"><input type="checkbox" /></a>
+   </td>
+   <td>
+    <a href="#1_1">Implementar o teste responsável por verificar cada atributo do Funcionário</a>
+   </td>
  </tr>
  <tr>
-   <td><a id="topo_1_2"><input type="checkbox" /></a></td>
-   <td><a href="#1_2">Implementar os testes dos demais Buscadores</a></td>
+   <td class="tac col2em">
+    <a id="topo_1_2"><input type="checkbox" /></a>
+   </td>
+   <td>
+    <a href="#1_2">Implementar os testes dos demais Buscadores</a>
+   </td>
  </tr>
 </table>
 
-## Passo-a-passo
-
-### Estruturar<a id="1_0"> </a>o código com as Anotações, Buscadores, DBUnit, métodos e funções necessários
+#### <a id="1_0"> </a>Estruturar o código com as Anotações, Buscadores, DBUnit, métodos e funções necessários
 
 Primeiramente, criamos a classe de Teste.
 
     public class TesteDeBuscarFuncionario {
-    
     }
 
-A partir dela, colocamos nela a notação @Test:
+A partir dela, colocamos nela a notação `@Test`:
 
     @Test
     public class TesteDeBuscarFuncionario {
-    
     }
 
-E fazemos uma relação com o Módulo __do projeto__ para fazer uso de suas configurações no Framework.
+E aí dizemos para que o TestNG utilize o módulo Guice correto.
 
     @Test
     @Guice(modules = { ModuloDeTeste.class })
     public class TesteDeBuscarFuncionario {
-    
     }
 
-<div class="alert alert-info">Geralmente, para cada projeto serão utilizados diferentes Módulos. Portanto atente-se a isso quando for implementar seus Testes!</div>
+<div class="alert alert-info">
+  Geralmente, para cada projeto serão utilizados diferentes Módulos. 
+  Portanto atente-se a isso quando for implementar seus Testes!
+</div>
 
 Em seguida, declaramos o Buscador de Funcionário.
 
@@ -129,6 +171,15 @@ Em seguida, declaramos o Buscador de Funcionário.
       private BuscarFuncionario buscarFuncionario;
       
     }
+    
+<div class="alert alert-error">
+  cpetreanu, é necessário dizer que a interface não existe e pedir para criar uma nova
+  no diretório de produção src/main/java
+</div>
+
+    public interface BuscarFuncionario {
+    }
+
 
 Por fim, decalramos uma instâcia do DBUnit para podermos carregar o DefaultDataSet contendo o arquivo .xml contendo dados necessários de registros nas tabelas no banco de dados.
 
@@ -150,9 +201,7 @@ Por fim, decalramos uma instâcia do DBUnit para podermos carregar o DefaultData
     }
     
 
-<p><a href="#topo_1_0">Voltar</a></p>
-
-### Implementar<a id="1_1"> </a>o teste responsável por verificar cada atributo do Funcionário
+#### <a id="1_1"> </a>Implementar o teste responsável por verificar cada atributo do Funcionário
 
 Para começar, devemos eleger o teste que irá verificar a listagem dos atributos de Funcionário. Utilizando o busca_por_id(), comece declarando um Funcionário recebido pelo Buscador:
 
@@ -160,14 +209,36 @@ Para começar, devemos eleger o teste que irá verificar a listagem dos atributo
         Funcionario res = buscarFuncionario.porId(3);
       }
 
-<div class="alert alert-error">Você verá que buscarFuncionario.porId() não está implementado ainda. Crie a Interface, deixe ela vazia para não dar erros de compilação e vamos em frente!</div>
+<div class="alert alert-info">
+Você verá que buscarFuncionario.porId() não está implementado ainda. 
+Crie a Interface, deixe ela vazia para não dar erros de compilação e vamos em frente!
+</div>
+
+<div class="alert alert-error">
+  cpetreanu. 
+  <ul>
+    <li>
+      Para informações/instruções ao leitor, utilizar alert-info
+    </li>
+    <li>
+      Listar o código com o novo método na interface conforme abaixo:
+    </li>
+  </ul>
+</div>
+
+    public interface BuscarFuncionario {
+      
+      Funcionario porId(int id);
+      
+    }
 
 E, em seguida, faça os asserts para cada atributo. Não dê importância neste momento para o conteúdo deles.
 
       public void busca_por_id() {
-        Funcionario res = buscarFuncionario.porId(3);
+        int id = 3;
+        Funcionario res = buscarFuncionario.porId(id);
     
-        assertThat(res.getId(), equalTo(0));
+        assertThat(res.getId(), equalTo(id));
         assertThat(res.getMatricula(), equalTo(null));
         assertThat(res.getNome(), equalTo(null));
         assertThat(res.getDataNascimento(), equalTo(null));
@@ -225,25 +296,33 @@ Para o teste:
         assertThat(res.getDataDemissao(), equalTo(new DateTime(2012, 1, 3, 12, 30)));
       }
 
-<div class="alert alert-block">É importantíssimo certificar-se que os valores nos asserts vão de acordo com as fontes de dados usadas. Sempre revise-os para ter certeza de que está implementando corretamente seus Testes!</div>
+<div class="alert alert-block">
+É importantíssimo certificar-se que os valores nos asserts vão de acordo com as fontes 
+de dados usadas. Sempre revise-os para ter certeza de que está implementando 
+corretamente seus Testes!
+</div>
 
-<p><a href="#topo_1_1">Voltar</a></p>
+<div class="alert alert-error">
+cpetreanu:
+<ul>
+  <li>Colocar o teste de busca_por_matricula, uma vez que você o mencionou na introdução</li>
+</ul>
+</div>
 
-### Implementar<a id="1_2"> </a>os testes dos demais métodos do Buscador
+## Casos especiais
 
-Para os demais casos, seguem alguns exemplos detalhados para facilitar o entendimento:
+<div class="alert alert-error">
+cpetreanu:
+<ul>
+  <li>Adicionar um checklist aqui com os casos especiais</li>
+</ul>
+</div>
 
-* <a href="#var_0">Variação 1: Buscador para relacionamentos</a>
-
-* <a href="#var_1">Variação 2: Buscadores para métodos que retornam Listas</a>
-
-<p><a href="#topo_1_2">Voltar</a></p>
-
-## Variação 1: Buscador para relacionamentos
+### Entidades com relacionamentos
 
 Não existe necessidade de testar todas as propriedades das entidades relacionadas.
 
-### Solução<a id="var_0"> </a>A: Usando o Buscador da Classe relacionada:
+#### Solução<a id="var_0"> </a>A: Usando o Buscador da Classe relacionada:
 
     @Inject
     private BuscarCinema buscarCinema;
@@ -258,7 +337,7 @@ Não existe necessidade de testar todas as propriedades das entidades relacionad
         assertThat(cinema.getId(), equalTo(2));
     }
 
-### Solução B: Usando a Classe Falsa:
+#### Solução B: Usando a Classe Falsa:
 
       @Inject
       private BuscarCaixaEletronico buscarCaixa;
@@ -270,7 +349,7 @@ Não existe necessidade de testar todas as propriedades das entidades relacionad
         assertThat(caixa.getId(), equalTo(1001708));
       }
 
-### Solução C: Verificar a busca pelo relacionamento por uma entidade extraída:
+#### Solução C: Verificar a busca pelo relacionamento por uma entidade extraída:
 
       public void busca_por_superior() {
         Funcionario esperado = buscarFuncionario.porId(3);
@@ -283,7 +362,7 @@ Não existe necessidade de testar todas as propriedades das entidades relacionad
 
 <p><a href="#1_2">Voltar: Demais Buscadores</a></p>
 
-## Variação<a id="var_1"> </a>2: Buscadores para métodos que retornam Listas
+### Métodos que retornam listas
 
 Neste exemplo, Funcionário relaciona-se com Superior. Atualizemos o novo mini-empresa.xml para:
 
@@ -392,7 +471,9 @@ Sabendo que na especificação a ordenação será feita pelo FUNCIONARIO.ID asc
 
 O método busca_por_superior() é o responsável por verificar que os Funcionários recebidos do Superior sejam os esperados.
 
-## O que pode estar errado no seu código que o Teste tem por objetivo capturar?
+### Métodos que retornam iteradores
+
+## Erros comuns
 
 O relacionamento com outras classes, ou o teste dele, não está correto.
 
@@ -429,7 +510,7 @@ Erro de @Inject:
 
     private Funcionario funcionario;
 
-## Testes Incompletos
+### Testes Incompletos
 
 São Testes em que propriedades ou colaborações (relacionamentos) não são testados. Exemplo:
 
@@ -440,11 +521,9 @@ São Testes em que propriedades ou colaborações (relacionamentos) não são te
         assertThat(res.getNome(), equalTo("Priscilla Cardoso"));
     }
 
-<p><a href="#topo">Voltar: Topo</a></p>
-
 Seguir em frente? <a href="{{ site.baseurl }}/procedimento/crud-entidade/01-implementando_buscador_buscadores.html" class="btn btn-success">Buscadores!</a>
 
-### Ler códigos!
+## Ler códigos!
 
 <table class="table table-striped">
  <tr>

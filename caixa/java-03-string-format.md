@@ -2,6 +2,7 @@
 layout: post
 title: Método String.format
 author: "Tiago Aguiar"
+date: 2012-03-07
 published: true
 partof: java
 num: 3

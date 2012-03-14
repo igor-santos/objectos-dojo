@@ -9,14 +9,20 @@ styleClass: post
   </div>
 
   <div class="row post">
-    <div class="offset2 span8">
-      <h1>{{ page.title }}</h1>
-      
-      {% if page.author %}
-      <h2>{{ page.author }}</h2>
-      {% endif %}
+    <div class="offset1 span9">
+
+      <h1 class="title">{{ page.title }}</h1>
+      <ul class="post-meta unstyled">
+        {% if page.author %}
+        <li class="author"><span class="by">por</span> <a href="{{ site.baseurl }}/autor/{{ page.user }}.html">{{ page.author }}</a></li>
+        {% endif %}
+        {% if page.date %}
+        <li class="date">{{ page.date | date: "%d %B %Y" }}</li>
+        {% endif %}
+      </ul>
 
       {{ content }}
+      
     </div>
   </div>
 </div>

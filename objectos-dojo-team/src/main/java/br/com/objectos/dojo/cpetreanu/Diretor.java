@@ -15,9 +15,6 @@
  */
 package br.com.objectos.dojo.cpetreanu;
 
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-
 /**
  * @author caio.petreanu@objectos.com.br (Caio Petreanu)
  */

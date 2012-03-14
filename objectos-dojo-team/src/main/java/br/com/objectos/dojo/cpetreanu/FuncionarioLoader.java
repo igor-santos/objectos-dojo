@@ -16,8 +16,11 @@
 package br.com.objectos.dojo.cpetreanu;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+
+import br.com.objectos.comuns.relational.jdbc.ResultSetWrapper;
 import br.com.objectos.comuns.relational.search.ResultSetLoader;
 
 /**
@@ -25,9 +28,72 @@ import br.com.objectos.comuns.relational.search.ResultSetLoader;
  */
 public class FuncionarioLoader implements ResultSetLoader<Funcionario> {
 
+  private final String prefix;
+
+  public FuncionarioLoader() {
+    this("FUNCIONARIO");
+  }
+
+  public FuncionarioLoader(String prefix) {
+    this.prefix = prefix;
+  }
+
   @Override
-  public Funcionario load(ResultSet resultSet) throws SQLException {
-    return null;
+  public Funcionario load(ResultSet resultSet) {
+    ResultSetWrapper rs = new ResultSetWrapper(prefix, resultSet);
+    return new Loader(rs).novaInstancia();
+  }
+
+  private class Loader implements Funcionario.Construtor {
+
+    private final ResultSetWrapper rs;
+
+    public Loader(ResultSetWrapper rs) {
+      this.rs = rs;
+    }
+
+    @Override
+    public Funcionario novaInstancia() {
+      FuncionarioJdbc impl = new FuncionarioJdbc(this);
+      impl.setId(rs.getInt("ID"));
+      return impl;
+    }
+    @Override
+    public String getNome() {
+      return rs.getString("NOME");
+    }
+
+    @Override
+    public String getMatricula() {
+      return rs.getString("MATRICULA");
+    }
+
+    @Override
+    public LocalDate getDataNascimento() {
+      return rs.getLocalDate("DATA_NASCIMENTO");
+    }
+
+    @Override
+    public DateTime getDataAdmissao() {
+      return rs.getDateTime("ADMISSAO");
+    }
+
+    @Override
+    public DateTime getDataDemissao() {
+      return rs.getDateTime("DEMISSAO");
+    }
+
+    @Override
+    public Superior getSuperior() {
+      ResultSet resultSet = rs.getResultSet();
+      return new FuncionarioLoaderSupervisor().load(resultSet);
+    }
+
+    @Override
+    public Diretor getDiretor() {
+      ResultSet resultSet = rs.getResultSet();
+      return new FuncionarioLoaderDiretor().load(resultSet);
+    }
   }
 
 }

@@ -36,12 +36,12 @@ do Eclipse, a criação de um lançador Gnome será feito.
 
 Em uma área vazia do seu Desktop, clique com o botão direito do mouse. O menu abaixo vai aparecer: 
 
-![lancador_gnome] (http://rio.objectos.com.br/twiki/pub/Objectos/ObjectosKDOEclipse/lancador_gnome.jpg)  
+![lancador_gnome] (http://i1245.photobucket.com/albums/gg582/img_repo/lancador_gnome-1.jpg)  
 
 No nome coloque Eclipse, e no comando clique em "Navegar". Abrirá uma janela, onde você deve selecionar o
 arquivo Eclipse que está do diretório `/home/seulogin/kdo/eclipse/`.
 
-![criar_lancador] (http://rio.objectos.com.br/twiki/pub/Objectos/ObjectosKDOEclipse/Captura_de_tela-Criar_lan%C3%A7ador.png)  
+![criar_lancador] (http://i1245.photobucket.com/albums/gg582/img_repo/Captura_de_tela-Criar_lanador.png)  
 
 Para mudar o ícone, basta clicar nele e procurá-lo no endereço `/home/seulogin/kdo/eclipse/icon.xpm`
 Criado o lançador, você pode também criar um link para deixar no painel. Para isso, clique com o
@@ -58,7 +58,7 @@ implementar, sejam guardados nesse diretório. Por isso, o padrão deve ser `/ho
 
 Segue o exemplo abaixo:  
 
-![init_eclipse] (http://rio.objectos.com.br/twiki/pub/Objectos/ObjectosKDOEclipse/eclipse-workspace-launcher.png)
+![init_eclipse] (http://i1245.photobucket.com/albums/gg582/img_repo/workspace.png)
 
 No caso da figura acima ele pergunta se eu quero usar o endereço como padrão e não perguntar novamente.
 Para que você não tenha o trabalho de dar ok nessa tela toda vez que abrir o Eclipse, deixe essa 
@@ -84,7 +84,7 @@ opção **Salvar link como**).
 No Eclipse, clique em **Window** > **Preferences**. Selecione as opções: **Java** > **Code Style** >
 **Clean Up**, conforme a figura abaixo: 
 
-![clean_up] (http://rio.objectos.com.br/twiki/pub/Objectos/ObjectosKDOEclipse/importantomaisarquivos2.png)
+![clean_up] (http://i1245.photobucket.com/albums/gg582/img_repo/pref-2.png)
 
 Clique no botão Import e busque o arquivo `objectos-clean-up.xml`, clique em `Apply` e depois
 em `Ok`.  
@@ -98,7 +98,7 @@ Agora, faça o mesmo para as opções que seguem abaixo de `Clean Up`:
 Ainda em **Window** > **Preferences**, na opção **Java**, escolha agora **Editor** > **Save Actions**, e
 verifique também se todas as opções do Save Actions estão habilitadas, conforme a figura abaixo. 
 
-![save_actions] (http://rio.objectos.com.br/twiki/pub/Objectos/ObjectosKDOEclipse/Save_action.jpg)
+![save_actions] (http://i1245.photobucket.com/albums/gg582/img_repo/Save_action.jpg)
 
 Pronto, suas preferências, inclusive as de formatação de arquivos, devem estar padronizadas. 
 
@@ -111,18 +111,18 @@ Esse procedimento faz com que cada classe nova que você criar, apareça sua ide
 
 Vá para **Window->Preferences**, 
 
-![autoria] (http://rio.objectos.com.br/twiki/pub/Objectos/ObjectosKDOEclipse/personalizacaodeautoria.png)
+![autoria] (http://i1245.photobucket.com/albums/gg582/img_repo/personalizacaodeautoria.png)
 
 Em **Java** > **Code Style** > **Code Templates** edite o comentário padrão de **Comments** > 
 **Types**, clicando no botão Edit. No caso, abrirá uma nova janela com o seguinte conteúdo padrão:
 
     /**
-        * @author marcio.endo@objectos.com.br (Marcio Endo)
+     * @author marcio.endo@objectos.com.br (Marcio Endo)
     */
 
 Você deverá editar esse comentario substituindo pelo seu email da Objectos e seu nome do lado.
 
-![autoria_2] (http://rio.objectos.com.br/twiki/pub/Objectos/ObjectosKDOEclipse/personalizacaodeautoria2.png)
+![autoria_2] (http://i1245.photobucket.com/albums/gg582/img_repo/personalizacaodeautoria2.png)
 
 Clique em Ok nessa janela, retornará na janela de Code Templates, clique em `Apply` e `OK`. 
 
@@ -136,4 +136,4 @@ Na caixa de busca procure pela palavra favorites. Selecione a opção **Java > E
 
 Adicione todas classes listadas na figura.
 
-![preferences_imports](http://rio.objectos.com.br/twiki/pub/Objectos/ObjectosKDOEclipse/assistentedeimportsestaticos.png)
+![preferences_imports](http://i1245.photobucket.com/albums/gg582/img_repo/assistentedeimportsestaticos.png)

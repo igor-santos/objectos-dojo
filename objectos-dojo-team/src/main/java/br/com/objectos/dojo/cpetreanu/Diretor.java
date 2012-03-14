@@ -21,20 +21,10 @@ import org.joda.time.LocalDate;
 /**
  * @author caio.petreanu@objectos.com.br (Caio Petreanu)
  */
-public interface Funcionario {
+public interface Diretor {
 
   int getId();
 
   String getNome();
-  
-  String getMatricula();
-
-  LocalDate getDataNascimento();
-
-  DateTime getDataAdmissao();
-
-  DateTime getDataDemissao();
-
-  Diretor getDiretor();
 
 }

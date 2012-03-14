@@ -15,26 +15,14 @@
 */
 package br.com.objectos.dojo.cpetreanu;
 
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
+import com.google.inject.ImplementedBy;
 
 /**
  * @author caio.petreanu@objectos.com.br (Caio C. Petreanu)
  */
-public interface Superior {
+@ImplementedBy(BuscarDiretorGuice.class)
+public interface BuscarDiretor {
 
-  Integer getId();
-
-  String getNome();
-
-  String getMatricula();
-
-  LocalDate getDataNascimento();
-
-  DateTime getAdmissao();
-
-  DateTime getDemissao();
-
-  Diretor getDiretor();
+  Diretor porId(int id);
 
 }

@@ -15,8 +15,12 @@
  */
 package br.com.objectos.dojo.cpetreanu;
 
+import static com.google.common.collect.Lists.transform;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+
+import java.util.Iterator;
+import java.util.List;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -25,6 +29,8 @@ import org.testng.annotations.Test;
 
 import br.com.objectos.comuns.testing.dbunit.DBUnit;
 
+import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
 /**
@@ -64,10 +70,42 @@ public class TesteDeBuscarFuncionario {
     assertThat(res.getId(), equalTo(3));
   }
 
-  public void busca_por_superior() {
+  public void busca_lista_por_superior() {
     Superior superior = buscarSuperior.porId(2);
-    Funcionario res = buscarFuncionario.porSuperior(superior);
+    List<Funcionario> res = buscarFuncionario.porSuperior(superior);
 
-    assertThat(res.getId(), equalTo(2));
+    List<Integer> ids = transform(res, new ToId());
+    assertThat(ids.get(0), equalTo(2));
+    assertThat(ids.get(1), equalTo(4));
   }
+
+  public void busca_iterador_por_superior() {
+    Superior superior = buscarSuperior.porId(2);
+
+    Iterator<Funcionario> iterator = buscarFuncionario.iterarPorFuncionario(superior);
+
+    List<Funcionario> res = ImmutableList.copyOf(iterator);
+    assertThat(res.size(), equalTo(2));
+
+    List<Integer> ids = transform(res, new ToId());
+    assertThat(ids.get(0), equalTo(2));
+    assertThat(ids.get(1), equalTo(4));
+  }
+
+  public void busca_por_diretor() {
+    Funcionario esperado = buscarFuncionario.porId(3);
+    Diretor diretor = esperado.getDiretor();
+
+    Funcionario res = buscarFuncionario.porDiretor(diretor);
+
+    assertThat(res.getDiretor().getId(), equalTo(1));
+  }
+
+  private class ToId implements Function<Funcionario, Integer> {
+    @Override
+    public Integer apply(Funcionario input) {
+      return input.getId();
+    }
+  }
+
 }

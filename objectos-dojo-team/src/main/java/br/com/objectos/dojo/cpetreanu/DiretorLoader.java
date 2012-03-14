@@ -15,26 +15,19 @@
 */
 package br.com.objectos.dojo.cpetreanu;
 
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import br.com.objectos.comuns.relational.search.ResultSetLoader;
 
 /**
  * @author caio.petreanu@objectos.com.br (Caio C. Petreanu)
  */
-public interface Superior {
+public class DiretorLoader implements ResultSetLoader<Diretor> {
 
-  Integer getId();
-
-  String getNome();
-
-  String getMatricula();
-
-  LocalDate getDataNascimento();
-
-  DateTime getAdmissao();
-
-  DateTime getDemissao();
-
-  Diretor getDiretor();
+  @Override
+  public Diretor load(ResultSet resultSet) throws SQLException {
+    return null;
+  }
 
 }

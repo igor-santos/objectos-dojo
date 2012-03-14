@@ -15,37 +15,36 @@
 */
 package br.com.objectos.dojo.cpetreanu;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import br.com.objectos.comuns.relational.jdbc.NativeSql;
 
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Guice;
-import org.testng.annotations.Test;
-
-import br.com.objectos.comuns.testing.dbunit.DBUnit;
-
-import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author caio.petreanu@objectos.com.br (Caio C. Petreanu)
  */
-@Test
-@Guice(modules = { ModuloDeTesteObjectosDojo.class })
-public class TesteDeBuscarSuperior {
+class BuscarDiretorGuice implements BuscarDiretor {
 
-  private BuscarSuperior buscarSuperior;
+  private final Provider<NativeSql> sqlProvider;
 
-  @Inject
-  private DBUnit dbUnit;
-
-  @BeforeClass
-  public void prepararDBUnit() {
-    dbUnit.loadDefaultDataSet();
+  public BuscarDiretorGuice(Provider<NativeSql> sqlProvider) {
+    this.sqlProvider = sqlProvider;
   }
 
-  public void busca_por_id() {
-    Superior res = buscarSuperior.porId(1);
+  @Override
+  public Diretor porId(int id) {
+    return newSelect()
 
-    assertThat(res.getId(), equalTo(1));
+        .add("where DIRETOR.ID = ?").param(id)
+
+        .single();
+  }
+
+  private NativeSql newSelect() {
+    return sqlProvider.get()
+
+        .add("select *")
+        .add("from DATABASE.DIRETOR as DIRETOR")
+
+        .andLoadWith(new DiretorLoader());
   }
 }

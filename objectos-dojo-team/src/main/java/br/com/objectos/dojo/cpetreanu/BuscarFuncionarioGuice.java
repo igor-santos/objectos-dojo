@@ -15,6 +15,9 @@
 */
 package br.com.objectos.dojo.cpetreanu;
 
+import java.util.Iterator;
+import java.util.List;
+
 import br.com.objectos.comuns.relational.jdbc.NativeSql;
 
 import com.google.inject.Inject;
@@ -51,12 +54,34 @@ class BuscarFuncionarioGuice implements BuscarFuncionario {
   }
 
   @Override
-  public Funcionario porSuperior(Superior superior) {
+  public List<Funcionario> porSuperior(Superior superior) {
     Integer superiorId = superior.getId();
 
     return newSelect()
 
         .add("where SUPERIOR.ID = ?").param(superiorId)
+
+        .list();
+  }
+
+  @Override
+  public Iterator<Funcionario> iterarPorFuncionario(Superior superior) {
+    Integer _superior = superior.getId();
+
+    return newSelect()
+
+        .add("where FUNCIONARIO.SUPERIOR_ID = ?").param(_superior)
+
+        .iterate();
+  }
+
+  @Override
+  public Funcionario porDiretor(Diretor diretor) {
+    int _diretor = diretor.getId();
+
+    return newSelect()
+
+        .add("where FUNCIONARIO.DIRETOR_ID = ? ").param(_diretor)
 
         .single();
   }

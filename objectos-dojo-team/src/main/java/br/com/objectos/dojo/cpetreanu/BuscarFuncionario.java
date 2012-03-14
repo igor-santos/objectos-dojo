@@ -15,6 +15,9 @@
  */
 package br.com.objectos.dojo.cpetreanu;
 
+import java.util.Iterator;
+import java.util.List;
+
 import com.google.inject.ImplementedBy;
 
 /**
@@ -27,6 +30,10 @@ public interface BuscarFuncionario {
 
   Funcionario porMatricula(String matricula);
 
-  Funcionario porSuperior(Superior superior);
+  List<Funcionario> porSuperior(Superior superior);
+
+  Iterator<Funcionario> iterarPorFuncionario(Superior superior);
+
+  Funcionario porDiretor(Diretor diretor);
 
 }

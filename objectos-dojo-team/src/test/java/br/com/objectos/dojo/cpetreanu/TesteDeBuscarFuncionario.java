@@ -35,7 +35,10 @@ import com.google.inject.Inject;
 public class TesteDeBuscarFuncionario {
 
   @Inject
-  private BuscarFuncionario_Buscadores buscarFuncionario;
+  private BuscarFuncionario buscarFuncionario;
+
+  @Inject
+  private BuscarSuperior buscarSuperior;
 
   @Inject
   private DBUnit dbUnit;
@@ -55,4 +58,16 @@ public class TesteDeBuscarFuncionario {
     assertThat(res.getDataDemissao(), equalTo(new DateTime(2012, 1, 3, 12, 30)));
   }
 
+  public void busca_por_matricula() {
+    Funcionario res = buscarFuncionario.porMatricula("T0033000");
+
+    assertThat(res.getId(), equalTo(3));
+  }
+
+  public void busca_por_superior() {
+    Superior superior = buscarSuperior.porId(2);
+    Funcionario res = buscarFuncionario.porSuperior(superior);
+
+    assertThat(res.getId(), equalTo(2));
+  }
 }

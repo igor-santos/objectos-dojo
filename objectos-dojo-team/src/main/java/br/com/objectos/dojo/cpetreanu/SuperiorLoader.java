@@ -23,10 +23,10 @@ import br.com.objectos.comuns.relational.search.ResultSetLoader;
 /**
  * @author caio.petreanu@objectos.com.br (Caio C. Petreanu)
  */
-public class FuncionarioLoader_Buscadores implements ResultSetLoader<Funcionario> {
+public class SuperiorLoader implements ResultSetLoader<Superior> {
 
   @Override
-  public Funcionario load(ResultSet resultSet) throws SQLException {
+  public Superior load(ResultSet resultSet) throws SQLException {
     return null;
   }
 

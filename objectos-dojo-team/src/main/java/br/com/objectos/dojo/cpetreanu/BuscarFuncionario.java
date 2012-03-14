@@ -15,11 +15,18 @@
  */
 package br.com.objectos.dojo.cpetreanu;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author caio.petreanu@objectos.com.br (Caio Petreanu)
  */
-public interface BuscarFuncionario_Testes {
+@ImplementedBy(BuscarFuncionarioGuice.class)
+public interface BuscarFuncionario {
 
   Funcionario porId(int id);
+
+  Funcionario porMatricula(String matricula);
+
+  Funcionario porSuperior(Superior superior);
 
 }

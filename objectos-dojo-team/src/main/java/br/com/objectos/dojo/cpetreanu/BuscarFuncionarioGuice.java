@@ -23,12 +23,12 @@ import com.google.inject.Provider;
 /**
  * @author caio.petreanu@objectos.com.br (Caio C. Petreanu)
  */
-class BuscarFuncionarioGuice_Buscadores implements BuscarFuncionario_Buscadores {
+class BuscarFuncionarioGuice implements BuscarFuncionario {
 
   private final Provider<NativeSql> sqlProvider;
 
   @Inject
-  public BuscarFuncionarioGuice_Buscadores(Provider<NativeSql> sqlProvider) {
+  public BuscarFuncionarioGuice(Provider<NativeSql> sqlProvider) {
     this.sqlProvider = sqlProvider;
   }
 
@@ -37,6 +37,26 @@ class BuscarFuncionarioGuice_Buscadores implements BuscarFuncionario_Buscadores 
     return newSelect()
 
         .add("where FUNCIONARIO.ID = ?").param(id)
+
+        .single();
+  }
+
+  @Override
+  public Funcionario porMatricula(String matricula) {
+    return newSelect()
+
+        .add("where FUNCIONARIO.MATRICULA = ?").param(matricula)
+
+        .single();
+  }
+
+  @Override
+  public Funcionario porSuperior(Superior superior) {
+    Integer superiorId = superior.getId();
+
+    return newSelect()
+
+        .add("where SUPERIOR.ID = ?").param(superiorId)
 
         .single();
   }
@@ -50,7 +70,7 @@ class BuscarFuncionarioGuice_Buscadores implements BuscarFuncionario_Buscadores 
         .add("join DATABASE.SUPERIOR as SUPERIOR")
         .add("from FUNCIONARIO.SUPERIOR_ID as SUPERIOR.ID")
 
-        .andLoadWith(new FuncionarioLoader_Buscadores());
+        .andLoadWith(new FuncionarioLoader());
   }
 
 }

@@ -24,9 +24,9 @@ Na [objectos](www.objectos.com.br), quando este for o caso, implementam-se os bu
 
 Este artigo assume conhecimento prévio em:
 
-- [Especificação](/caixa/processo-especificacao.html)
+- Especificação<span class="label label-warning">TODO</span>
 - [TDD](/caixa/processo-00-TDD.html)
-- [mini-arquivos DBUnit](/caixa/)
+- mini-arquivos DBUnit<span class="label label-warning">TODO</span>
 
 ## Passo-a-passo
 
@@ -83,7 +83,7 @@ No nosso exemplo, portanto:
     
       }
 
-Para os demais 20% dos casos, refira-se a este [artigo](/crud/). Este último explica com mais 
+Para os demais 20% dos casos, refira-se a este artigo <span class="label label-warning">TODO</span>. Este último explica com mais 
 detalhes os casos em que, por exemplo, o valor de propriedades vêm de duas ou mais colunas.  
 
 #### <a id="0_1"> </a>Quais métodos de busca devemos testar?

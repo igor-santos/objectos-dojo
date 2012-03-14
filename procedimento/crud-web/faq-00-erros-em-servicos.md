@@ -25,7 +25,7 @@ Para este FAQ considere a seguinte a seguinte amostra de código
           assertThat(response.status(), equalTo(HttpServletResponse.SC_UNAUTHORIZED));
         }
 
-        public void usuario_autenticados_devem_listar_itens() {
+        public void usuarios_autenticados_devem_listar_itens() {
           Map<String, String> cookies = login("alberto");
 
          WebResponse response = webClientOf(URL, cookies).get();
@@ -44,7 +44,7 @@ Para este FAQ considere a seguinte a seguinte amostra de código
 
 ### Erro 404: A URL foi definida corretamente ?
 
-Verifique se no inicio da classe de teste a URL foi definida corretamente, sem nenhum `/` no inicio[
+Verifique se no inicio da classe de teste a URL foi definida corretamente, sem nenhum `/` no inicio
 
     @Test
       public class TesteDeProduto extends TesteDeIntegracaoWeb {
@@ -80,6 +80,49 @@ Assim percebemos que o erro estava na URL que foi definida no teste
 
 Portanto é só remover a barra no inicio da URL
 
-### Address already in use: O Jetty ou o jekyll estão sendo utilizados no terminal?
+### BindException: Address already in use - O Jetty ou o jekyll estão sendo utilizados no terminal ?
 
 Verifique no terminal se o Jetty ou o jekyll estão em uso, se sim o seguinte _stacktrace_ aparecerá
+
+    java.net.BindException: Address already in use
+	  at sun.nio.ch.Net.bind(Native Method)
+	  at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:126)
+	  at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:59)
+	  at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:172)
+	  at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:300)
+
+De acordo com o _stacktrace_ a exceção ocorre por conta das aplicações em uso no terminal, basta
+encerrá-las para que o problema seja resolvido.
+
+### Erro 401 - O login fornecido no teste está correto ? 
+
+Verifique se o login fornecido no teste está correto
+
+    public void usuarios_autenticados_devem_listar_itens() {
+      Map<String, String> cookies = login("alberto");
+
+      WebResponse response = webClientOf(URL, cookies).get();
+      assertThat(response.status(), equalTo(HttpServletResponse.SC_OK));
+    }
+
+Caso contrário, o seguinte _stacktrace_ aparecerá:
+
+    java.lang.AssertionError: 
+    Expected: <200>
+    got: <401>
+
+	  at br.com.objectos.dojo.TesteDeIntegracaoWeb.login(TesteDeIntegracaoWeb.java:98)
+	  at br.com.objectos.dojo..TesteDeIntegracaoWeb.login(TesteDeIntegracaoWeb.java:91)
+
+De acordo com o _stacktrace_ o erro 401, ocorrerá exatamente na linha onde foi fornecido o login 
+na classe de teste
+
+    public void usuario_autenticados_devem_listar_itens() {
+      Map<String, String> cookies = login("alberto");
+    }
+    
+Caso o login estiver incorreto, basta substituir o mesmo pelo login correto.
+
+
+
+

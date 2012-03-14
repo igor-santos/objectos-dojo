@@ -3,9 +3,9 @@ layout: post
 title: Instalação do Eclipse
 author: "Marcos Piazzolla"
 published: true
-partof: java
-num: 3
-outof: 4
+partof: eclipse
+num: 0
+outof: 0
 ---
 
 ## Instalação do Eclipse 

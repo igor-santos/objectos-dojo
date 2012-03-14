@@ -56,11 +56,11 @@ Verifique se a classe de teste está corretamente anotada com `@Guice`
     
 Caso contrário é possível que o seguinte _stacktrace_ apareça
 
-	RemoteTestNG starting
-	FAILED CONFIGURATION: @BeforeClass prepararClasse
-		java.lang.NullPointerException
-		at br.com.objectos.dojo.TesteDeBuscarCliente.prepararClasse(TesteDeBuscarCliente.java:42)
-		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    FAILED CONFIGURATION: @BeforeClass prepararClasse
+    java.lang.NullPointerException
+    
+      at br.com.objectos.dojo.TesteDeBuscarCliente.prepararClasse(TesteDeBuscarCliente.java:42)
+      at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 
 Conforme o _stacktrace_ a NPE acontece logo no método `@BeforeClass`, na linha 
 em que o DBUnit é chamado
@@ -86,12 +86,12 @@ Verifique se foi adicionada a anotação `@Inject` antes de declarar o buscador 
 	
 Caso não adicionada a anotação o seguinte _stacktrace_ aparecerá: 
 
- 	FAILED: busca_por_id_deve_funcionar
-	java.lang.NullPointerException
-	
-	 	at br.com.objectos.dojo.TesteDeBuscarCliente.busca_por_id_deve_funcionar(TesteDeBuscarCliente.java:47)
- 		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:56)
+    FAILED: busca_por_id_deve_funcionar
+    java.lang.NullPointerException
+    
+      at br.com.objectos.dojo.TesteDeBuscarCliente.busca_por_id_deve_funcionar(TesteDeBuscarCliente.java:47)
+      at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+      at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:56)
  
 De acordo com o _stacktrace_ a NPE acontece exatamente quando o buscador é chamado em seus métodos
 de testes
@@ -147,12 +147,12 @@ Classe de teste
 
 Caso os dados utilizados no teste não existam no mini-arquivo, o seguinte _stacktrace_ aparecerá
 
- 	FAILED: busca_por_id_deve_funcionar
-	java.lang.NullPointerException
-	
-	 	at br.com.objectos.dojo.TesteDeBuscarCliente.busca_por_id_deve_funcionar(TesteDeBuscarCliente.java:62)
- 		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+    FAILED: busca_por_id_deve_funcionar
+    java.lang.NullPointerException
+    
+      at br.com.objectos.dojo.TesteDeBuscarCliente.busca_por_id_deve_funcionar(TesteDeBuscarCliente.java:62)
+      at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+      at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
 		
 De acordo com o _stacktrace_ a NPE ocorre exatamente na linha onde o resultado do buscador é acessado,
 ou seja nos asserts

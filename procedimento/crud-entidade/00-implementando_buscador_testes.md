@@ -25,7 +25,7 @@ Na [objectos](www.objectos.com.br), quando este for o caso, implementam-se os bu
 Este artigo assume conhecimento prévio em:
 
 - Especificação<span class="label label-warning">TODO</span>
-- [TDD](/caixa/processo-00-TDD.html)
+- TDD
 - mini-arquivos DBUnit<span class="label label-warning">TODO</span>
 
 ## Passo-a-passo

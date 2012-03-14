@@ -2,8 +2,8 @@
 layout: post-alpha
 title: "NPEs em buscadores e consultas"
 author: "Marcos Piazzolla"
-user: "MarcosPiazzolla"
-published: true 
+user: "mpiazzolla"
+date: "2012-03-09"
 partof: faq-crud-entidade
 num: 1
 ---
@@ -15,6 +15,7 @@ Para este FAQ, considere o seguinte bloco de código:
     @Test
     @Guice(modules = {ModuloDeTesteEmpresaXPTO.class})
     public class TesteDeBuscarCliente {
+
       @Inject
 	  private BuscarCliente buscarCliente;
 	  
@@ -26,23 +27,34 @@ Para este FAQ, considere o seguinte bloco de código:
 	    dbUnit.loadDefaultDataSet();
 	  }
 	  
-	public void busca_por_id_deve_funcionar() {
-	  int id = 10;
-	    
-	  Cliente res = buscarCliente.porId(id);
-	  assertThat(res, is(notNullValue()));
-		
-	  assertThat(res.getId, equalTo(id));
-	  assertThat(res.getNome(), equalTo("Godofredo Diaz"));
-	  assertThat(res.getTelefone(), equalTo("(11) 1234 - 6789"));
-	  assertThat(res.getEndereco(), equalTo("Avenida do Oratório, 5000"));
-	  assertThat(res.getBairro(), equalTo("Vila Industrial"));
-	  assertThat(res.getCidade(), equalTo("São Paulo"));
+      public void busca_por_id_deve_funcionar() {
+        int id = 10;
+          
+        Cliente res = buscarCliente.porId(id);
+        assertThat(res, is(notNullValue()));
+        
+        assertThat(res.getId, equalTo(id));
+        assertThat(res.getNome(), equalTo("Godofredo Diaz"));
+        assertThat(res.getTelefone(), equalTo("(11) 1234 - 6789"));
+        assertThat(res.getEndereco(), equalTo("Avenida do Oratório, 5000"));
+        assertThat(res.getBairro(), equalTo("Vila Industrial"));
+        assertThat(res.getCidade(), equalTo("São Paulo"));
 	  }
       
     }
-	
-### Foi adicionada a anotação `@Guice` logo abaixo da anotação `@Test` ? 
+    
+## Erros comuns
+
+### Foi adicionada a anotação @Guice logo abaixo da anotação @Test ? 
+
+Verifique se a classe de teste está corretamente anotada com `@Guice`  
+
+    @Test
+    @Guice(modules = {ModuloDeTesteEmpresaXPTO.class})
+    public class TesteDeBuscarCliente {
+    }
+    
+Caso contrário é possível que o seguinte _stacktrace_ apareça
 
 	RemoteTestNG starting
 	FAILED CONFIGURATION: @BeforeClass prepararClasse
@@ -50,14 +62,15 @@ Para este FAQ, considere o seguinte bloco de código:
 		at br.com.objectos.dojo.TesteDeBuscarCliente.prepararClasse(TesteDeBuscarCliente.java:42)
 		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 
-A npe acontecerá exatamente onde não foi definido a anotação `@Guice` em sua classe de teste:
+Conforme o _stacktrace_ a NPE acontece logo no método `@BeforeClass`, na linha 
+em que o DBUnit é chamado
+
+    @BeforeClass
+    public void prepararDBUnit() {
+      dbUnit.loadDefaultDataSet();
+    }
  	
-		@Test
-		@Guice (modules = {ModuloDeTesteEmpresaXPTO.class})
-			public class TesteDeBuscarCliente {
-		}
- 
- 
+
 ### Você adicionou a anotação `@Inject` logo após declarar o seu Buscador em seu teste ?
  
  	FAILED: busca_por_id_deve_funcionar

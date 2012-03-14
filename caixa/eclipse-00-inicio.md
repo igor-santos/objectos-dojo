@@ -1,7 +1,9 @@
 ---
 layout: post
 title: Instalação do Eclipse
-author: "Marcos Piazzolla"
+author: "Hellen Carla Paixão Escarate"
+user: "hescarate"
+date: "2011-07-11"
 published: true
 partof: eclipse
 num: 0

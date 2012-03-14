@@ -51,9 +51,9 @@ Ou seja o recurso a ser acessado em seu teste não existe;
 
 ### Causas:
 
-*URL incorreta;
+URL incorreta;
 
-*Anotação @Get na classe do serviço
+Anotação @Get na classe do serviço
 
 ### Soluções:
 

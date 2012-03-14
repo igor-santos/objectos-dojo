@@ -5,8 +5,7 @@ author: "Afonso Jardim Filgueiras"
 user: "afilgueiras"
 published: true 
 partof: faq-crud-entidade
-num: 1
-outof: 1
+num: 0
 ---
 
 ## Conversão de Enum

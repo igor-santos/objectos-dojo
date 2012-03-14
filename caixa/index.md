@@ -44,6 +44,10 @@ title: "Caixa de ferramentas"
     {% include obj/section_list %}
   </div>
   <div class="span4">
+    <h3>Eclipse</h3>
+
+    {% assign section_list = "eclipse" %}
+    {% include obj/section_list %}
   </div>
   <div class="span4">
   </div>

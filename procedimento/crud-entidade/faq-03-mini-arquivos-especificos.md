@@ -3,6 +3,7 @@ layout: post-alpha
 title: "Mini-Arquivos especifícos"
 author: "Marcos Piazzolla"
 user: "MarcosPiazzolla"
+date: 2012-03-12
 published: true 
 partof: faq-crud-entidade
 num: 2

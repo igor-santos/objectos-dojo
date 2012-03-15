@@ -91,17 +91,6 @@ Podemos ver que existem arquivos que ainda não foram adicionados ao controle de
 
     $ git add config.txt
 
-Existe também o comando ``git add -i``. Com ele você reberá um menu como esse:
-
-               staged     unstaged path
-      1:    unchanged        +4/-0 caixa/git-02-adicionando-arquivos.md
-    
-    *** Commands ***
-      1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
-      5: [p]atch	  6: [d]iff	      7: [q]uit	      8: [h]elp
-    What now> 
-
-
 Agora execute novamente o comando git status:
 
     $ git status
@@ -114,6 +103,23 @@ Agora execute novamente o comando git status:
 
 Podemos observar então que o arquivo config.txt foi adicionado ao controle de versão, e que existem mudanças a serem
 "comitadas".
+
+Existe também o comando ``git add -i``. Com ele você reberá um menu como esse:
+
+               staged     unstaged path
+    
+    
+    *** Commands ***
+      1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
+      5: [p]atch	  6: [d]iff	      7: [q]uit	      8: [h]elp
+    What now> 
+
+Com ele é mais interativo operações comuns do git como status, add e diff. E é importante frisar que usar ele lhe dá maior controle do que será colocado no stage.
+
+Com a opção 1: [s]tatus, você porderá ver as modificações feitas com relação ao último commit, ou HEAD.
+
+
+
 
 Vamos então executar o `commit`
 

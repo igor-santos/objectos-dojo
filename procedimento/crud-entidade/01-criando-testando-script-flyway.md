@@ -229,17 +229,4 @@ que seja devidamente revisado.
 Com o script flyway criado, utilize o [phpMyAdmin](http://www.phpmyadmin.net/home_page/index.php) para testá-lo 
 localmente em seu computador. 
 
-	drop table if exists OBJ_BASE.EMAIL;
-
-	create table OBJ_BASE.EMAIL (
-
-	ID integer not null auto_increment,
-	PESSOA_FISICA_ID integer not null,
-	ENDERECO varchar(60) not null,
-	DATA_CRIACAO datetime not null,
-
-	primary key(ID)
-
-	) ENGINE=InnoDB;
-	
 Siga para o próximo passo. Os Objetos Falsos e seus atributos no XML! <a href="{{ site.baseurl }}/procedimento/crud-entidade/02-criando-objetos-falsos.html" class="btn btn-success">Continuar!</a>

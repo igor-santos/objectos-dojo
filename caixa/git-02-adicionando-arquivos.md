@@ -125,7 +125,7 @@ Bom, veremos algumas funcionalidades dele ao longo dos artigos Git. No momento u
       1: [c]onfig.txt
     Add untracked>>  
 
-Selecione ``1: [c]onfig.txt`` ou `*` para adicionar o arquivo ao controle de versão.
+Selecione ``1: [c]onfig.txt`` ou `*` para adicionar o arquivo ao controle de versão. Por, fim, use o `q` para sair do menu.
 
 Vamos então executar o `commit`
 

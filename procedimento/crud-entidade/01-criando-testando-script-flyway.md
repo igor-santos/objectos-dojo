@@ -184,3 +184,21 @@ servirá para instanciar objetos FALSOS (veremos isto mais adiante).
 		  }
 		
 		}
+
+É nesta classe que definimos se os campos devem ser nulos, vazios, ter valor mínimo de caracteres,
+entre outros. Definimos os campos como __not null__ (exceto o campo da data de demissão) e criamos
+o método __setId(int id)__.
+ 
+_Nota: TODOS os objetos DEVEM ter um método getter e um setter para o id_.
+
+- Por fim, crie a __enum Contrato__.
+
+		public enum Contrato {
+		
+		  CLT,
+		  
+		  ESTAGIO
+		
+		}
+
+##3º Criando Scripts Flyway

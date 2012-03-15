@@ -91,6 +91,17 @@ Podemos ver que existem arquivos que ainda não foram adicionados ao controle de
 
     $ git add config.txt
 
+Existe também o comando ``git add -i``. Com ele você reberá um menu como esse:
+
+               staged     unstaged path
+      1:    unchanged        +4/-0 caixa/git-02-adicionando-arquivos.md
+    
+    *** Commands ***
+      1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
+      5: [p]atch	  6: [d]iff	      7: [q]uit	      8: [h]elp
+    What now> 
+
+
 Agora execute novamente o comando git status:
 
     $ git status

@@ -48,7 +48,7 @@ nosso mini-arquivo será bem parecido com este :
 Sempre que um mini-arquivo for criado é necessário criar uma classe que represente este 
 mini-arquivo, que devera ser análoga a esta:
 
-    public class MiniPetShopModificado extends DataSupplier {
+    public class MiniPetShopModificadoXML extends DataSupplier {
 
         @Override
          public String getFilename() {
@@ -69,6 +69,6 @@ Para chamar o mini-arquivo recém criado basta utilizar o DBUnit declarado em su
     @BeforeClass
     public void prepararClasse() {
         dbUnit.loadDefaultDataSet();
-        dbUnit.load(new MiniPetShopModificado());
+        dbUnit.load(new MiniPetShopModificadoXML());
     }
 		

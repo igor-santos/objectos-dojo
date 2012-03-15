@@ -106,20 +106,26 @@ Podemos observar então que o arquivo config.txt foi adicionado ao controle de v
 
 Existe também o comando ``git add -i``. Com ele você reberá um menu como esse:
 
-               staged     unstaged path
-    
-    
     *** Commands ***
       1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
-      5: [p]atch	  6: [d]iff	      7: [q]uit	      8: [h]elp
+      5: [p]atch	  6: [d]iff	  7: [q]uit	  8: [h]elp
     What now> 
+               staged     unstaged path
 
-Com ele é mais interativo operações comuns do git como status, add e diff. E é importante frisar que usar ele lhe dá maior controle do que será colocado no stage.
+Com ele é mais interativo operações comuns do git como status, add e diff.
 
-Com a opção 1: [s]tatus, você porderá ver as modificações feitas com relação ao último commit, ou HEAD.
+É importante frisar que usar ele lhe dá maior controle do que será colocado no stage.
 
+Bom, veremos algumas funcionalidades dele ao longo dos artigos Git. No momento utilize a opção ``4: [a]dd untracked`` para ver o seguinte menu:
 
+    *** Commands ***
+      1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
+      5: [p]atch	  6: [d]iff	  7: [q]uit	  8: [h]elp
+    What now> 4
+      1: [c]onfig.txt
+    Add untracked>>  
 
+Selecione ``1: [c]onfig.txt`` ou `*` para adicionar o arquivo ao controle de versão.
 
 Vamos então executar o `commit`
 
@@ -188,9 +194,31 @@ Isso mesmo, verificar o status:
     #
     no changes added to commit (use "git add" and/or "git commit -a")
 
+Se preferir, use aqui o ``git add -i`` e verá no menu:
+
+               staged     unstaged path
+      1:    unchanged        +1/-0 config.txt
+    
+    *** Commands ***
+      1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
+      5: [p]atch	  6: [d]iff	      7: [q]uit	      8: [h]elp
+    What now> 
+
 Podemos observar que no status aparece que esse arquivo foi modificado, e então precisamos adicionar essa alteração: 
 
 $ git add config.txt 
+
+Ou, usando o ``git add -i``, selecione ``2: [u]pdate`` para:
+
+    *** Commands ***
+      1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
+      5: [p]atch	  6: [d]iff	      7: [q]uit	      8: [h]elp
+    What now> 2
+               staged     unstaged path
+      1:    unchanged        +1/-0 [c]onfig.txt
+    Update>> 
+
+E `1` ou `*` para mandar o config.txt para o sistema.
 
 Depois vamos executar o comando git status novamente: 
 
@@ -279,9 +307,6 @@ Esse é o nosso próximo passo!
 Volte então para a branch nova_funcionalidade: 
 
     $ git checkout nova_funcionalidade
-
-Agora precisamos atualizar o fork do projeto (master) com a nova funcionalidade criada na branch `nova_funcionalidade`,
-pra isso vamos usar o comando rebase: 
 
     $ git rebase master 
     First, rewinding head to replay your work on top of it...

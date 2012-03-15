@@ -48,18 +48,48 @@
 }
 
 #ft {
+	background-color: #2E4971;
+	border-top: 2px solid #C0C0C0;
+	margin-top: 120px;
 	min-height: 800px;
 	padding-top: 40px;
   
-	font-family: 'Josefin Sans', sans-serif;
-	
 	a {
 		color: #C0D0E8;
 		text-decoration: underline;	
 	}
 	
-	p {
-		font-size: @baseFontSize * 1.2;
+	h1, h2, h3, h4, h5, h6 {
+		.sans-serif(2.4);
+		color: #F0F0F0;
+		font-weight: normal;
+		
+		margin-bottom: 20px;
+	}
+	
+	h1, h2, h3, h4, h5, h6, p, ul, li {
+		color: #d0d0d0;
+		text-align: left;
+		text-shadow: 1px 1px 1px #000000;
+	}
+	
+	.address {
+		li {
+			.sans-serif(1.2);
+		}
+	}
+	
+	.copyright {
+		margin-bottom: 20px;
+		
+		p {
+			.sans-serif(1.2);
+			margin: 0;
+		}
+	}
+	
+	.credits {
+		.sans-serif(1.1);
 	}
 }
 

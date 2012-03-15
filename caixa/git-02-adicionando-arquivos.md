@@ -308,23 +308,28 @@ Volte então para a branch nova_funcionalidade:
 
     $ git checkout nova_funcionalidade
 
-    $ git rebase master 
-    First, rewinding head to replay your work on top of it...
-    Applying: criado o arquivo config.txt
-    Applying: adicionada a primeira linha no arquivo config.txt
-    Applying: inserida a segunda linha no arquivo config.txt
-    Applying: inserida a terceira linha no arquivo config.txt
+Agora precisamos atualizar o fork do projeto (master) com a nova funcionalidade criada na branch `nova_funcionalidade`,
+pra isso vamos usar o comando merge: 
 
-Agora se você verificar os arquivos contidos na branch `nova_funcionalidade`, vai ver que o a nova funcionalidade 
+    $ git merge master
+    Updating e78af0d..91ab9cd
+    Fast-forward
+     novafuncionalidade_usuário.txt |    3 +++
+     1 files changed, 3 insertions(+), 0 deletions(-)
+     create mode 100644 config.txt
+
+O comando merge converte as mudanças feitas na branch, nesse caso a master, para a branch a qual que você está executando o comando. 
+
+Agora se você verificar os arquivos contidos na branch `nova_funcionalidade`, vai ver que a nova funcionalidade 
 inserida lá no projeto original pelo seu colega de equipe (o arquivo novafuncionalidade_usuário.txt) aparece na sua
-branch, pois usamos o comando rebase. 
+branch, pois usamos o comando master. 
 
 Agora então vá no Github, no fork do seu projeto, e veja se as atualizações da branch nova_funcionalidade (novo
 diretório criado objectos-dojo-seu usuário + o arquivo config.txt) estão na sua branch master. 
 
 Não? Porque?
 
-É necessário agora fazer um merge da branch nova_funcionalidade, com a sua branch master (fork do projeto). 
+É necessário agora fazer um merge de master com nova_funcionalidade, e um push dele para origin (a fork do projeto). 
 
 Vamos então voltar para a branch master:
 
@@ -334,7 +339,7 @@ E então vamos fazer o merge:
 
     $ git merge nova_funcionalidade
 
-E agora, por fim, vamos mandar essas alterações para a nossa branch master. 
+E agora, por fim, vamos mandar as atualizações da nossa branch master. 
 
     $ git push origin master
 

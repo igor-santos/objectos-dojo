@@ -202,3 +202,44 @@ _Nota: TODOS os objetos DEVEM ter um método getter e um setter para o id_.
 		}
 
 ##3º Criando Scripts Flyway
+
+###_Importante: Este item exige conhecimentos sobre:_
+- [Script Flyway](http://dojo.objectos.com.br/procedimento/crud-entidade/99-bd-scripts-flyway.html)
+
+A princípio iremos criar o arquivo __VTESTS.000.Funcionario.sql__ no diretório __objectos-tests/src/main/resources/__ até
+que seja devidamente revisado.
+
+	drop table if exists NOME_DO_BANCO.FUNCIONARIO;
+		
+	create table NOME_DO_BANCO.FUNCIONARIO (
+		
+	ID integer not null auto_increment,
+	NOME varchar(60) not null,
+	MATRICULA varchar(60) not null,
+	DATA_NASCIMENTO date not null,
+	DATA_ADMISSAO datetime not null,
+	DATA_DEMISSAO datetime,
+	REGIME_CONTRATACAO tinyint not null,
+		
+	primary key(ID),
+	unique(MATRICULA)
+		
+	) ENGINE=InnoDB;
+
+Com o script flyway criado, utilize o [phpMyAdmin](http://www.phpmyadmin.net/home_page/index.php) para testá-lo 
+localmente em seu computador. 
+
+	drop table if exists OBJ_BASE.EMAIL;
+
+	create table OBJ_BASE.EMAIL (
+
+	ID integer not null auto_increment,
+	PESSOA_FISICA_ID integer not null,
+	ENDERECO varchar(60) not null,
+	DATA_CRIACAO datetime not null,
+
+	primary key(ID)
+
+	) ENGINE=InnoDB;
+	
+Siga para o próximo passo. Os Objetos Falsos e seus atributos no XML! <a href="{{ site.baseurl }}/procedimento/crud-entidade/02-criando-objetos-falsos.html" class="btn btn-success">Continuar!</a>

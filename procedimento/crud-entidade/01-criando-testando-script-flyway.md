@@ -12,14 +12,14 @@ outof: 1
 
 ##1º: Importando o projeto
 
-A princípio devemos ter o projeto em nosso computador. Utilizaremos o projeto _objectos-apps_ para
-descrever os procedimentos seguintes:
+A princípio devemos ter o projeto em nosso computador. Utilizaremos um projeto fictício chamada _objectos-tests_ para
+descrever os procedimentos (utilize o nome de seu projeto no lugar de _objectos-tests_):
 
-Execute o seguinte comando para clonar o projeto _objectos-apps_.
+Execute o seguinte comando para clonar o projeto _objectos-tests_.
 
 	$ cd ~/kdo/projetos/
-	$ git clone git@github.com:objectos/objectos-apps.git
-	$ cd objectos-apps/
+	$ git clone git@github.com:objectos/objectos-tests.git
+	$ cd objectos-tests/
 	$ git branch
 	
 Note que estamos na branch _master_. Devemos trabalhar em uma nova branch neste padrão: 
@@ -29,7 +29,7 @@ _login-de-rede-objectos-XX-nome da entidade_ (onde _XX_ representa o próximo n�
 Provavelmente o Eclipse mostrará um erro no arquivo POM.XML do projeto.
 Vejamos:
 
-POM.XML de _objectos-apps_:
+POM.XML de _objectos-tests_:
 
 	<parent>
 		<artifactId>objectos-comuns-parent</artifactId>
@@ -37,7 +37,8 @@ POM.XML de _objectos-apps_:
 		<version>2.0.5</version>
 	</parent>
 
-Isto ocorre porque há algumas dependências que devem ser carregadas no projeto.
+Isto ocorre porque há algumas dependências que devem ser carregadas no projeto (nossas dependências
+estão contidas neste projeto _objectos-comuns-parent_).
 
 ##Solução:
 
@@ -50,57 +51,136 @@ Siga os seguintes procedimentos:
 	
 ###2 - No terminal:
 	
-	$ cd ~/kdo/projetos/objectos-apps
+	$ cd ~/kdo/projetos/objectos-tests
 	$ mvn-ci
 	
-###3 - Informações no terminal...
-	
-	[INFO] Scanning for projects...
-	Downloading: http://rio.objectos.com.br/nexus/content/groups/public/br/com/objectos/objectos-comuns-parent/2.0.5/objectos-comuns-parent-2.0.5.pom
-	Downloaded: http://rio.objectos.com.br/nexus/content/groups/public/br/com/objectos/objectos-comuns-parent/2.0.5/objectos-comuns-parent-2.0.5.pom (18 KB at 24.8 KB/sec)
-	[INFO] ------------------------------------------------------------------------
-	[INFO] Reactor Build Order:
-	[INFO] 
-	[INFO] objectos :: apps
-	[INFO] objectos :: apps :: base
-	[INFO] objectos :: apps :: cur :: Currículos
-	[INFO] objectos :: apps :: fin :: Finanças
-	[INFO] objectos :: apps :: fun :: Funcionários
-	[INFO] objectos :: apps :: usr :: Usuários
-	[INFO]                                                                         
-	[INFO] ------------------------------------------------------------------------
-	[INFO] Building objectos :: apps 0.1.11-SNAPSHOT
-	[INFO] ------------------------------------------------------------------------
-	[INFO] ------------------------------------------------------------------------
-	[INFO] Reactor Summary:
-	[INFO] 
-	[INFO] objectos :: apps .................................. FAILURE [0.001s]
-	[INFO] objectos :: apps :: base .......................... SKIPPED
-	[INFO] objectos :: apps :: cur :: Currículos ............. SKIPPED
-	[INFO] objectos :: apps :: fin :: Finanças ............... SKIPPED
-	[INFO] objectos :: apps :: fun :: Funcionários ........... SKIPPED
-	[INFO] objectos :: apps :: usr :: Usuários ............... SKIPPED
-	[INFO] ------------------------------------------------------------------------
-	[INFO] BUILD FAILURE
-	[INFO] ------------------------------------------------------------------------
-	[INFO] Total time: 1.264s
-	[INFO] Finished at: Mon Mar 12 10:55:14 BRT 2012
-	[INFO] Final Memory: 3M/116M
-	[INFO] ------------------------------------------------------------------------
-	[ERROR] Unknown lifecycle phase "i". You must specify a valid lifecycle phase or a goal in the format <plugin-prefix>:<goal> or <plugin-group-id>:<plugin-artifact-id>[:<plugin-version>]:<goal>. Available lifecycle phases are: validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy, pre-clean, clean, post-clean, pre-site, site, post-site, site-deploy. -> [Help 1]
-	[ERROR] 
-	[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-	[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-	[ERROR] 
-	[ERROR] For more information about the errors and possible solutions, please read the following articles:
-	[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/LifecyclePhaseNotFoundException
-	
-###4 - Voltando ao Eclipse:
-	4.1 - Selecionar todos os projetos;
- 	4.2 - Na barra de menu -> Project -> Clean -> Selecione 'Clean all projects' -> Clique em Ok;
-	4.3 - Clicar com direito no projeto -> Maven -> Update Project Configuration. 
+###3 - Voltando ao Eclipse:
+	3.1 - Selecionar todos os projetos;
+ 	3.2 - Na barra de menu -> Project -> Clean -> Selecione 'Clean all projects' -> Clique em Ok;
+	3.3 - Clicar com direito no projeto -> Maven -> Update Project Configuration. 
 	
 Isto deve resolver o problema.
 
-##2º: Criando o Script Flyway
- 
+##2º: Criando Entidades no Java
+
+###_Importante: Este item exige conhecimentos sobre:_
+ - [Interfaces](http://en.wikipedia.org/wiki/Interface_%28Java%29)
+ - [Annotations](http://docs.oracle.com/javase/1.5.0/docs/guide/language/annotations.html)
+
+Antes de criarmos qualquer Script Flyway DEVEMOS criar as entidades e seus respectivos campos no
+Java que serão utilizados futuramente.
+
+- Crie uma __package__ chamada __br.com.objectos.tests.empresa__ no diretório __objectos-tests/src/main/java/__.
+- Crie uma __interface__ chamada __Funcionario__.
+
+
+		public interface Funcionario {
+			
+			interface Construtor extends br.com.objectos.comuns.base.Construtor<Funcionario> {
+			
+			    String getNome();
+				    
+			    String getMatricula();
+				
+			    LocalDate getDataDeNascimento();
+				
+			    DateTime getDataDeAdmissao();
+				    
+			    DateTime getDataDeDemissao();
+				    
+			    Contrato getRegimeDeContratacao();
+				
+			}
+			
+			int getId();
+				
+			String getNome();
+				    
+			String getMatricula();
+				
+			LocalDate getDataDeNascimento();
+				
+			DateTime getDataDeAdmissao();
+				    
+			DateTime getDataDeDemissao();
+				    
+			Contrato getRegimeDeContratacao();
+				
+		}
+		
+O que fizemos aqui foi definir os campos da entidade Funcionario e um Construtor que 
+servirá para instanciar objetos FALSOS (veremos isto mais adiante).
+
+- Crie uma classe __FuncionarioJdbc__ que implemente a interface já definida.
+
+
+		public class FuncionarioJdbc implements Funcionario {
+		
+		  private int id;
+		
+		  @NotNull	 			
+		  private final String nome;
+		
+		  @NotNull			
+		  private final String matricula;
+		
+		  @NotNull
+		  private final LocalDate dataDeNascimento;
+		  
+		  @NotNull
+		  private final DateTime dataDeAdmissao;
+		  
+		  private final DateTime dataDeDemissao;
+		  
+		  @NotNull
+		  private final Contrato regimeDeContratacao;
+		
+		  public FuncionarioJdbc(Construtor construtor) {
+		    nome = construtor.getNome();
+		    matricula = construtor.getMatricula();
+		    dataDeNascimento = construtor.getDataDeNascimento();
+		    dataDeAdmissao = construtor.getDataDeAdmissao();
+		    dataDeDemissao = construtor.getDataDeDemissao();
+		    regimeDeContratacao = construtor.getRegimeDeContracao();
+		  }
+		
+		  @Override
+		  public int getId() {
+		    return id;
+		  }
+		
+		  void setId(int id) {
+		    this.id = id;
+		  }
+		
+		  @Override
+		  public String getNome() {
+		    return nome;
+		  }
+		
+		  @Override
+		  public String getMatricula() {
+		    return matricula;
+		  }
+		
+		  @Override
+		  public LocalDate getDataDeNascimento() {
+		    return dataDeNascimento;
+		  }
+		  
+		  @Override
+		  public DateTime getDataDeAdmissao() {
+		    return dataDeAdmissao;
+		  }  
+		
+		  @Override
+		  public DateTime getDataDeDemissao() {
+		    return dataDeDemissao;
+		  }  
+		
+		  @Override
+		  public Contrato getRegimeDeContratacao() {
+		    return regimeDeContratacao;
+		  }
+		
+		}

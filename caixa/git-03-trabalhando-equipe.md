@@ -282,7 +282,7 @@ E para terminar, sincronize seu trabalho com o GitHub.
 
 Com este kata você um pouco sobre os conflitos no Git, e você deve ter uma base mínima para:
 
-1. Identificar em quais situações conflitos podem ocorrer;
-2. Identificar em quais situações conflitos não ocorrem;
-3. Sincronizar branches de trabalho com a branch master através do merge; e
-4. Resolver conflitos que podem ocorrer com o merge.
+1. Identificar em quais situações conflitos podem ocorrer
+2. Identificar em quais situações conflitos não ocorrem
+3. Sincronizar branches de trabalho com a branch master através do merge e
+4. Resolver conflitos que podem ocorrer com o merge

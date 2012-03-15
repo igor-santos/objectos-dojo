@@ -358,7 +358,7 @@ E agora vamos excluir remotamente:
     To git@github.com:hescarate/objectos-dojo.git
      - [deleted]         nova_funcionalidade
 
-Pronto, sua branch foi excluída. 
+Pronto, sua branch foi excluída!
 
 
 

@@ -1,9 +1,8 @@
 body.landing {
 	#hd {
 		background: @black;
+		border-bottom: 1px solid @gray;
 		color: @grayLight;
-		
-		margin-bottom: 40px;
 	}
 	
 	#hd-inner {
@@ -24,14 +23,12 @@ body.landing {
 		}
 	}
 
-	div.landing {
+	.landing {
 	
 		h1, h2 {
+			.serif(4);
 			color: @black;
-			font-family: 'ratio', sans-serif;
-			font-size: @baseFontSize * 4;
-			font-weight: 300;
-			line-height: @baseLineHeight * 3;
+			font-weight: normal;
 		}
 		
 		h1 {
@@ -45,6 +42,27 @@ body.landing {
 		hr {
 			margin: 40px 0;
 		}
+		
+		p, li {
+			.sans-serif(1.2);
+			.serif(1.8);
+		}
 	
+	}
+	
+	.wellcome {
+		background-color: @herobg;
+		padding: 40px 0;
+
+		h1, h2 {
+			.sans-serif(4);
+			color: @white;
+			font-weight: normal;
+		}
+		
+		p, li {
+			.sans-serif(1.2);
+			color: @white;
+		}
 	}
 }

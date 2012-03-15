@@ -2,29 +2,33 @@
 layout: base
 styleClass: landing
 ---
-<div class="container landing">
-  <div class="row wellcome">
-    
-    <div class="span5">
-      <h1>objectos doj&ocirc;</h1>
-      <p>
-        Tutoriais, artigos técnicos, procedimentos, etc com o objetivo de:
-      </p>
-      <ol>
-        <li>Treinamento constante da equipe de desenvolvimento</li>
-        <li>Compartilhar conhecimento com a comunidade</li>
-      </ol>
+<div class="wellcome">
+  <div class="container">
+    <div class="row">
       
-      <a href="contribua" class="btn btn-large btn-info">Contribua!</a>
-      <a href="https://github.com/objectos/objectos-dojo" class="btn btn-large">Projeto no GitHub</a>
+      <div class="span5">
+        <h1>objectos doj&ocirc;</h1>
+        <p>
+          Tutoriais, artigos técnicos, procedimentos, etc com o objetivo de:
+        </p>
+        <ol>
+          <li>Treinamento constante da equipe de desenvolvimento</li>
+          <li>Compartilhar conhecimento com a comunidade</li>
+        </ol>
+        
+        <a href="contribua" class="btn btn-large btn-info">Contribua!</a>
+        <a href="https://github.com/objectos/objectos-dojo" class="btn btn-large">Projeto no GitHub</a>
+      </div>
+  
+      <div class="span7">
+        <img src="img/dojo-book.jpg" />
+      </div>
+      
     </div>
-
-    <div class="span7">
-      <img src="img/dojo-book.jpg" />
-    </div>
-    
   </div>
+</div>
 
+<div class="container landing">
   <hr />
   
   <h2>cultura de aprendizado contínuo</h2>

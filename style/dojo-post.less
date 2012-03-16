@@ -1,43 +1,63 @@
 body.post {
 	border-top: 4px solid @objectosBlue;
 
-	div.post {
-	
+	.post {
 		h1, h2, h3, h4, h5, h6 {
-			font-family: "botanika-web", sans-serif;
+			.serif(3.5);
 		}
 
-		h1 {
-			color: @black;
-			font-size: @baseFontSize * 3;
-			font-weight: 100;
-			line-height: @baseLineHeight * 3;
-		}
-		
-		h2:first-child {
-			margin-top: 0;
-		}
-		
 		h2, h3, h4, h5, h6 {
-			margin: 40px 0 8px;
+			.serif(3);
 		}
-	
-		p, li {
-			font-family: "botanika-web", sans-serif;
-			font-size: @baseFontSize * 1.2;
-			line-height: @baseLineHeight * 1.5;
+		
+		h2 {
+			background: url('../img/book.png') no-repeat left center;
+			margin-top: 80px;
+			
+			position: relative;
+			left: -64px;
+			padding-left: 64px;
 		}
-	
+		
+		h3, h4, h5, h6 {
+			margin-top: 20px;
+		}
+
+		code, pre {
+			font-size: @baseFontSize * 1.1;
+			line-height: @baseLineHeight * 1.1;
+		}
+
+		li {
+			.serif(2);
+		}
+
 		li > p {
 			margin-bottom: 0;
+		}
+		
+		p {
+			.serif(2);
 		}
 		
 		p, pre {
 			margin-bottom: @baseLineHeight * 1.1;
 		}
 		
-		code, pre {
+		ul {
 		}
+		
+		.alert {
+			.serif(2);
+		}
+	}
+	
+	.post-hd {
+		padding-left: 64px;
+	}
+	
+	.post-bd {
+		padding-left: 64px;
 	}
 	
 	ul.post-meta {
@@ -63,10 +83,4 @@ body.post {
 			padding: 0 0 0 30px;
 		}
 	}
-}
-
-.post-container {
-}
-
-.post {
 }

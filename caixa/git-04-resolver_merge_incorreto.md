@@ -8,73 +8,128 @@ num: 4
 outof: 4
 ---
 
-### Fiz um merge em uma branch que eu não deveria fazer, e agora?
+## Fiz um merge em uma branch que eu não deveria fazer, e agora?
 
 Por acidente, você pode acabar fazendo merges ou pulls de uma branch para outra completamente distinta.
 
 Mandando um pull request com essas atualizações não pode ocorrer! São um RISCO e DE FORMA ALGUMA podem ser aceitas e integradas no projeto original!
 
-### Mas e agora, como posso resolver isso?
-
-Primeiro, siga os passos:
-
-Execute o comando ``git log`` desta forma:
-
-    git log -10
-    
-Ou com os parâmetros que desejar.
-
-Na lista que aparecerá, tente achar qual foi seu último commit válido, ou seja, o anterior ao pull ou ao merge incorreto.
-
 <div class="alert alert-info">
   O pull nada mais é que um fetch e um merge no mesmo comando.
 </div>
 
-Os commit são identificados com hash de caractéres como:
+### 1. Mas e agora, como posso resolver isso?
 
-    commit 51c50d0b710d643fadc15sd72ea9b0e88f658b69
+Antes de continuarmos para as soluções, que tal simularmos casos de merges errados?
 
-Em:
+__Observação__: Como existe vasta base de conhecimento dos comandos git na Web (vide algumas em [Referências][0]), 
+a continuação este artigo foca-se em quando e como usar certas soluções a partir de um novo caso.
 
-        Testes: Novas classes de teste
-    
-    commit 51c50d0b710d643fadc15sd72ea9b0e88f658b69
-    Author: Robert Styles <robert.styles@domain.com.br>
-    Date:   Mon Mar 12 10:10:29 2007 -0300
+#### Antes de começar:
 
-<div class="alert alert-info">
- Uma dica é filtrar a lista, da maneira que preferir, por commits contendo uma linha com Merge, como esse:
-</div>
-        Web: Feito merge com servico-aplicacao
+* Faça um novo repositório chamado __repo__ no Github
 
-    commit f629c09f8fac798010fd5a2fd80821a668432df9
-    Merge: 9c278d7 7fec7d7
-    Author: Robert Styles <robert.styles@domain.com.br>
-    Date:   Sat Mar 10 19:56:08 2007 -0700
+* Coloque-o diretório /tmp/repo
 
-Antes de continuarmos para as soluções, que tal simularmos um merge errado?
+#### Criando o cenário
+
+Crie uma branch chamada eu_vc_00_buscar_funcionario e entre nela.
+
+      $ git checkout -b eu_vc_00_buscar_acionista
+      Switched to a new branch 'eu_vc_00_buscar_acionista'
+
+E execute os comandos abaixo para criar os arquivos:
+
+* TesteDeBuscarAcionista
+* BuscarAcionista
+
+<p></p>
+
+      $ touch TesteDeBuscarAcionista.java
+      $ touch BuscarAcionista.java
+
+Adicione os arquivos, faça um commit e dê um push:
+
+      $ git add BuscarAcionista.java
+      $ git add TesteDeBuscarAcionista.java
+      
+      $ git commit -m "Implementado: TesteDeBuscarAcionista e BuscarAcionista"
+      
+      [eu_vc_00_buscar_funcionario 9f9ebd9] Implementado: TesteDeBuscarAcionista e BuscarAcionista
+       0 files changed, 0 insertions(+), 0 deletions(-)
+       create mode 100644 BuscarAcionista.java
+       create mode 100644 TesteDeBuscarAcionista.java
+       
+      $ git push origin eu_vc_00_buscar_funcionario
+      Counting objects: 3, done.
+      Delta compression using up to 3 threads.
+      Compressing objects: 100% (2/2), done.
+      Writing objects: 100% (2/2), 299 bytes, done.
+      Total 2 (delta 0), reused 0 (delta 0)
+      To git@github.com:cpetreanu/repo.git
+       * [new branch]      eu_vc_00_buscar_funcionario -> eu_vc_00_buscar_funcionario
+
+Agora, antes de mais nada volte para a master.
+
+      $ git checkout master
+      Switched to branch 'master'
+
+Perfeito! Agora crie uma branch chamada joao_maria_00_form_aeroporto_create e entre nela.
+
+      $ git checkout -b joao_maria_00_form_aeroporto_create
+      Switched to a new branch 'joao_maria_00_form_aeroporto_create'
+
+E crie, da mesma forma:
+
+      $ touch TesteDeFormDeAeroportoCreate.java
+      $ touch FormDeAeroportoCreate.java
+      $ touch FormDeAeroportoCreateGuice.java
+
+Faça os adds, commit e push:
+
+      $ git add TesteDeFormDeAeroportoCreate.java
+      $ git add FormDeAeroportoCreate.java
+      $ git add FormDeAeroportoCreateGuice.java
+      
+      $ git commit -m "Web: Implementando FormDeAeroportoCreate"
+      [joao_maria_00_form_aeroporto_create 7688f2d] Web: Implementando FormDeAeroportoCreate
+       0 files changed, 0 insertions(+), 0 deletions(-)
+       create mode 100644 FormDeAeroportoCreate.java
+       create mode 100644 FormDeAeroportoCreateGuice.java
+       create mode 100644 TesteDeFormDeAeroportoCreate.java
+      
+      $ git push origin joao_maria_00_form_aeroporto_create
+      Counting objects: 3, done.
+      Delta compression using up to 3 threads.
+      Compressing objects: 100% (2/2), done.
+      Writing objects: 100% (s2/2), 308 bytes, done.
+      Total 2 (delta 0), reused 0 (delta 0)
+      To git@github.com:cpetreanu/repo.git
+       * [new branch]      joao_maria_00_form_aeroporto_create -> joao_maria_00_form_aeroporto_create
+
+### 2.1 Quando usar o git checkout?
+
+#### Adaptando o cenário
 
 
 
-Como existe vasta base de conhecimento dos comandos git na Web (vide algumas em __Referências__), a continuação deste artigo focará em quando usar cada solução, seguindo com o exemplo acima.
+### 2.2 Quando usar o git reset?
 
-#### Quando usar o git reset?
+#### Adaptando o cenário
 
-
-
-#### Quando usar o git revert?
+Crie uma branch chamada
 
 
 
-#### Quando usar o git commit --ammend?
+### 2.3 Quando usar o git revert?
+
+#### Adaptando o cenários
+
+Crie uma branch chamada
 
 
 
-#### Quando usar o git rebase -i?
-
-
-
-#### Quando fazer um re-fork
+### 3. Quando fazer um re-fork
 
 Em alguns casos, quando seu trabalho na branch acabou de começar, existem poucos arquivos no projeto original ou existem uma série de erros na execução dos comandos anteriores, uma opção simples é refazer a fork do projeto original.
 
@@ -83,26 +138,20 @@ Para isso, você pode seguir os seguintes passos:
 1. Faça cuidadosamente o backup de todos os arquivos importantes que você criou ou modificou
 1. Remova a pasta do projeto da sua máquina, usando um comando como:
 
-    rm -f -R ~/kdo/projetos/meu-projeto/
+    rm -f -R /tmp/repo/
 
-1. Vá no repositório do fork meu-projeto em sua página.
+1. Vá no repositório do fork __repo__ em sua página.
 
 1. Clique no botão "Admin", na parte superior direita da página
 
-
-
-1. Clique no botão "Delete this repositoy" ... 
-
-
-
-... e confirme a remoção do fork clicando em "I understand, delete this repository"
+1. Clique no botão "Delete this repository" ... e confirme a remoção do fork clicando em "I understand, delete this repository"
 
 1. Acesse a página do projeto original e faça novamente um fork e clone ele (se não lembrar como fazer clique [aqui][1])
 
 1. Use os comandos
 
-    mkdir ~/kdo/projetos/meu-projeto
-    cd ~/kdo/projetos/meu-projeto
+    mkdir /tmp/repo/
+    cd /tmp/repo
 
 Se necessário configure a url do projeto original usando
 
@@ -114,15 +163,139 @@ Seu fork estará agora idêntico a úĺtima versão do projeto
 
 1. Pronto, você acaba de desfazer os comandos errados usando uma das formas mais árduas (tirando os possíveis erros nos comandos citados nas outras seções!)
 
-### Referências
+<div id="referencias"> </div>
+
+### Referências<div id="referencias"> </div>
 
 [objectos-dojo :: Tutorial gh-pages][1]
 
+Crie os seguintes arquivos:
 
+<div class="alert alert-info"><p><b>Observação:</b> Nos comandos abaixo, ao usar cat &gt;&gt; &lt;arquivo&gt;, é concatenado um texto por input (stdin) ao &lt;arquivo&gt;, e ele é fechado usando ^D (que no teclado, significa ctrl pressionado e 'd'). Use copiar e colar no terminal para agilizar as coisas.</p></div>
+
+* TesteDeBuscarFuncionario.java
+
+      $ cat >> TesteDeBuscarFuncionario.java
+      /*
+      * Copyright 2012 Objectos, Fábrica de Software LTDA.
+      *
+      * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+      * use this file except in compliance with the License. You may obtain a copy of
+      * the License at
+      *
+      * http://www.apache.org/licenses/LICENSE-2.0
+      *
+      * Unless required by applicable law or agreed to in writing, software
+      * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+      * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+      * License for the specific language governing permissions and limitations under
+      * the License.
+      */
+      @Test
+      @Guice(modules = { ModuloDeTesteObjectosDojo.class })
+      public class TesteDeBuscarFuncionario {
+      
+        @Inject
+        private BuscarFuncionario buscarFuncionario;
+      
+        @Inject
+        private DBUnit dbUnit;
+      
+        public void prepararDBUnit() {
+          dbUnit.loadDefaultDataSet();
+        }
+      
+        public void busca_por_id() {
+          Funcionario res = buscarFuncionario.porId(3);
+      
+          assertThat(res.getId(), equalTo(3));
+          assertThat(res.getMatricula(), equalTo("T0033000"));
+          assertThat(res.getNome(), equalTo("Briann Adams"));
+          assertThat(res.getDataNascimento(), equalTo(new LocalDate(1980, 6, 01)));
+          assertThat(res.getDataAdmissao(), equalTo(new DateTime(2004, 12, 10, 9, 0)));
+          assertThat(res.getDataDemissao(), equalTo(new DateTime(2012, 1, 3, 12, 30)));
+        }
+      
+      }
+
+* BuscarFuncionario.java
+
+      $ cat >> BuscarFuncionario.java
+      /*
+      * Copyright 2012 Objectos, Fábrica de Software LTDA.
+      *
+      * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+      * use this file except in compliance with the License. You may obtain a copy of
+      * the License at
+      *
+      * http://www.apache.org/licenses/LICENSE-2.0
+      *
+      * Unless required by applicable law or agreed to in writing, software
+      * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+      * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+      * License for the specific language governing permissions and limitations under
+      * the License.
+      */
+      @ImplementedBy(BuscarFuncionarioGuice.class)
+      public interface BuscarFuncionario {
+      
+        Funcionario porId(int id);
+      
+      }
+
+* BuscarFuncionarioGuice.java
+
+      $ cat >> BuscarFuncionarioGuice.java
+      /*
+       * Copyright 2012 Objectos, Fábrica de Software LTDA.
+       *
+       * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+       * use this file except in compliance with the License. You may obtain a copy of
+       * the License at
+       *
+       * http://www.apache.org/licenses/LICENSE-2.0
+       *
+       * Unless required by applicable law or agreed to in writing, software
+       * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+       * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+       * License for the specific language governing permissions and limitations under
+       * the License.
+       */
+      class BuscarFuncionarioGuice implements BuscarFuncionario {
+      
+        private final Provider<NativeSql> sqlProvider;
+      
+        @Inject
+        public BuscarFuncionarioGuice(Provider<NativeSql> sqlProvider) {
+          this.sqlProvider = sqlProvider;
+        }
+      
+        @Override
+        public Funcionario porId(int id) {
+          return newSelect()
+      
+              .add("where FUNCIONARIO.ID = ?").param(id)
+      
+              .single();
+        }
+        
+        private NativeSql newSelect() {
+          return sqlProvider.get()
+      
+              .add("select *")
+              .add("from DATABASE.FUNCIONARIO as FUNCIONARIO")
+      
+              .add("join DATABASE.SUPERIOR as SUPERIOR")
+              .add("from FUNCIONARIO.SUPERIOR_ID as SUPERIOR.ID")
+      
+              .andLoadWith(new FuncionarioLoader());
+        }
+      
+      }
 
 [id]: /path/to/img.jpg "Admin"
 [id]: /path/to/img.jpg "Delete this repositoy"
 [id]: /path/to/img.jpg "I understand, delete this repository"
 
-
+[0]: #referencias "Referências"
 [1]: ../contribua/00-importar.html "objectos-dojo :: Tutorial gh-pages"

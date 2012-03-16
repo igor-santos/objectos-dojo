@@ -8,6 +8,7 @@ tags:
 - aprendizes
 partof: git
 num: 3
+outof: 3
 ---
 
 ## Introdução

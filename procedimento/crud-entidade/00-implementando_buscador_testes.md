@@ -8,7 +8,7 @@ partof: procedimento-crud-entidade
 num: 0
 ---
 
-# Introdução<a id="topo"> </a>
+## Introdução<a id="topo"> </a>
 
 Praticamente todas as aplicações desenvolvidas hoje em dia necessitam que as informações obtidas, 
 calculadas, processadas sobrevivam a uma falta de energia ou àquele estagiário quem perguntou 
@@ -152,7 +152,7 @@ A partir dela, colocamos nela a notação `@Test`:
 E aí dizemos para que o TestNG utilize o módulo Guice correto.
 
     @Test
-    @Guice(modules = { ModuloDeTesteObjectosDojo.class })
+    @Guice(modules = { ModuloDeTeste.class })
     public class TesteDeBuscarFuncionario {
     }
 
@@ -164,7 +164,7 @@ E aí dizemos para que o TestNG utilize o módulo Guice correto.
 Em seguida, declaramos o Buscador de Funcionário.
 
     @Test    
-    @Guice(modules = { ModuloDeTesteObjectosDojo.class })
+    @Guice(modules = { ModuloDeTeste.class })
     public class TesteDeBuscarFuncionario {
     
       @Inject
@@ -172,18 +172,19 @@ Em seguida, declaramos o Buscador de Funcionário.
       
     }
     
-<div class="alert alert-info">
-  Quando terminar de declarar a referência de BuscarFuncionario, o compilador acusará que não existe implementação para ela.
-  Devemos então criar, no caso uma interface e não uma class, para isso, e ela deverá estar localizada no diretório de produção src/main/java.
+<div class="alert alert-error">
+  cpetreanu, é necessário dizer que a interface não existe e pedir para criar uma nova
+  no diretório de produção src/main/java
 </div>
 
     public interface BuscarFuncionario {
     }
 
-Por fim, decalramos uma instâcia do DBUnit para podermos carregar o DefaultDataSet contendo o arquivo .xml que contém dados necessários de registros nas tabelas no banco de dados.
+
+Por fim, decalramos uma instâcia do DBUnit para podermos carregar o DefaultDataSet contendo o arquivo .xml contendo dados necessários de registros nas tabelas no banco de dados.
 
     @Test    
-    @Guice(modules = { ModuloDeTesteObjectosDojo.class })
+    @Guice(modules = { ModuloDeTeste.class })
     public class TesteDeBuscarFuncionario {
     
       @Inject
@@ -209,10 +210,21 @@ Para começar, devemos eleger o teste que irá verificar a listagem dos atributo
       }
 
 <div class="alert alert-info">
-  Você verá que buscarFuncionario.porId() não está implementado ainda. Você deverá portanto criar na Interface a assinatura dele.
+Você verá que buscarFuncionario.porId() não está implementado ainda. 
+Crie a Interface, deixe ela vazia para não dar erros de compilação e vamos em frente!
 </div>
 
-Fazendo assim, a assinatura do método porId() deverá ser listada na Interface, conforme abaixo:
+<div class="alert alert-error">
+  cpetreanu. 
+  <ul>
+    <li>
+      Para informações/instruções ao leitor, utilizar alert-info
+    </li>
+    <li>
+      Listar o código com o novo método na interface conforme abaixo:
+    </li>
+  </ul>
+</div>
 
     public interface BuscarFuncionario {
       
@@ -220,7 +232,7 @@ Fazendo assim, a assinatura do método porId() deverá ser listada na Interface,
       
     }
 
-Em seguida, faça os asserts para cada atributo. Não dê importância neste momento para o conteúdo deles.
+E, em seguida, faça os asserts para cada atributo. Não dê importância neste momento para o conteúdo deles.
 
       public void busca_por_id() {
         int id = 3;
@@ -284,118 +296,33 @@ Para o teste:
         assertThat(res.getDataDemissao(), equalTo(new DateTime(2012, 1, 3, 12, 30)));
       }
 
-<div class="alert alert-info">
-  É importantíssimo certificar-se que os valores nos asserts vão de acordo com as fontes 
-  de dados usadas. Sempre revise-os para ter certeza de que está implementando 
-  corretamente seus Testes!
+<div class="alert alert-block">
+É importantíssimo certificar-se que os valores nos asserts vão de acordo com as fontes 
+de dados usadas. Sempre revise-os para ter certeza de que está implementando 
+corretamente seus Testes!
 </div>
 
-Agora tente você. Implemente o teste para buscarFuncionario.porMatricula() e liste sua assinatura na Interface. Com ele, o código do Teste ficará mais ou menos assim:
-
-      @Test
-      @Guice(modules = { ModuloDeTesteObjectosDojo.class })
-      public class TesteDeBuscarFuncionario {
-    
-        @Inject
-        private BuscarFuncionario buscarFuncionario;
-    
-        @Inject
-        private DBUnit dbUnit;
-    
-        public void prepararDBUnit() {
-          dbUnit.loadDefaultDataSet();
-        }
-    
-        public void busca_por_id() {
-          Funcionario res = buscarFuncionario.porId(3);
-    
-          assertThat(res.getId(), equalTo(3));
-          assertThat(res.getMatricula(), equalTo("T0033000"));
-          assertThat(res.getNome(), equalTo("Briann Adams"));
-          assertThat(res.getDataNascimento(), equalTo(new LocalDate(1980, 6, 01)));
-          assertThat(res.getDataAdmissao(), equalTo(new DateTime(2004, 12, 10, 9, 0)));
-          assertThat(res.getDataDemissao(), equalTo(new DateTime(2012, 1, 3, 12, 30)));
-        }
-    
-        public void busca_por_matricula() {
-          Funcionario res = buscarFuncionario.porMatricula("T0033000");
-    
-          assertThat(res.getId(), equalTo(3));
-        }
-    
-      }
-
-<div class="alert alert-box">
-  Não se esqueça que cada método do Teste tem sua responsabilidade específica. Como busca_por_id() engarregou-se de verificar a listagem das propriedades de Funcionário, busca_por_matricula() não precisa fazer o mesmo.
+<div class="alert alert-error">
+cpetreanu:
+<ul>
+  <li>Colocar o teste de busca_por_matricula, uma vez que você o mencionou na introdução</li>
+</ul>
 </div>
 
 ## Casos especiais
 
-<table class="table table-bordered">
- <tr>
-   <td class="tac col2em">
-   </td>
-   <td>
-    <p><a href="#ce_0">Entidades com relacionamentos</a></p>
-    <table class="table table-bordered">
-     <tr>
-      <td class="tac col2em">
-       <input type="checkbox" />
-      </td>
-      <td>
-       <a href="#sol_a">Solução A: Usando o Buscador da Classe relacionada</a>
-      </td>
-     </tr>
-     <tr>
-      <td class="tac col2em">
-       <input type="checkbox" />
-      </td>
-      <td>
-       <a href="#sol_b">Solução B: Usando a Classe Falsa</a>
-      </td>
-     </tr>
-     <tr>
-      <td class="tac col2em">
-       <input type="checkbox" />
-      </td>
-      <td>
-       <a href="#sol_c">Solução C: Verificar a busca pelo relacionamento por uma entidade extraída</a>
-      </td>
-     </tr>
-    </table>
-   </td>
- </tr>
-  <tr>
-   <td class="tac col2em">
-    <input type="checkbox" />
-   </td>
-   <td>
-    <a href="#ce_1">Métodos que retornam listas</a>
-   </td>
- </tr>
-  <tr>
-   <td class="tac col2em">
-    <input type="checkbox" />
-   </td>
-   <td>
-    <a href="#ce_2">Métodos que retornam iteradores</a>
-   </td>
- </tr>
- <tr>
-   <td class="tac col2em">
-    <input type="checkbox" />
-   </td>
-   <td>
-    <a href="#ce_3">Testes incompletos</a>
-   </td>
- </tr>
-</table>
+<div class="alert alert-error">
+cpetreanu:
+<ul>
+  <li>Adicionar um checklist aqui com os casos especiais</li>
+</ul>
+</div>
 
-### Entidades<a id="ce_0"> </a>com relacionamentos
+### Entidades com relacionamentos
 
 Não existe necessidade de testar todas as propriedades das entidades relacionadas.
 
-#### Solução<a id="sol_a"> </a>A: Usando o Buscador da Classe relacionada:
+#### Solução<a id="var_0"> </a>A: Usando o Buscador da Classe relacionada:
 
     @Inject
     private BuscarCinema buscarCinema;
@@ -410,7 +337,7 @@ Não existe necessidade de testar todas as propriedades das entidades relacionad
         assertThat(cinema.getId(), equalTo(2));
     }
 
-#### Solução<a id="sol_b"> </a>B: Usando a Classe Falsa:
+#### Solução B: Usando a Classe Falsa:
 
       @Inject
       private BuscarCaixaEletronico buscarCaixa;
@@ -422,7 +349,7 @@ Não existe necessidade de testar todas as propriedades das entidades relacionad
         assertThat(caixa.getId(), equalTo(1001708));
       }
 
-#### Solução<a id="sol_c"> </a>C: Verificar a busca pelo relacionamento por uma entidade extraída:
+#### Solução C: Verificar a busca pelo relacionamento por uma entidade extraída:
 
       public void busca_por_superior() {
         Funcionario esperado = buscarFuncionario.porId(3);
@@ -433,7 +360,9 @@ Não existe necessidade de testar todas as propriedades das entidades relacionad
         assertThat (res.getSuperior().getId(), equalTo(1));
       }
 
-### Métodos<a id="ce_1"> </a>que retornam listas
+<p><a href="#1_2">Voltar: Demais Buscadores</a></p>
+
+### Métodos que retornam listas
 
 Neste exemplo, Funcionário relaciona-se com Superior. Atualizemos o novo mini-empresa.xml para:
 
@@ -538,56 +467,11 @@ Sabendo que na especificação a ordenação será feita pelo FUNCIONARIO.ID asc
         }
      }
 
+<p><a href="#1_2">Voltar: Demais Buscadores</a></p>
+
 O método busca_por_superior() é o responsável por verificar que os Funcionários recebidos do Superior sejam os esperados.
 
-### Métodos<a id="ce_2"> </a>que retornam iteradores
-
-Usando os mesmos dados do <a href="#ce_1">exemplo anterior</a>. Vamos ver como é feita a implementação quando usamos _Iterators_:
-
-      public void busca_iterador_por_superior() {
-        Superior superior = buscarSuperior.porId(2);
-    
-        Iterator<Funcionario> iterator = buscarFuncionario.iterarPorFuncionario(superior);
-    
-        List<Funcionario> res = ImmutableList.copyOf(iterator);
-        assertThat(res.size(), equalTo(2));
-    
-        List<Integer> ids = transform(res, new ToId());
-        assertThat(ids.get(0), equalTo(2));
-        assertThat(ids.get(1), equalTo(4));
-      }
-
-<div class="alert alert-info">Logo, o compilador alertará que não existe o contrato de iterarPorFuncionario() na interface BuscarFuncionário. portanto implemente-a para não haver problema.</div>
-
-Existe também a seguinto variação para quando houver retorno de Iteradores:
-
-      public void busca_iterador_por_superior() {
-        Superior superior = buscarSuperior.porId(2);
-    
-        Iterator<Funcionario> iterator = buscarFuncionario.iterarPorFuncionario(superior);
-    
-        List<Funcionario> res = newArrayList(iterator);
-        assertThat(res.size(), equalTo(2));
-    
-        List<Integer> ids = transform(res, new ToId());
-        assertThat(ids.get(0), equalTo(2));
-        assertThat(ids.get(1), equalTo(4));
-      }
-
-Nesse caso usamos o _newArrayList()_ ao invés de _ImmutableList.copyOf()_ para popularmos uma lista com os registros de Funcionário provenientes de _iterator_.
-
-A Interface terá agora implementado a seguinte lista de métodos:
-
-      @ImplementedBy(BuscarFuncionarioGuice.class)
-      public interface BuscarFuncionario {
-    
-        Funcionario porId(int id);
-    
-        Funcionario porMatricula(String matricula);
-    
-        Iterator<Funcionario> iterarPorFuncionario(Superior superior);
-    
-      }
+### Métodos que retornam iteradores
 
 ## Erros comuns
 
@@ -626,7 +510,7 @@ Erro de @Inject:
 
     private Funcionario funcionario;
 
-### Testes<a id="ce_3"> </a>incompletos
+### Testes Incompletos
 
 São Testes em que propriedades ou colaborações (relacionamentos) não são testados. Exemplo:
 

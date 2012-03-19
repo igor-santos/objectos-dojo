@@ -1,8 +1,8 @@
 ---
 layout: post-alpha
 title: "Git :: Fiz um merge incorreto. E agora, como resolvo?"
-author: "Hellen Carla Paixão Escarate"
-published: false
+author: "Caio Catanzaro Petreanu"
+published: true
 partof: git
 num: 4
 outof: 4
@@ -107,9 +107,40 @@ Faça os adds, commit e push:
       To git@github.com:cpetreanu/repo.git
        * [new branch]      joao_maria_00_form_aeroporto_create -> joao_maria_00_form_aeroporto_create
 
-### 2.1 Quando usar o git checkout?
+Por fim, dentro da branch joao_maria_00_form_aeroporto_create, faça merge com eu_vc_00_buscar_funcionario (e também um ``git status``, se preferir), ``git commit -m`` e ``git push origin eu_vc_00_buscar_funcionario``. Veja:
 
-#### Adaptando o cenário
+     $ git merge eu_vc_00_buscar_acionista
+     Merge made by recursive.
+      0 files changed, 0 insertions(+), 0 deletions(-)
+      create mode 100644 BuscarAcionista.java
+      create mode 100644 TesteDeBuscarAcionista.java
+     
+     $ git commit -m "Merge acidental"
+     # On branch joao_maria_00_form_aeroporto_create
+     # Your branch is ahead of 'origin/joao_maria_00_form_aeroporto_create' by 2 commits.
+     #
+     nothing to commit (working directory clean)
+     
+     $ git push origin joao_maria_00_form_aeroporto_create
+     Counting objects: 4, done.
+     Delta compression using up to 3 threads.
+     Compressing objects: 100% (2/2), done.
+     Writing objects: 100% (2/2), 339 bytes, done.
+     Total 2 (delta 1), reused 0 (delta 0)
+     To git@github.com:cpetreanu/repo.git
+        7688f2d..0606a81  joao_maria_00_form_aeroporto_create -> joao_maria_00_form_aeroporto_create
+
+Considerando que os trabalhos nas branchs ``joao_maria_00_form_aeroporto_create`` e ``eu_vc_00_buscar_funcionario`` são completamente distintos, ou seja. não podem intercalar-se; verifique lá no Github, sua branch agora contém arquivos que não deveriam estar lá!
+
+<div class="alert alert-info">
+ Obs. Sempre cheque seus arquivos na branch, e seus pull requests com o Diff na página do Github para identificar aquilo que foi mandado para origin, ou que está sendo mandado para o projeto original. Se não souber verificar o problema, de nada adianta saber solucioná-lo!
+</div>
+
+Tendo isso em mente, vem a grande pergunta: "Mas e agora, como faço para reverter isso?"
+
+Pois bem. Veja as seção abaixo para entender as maneiras corretas, para que posteriormente você possa corrigir com facilidade esse tipo de erro.
+
+### 2.1 Quando usar o git checkout?
 
 
 

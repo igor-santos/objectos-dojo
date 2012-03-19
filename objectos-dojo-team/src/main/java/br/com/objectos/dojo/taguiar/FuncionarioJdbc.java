@@ -17,7 +17,6 @@ package br.com.objectos.dojo.taguiar;
 
 import javax.validation.constraints.NotNull;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 /**
@@ -37,9 +36,9 @@ public class FuncionarioJdbc implements Funcionario {
   private final LocalDate dataDeNascimento;
   
   @NotNull
-  private final DateTime dataDeAdmissao;
+  private final LocalDate dataDeAdmissao;
   
-  private final DateTime dataDeDemissao;
+  private final LocalDate dataDeDemissao;
   
   @NotNull
   private final Contrato regimeDeContratacao;
@@ -78,12 +77,12 @@ public class FuncionarioJdbc implements Funcionario {
   }
   
   @Override
-  public DateTime getDataDeAdmissao() {
+  public LocalDate getDataDeAdmissao() {
     return dataDeAdmissao;
   }  
 
   @Override
-  public DateTime getDataDeDemissao() {
+  public LocalDate getDataDeDemissao() {
     return dataDeDemissao;
   }  
 

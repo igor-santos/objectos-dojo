@@ -15,7 +15,6 @@
  */
 package br.com.objectos.dojo.taguiar;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 /**
@@ -31,9 +30,9 @@ public interface Funcionario {
   
     LocalDate getDataDeNascimento();
   
-    DateTime getDataDeAdmissao();
+    LocalDate getDataDeAdmissao();
       
-    DateTime getDataDeDemissao();
+    LocalDate getDataDeDemissao();
       
     Contrato getRegimeDeContratacao();
  
@@ -47,9 +46,9 @@ public interface Funcionario {
     
   LocalDate getDataDeNascimento();
     
-  DateTime getDataDeAdmissao();
+  LocalDate getDataDeAdmissao();
         
-  DateTime getDataDeDemissao();
+  LocalDate getDataDeDemissao();
         
   Contrato getRegimeDeContratacao();
   

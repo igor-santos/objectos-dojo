@@ -8,7 +8,7 @@ styleClass: landing
       <div class="mkt">
         <h1>objectos dojô</h1>
         <h2>Cultura de aprendizado contínuo</h2>
-        <p>Centro de treinamento da <a href="http://www.objectos.com.br">objectos</a>, 
+        <p>Centro de aprendizado da <a href="http://www.objectos.com.br">objectos</a>, 
         uma pequena fábrica de software localizada na cidade de São Paulo, Brasil.</p>
       </div>
     </div>
@@ -32,55 +32,31 @@ styleClass: landing
       &nbsp;
     </div>
     <div class="span5">
-      <ul class="unstyled">
-        <li><a href="">Caixa de ferramentas</a></li>
-        <li><a href="">Procedimentos</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-<div class="landing">
-  <div class="row">
-  
-    <div class="span4">
-      <h3>
-        <a href="#">Novos estagiários, funcionários</a>
-        <span class="label label-notice">todo</span>
-      </h3>
-      <p>
-        Seja bem vindo à objectos. Aqui você encontrará:
+      <div class="text">
+        <h3>
+          <a href="{{ site.baseurl }}/caixa">Caixa de ferramentas</a>
+        </h3>
+        <p>
+        as ferramentas básicas (e mínimas) que todo programador <strong>deve</strong> 
+        saber para chamar-se um programador. Incluem mas não se restrigem a:
         <ul>
-          <li>pacote de boas vindas</li>
-          <li>pacote de benefícios</li>
-          <li>um pouco da história, missão e valores objectos</li>
-          <li>obrigações e o que é esperado de você</li>
+          <li>Sistemas de controle de versão</li>
+          <li>Orientação a objetos</li>
+          <li>Compiladores</li>
+          <li>Expressões regulares</li>
+          <li>Ferramentas linux (sed, grep, find, etc.)</li>
+          <li>IDEs</li>
+          <li>Java (conceitos básicos da linguagem)</li>
+          <li>Processos como integração contínua e todos os conceitos relacionados: testes, build, revisão de código.</li>      
         </ul>
-      </p>
+        </p>
+        <h3>
+          <a href="{{ site.baseurl }}/procedimento">Procedimentos</a>
+        </h3>
+        <p>
+        Até que certos conceitos fundamentais fiquem sedimentados, procedimentos trazem produtividade.
+        </p>
+      </div>
     </div>
-
-    <div class="span4">
-      <h3>
-        <a href="caixa">Caixa de ferramentas</a>
-        <span class="label label-success">em progresso</span>
-      </h3>
-      <p>       
-        Tutorias, artigos, katas, exercícios, entre outros. 
-        Conceitos essencias que todo membro da equipe de desenvolvimento deve saber compartilhados com a comunidade.
-      </p>
-      <p>Java, Eclipse, GIT, Maven, Bash, Jenkis, SQL, entre outros.</p>
-    </div>
-
-    <div class="span4">
-      <h3>
-        <a href="procedimento">Procedimentos</a>
-        <span class="label label-success">em progresso</span>
-      </h3>
-      <p>
-        Até que certos conceitos fundamentais fiquem sedimentados, 
-        procedimentos trazem produtividade. Aprenda aqui!
-      </p>
-    </div>
-  
   </div>
-  
 </div>

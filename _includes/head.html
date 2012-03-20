@@ -5,11 +5,19 @@
 <link href="img/favicon.ico" type="image/vnd.microsoft.icon" rel="icon">
 <link href="{{ site.baseurl }}/style/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="{{ site.baseurl }}/style/sheet.less" rel="stylesheet/less" type="text/css">
-<script type="text/javascript" src="{{ site.baseurl }}/js/less-1.2.2.min.js"></script>
-<script type="text/javascript" src="{{ site.baseurl }}/js/google-code-prettify/prettify.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/js/less-1.3.0.min.js"></script>
 <script type="text/javascript" src="{{ site.baseurl }}/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/js/bootstrap-tooltip.js"></script>
 <script type="text/javascript" src="http://use.typekit.com/cun3vsi.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script type="text/javascript">
+jQuery.noConflict();
+(function($){
+  $(document).ready(function(){
+    $('#ul-nav a').tooltip();
+  });  
+})(jQuery);
+</script>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push([ '_setAccount', 'UA-25755750-1' ]);

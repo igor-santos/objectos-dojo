@@ -15,14 +15,18 @@ Digamos que, por acidente, você pode acabar fazendo merges ou pulls de uma bran
 E você acaba mandando um Pull Request com essas atualizações. Bem, isso não pode ocorrer! De forma alguma essas atualizações podem ser aceitas e integradas no projeto original!
 
 <div class="alert alert-info">
-  Obs. Um git pull nada mais é que um fetch e um merge no mesmo comando.
+  Obs. Um git pull nada mais é que um <b>fetch e um merge no mesmo comando</b>.
 </div>
 
 Bom, o dano estám feito. Correto..?
 
 Não, cabe a você arrumar isso! E eu estou aqui para guiá-lo na resolução dessa lasqueira. Então mãos-a-obra!
 
-### Introdução
+### 1. Casos de uso
+
+Se você se consegue marcar uma das opções abaixo, está no lugar certo!
+
+### 2. Introdução
 
 Entenda, as formas de solucionar esse problema são diversas e possuem características próprias, mas é importante fazer uma breve explicação delas para que fique claro quais são adequadas a qual situação.
 
@@ -56,15 +60,15 @@ __Por apagar histórico, nas situações de trabalho apenas faça o ``push --for
 
 * E a solução menos recomendada, mas mais prática é refazer a fork do projeto e recuperar os backups. É mantido o histórico do projeto original e os backups serão adicionados em um ou mais commits novos.
 
-### 1. Montando os cenários
+### 3. Montando os cenários
 
-#### 1.1 Antes de começar
+#### 3.1 Antes de começar
 
 * Faça um novo repositório chamado __repo__ no Github;
 
 * Coloque-o diretório /tmp/repo.
 
-#### 1.2 Criando o cenário_alfa
+#### 3.2 Criando o cenário_alfa
 
 A partir da master crie uma branch chamada __cenario__.
 
@@ -138,7 +142,7 @@ Crie a partir da master 3 novas branches usando os comandos:
     $ git checkout -b cenario_reset
     $ git checkout -b cenario_rebase
 
-### 2. O git revert
+### 4. O git revert
 
 Como dito anteriormente, o revert:
 
@@ -154,7 +158,7 @@ Portanto, ele é indicado nos casos em que são poucos os arquivos indesejáveis
 
 Antes de continuarmos para a solução, por que não simularmos algo dando errado?
 
-#### 2.1 Simulando um erro
+#### 4.1 Simulando um erro
 
 Entre na branch do tópico e faça um merge dela com numeros.
 
@@ -188,7 +192,7 @@ Agora, imagine que você não podia ter adcionado o arquivo 7.txt e muito menos 
  Observação: Sempre cheque seus arquivos na branch, e seus Pull Requests com o <b>Diff</b> na página do Github para identificar aquilo que foi mandado para origin, ou que está sendo mandado para o projeto original. Se não souber verificar o problema, de nada adianta saber solucioná-lo!
 </div>
 
-#### 2.2 Solução
+#### 4.2 Solução
 
 Devemos encontrar o commit incorreto e revertê-lo. Para isso você pode usar o Github. Se preferir faça como eu e use o ``git log`` assim:
 
@@ -286,7 +290,7 @@ Você verá que há no histórico um novo commit que reverte as atualizações d
 
 Simples, não? Mas e se precisarmos reverter um merge?
 
-#### 2.3 Resolvendo um merge indesejado com revert
+#### 4.3 Resolvendo um merge indesejado com revert
 
 Faça um merge "acidental" com letras. Por acidental, quero dizer que esse merge não poderia ter sido feito, e muito menos mandado para a origin.
 
@@ -340,17 +344,17 @@ O VIM será aberto. Feche-o.
 
  E faça o push. Voilá! Revertemos o merge!
 
-#### 2.4 Resumo
+#### 4.4 Resumo
 
 <p></p>
 
 __Você selecionou um ou mais commits em sequência, e a partir deles gerou um novo capaz de selecionar e reverter as atualizações dos anteriores e o enviou à origem.__
 
-### 3. Próximo cenário
+### 5. Próximo cenário
 
 É um procedimento é fácil, por possuir apenas passos.
 
-#### Montando o cenário
+#### 5.1 Montando o cenário
 
 Entre na branch __cenario_procedimento_de_checkout__ e execute os comandos ``git remote`` e ``git pull gh-pages`` abaixo. Ah, e não se esqueça de fazer. um push para origin disso!
 
@@ -384,7 +388,7 @@ Muito bem! Concordo que é uma possibilidade. Maaass.. você não concorda comig
 
 E aí, o que você? O revert resolve? Com certeza!! Mas devemos usá-lo sabendo que toda vez que for feito merge, pull ou clone do projeto (ou fork) será baixado o gh-pages inteiro? Não mesmo!!!
 
-É aí que entram os capítulos 3, 4 e 5!
+É aí que entram os capítulos 6, 7 e 8!
 
 Antes de ir para eles, faça um merge com direito a push das branches __cenario_reset__ e __cenario_rebase__ com a que estamos.
 
@@ -396,7 +400,7 @@ Antes de ir para eles, faça um merge com direito a push das branches __cenario_
     $ git merge cenario_procedimento_de_checkout
     $ git push origin cenario_rebase
 
-### 3. O procedimento do git checkout -b
+### 6. O procedimento do git checkout -b
 
 Entre na branch __cenario_procedimento_de_checkout__ e se preferir, use o ``git log``.
 
@@ -467,13 +471,13 @@ Aqui parece que funcionou, veja como ficou todo o meu git log:
 
 Beleza, entendeu como funciona?
 
-#### Resumo
+#### 6.1 Resumo
 
 <p></p>
 
 __Você entrou em um commit - de preferência o último válido - e substituiu a branch "corrompida" por ele. Por fim, realizarou um ``push --force`` para a origem, revertendo todo o histórico para o estado desse commit.__
 
-### 4. O git reset --hard
+### 7. O git reset --hard
 
 Entre na branch __cenario_reset__.
 
@@ -501,7 +505,11 @@ Feito isso, verifique no Github por traços da gh-pages nas sua branch.
 
 Nada né? Perfeito!
 
-### 5. O git rebase -i
+#### 7.1 Resumo
+
+__Nesse caso, você apontou o commit HEAD de sua branch para o último commit válido antes do merge. Pode-se concluir que trata-se uma solução análoga à de checkout.__
+
+### 8. O git rebase -i
 
 #### Adaptando o cenários
 
@@ -511,43 +519,48 @@ Entre na sua branch __cenario_rebase__.
 
 Novamente estaremos no mesmo cenário. Dê um __ls -l__ e confira se quiser!
 
+#### 8.1 Resumo
 
-
-### 5. Refazer a fork?
+### 9. Refazer a fork?
 
 Em alguns casos, quando seu trabalho na branch acabou de começar, existem poucos arquivos no projeto original ou existem uma série de erros na execução dos comandos anteriores, uma opção simples é refazer a fork do projeto original.
 
 Para isso, você pode seguir os seguintes passos:
 
-1. Faça cuidadosamente o backup de todos os arquivos importantes que você criou ou modificou
-1. Remova a pasta do projeto da sua máquina, usando um comando como:
+* Faça cuidadosamente o backup de todos os arquivos importantes que você criou ou modificou
 
-    rm -f -R /tmp/repo/
+* Remova a pasta do projeto da sua máquina, usando um comando como:
 
-1. Vá no repositório do fork __repo__ em sua página.
+<p></p>
 
-1. Clique no botão "Admin", na parte superior direita da página
+        rm -f -R /tmp/repo/
 
-1. Clique no botão "Delete this repository" ... e confirme a remoção do fork clicando em "I understand, delete this repository"
+* Vá no repositório do fork __repo__ em sua página.
 
-1. Acesse a página do projeto original e faça novamente um fork e clone ele (se não lembrar como fazer clique [aqui][1])
+* Clique no botão "Admin", na parte superior direita da página
 
-1. Use os comandos
+* Clique no botão "Delete this repository" ... e confirme a remoção do fork clicando em "I understand, delete this repository"
 
-    mkdir /tmp/repo/
-    cd /tmp/repo
+* Acesse a página do projeto original e faça novamente um fork e clone ele (se não lembrar como fazer clique [aqui][1])
+
+* Use os comandos:
+
+<p></p>
+
+        mkdir /tmp/repo/
+        cd /tmp/repo
 
 Se necessário configure a url do projeto original usando
 
     $git remote add <alias-da-url> <url-do-projeto-original>
 
-Seu fork estará agora idêntico a úĺtima versão do projeto
+Seu fork estará agora idêntico a última versão do projeto
 
-1. Entre na branch correta e recupere os backups feitos.
+* Entre na branch correta e recupere os backups feitos.
 
-1. Pronto, você acaba de desfazer os comandos errados usando uma das formas mais árduas (tirando os possíveis erros nos comandos citados nas outras seções!)
+* Pronto, você acaba de desfazer os comandos errados usando uma das formas mais árduas (tirando os possíveis erros nos comandos citados nas outras seções!)
 
-### Finalizando
+### 10. Finalizando
 
 Obrigado aos meus leitores pela paciência e espero que tenham com este trabalho aprendido coisas novas, mas principalmente úteis no dia-a-dia de cada um.
 
@@ -555,13 +568,14 @@ Caso não precisem mais, não se esqueçam de remover os arquivos, branchs, fork
 
 <div id="referencias"> </div>
 
-### Referências<div id="referencias"> </div>
+### 11. Referências<div id="referencias"> </div>
+
+<p></p>
 
 [objectos-dojo :: Tutorial gh-pages][1]
 
-[id]: /path/to/img.jpg "Admin"
-[id]: /path/to/img.jpg "Delete this repositoy"
-[id]: /path/to/img.jpg "I understand, delete this repository"
+[Git Book - Undoing in Git][2]
 
 [0]: #referencias "Referências"
 [1]: ../contribua/00-importar.html "objectos-dojo :: Tutorial gh-pages"
+[2]: http://book.git-scm.com/4_undoing_in_git_-_reset,_checkout_and_revert.html "Git Book - Undoing in Git - Reset, Checkout and Revert"

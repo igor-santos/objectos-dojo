@@ -48,7 +48,7 @@ Entendeu? Então vamos aos comandos!
 
  <p>Caso você não saiba, fique sabendo: tudo que está no histórico é mantido. Imagine que toda vez que alguem for de alguma forma acessar, ou fazer download, do seu projeto, ele tenha que pegar meros 800 mb a mais, desnecessários.</p>
  <p>O que você acha disso?</p>
- <p>É por isso que nesses casos, em especial quando lidamos com a presença de históricos indesejados como uma legião de arquivos e/ou Arquivos <i>colossus</i> (muito grandes).</p>
+ <p>É por isso que nesses casos, em especial quando lidamos com a presença de históricos indesejados como uma legião de arquivos e/ou arquivos <i>colossus</i> (muito grandes).</p>
  <p>Por isso, nesses casos <b>devemos</b> alterar o histórico, para remover presenças indesejaveis em nossos diretórios do projeto.</p>
  <p>Repetindo: Eles representam tarefas simples, mas devem ser usados com <b>extrema cautela</b>! Afinal, agora estaremos lidando mais diretamente com o histórico.</p>
  
@@ -246,7 +246,7 @@ Que retornará uma série de registros dos commits feitos, como os meus:
  No caso de você ter feito muitos logs após o commit errôneo, tente usar o <code>git log -10</code> para listar os 10 últimos commits (ou o número que desejar).
 </div>
 
-Usando o Github ou olhando com calma o log, podemos ver que o commit que o commit que precisamos reverter é o "Arquivos pares".
+Usando o Github ou olhando com calma o log, podemos ver que o commit que precisamos reverter é o "Arquivos pares".
 
 Muito bem. Copie o hash do commit (que no meu caso é 51283b9dee534378c6dba77e12c7e0adfb29493e) e aperte a tecla __Q__ para sair dessa tela.
 
@@ -258,10 +258,10 @@ Será aberto um editor de texto (no meu caso o VIM) contendo informação do rev
 
 Portanto, o texto que está assim:
 
-Revert "Arquivos pares"
-
-This reverts commit 51283b9dee534378c6dba77e12c7e0adfb29493e.
-
+    Revert "Arquivos pares"
+    
+    This reverts commit 51283b9dee534378c6dba77e12c7e0adfb29493e.
+    
     # Please enter the commit message for your changes. Lines starting
     # with '#' will be ignored, and an empty message aborts the commit.
     # On branch cenario_revert
@@ -352,14 +352,10 @@ __Você selecionou um ou mais commits em sequência, e a partir deles gerou um n
 
 ### 5. Próximo cenário
 
-É um procedimento é fácil, por possuir apenas passos.
-
-#### 5.1 Montando o cenário
-
 Entre na branch __cenario_procedimento_de_checkout__ e execute os comandos ``git remote`` e ``git pull gh-pages`` abaixo. Ah, e não se esqueça de fazer. um push para origin disso!
 
     $ git checkout cenario_procedimento_de_checkout
-    $ git remote add objectos https://    $ github.com/objectos/objectos-dojo.    $ git
+    $ git remote add objectos https:github.com/objectos/objectos-dojo.git
     $ git pull objectos gh-pages
     $ git push origin cenario_procedimento_de_checkout
 
@@ -369,7 +365,7 @@ E o log?
 
     $ git log
 
-Nossa! Parece que ele está cheio de registros tanto da  __cenario_procedimento_de_checkout_ quanto da _gh-pages_. Não é? Olhe o seu commit gerado pelo pull também, ele deve estar assim:
+Nossa! Parece que ele está cheio de registros tanto da __cenario_procedimento_de_checkout__ quanto da __gh-pages__. Não é? Olhe o seu commit gerado pelo pull também, ele deve estar assim:
 
     commit 280fde94001ab2b8f89276c6a076d1e3f66ab019
     Merge: 426bca1 a5f651f
@@ -436,7 +432,7 @@ Remova a branch __cenario_procedimento_de_checkout__ e renomeie __bkp__ para cen
 
 E ai..? O que temos agora?? Aha! Isso mesmo, pelo visto a branch __cenario_procedimento_de_checkout__ já não é mais a mesma... ela é, digamos, o commit "first commit".
 
-Mas pra que isso? Se vocẽ quiser descobrir, faça esse comando:
+Mas pra que isso? Se você quiser descobrir, faça esse comando:
 
     $ git push origin cenario_procedimento_de_checkout
     To git@github.com:cpetreanu/repo.git
@@ -511,13 +507,19 @@ __Nesse caso, você apontou o commit HEAD de sua branch para o último commit v�
 
 ### 8. O git rebase -i
 
-#### Adaptando o cenários
-
 Entre na sua branch __cenario_rebase__.
 
     $ git checkout cenario_rebase
 
 Novamente estaremos no mesmo cenário. Dê um __ls -l__ e confira se quiser!
+
+Temos o cenário e o commit 426bca1b80fd19e22d5f3fb31f49b3f15698142f. Vamos usar o rebase no modo interativo (<b>-i</b>, que abre um editor de texto) ver as atualizações de todos os commits entre "first commit" e o HEAD (cenario_rebase).
+
+    $ git rebase -i 426bca1b80fd19e22d5f3fb31f49b3f15698142f cenario_rebase
+
+Note os vários commits vindos de gh-pages. Aqui podemos modificar aqueles que serão mantidos ou removidos do histórico, __remontando-o__.
+
+Apague todos os commits menos o 426bca1b80fd19e22d5f3fb31f49b3f15698142f
 
 #### 8.1 Resumo
 

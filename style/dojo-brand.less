@@ -1,4 +1,5 @@
-@objectosBlue: #2E4971;
+@objectosBlue: 	#2E4971;
+@herobg: 		#292929;
 
 .fixed(@top: 0, @left: 0, @right: 0) {
 	position: fixed;
@@ -17,30 +18,50 @@
 	}
 }
 
-.hd {
-	background: url('../../img/logo-dojo-brand.png') no-repeat 60px center;
-	
-	h1, h2 {
-		font-family: 'tilden-sans-light', sans-serif;
-		font-size: @baseFontSize;
-		font-weight: bold;
-		line-height: @baseLineHeight;
-		
-		margin: 0;
-	}
-	
-	h2 {
-		color: @grayLight;
-	}
-	 
-	.objectos {
-		color: lighten(@objectosBlue, 25%);
-	}
-}
+#hd {
+	border-bottom: 1px solid @grayLight;
+	height: @hdHeight;
 
-#hd-inner {
-	border-bottom: 1px solid @grayLighter;
-	padding: 60px 0;
+	#hd-inner {
+	}
+	
+	.hd {
+		h1, h2 {
+			#font > #family > .sans-serif;
+			font-weight: bold;
+			font-size: @baseFontSize;
+			line-height: @baseLineHeight;
+	
+			margin: 0;
+		}
+		
+		h2 {
+			color: @grayLight;
+		}
+		 
+		.objectos {
+			color: lighten(@objectosBlue, 25%);
+		}
+	}
+	
+	.obj-link {
+		display: block;
+		padding: 42px 15px;
+	}
+	
+	ul.nav {
+		.clearfix();
+		padding: 34px 0;
+	
+		li {
+			float: left;
+			width: 60px;
+			
+			a:hover {
+				background: transparent;
+			}
+		}
+	}
 }
 
 #bd {

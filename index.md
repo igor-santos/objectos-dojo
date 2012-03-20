@@ -2,39 +2,44 @@
 layout: base
 styleClass: landing
 ---
-<div class="wellcome">
-  <div class="container">
-    <div class="row">
-      
-      <div class="span5">
-        <h1>objectos doj&ocirc;</h1>
+<div class="container wellcome">
+  <div class="row">
+    <div class="span7">
+      <div class="mkt">
+        <h1>objectos dojô</h1>
+        <h2>Cultura de aprendizado contínuo</h2>
+        <p>Centro de treinamento da <a href="http://www.objectos.com.br">objectos</a>, 
+        uma pequena fábrica de software localizada na cidade de São Paulo, Brasil.</p>
+      </div>
+    </div>
+    <div class="span5">
+      <div class="share">
+        <h2>Código aberto</h2>
         <p>
-          Tutoriais, artigos técnicos, procedimentos, etc com o objetivo de:
+          Todos os textos, artigos e códigos-fontes estão disponíveis. 
         </p>
-        <ol>
-          <li>Treinamento constante da equipe de desenvolvimento</li>
-          <li>Compartilhar conhecimento com a comunidade</li>
-        </ol>
-        
-        <a href="contribua" class="btn btn-large btn-info">Contribua!</a>
-        <a href="https://github.com/objectos/objectos-dojo" class="btn btn-large">Projeto no GitHub</a>
+        <ul class="unstyled links">
+          <li><a href="contribua" class="btn btn-large btn-info">Contribua!</a></li>
+          <li><a href="https://github.com/objectos/objectos-dojo" class="btn btn-large">Projeto no GitHub</a></li>
+        </ul>
       </div>
-  
-      <div class="span7">
-        <img src="img/dojo-book.jpg" />
-      </div>
-      
     </div>
   </div>
 </div>
-
-<div class="container landing">
-  <hr />
-  
-  <h2>cultura de aprendizado contínuo</h2>
-
-  <hr />
-  
+<div class="container hero">
+  <div class="row">
+    <div class="span7">
+      &nbsp;
+    </div>
+    <div class="span5">
+      <ul class="unstyled">
+        <li><a href="">Caixa de ferramentas</a></li>
+        <li><a href="">Procedimentos</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="landing">
   <div class="row">
   
     <div class="span4">
@@ -78,21 +83,4 @@ styleClass: landing
   
   </div>
   
-  <hr />
-
-  <div class="row contribua">
-    <div class="span4">
-      <h2>Contribua!</h2>
-    </div>
-
-    <div class="span8">
-      <p>
-        objectos dojo é um projeto de código aberto! Você encontra todos os textos, artigos e 
-        códigos-fontes no <a href="http://github.com/objectos/objectos-dojo">GitHub</a>. 
-      </p>
-    </div>
-  </div>
-
-  <hr />
-    
 </div>

@@ -1,30 +1,73 @@
 body.landing {
+	background: url('../../img/noise.png');
+
 	#hd {
+		background: @white;
+		margin-bottom: 50px;
+	}
+	
+	.wellcome {
 		background: @black;
-		border-bottom: 1px solid @gray;
-		color: @grayLight;
-	}
-	
-	#hd-inner {
-		border: 0;
-	}
-	
-	.hd {
+		padding: 40px 0;
+				
 		h1, h2 {
-			margin: 0;
+			font-weight: normal;
 		}
 		
 		h1 {
-			color: @gray;
+			.sans-serif(4);
+			color: @white;
+			margin-bottom: 20px;
 		}
 		
 		h2 {
-			color: @grayLighter;
+			.sans-serif(2);
+			color: @grayLight;
+		}
+
+		p {
+			color: @white;
+			.sans-serif(1.4);
+		}
+
+		.mkt {
+			padding-left: 60px;
+		}
+		
+		.share {
+			padding-top: 20px;
+			padding-right: 60px;
+			
+			ul.links {
+				.clearfix();
+				
+				li {
+					float: left;
+					margin-right: 20px;
+				}
+			}
+		}
+	}
+	
+	.hero {
+		.box-shadow();
+		background: @white url('../../img/dojo-board.jpg') no-repeat left top;
+		height: 540px;
+		
+		p, li {
+			.sans-serif(1.2);
+		}
+	}
+	
+	.contribute {
+		h1, h2 {
+			.serif(4);
+			color: @black;
+			font-weight: normal;
 		}
 	}
 
 	.landing {
-	
 		h1, h2 {
 			.serif(4);
 			color: @black;
@@ -48,21 +91,5 @@ body.landing {
 			.serif(1.8);
 		}
 	
-	}
-	
-	.wellcome {
-		background-color: @herobg;
-		padding: 40px 0;
-
-		h1, h2 {
-			.sans-serif(4);
-			color: @white;
-			font-weight: normal;
-		}
-		
-		p, li {
-			.sans-serif(1.2);
-			color: @white;
-		}
 	}
 }

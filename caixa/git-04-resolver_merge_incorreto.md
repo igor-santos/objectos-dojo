@@ -32,7 +32,23 @@ Entendeu? Então vamos aos comandos!
 
 * No ``git revert`` é feito um novo commit, contendo as atualizações inversas aos commits selecionados. E esse commit ainda é reversível! Usar ele mantém todo o histórico anterior, mas em alguns casos pode não ser o que queremos;
 
-* No entanto, quando usamos ``git checkout``, ``git reset --hard`` e ``git rebase -i``, "quebramos" o histórico, sendo necessário fazer um ``push --force`` para ser mandado para o Github. Essas ações não podem ser revertidas por causa disso, devem ser usadas com muita cautela e em situações claras e específicas!
+<div class="alert alert-info">
+ Ele é praticamente mandatório para todos os casos em que manter os commits anteriores no histórico não representa um problema.
+</div>
+
+* No entanto, nos demais casos podemos usar um dos 3 procedimentos/comandos:``git checkout``, ``git reset --hard`` e ``git rebase -i``. Com eles, "quebramos" ou remontamos o histórico da branch, sendo necessário fazer um ``push --force`` para ser mandado para o Github. Essas ações não podem ser revertidas e por causa disso, devem ser usadas com muita cautela e em situações claras e específicas!
+
+<div class="alert alert-info">
+ <p>Caso você não saiba, fique sabendo: tudo que está no histórico é mantido. Imagine que toda vez que alguem for de alguma forma acessar, ou fazer download, do seu projeto, ele tenha que pegar meros 800 mb a mais, desnecessários.</p>
+ <p>O que você acha disso?</p>
+ <p>É por isso que nesses casos, em especial quando lidamos com a presença de históricos indesejados como uma legião de arquivos e/ou Arquivos <i>colossus</i> (muito grandes).</p>
+ <p>Por isso, nesses casos <b>devemos</b> alterar o histórico, para remover presenças indesejaveis em nossos diretórios do projeto.</p>
+ <p>Repetindo: Eles representam tarefas simples, mas devem ser usados com <b>extrema cautela</b>! Afinal, agora estaremos lidando mais diretamente com o histórico.</p>
+</div>
+
+# Importante!!!
+
+__Por apagar histórico, nas situações de trabalho apenas faça o ``push --force``, e somente apenas se você tiver absoluta certeza, sem qualquer sombra de dúvidas e de preferência certo de um alinhamento estrelar favorável.__
 
 E a solução menos recomendada, mas mais prática:
 
@@ -40,7 +56,89 @@ E a solução menos recomendada, mas mais prática:
 
 __Observação__: Como existe vasta base de conhecimento dos comandos git, me limito a focar em quando e como usar cada uma dessas soluções a partir dos casos particulares que criaremos juntos.
 
-### 1. O git revert
+### 1. Montando os cenários
+
+#### 1.1 Antes de começar
+
+* Faça um novo repositório chamado __repo__ no Github;
+
+* Coloque-o diretório /tmp/repo.
+
+#### 1.2 Criando o cenário_alfa
+
+A partir da master crie uma branch chamada __cenario__.
+
+    $ git checkout master
+    $ git checkout -b cenario_alfa
+
+Nela crie, adicione, faça commit e push, __para cada__ um de 5 arquivos de texto (distintos).
+
+    $ touch A.txt
+    $ git add A.txt 
+    $ git commit -m "Add: A.txt"
+    $ git push origin cenario_alfa
+     
+    $ touch B.txt
+    $ git add B.txt 
+    $ git commit -m "Add: B.txt"
+    $ git push origin cenario_alfa
+    
+    $ touch C.txt
+    $ git add C.txt 
+    $ git commit -m "Add: C.txt"
+    $ git push origin cenario_alfa
+    
+    $ touch D.txt
+    $ git add D.txt 
+    $ git commit -m "Add: D.txt"
+    $ git push origin cenario_alfa
+    
+    $ touch E.txt
+    $ git add E.txt 
+    $ git commit -m "Add: E.txt"
+    $ git push origin cenario_alfa
+
+Volte a master e crie uma branch chamada cenario_beta, entre nela, e execute os comandos abaixo.
+
+    $ git checkout master
+    $ git checkout -b cenario_beta
+
+    $ touch 1.txt
+    $ git add 1.txt 
+    $ git commit -m "Add: 1.txt"
+    $ git push origin cenario_beta
+     
+    $ touch 2.txt
+    $ git add 2.txt 
+    $ git commit -m "Add: 2.txt"
+    $ git push origin cenario_beta
+    
+    $ touch 3.txt
+    $ git add 3.txt 
+    $ git commit -m "Add: 3.txt"
+    $ git push origin cenario_beta
+    
+    $ touch 4.txt
+    $ git add 4.txt 
+    $ git commit -m "Add: 4.txt"
+    $ git push origin cenario_beta
+    
+    $ touch 5.txt
+    $ git add 5.txt 
+    $ git commit -m "Add: 5.txt"
+    $ git push origin cenario_beta
+
+Cheque no Github se todos os arquivos estão presentes. Viu?! Ok, blz! Então volte para o terminal.
+
+Crie a partir da master 3 novas branches usando os comandos:
+
+    $ git checkout master
+    $ git checkout -b cenario_revert
+    $ git checkout -b cenario_procedimento_de_checkout
+    $ git checkout -b cenario_reset
+    $ git checkout -b cenario_rebase
+
+### 2. O git revert
 
 Como dito anteriormente, o revert:
 
@@ -54,140 +152,90 @@ Como dito anteriormente, o revert:
 
 Portanto, ele é indicado nos casos em que são poucos os arquivos indesejáveis enviados, representando um histórico cujo tamanho não é significantemente grande a ponto de termos de alterá-lo ou removê-lo. 
 
-Antes de continuarmos para a solução, por que não simularmos um caso de merge errado?
+Antes de continuarmos para a solução, por que não simularmos algo dando errado?
 
-#### 1.1 Antes de começar
+#### 2.1 Simulando um erro
 
-* Faça um novo repositório chamado __repo__ no Github;
+Entre na branch do tópico e faça um merge dela com cenario_beta.
 
-* Coloque-o diretório /tmp/repo.
+    $ git checkout cenario_revert
+    $ git merge cenario_beta
 
-#### 1.2 Criando o cenário
+Ok! Agora você terá os arquivos de textos do 1.txt ao 5.txt na sua branch. Faça um push.
 
-Crie uma branch chamada buscar_acionista e entre nela.
+    $ git push origin cenario_revert
 
-      $ git checkout -b buscar_acionista
-      Switched to a new branch 'buscar_acionista'
+Faça outro merge, agora com cenario_beta, e finalize com um push.
 
-Execute os comandos abaixo para criar os arquivos TesteDeBuscarAcionista e BuscarAcionista.
+    $ git merge cenario_beta
+    $ git push origin cenario_revert
 
-<p></p>
+Verifique lá no Github, sua branch agora contém 5 arquivos. Certo?
 
-      $ touch TesteDeBuscarAcionista.java
-      $ touch BuscarAcionista.java
+Muito bem! Agora remova os arquivos pares, ou seja 2.txt e 4.txt. Crie também o 7.txt.
 
-Adicione os arquivos, faça um commit e dê um push:
+    $ rm 2.txt 4.txt
+    $ touch 7.txt
 
-      $ git add BuscarAcionista.java
-      $ git add TesteDeBuscarAcionista.java
-      
-      $ git commit -m "Implementado: TesteDeBuscarAcionista e BuscarAcionista"
-      
-      [buscar_acionista 9f9ebd9] Implementado: TesteDeBuscarAcionista e BuscarAcionista
-       0 files changed, 0 insertions(+), 0 deletions(-)
-       create mode 100644 BuscarAcionista.java
-       create mode 100644 TesteDeBuscarAcionista.java
-       
-      $ git push origin buscar_acionista
-      Counting objects: 3, done.
-      Delta compression using up to 3 threads.
-      Compressing objects: 100% (2/2), done.
-      Writing objects: 100% (2/2), 299 bytes, done.
-      Total 2 (delta 0), reused 0 (delta 0)
-      To git@github.com:cpetreanu/repo.git
-       * [new branch]      buscar_acionista -> buscar_acionista
+Adicione os arquivos com __add__, faça o commit e o push.
 
-Cheque no Github se os 2 arquivos estão presentes. Viu?! Ok! Então volte para a master para continuarmos.
+    $ git add 2.txt
+    $ git add 4.txt
+    $ git add 7.txt
+    $ git commit -m "Arquivos pares"
+    $ git push origin cenario_revert
 
-      $ git checkout master
-      Switched to branch 'master'
+Verifique no Github se sua branch está apenas com arquivos ímpares.
 
-Perfeito! Agora crie uma branch chamada form_aeroporto_create e entre nela.
-
-      $ git checkout -b form_aeroporto_create
-      Switched to a new branch 'form_aeroporto_create'
-
-E crie, da mesma forma:
-
-      $ touch TesteDeFormDeAeroportoCreate.java
-      $ touch FormDeAeroportoCreate.java
-      $ touch FormDeAeroportoCreateGuice.java
-
-Faça os adds, commit e push:
-
-      $ git add TesteDeFormDeAeroportoCreate.java
-      $ git add FormDeAeroportoCreate.java
-      $ git add FormDeAeroportoCreateGuice.java
-      
-      $ git commit -m "Web: Implementando FormDeAeroportoCreate"
-      [form_aeroporto_create 7688f2d] Web: Implementando FormDeAeroportoCreate
-       0 files changed, 0 insertions(+), 0 deletions(-)
-       create mode 100644 FormDeAeroportoCreate.java
-       create mode 100644 FormDeAeroportoCreateGuice.java
-       create mode 100644 TesteDeFormDeAeroportoCreate.java
-      
-      $ git push origin form_aeroporto_create
-      Counting objects: 3, done.
-      Delta compression using up to 3 threads.
-      Compressing objects: 100% (2/2), done.
-      Writing objects: 100% (s2/2), 308 bytes, done.
-      Total 2 (delta 0), reused 0 (delta 0)
-      To git@github.com:cpetreanu/repo.git
-       * [new branch]      form_aeroporto_create -> form_aeroporto_create
-
-Por fim, dentro da branch form_aeroporto_create, faça merge com buscar_acionista (e também um ``git status``, se preferir) e ``git push origin buscar_acionista``. Veja:
-
-     $ git merge buscar_acionista
-     Merge made by recursive.
-      0 files changed, 0 insertions(+), 0 deletions(-)
-      create mode 100644 BuscarAcionista.java
-      create mode 100644 TesteDeBuscarAcionista.java
-     
-     $ git push origin form_aeroporto_create
-     Counting objects: 4, done.
-     Delta compression using up to 3 threads.
-     Compressing objects: 100% (2/2), done.
-     Writing objects: 100% (2/2), 339 bytes, done.
-     Total 2 (delta 1), reused 0 (delta 0)
-     To git@github.com:cpetreanu/repo.git
-        7688f2d..0606a81  form_aeroporto_create -> form_aeroporto_create
-
-Considerando que os trabalhos nas branchs ``form_aeroporto_create`` e ``buscar_acionista`` são completamente distintos, ou seja. não podem intercalar-se.
-
-Verifique lá no Github, sua branch agora contém arquivos que não deveriam estar lá, certo?
+Agora, imagine que você não podia ter adcionado o arquivo 7.txt e muito menos removido o 4.txt. E agora, como fazemos para reverter isso?
 
 <div class="alert alert-info">
  Observação: Sempre cheque seus arquivos na branch, e seus Pull Requests com o <b>Diff</b> na página do Github para identificar aquilo que foi mandado para origin, ou que está sendo mandado para o projeto original. Se não souber verificar o problema, de nada adianta saber solucioná-lo!
 </div>
 
-Tendo isso em mente, vem a grande pergunta: "Mas e agora, como faço para reverter isso?"
-
-#### 1.3 Solução
+#### 2.2 Solução
 
 Devemos encontrar o commit incorreto e revertê-lo. Para isso você pode usar o Github. Se preferir faça como eu e use o ``git log`` assim:
 
     $ git log
 
-Que retornará:
+Que retornará uma série de registros dos commits feitos, como os meus:
 
-    commit 81e86e2f683cdb2fad8120a8f3fe6dfae5d513f0
-    Merge: 7688f2d 9f9ebd9
+    commit 51283b9dee534378c6dba77e12c7e0adfb29493e
     Author: Caio Petreanu <caio.petreanu@objectos.com.br>
-    Date:   Mon Mar 19 13:34:58 2012 -0300
+    Date:   Mon Mar 19 19:05:40 2012 -0300
     
-        Merge branch 'buscar_acionista' into form_aeroporto_create
+        Arquivos pares
     
-    commit 7688f2d332b75cefa835540be64a54e0b6eded1d
+    commit 0b31782b35e1c80ba03ae4ae9da2c96b63e7c6fc
     Author: Caio Petreanu <caio.petreanu@objectos.com.br>
-    Date:   Fri Mar 16 18:52:40 2012 -0300
+    Date:   Mon Mar 19 18:24:10 2012 -0300
     
-        Web: Implementando FormDeAeroportoCreate
+        Add: 5.txt
     
-    commit 9f9ebd90ead253b26503b83a4c201569b703fef0
+    commit e702e819ab3a3bc74b147c50e9fe87064996aee7
     Author: Caio Petreanu <caio.petreanu@objectos.com.br>
-    Date:   Fri Mar 16 18:43:19 2012 -0300
+    Date:   Mon Mar 19 18:24:06 2012 -0300
     
-        Implementado: TesteDeBuscarAcionista e BuscarAcionista
+        Add: 4.txt
+    
+    commit 773fa02ebf3248c95e0f7c4d64560062b57052ad
+    Author: Caio Petreanu <caio.petreanu@objectos.com.br>
+    Date:   Mon Mar 19 18:24:03 2012 -0300
+    
+        Add: 3.txt
+    
+    commit 7e17f4dde6f43bd99d1b7abacf2a97f0846c263f
+    Author: Caio Petreanu <caio.petreanu@objectos.com.br>
+    Date:   Mon Mar 19 18:23:59 2012 -0300
+    
+        Add: 2.txt
+    
+    commit 6987e2c1f584f40f4db1d79750879c8373858dc6
+    Author: Caio Petreanu <caio.petreanu@objectos.com.br>
+    Date:   Mon Mar 19 18:23:55 2012 -0300
+    
+        Add: 1.txt
     
     commit 426bca1b80fd19e22d5f3fb31f49b3f15698142f
     Author: Caio Petreanu <caio.petreanu@objectos.com.br>
@@ -196,157 +244,157 @@ Que retornará:
         first commit
 
 <div class="alert alert-info">
- No caso de você ter feito muitos logs após o commit errôneo, tente usar o <code>git log -10</code> (ou o número que desejar).
- Se preferir, também pode acrescentar a opção <b>--pretty</b> e o <b>grep</b>.
- Exemplo: <code>git log --pretty=oneline -10 | grep 'Merge'</code>.
+ No caso de você ter feito muitos logs após o commit errôneo, tente usar o <code>git log -10</code> para listar os 10 últimos commits (ou o número que desejar).
 </div>
 
-Podemos ver que o commit que precisamos reverter é o Merge branch 'buscar_acionista' into form_aeroporto_create para o anterior, Web: Implementando FormDeAeroportoCreate.
+Usando o Github ou olhando com calma o log, podemos ver que o commit que o commit que precisamos reverter é o "Arquivos pares".
 
-Muito bem. Copie o hash do commit (que no meu caso é 81e86e2f683cdb2fad8120a8f3fe6dfae5d513f0) e aperte a tecla __Q__ para sair dessa tela.
+Muito bem. Copie o hash do commit (que no meu caso é 51283b9dee534378c6dba77e12c7e0adfb29493e) e aperte a tecla __Q__ para sair dessa tela.
 
 Agora faça o revert conforme:
 
-    git revert 81e86e2f683cdb2fad8120a8f3fe6dfae5d513f0 -m -1
+    git revert 51283b9dee534378c6dba77e12c7e0adfb29493e
 
 <div class="alert alert-info">
- O parâmetro na opção <b>-m</b> informa até onde será revertido. o <b>-1</b> informa para ela serão revertidas as atualizações do commit <b>81e86e2f683cdb2fad8120a8f3fe6dfae5d513f0</b> até o anterior.
+ O parâmetro na opção <b>-m</b> informa até onde será revertido. o <b>-1</b> informa para ela serão revertidas as atualizações do commit <b>51283b9dee534378c6dba77e12c7e0adfb29493e</b> até o anterior.
 </div>
 
 Será aberto um editor de texto (no meu caso o VIM) contendo informação do revert a ser realizado. Para cada linha de atualização do próprio revert existe um __#__. Você deve remover todos os __#__ das novas atualizações dele que devem estar no novo commit.
 
 Portanto, o texto que está assim:
 
-    Revert "Merge branch 'buscar_acionista' into form_aeroporto_create"
-    
-    This reverts commit 81e86e2f683cdb2fad8120a8f3fe6dfae5d513f0, reversing
-    changes made to 7688f2d332b75cefa835540be64a54e0b6eded1d.
-    
+Revert "Arquivos pares"
+
+This reverts commit 51283b9dee534378c6dba77e12c7e0adfb29493e.
+
     # Please enter the commit message for your changes. Lines starting
     # with '#' will be ignored, and an empty message aborts the commit.
-    # On branch form_aeroporto_create
+    # On branch cenario_revert
     # Changes to be committed:
     #   (use "git reset HEAD <file>..." to unstage)
     #
-    #       deleted:    BuscarAcionista.java
-    #       deleted:    TesteDeBuscarAcionista.java
+    #       copied:     7.txt -> 2.txt
+    #       renamed:    7.txt -> 4.txt
 
 Deverá ficar assim:
 
-    Revert "Merge branch 'buscar_acionista' into form_aeroporto_create"
+    Revert "Arquivos pares"
     
-    This reverts commit 81e86e2f683cdb2fad8120a8f3fe6dfae5d513f0, reversing
-    changes made to 7688f2d332b75cefa835540be64a54e0b6eded1d.
+    This reverts commit 51283b9dee534378c6dba77e12c7e0adfb29493e.
     
     # Please enter the commit message for your changes. Lines starting
     # with '#' will be ignored, and an empty message aborts the commit.
-    # On branch form_aeroporto_create
+    # On branch cenario_revert
     # Changes to be committed:
     #   (use "git reset HEAD <file>..." to unstage)
     #
-            deleted:    BuscarAcionista.java
-            deleted:    TesteDeBuscarAcionista.java
+            copied:     7.txt -> 2.txt
+            renamed:    7.txt -> 4.txt
 
-Salve e feche o arquivo. Faça o commit e push, e veja tanto no git log quanto no site do Github as mudanças que ocorreram.
+Salve e feche o arquivo. Faça o push e veja tanto no git log quanto no site do Github as mudanças que ocorreram.
 
-    $ git commit -m "Feito adequadamente com o VIM o revert"
-    # On branch form_aeroporto_create
-    nothing to commit (working directory clean)
-    
-    $ git push origin form_aeroporto_create
-    Counting objects: 5, done.
-    Delta compression using up to 3 threads.
-    Compressing objects: 100% (3/3), done.
-    Writing objects: 100% (3/3), 618 bytes, done.
-    Total 3 (delta 1), reused 0 (delta 0)
-    To git@github.com:cpetreanu/repo.git
-       7688f2d..6d0ca6d  form_aeroporto_create -> form_aeroporto_create
+    $ git push origin cenario_revert
 
-    commit 6d0ca6d4100aa13b6af2d1c0db1c5e19ba5595ac
+Você verá que há no histórico um novo commit que reverte as atualizações daquele que foi selecionado. 
+
+    commit e22f46c3fb58bc2f382cdba5babd9b94fb300f29
     Author: Caio Petreanu <caio.petreanu@objectos.com.br>
-    Date:   Mon Mar 19 15:54:59 2012 -0300
+    Date:   Mon Mar 19 19:11:31 2012 -0300
     
-        Revert "Merge branch 'buscar_acionista' into form_aeroporto_create"
+        Revert "Arquivos pares"
         
-        This reverts commit 81e86e2f683cdb2fad8120a8f3fe6dfae5d513f0, reversing
-        changes made to 7688f2d332b75cefa835540be64a54e0b6eded1d.
+        This reverts commit 51283b9dee534378c6dba77e12c7e0adfb29493e.
         
-            deleted:    BuscarAcionista.java
-            deleted:    TesteDeBuscarAcionista.java
+            copied:     7.txt -> 2.txt
+            renamed:    7.txt -> 4.txt
 
-Você verá que há no histórico um novo commit que reverte as atualizações daquele que foi selecionado. Simples, não?
+Simples, não? Mas e se precisarmos reverter um merge?
 
-#### Em resumo, você selecionou um ou mais commits em sequência, e a partir deles gerou um novo capaz de selecionar e reverter as atualizações dos anteriores e o enviou à origem.
+#### 2.3 Resolvendo um merge indesejado com revert
 
-### 2. O git checkout
+Faça um merge "acidental" com cenario_alfa. Por acidental, quero dizer que esse merge não poderia ter sido feito, e muito menos mandado para a origin.
 
-O procedimento é simples, mas que deve ser usado com __extrema__ cautela! Afinal, agora estaremos lidando mais diretamente com o histórico.
+Vamos usar o que aprendemos para resolver isso:
 
-Lembra dele?
+    $ git log -10
+
+Você porderá ver que apareceu um novo commit.
+
+    commit 37687b9de11e7f12dd0ba20f02ac90e219498b08
+    Merge: e22f46c 36277bb
+    Author: Caio Petreanu <caio.petreanu@objectos.com.br>
+    Date:   Mon Mar 19 19:15:50 2012 -0300
+    
+        Merge branch 'cenario_alfa' into cenario_revert
+
+Vamos reverter ele?
+
+    git revert 37687b9de11e7f12dd0ba20f02ac90e219498b08
+
+Não funcionou né? Pois é, sabemos que um merge local deixa as duas branches envolvidas exatamente iguais. Independentemente de qual branch você está agora, ao reverter um merge deve ser informada para qual branch devemos voltar.
+
+O que, nesse caso são __e22f46c__ (vinda da cenario_revert e representada por 1) e __36277bb__ (vinda da cenario_alfa e representada por 2).
+
+Em caso de dúvida, cheque o log. Fica fácil ver que o commit anterior na branch em que estamos é o 1 (e22f46c3fb58bc2f382cdba5babd9b94fb300f29).
+
+Agora usamos a opção __-m__ para informar que o revert do merge deverá fazer com que voltem as alterações para o commit 1, proveniente da branch cenario_revert.
+
+    $ git revert 37687b9de11e7f12dd0ba20f02ac90e219498b08 -m 1
+
+O VIM será aberto.
+
+    Revert "Merge branch 'cenario_alfa' into cenario_revert"
+    
+    This reverts commit 37687b9de11e7f12dd0ba20f02ac90e219498b08, reversing
+    changes made to e22f46c3fb58bc2f382cdba5babd9b94fb300f29.
+    
+    # Please enter the commit message for your changes. Lines starting
+    # with '#' will be ignored, and an empty message aborts the commit.
+    # On branch cenario_revert
+    # Changes to be committed:
+    #   (use "git reset HEAD <file>..." to unstage)
+    #
+    #       deleted:    A.txt
+    #       deleted:    B.txt
+    #       deleted:    C.txt
+    #       deleted:    D.txt
+    #       deleted:    E.txt
+
+Remova os sustenidos. salve e feche o programa. Faça o push.
+
+    $ git push origin cenario_revert
+
+E Voilá! Revertemos o merge.
+
+#### 2.4 Resumo
+
+__Você selecionou um ou mais commits em sequência, e a partir deles gerou um novo capaz de selecionar e reverter as atualizações dos anteriores e o enviou à origem.__
+
+### 3. O git checkout
+
+É um procedimento é fácil, por possuir apenas alguns passos muito simples.
 
 #### Caso A: Exemplo simples
 
 Crie no repósitorio anterior uma branch a partir da master chamada __documentos__. Nela crie, adicione, faça commit e push, __para cada__ um dos 3 arquivos de texto (distinto) criados.
 
     $ git checkout master
-    Switched to branch 'master'
-    
     $ git checkout -b documentos
-    Switched to a new branch 'documentos'
     
     $ touch Rafaela.txt
-    
     $ git add Rafaela.txt 
-    
     $ git commit -m "Add: Rafaela.txt"
-    [documentos 69a84f6] Add: Rafaela.txt
-     0 files changed, 0 insertions(+), 0 deletions(-)
-     create mode 100644 Rafaela.txt
-     
     $ git push origin documentos
-    Counting objects: 3, done.
-    Delta compression using up to 3 threads.
-    Compressing objects: 100% (2/2), done.
-    Writing objects: 100% (2/2), 260 bytes, done.
-    Total 2 (delta 0), reused 0 (delta 0)
-    To git@github.com:cpetreanu/repo.git
-     * [new branch]      documentos -> documentos
      
     $ touch Monique.txt
-    
     $ git add Monique.txt 
-    
     $ git commit -m "Add: Monique.txt"
-    [documentos 5361523] Add: Monique.txt
-     0 files changed, 0 insertions(+), 0 deletions(-)
-     create mode 100644 Monique.txt
-     
     $ git push origin documentos
-    Counting objects: 3, done.
-    Delta compression using up to 3 threads.
-    Compressing objects: 100% (2/2), done.
-    Writing objects: 100% (2/2), 268 bytes, done.
-    Total 2 (delta 0), reused 0 (delta 0)
-    To git@github.com:cpetreanu/repo.git
-       69a84f6..5361523  documentos -> documentos
        
     $ touch Juliana.txt
-    
     $ git add Juliana.txt 
-    
     $ git commit -m "Add: Juliana.txt"
-    [documentos cc0126b] Add: Juliana.txt
-     0 files changed, 0 insertions(+), 0 deletions(-)
-     create mode 100644 Juliana.txt
-     
     $ git push origin documentos
-    Counting objects: 3, done.
-    Delta compression using up to 3 threads.
-    Compressing objects: 100% (2/2), done.
-    Writing objects: 100% (2/2), 251 bytes, done.
-    Total 2 (delta 1), reused 0 (delta 0)
-    To git@github.com:cpetreanu/repo.git
-       5361523..cc0126b  documentos -> documentos
 
 Vá no Github e verifique os 3 commits que você fez, em que estão os arquivos que foram criados e enviados por você.
 
@@ -361,22 +409,6 @@ Bom, como todo bom leitor você não pulou o tópico anterior, e me sugere:
 Muito bem! Concordo que é uma possibilidade. Maaass.. e se cada um desses arquivos ocupa por volta de 400 mb em disco. São tipo um mega textão, tipo um log de msn dessa mulherada?!!
 
 E aí? O revert resolve?
-
-Caso você não saiba, fique sabendo: tudo que está no histórico é mantido. Imagine que toda vez que alguem for de alguma forma acessar, ou fazer download, do seu projeto, ele tenha que pegar meros 800 mb a mais, desnecessários.
-
-O que você acha disso?
-
-É por isso que nesses casos, em especial quando lidamos com a presença de históricos indesejados com:
-
-* Uma legião de arquivos
-
-E / ou:
-
-* Arquivos __colossus_
-
-Devemos alterar o histórico, para remover presenças indesejaveis em nossos diretórios do projeto.
-
-E você verá agora como!
 
 __Retomando...__
 
@@ -451,10 +483,6 @@ Ops!! Não funcionou? O que houve aí?!
 
 Parece pra mim que você está recebendo um alerta.. E pelo visto é porque estamos pra alterar o histórico.
 
-# Importate!!!
-
-__Em situações de trabalho apenas faça o seguinte passo, e somente apenas se você tiver absoluta certeza, sem qualquer sombra de dúvidas e de preferência com alinhamento estrelar favorável.__
-
 Force seu push, ignorando o aviso:
 
     $ git push --force origin documentos
@@ -481,9 +509,17 @@ Beleza? Vamos ao próximo exemplo então:
 
 #### Caso B: Exemplo realista
 
+Você está desenvolvendo em sua branch, quando por algum motivo acidentalmente "inesperado" você faz um merge dela com, digamos.., a gh-pages. E despercebido ainda fez um PUSH!
+
+Convenhamos, o seu projeto não tem nenhuma relação com ela, e de nada vai servir tê-la aí. Ah sim, você não pode remover sua branch (e claro que não vai adiantar), e muito menos reverter seus commit, pois se a massa de arquivos descarregados em sua máquina foi enorme imagina como está o histórico no projeto do Github! 
+
+Vamos causar um acidente?
+
+Entre na master, adicione o projeto objectos/gh-pages nas conexões remotas e faça "aquele" merge.
+
+
+
 __Resumindo, você entrou em um commit - de preferência o último válido - e sobrescreveu ele sobre a branch "corrompida". Por fim, realizarou um ``push --force`` para a origem, revertendo todo o histórico para o estado desse commit.__
-
-
 
 ### 3. O git reset
 
@@ -535,135 +571,17 @@ Seu fork estará agora idêntico a úĺtima versão do projeto
 
 1. Pronto, você acaba de desfazer os comandos errados usando uma das formas mais árduas (tirando os possíveis erros nos comandos citados nas outras seções!)
 
+### Finalizando
+
+Obrigado aos meus leitores pela paciência e espero que tenham com este trabalho aprendido coisas novas, mas principalmente úteis no dia-a-dia de cada um.
+
+Caso não precisem mais, não se esqueçam de remover os arquivos, branchs, forks criados aqui para aprendizado.
+
 <div id="referencias"> </div>
 
 ### Referências<div id="referencias"> </div>
 
 [objectos-dojo :: Tutorial gh-pages][1]
-
-Crie os seguintes arquivos:
-
-<div class="alert alert-info"><p><b>Observação:</b> Nos comandos abaixo, ao usar cat &gt;&gt; &lt;arquivo&gt;, é concatenado um texto por input (stdin) ao &lt;arquivo&gt;, e ele é fechado usando ^D (que no teclado, significa ctrl pressionado e 'd'). Use copiar e colar no terminal para agilizar as coisas.</p></div>
-
-* TesteDeBuscarFuncionario.java
-
-      $ cat >> TesteDeBuscarFuncionario.java
-      /*
-      * Copyright 2012 Objectos, Fábrica de Software LTDA.
-      *
-      * Licensed under the Apache License, Version 2.0 (the "License"); you may not
-      * use this file except in compliance with the License. You may obtain a copy of
-      * the License at
-      *
-      * http://www.apache.org/licenses/LICENSE-2.0
-      *
-      * Unless required by applicable law or agreed to in writing, software
-      * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-      * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-      * License for the specific language governing permissions and limitations under
-      * the License.
-      */
-      @Test
-      @Guice(modules = { ModuloDeTesteObjectosDojo.class })
-      public class TesteDeBuscarFuncionario {
-      
-        @Inject
-        private BuscarFuncionario buscarFuncionario;
-      
-        @Inject
-        private DBUnit dbUnit;
-      
-        public void prepararDBUnit() {
-          dbUnit.loadDefaultDataSet();
-        }
-      
-        public void busca_por_id() {
-          Funcionario res = buscarFuncionario.porId(3);
-      
-          assertThat(res.getId(), equalTo(3));
-          assertThat(res.getMatricula(), equalTo("T0033000"));
-          assertThat(res.getNome(), equalTo("Briann Adams"));
-          assertThat(res.getDataNascimento(), equalTo(new LocalDate(1980, 6, 01)));
-          assertThat(res.getDataAdmissao(), equalTo(new DateTime(2004, 12, 10, 9, 0)));
-          assertThat(res.getDataDemissao(), equalTo(new DateTime(2012, 1, 3, 12, 30)));
-        }
-      
-      }
-
-* BuscarFuncionario.java
-
-      $ cat >> BuscarFuncionario.java
-      /*
-      * Copyright 2012 Objectos, Fábrica de Software LTDA.
-      *
-      * Licensed under the Apache License, Version 2.0 (the "License"); you may not
-      * use this file except in compliance with the License. You may obtain a copy of
-      * the License at
-      *
-      * http://www.apache.org/licenses/LICENSE-2.0
-      *
-      * Unless required by applicable law or agreed to in writing, software
-      * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-      * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-      * License for the specific language governing permissions and limitations under
-      * the License.
-      */
-      @ImplementedBy(BuscarFuncionarioGuice.class)
-      public interface BuscarFuncionario {
-      
-        Funcionario porId(int id);
-      
-      }
-
-* BuscarFuncionarioGuice.java
-
-      $ cat >> BuscarFuncionarioGuice.java
-      /*
-       * Copyright 2012 Objectos, Fábrica de Software LTDA.
-       *
-       * Licensed under the Apache License, Version 2.0 (the "License"); you may not
-       * use this file except in compliance with the License. You may obtain a copy of
-       * the License at
-       *
-       * http://www.apache.org/licenses/LICENSE-2.0
-       *
-       * Unless required by applicable law or agreed to in writing, software
-       * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-       * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-       * License for the specific language governing permissions and limitations under
-       * the License.
-       */
-      class BuscarFuncionarioGuice implements BuscarFuncionario {
-      
-        private final Provider<NativeSql> sqlProvider;
-      
-        @Inject
-        public BuscarFuncionarioGuice(Provider<NativeSql> sqlProvider) {
-          this.sqlProvider = sqlProvider;
-        }
-      
-        @Override
-        public Funcionario porId(int id) {
-          return newSelect()
-      
-              .add("where FUNCIONARIO.ID = ?").param(id)
-      
-              .single();
-        }
-        
-        private NativeSql newSelect() {
-          return sqlProvider.get()
-      
-              .add("select *")
-              .add("from DATABASE.FUNCIONARIO as FUNCIONARIO")
-      
-              .add("join DATABASE.SUPERIOR as SUPERIOR")
-              .add("from FUNCIONARIO.SUPERIOR_ID as SUPERIOR.ID")
-      
-              .andLoadWith(new FuncionarioLoader());
-        }
-      
-      }
 
 [id]: /path/to/img.jpg "Admin"
 [id]: /path/to/img.jpg "Delete this repositoy"

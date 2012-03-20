@@ -26,6 +26,64 @@ Não, cabe a você arrumar isso! E eu estou aqui para guiá-lo na resolução de
 
 Se você se consegue marcar uma das opções abaixo, está no lugar certo!
 
+<table class="table table-striped">
+ <tr>
+   <td class="tac col2em">
+    <input type="checkbox" />
+   </td>
+   <td>
+    Fiz várias alterações erradas em um commit
+   </td>
+   <td>
+    <a href="#revert">help!</a>
+   </td>
+ </tr>
+ <tr>
+   <td class="tac col2em">
+    <input type="checkbox" />
+   </td>
+   <td>
+    Mandei um push de uma feature pro lugar errado
+   </td>
+   <td>
+    <a href="#outros">help!</a>
+   </td>
+ </tr>
+ <tr>
+   <td class="tac col2em">
+    <input type="checkbox" />
+   </td>
+   <td>
+    Fiz um merge com uma branch totalmente diferente da que estou
+   </td>
+   <td>
+    <a href="#outros">help!</a>
+   </td>
+ </tr>
+ <tr>
+   <td class="tac col2em">
+    <input type="checkbox" />
+   </td>
+   <td>
+    Removi arquivos muito grandes que haviam em meu projeto, mas eles aparecem em commits anteriores
+   </td>
+   <td>
+    <a href="#outros">help!</a>
+   </td>
+ </tr>
+ <tr>
+   <td class="tac col2em">
+    <input type="checkbox" />
+   </td>
+   <td>
+    Fiz muitas alterações erradas em vários commits
+   </td>
+   <td>
+    <a href="#outros">help!</a>
+   </td>
+ </tr>
+</table>
+
 ### 2. Introdução
 
 Entenda, as formas de solucionar esse problema são diversas e possuem características próprias, mas é importante fazer uma breve explicação delas para que fique claro quais são adequadas a qual situação.
@@ -60,15 +118,17 @@ __Por apagar histórico, nas situações de trabalho apenas faça o ``push --for
 
 * E a solução menos recomendada, mas mais prática é refazer a fork do projeto e recuperar os backups. É mantido o histórico do projeto original e os backups serão adicionados em um ou mais commits novos.
 
-### 3. Montando os cenários
+<div id="revert"> </div>
 
-#### 3.1 Antes de começar
+#### Antes de começar
 
 * Faça um novo repositório chamado __repo__ no Github;
 
+<p></p>
+
 * Coloque-o diretório /tmp/repo.
 
-#### 3.2 Criando o cenário_alfa
+### 3. Cenário alfa
 
 A partir da master crie uma branch chamada __cenario__.
 
@@ -350,7 +410,9 @@ O VIM será aberto. Feche-o.
 
 __Você selecionou um ou mais commits em sequência, e a partir deles gerou um novo capaz de selecionar e reverter as atualizações dos anteriores e o enviou à origem.__
 
-### 5. Próximo cenário
+<div id="outros"> </div>
+
+### 5. Cenário beta
 
 Entre na branch __cenario_procedimento_de_checkout__ e execute os comandos ``git remote`` e ``git pull gh-pages`` abaixo. Ah, e não se esqueça de fazer. um push para origin disso!
 
@@ -503,13 +565,13 @@ Nada né? Perfeito!
 
 #### 7.1 Resumo
 
-__Nesse caso, você apontou o commit HEAD de sua branch para o último commit válido antes do merge. Pode-se concluir que trata-se uma solução análoga à de checkout.__
+__Nesse caso, você apontou o commit HEAD de sua branch para o último commit válido antes do merge, e mandou essa alteraçõa de histórico para a origem remota. Pode-se concluir que trata-se uma solução análoga à de checkout.__
 
 ### 8. O git rebase -i
 
 Entre na sua branch __cenario_rebase__.
 
-    $ git checkout cenario_rebase
+    
 
 Novamente estaremos no mesmo cenário. Dê um __ls -l__ e confira se quiser!
 
@@ -519,9 +581,44 @@ Temos o cenário e o commit 426bca1b80fd19e22d5f3fb31f49b3f15698142f. Vamos usar
 
 Note os vários commits vindos de gh-pages. Aqui podemos modificar aqueles que serão mantidos ou removidos do histórico, __remontando-o__.
 
-Apague todos os commits menos o 426bca1b80fd19e22d5f3fb31f49b3f15698142f
+Apague todos os commits menos um (não importa qual seja). Salve e feche o arquivo. Como podemos ver, o rebase parou por causa de conflitos de path. Faça um git status.
+
+    $ git checkout cenario_rebase
+    error: could not apply b82ad6a... Finalizado objetos falsos
+    hint: after resolving the conflicts, mark the corrected paths
+    hint: with 'git add <paths>' and run 'git rebase --continue'
+    Could not apply b82ad6a... Finalizado objetos falsos
+    
+    $ git status
+    # Not currently on any branch.
+    # Unmerged paths:
+    #   (use "git reset HEAD <file>..." to unstage)
+    #   (use "git add/rm <file>..." as appropriate to mark resolution)
+    #
+    #	deleted by us:      procedimento/crud-entidade/00.2-criando-objetos-falsos.md
+    #
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+Existe um path incorreto/inexistente para o arquivo mostrado. Para resolver isso vamos remover essa atualização, e por fim dar continuidade ao rebase.
+
+    $ git checkout -f
+    
+    $ git status
+    # Not currently on any branch.
+    nothing to commit (working directory clean)
+    
+    $ git rebase --continue
+    Successfully rebased and updated refs/heads/cenario_rebase.
+
+Faça um ``push --force`` e vejá no Github os resultados. E o log também só pra ter certeza!
+
+    $ git push origin cenario_rebase
+
+Pronto! Trabalho realizado com sucesso!
 
 #### 8.1 Resumo
+
+__Assim, você conseguiu reverter o merge (e histórico) ao remover todos os commits (menos 1), entre o "first commit" e o HEAD da branch com o merge com gh-pages. Na sequência removeu as alterações desse commit, fazendo com que o único remanescente fosse o nosso querido 426bca1b80fd19e22d5f3fb31f49b3f15698142f.__
 
 ### 9. Refazer a fork?
 

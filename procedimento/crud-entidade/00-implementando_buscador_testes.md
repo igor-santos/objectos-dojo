@@ -5,7 +5,8 @@ author: "Caio C. Petreanu"
 user: "cpetreanu"
 date: 2012-03-01
 partof: procedimento-crud-entidade
-num: 1
+num: 3
+outof: 3
 ---
 
 ## Introdução<a id="topo"> </a>

@@ -15,25 +15,13 @@
  */
 package br.com.objectos.dojo.cpetreanu;
 
-import java.util.Iterator;
-import java.util.List;
-
-import com.google.inject.ImplementedBy;
-
 /**
  * @author caio.petreanu@objectos.com.br (Caio Petreanu)
  */
-@ImplementedBy(BuscarFuncionarioGuice.class)
-public interface BuscarFuncionario {
+public interface Diretor {
 
-  Funcionario porId(int id);
+  int getId();
 
-  Funcionario porMatricula(String matricula);
-
-  List<Funcionario> porSuperior(Superior superior);
-
-  Iterator<Funcionario> iterarPorFuncionario(Superior superior);
-
-  Funcionario porDiretor(Diretor diretor);
+  String getNome();
 
 }

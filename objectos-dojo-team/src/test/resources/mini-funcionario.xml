@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dataset>
-
-    <!-- Funcionário -->
-    <DATABASE.FUNCIONARIO ID="1" MATRICULA="F0050000" NOME="Renato Augusto Machado" DATA_NASCIMENTO="1970-01-20" ADMISSAO="2001-02-06 18:30"                             />
-    <DATABASE.FUNCIONARIO ID="2" MATRICULA="F0050001" NOME="Priscilla Cardoso"      DATA_NASCIMENTO="1989-05-29" ADMISSAO="2002-02-06 18:30" DEMISSAO="2005-09-16 10:20" />
-    <DATABASE.FUNCIONARIO ID="3" MATRICULA="T0033000" NOME="Briann Adams"           DATA_NASCIMENTO="1980-06-01" ADMISSAO="2004-12-10 09:00" DEMISSAO="2012-01-03 12:30" />
-
-</dataset>

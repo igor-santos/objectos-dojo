@@ -18,21 +18,45 @@ package br.com.objectos.dojo.cpetreanu;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
+import br.com.objectos.comuns.relational.jdbc.Insertable;
+
 /**
  * @author caio.petreanu@objectos.com.br (Caio Petreanu)
  */
-public interface Funcionario {
+public interface Funcionario extends Insertable {
+
+  interface Construtor extends br.com.objectos.comuns.base.Construtor<Funcionario> {
+
+    String getNome();
+
+    String getMatricula();
+
+    LocalDate getDataNascimento();
+
+    DateTime getDataAdmissao();
+
+    DateTime getDataDemissao();
+
+    Superior getSuperior();
+
+    Diretor getDiretor();
+
+  }
 
   int getId();
 
-  String getMatricula();
-
   String getNome();
+
+  String getMatricula();
 
   LocalDate getDataNascimento();
 
   DateTime getDataAdmissao();
 
   DateTime getDataDemissao();
+
+  Superior getSuperior();
+
+  Diretor getDiretor();
 
 }

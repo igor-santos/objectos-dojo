@@ -1,0 +1,8 @@
+Inserindo a primeira linha no arquivo
+Inserindo a segunda linha
+Inserindo a terceira linha
+
+1. config a-
+2. config b 
+3. config c
+4. config d+

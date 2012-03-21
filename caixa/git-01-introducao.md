@@ -232,4 +232,3 @@ projeto.
 ## Referências 
 
 * [Help do Github](http://help.github.com/linux-set-up-git/)
-

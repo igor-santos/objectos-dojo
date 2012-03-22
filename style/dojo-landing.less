@@ -1,37 +1,81 @@
 body.landing {
+	background: url('../../img/noise.png');
+
 	#hd {
+		background: @white;
+		margin-bottom: 50px;
+	}
+	
+	.wellcome {
 		background: @black;
-		color: @grayLight;
-		
-		margin-bottom: 40px;
-	}
-	
-	#hd-inner {
-		border: 0;
-	}
-	
-	.hd {
+		padding: 40px 0;
+				
 		h1, h2 {
-			margin: 0;
+			font-weight: normal;
 		}
 		
 		h1 {
-			color: @gray;
+			.sans-serif(4);
+			color: @white;
+			margin-bottom: 20px;
 		}
 		
 		h2 {
-			color: @grayLighter;
+			.sans-serif(2);
+			color: @grayLight;
+		}
+
+		p {
+			color: @white;
+			.sans-serif(1.4);
+		}
+
+		.mkt {
+			padding-left: 60px;
+		}
+		
+		.share {
+			padding-top: 20px;
+			padding-right: 60px;
+			
+			ul.links {
+				.clearfix();
+				
+				li {
+					float: left;
+					margin-right: 20px;
+				}
+			}
+		}
+	}
+	
+	.hero {
+		.box-shadow();
+		background: @white url('../../img/dojo-board.jpg') no-repeat left top;
+		height: 540px;
+		
+		p, li {
+			.sans-serif(1.2);
+		}
+		
+		.text {
+			padding: 20px 20px 0 0;
+		}
+	}
+	
+	.contribute {
+		h1, h2 {
+			.serif(4);
+			color: @black;
+			font-weight: normal;
 		}
 	}
 
-	div.landing {
-	
+	.landing {
 		h1, h2 {
+			.serif(4);
 			color: @black;
-			font-family: 'ratio', sans-serif;
-			font-size: @baseFontSize * 4;
-			font-weight: 300;
-			line-height: @baseLineHeight * 3;
+			font-weight: normal;
 		}
 		
 		h1 {
@@ -44,6 +88,11 @@ body.landing {
 		
 		hr {
 			margin: 40px 0;
+		}
+		
+		p, li {
+			.sans-serif(1.2);
+			.serif(1.8);
 		}
 	
 	}

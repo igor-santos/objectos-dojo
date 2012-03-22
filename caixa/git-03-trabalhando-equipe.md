@@ -8,7 +8,6 @@ tags:
 - aprendizes
 partof: git
 num: 3
-outof: 3
 ---
 
 ## Introdução
@@ -113,21 +112,12 @@ Deve ficar muito claro aqui o que foi simulado:
 4. Você recebeu (em sua branch master) as alterações do item anterior
 5. Você agora irá sincronizar o trabalho dos demais membros com o seu próprio
 
-Certo, volte para a branch **configuracoes\_conflituosas**. Um rebase será feito.
+Certo, volte para a branch **configuracoes\_conflituosas**. Um merge será feito.
 
-    $ git rebase master
-    First, rewinding head to replay your work on top of it...
-    Applying: alterando a segunda linha do arquivo conflitos.txt
-    Using index info to reconstruct a base tree...
-    Falling back to patching base and 3-way merge...
+    $ git merge master
     Auto-merging conflitos.txt
-    CONFLICT (content): Merge conflict in conflitos.txt
-    Failed to merge in the changes.
-    Patch failed at 0001 alterando a segunda linha do arquivo conflitos.txt
-
-    When you have resolved this problem run "git rebase --continue".
-    If you would prefer to skip this patch, instead run "git rebase --skip".
-    To restore the original branch and stop rebasing run "git rebase --abort".
+    CONFLICT (add/add): Merge conflict in conflitos.txt
+    Automatic merge failed; fix conflicts and then commit the result.
 
 Uh-oh. E agora?
 
@@ -170,31 +160,39 @@ conteúdo seja:
 
 Certo, depois que alteramos o arquivo o que deve ser feito?
 
-Execute agora o status:
+Execute agora o ``git add -i``:
 
-    $ git status
-    # Not currently on any branch.
-    # Unmerged paths:
-    #   (use "git reset HEAD <file>..." to unstage)
-    #   (use "git add/rm <file>..." as appropriate to mark resolution)
-    #
-    #	both modified:      conflitos.txt
-    # no changes added to commit (use "git add" and/or "git commit -a")
+     git add -i
+                staged     unstaged path
+       1:        +0/-0        +0/-0 conflitos.txt
+     
+     *** Commands ***
+       1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
+       5: [p]atch	  6: [d]iff	      7: [q]uit	      8: [h]elp
+     What now> 
 
-Observamos então que é necessário adicionar o arquivo, pra que ele seja marcado como resolvido, então, faça isso. 
+E escolha a opção ``2: [u]pdate`` para o arquivo conflitos.txt, conforme
 
-    $ git add conflitos.txt
+     *** Commands ***
+       1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
+       5: [p]atch	  6: [d]iff	      7: [q]uit	      8: [h]elp
+     What now> 2
+                staged     unstaged path
+       1:        +0/-0        +0/-0 [c]onflitos.txt
+     Update>> *
+     updated one path
+
+E use o `q` para sair.
+
+     *** Commands ***
+       1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
+       5: [p]atch	  6: [d]iff	      7: [q]uit	      8: [h]elp
+     What now> q
+     Bye.
+
+__Importante__: Faça também um commit desse passo com algo como "Resolvidos conflitos".
 
 E qual é o próximo passo?
-
-Você se recorda que quando executou o comando git rebase, no final do comando apareceram algumas opções, e entre elas a opção abaixo: 
-
-    When you have resolved this problem run "git rebase --continue".
-
-Portanto, agora que resolvemos o problema, vamos executar o comando acima.  
-
-    $ git rebase --continue
-    Applying: alterando a segunda linha do arquivo conflitos.txt
 
 Podemos ver que a nossa alteração do arquivo foi aplicada. Pra ter certeza mesmo, execute o comando abaixo: 
 
@@ -254,15 +252,10 @@ Em seguida, volte à branch master e altere o mesmo arquivo, mas ao invés da ú
     3. config c
     4. config d
 
-Volte agora para a branch de trabalho. Faça um rebase:
+Volte agora para a branch de trabalho. Faça um merge:
 
-    $ git checkout config_sem_conflitos
-    $ git rebase master
-    First, rewinding head to replay your work on top of it...
-    Applying: configuração MUITO importante
-    Using index info to reconstruct a base tree...
-    Falling back to patching base and 3-way merge...
-    Auto-merging objectos-dojo-mendo/config.txt
+    $ git merge config_sem_conflito
+    Already up-to-date.
 
 E se você verificar o conteúdo do arquivo:
 
@@ -288,7 +281,7 @@ E para terminar, sincronize seu trabalho com o GitHub.
 
 Com este kata você um pouco sobre os conflitos no Git, e você deve ter uma base mínima para:
 
-1. Identificar em quais situações conflitos podem ocorrer;
-2. Identificar em quais situações conflitos não ocorrem;
-3. Sincronizar branches de trabalho com a branch master através do rebase; e
-4. Resolver conflitos e continuar o processo do rebase.
+1. Identificar em quais situações conflitos podem ocorrer
+2. Identificar em quais situações conflitos não ocorrem
+3. Sincronizar branches de trabalho com a branch master através do merge e
+4. Resolver conflitos que podem ocorrer com o merge

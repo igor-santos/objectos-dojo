@@ -104,6 +104,29 @@ Agora execute novamente o comando git status:
 Podemos observar então que o arquivo config.txt foi adicionado ao controle de versão, e que existem mudanças a serem
 "comitadas".
 
+Existe também o comando ``git add -i``. Com ele você reberá um menu como esse:
+
+    *** Commands ***
+      1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
+      5: [p]atch	  6: [d]iff	  7: [q]uit	  8: [h]elp
+    What now> 
+               staged     unstaged path
+
+Com ele é mais interativo operações comuns do git como status, add e diff.
+
+É importante frisar que usar ele lhe dá maior controle do que será colocado no stage.
+
+Bom, veremos algumas funcionalidades dele ao longo dos artigos Git. No momento utilize a opção ``4: [a]dd untracked`` para ver o seguinte menu:
+
+    *** Commands ***
+      1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
+      5: [p]atch	  6: [d]iff	  7: [q]uit	  8: [h]elp
+    What now> 4
+      1: [c]onfig.txt
+    Add untracked>>  
+
+Selecione ``1: [c]onfig.txt`` ou `*` para adicionar o arquivo ao controle de versão. Por, fim, use o `q` para sair do menu.
+
 Vamos então executar o `commit`
 
     $ git commit -m "criado o arquivo config.txt"
@@ -171,9 +194,31 @@ Isso mesmo, verificar o status:
     #
     no changes added to commit (use "git add" and/or "git commit -a")
 
+Se preferir, use aqui o ``git add -i`` e verá no menu:
+
+               staged     unstaged path
+      1:    unchanged        +1/-0 config.txt
+    
+    *** Commands ***
+      1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
+      5: [p]atch	  6: [d]iff	      7: [q]uit	      8: [h]elp
+    What now> 
+
 Podemos observar que no status aparece que esse arquivo foi modificado, e então precisamos adicionar essa alteração: 
 
 $ git add config.txt 
+
+Ou, usando o ``git add -i``, selecione ``2: [u]pdate`` para:
+
+    *** Commands ***
+      1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
+      5: [p]atch	  6: [d]iff	      7: [q]uit	      8: [h]elp
+    What now> 2
+               staged     unstaged path
+      1:    unchanged        +1/-0 [c]onfig.txt
+    Update>> 
+
+E `1` ou `*` para mandar o config.txt para o sistema.
 
 Depois vamos executar o comando git status novamente: 
 
@@ -264,25 +309,27 @@ Volte então para a branch nova_funcionalidade:
     $ git checkout nova_funcionalidade
 
 Agora precisamos atualizar o fork do projeto (master) com a nova funcionalidade criada na branch `nova_funcionalidade`,
-pra isso vamos usar o comando rebase: 
+pra isso vamos usar o comando merge: 
 
-    $ git rebase master 
-    First, rewinding head to replay your work on top of it...
-    Applying: criado o arquivo config.txt
-    Applying: adicionada a primeira linha no arquivo config.txt
-    Applying: inserida a segunda linha no arquivo config.txt
-    Applying: inserida a terceira linha no arquivo config.txt
+    $ git merge master
+    Updating e78af0d..91ab9cd
+    Fast-forward
+     novafuncionalidade_usuário.txt |    3 +++
+     1 files changed, 3 insertions(+), 0 deletions(-)
+     create mode 100644 config.txt
 
-Agora se você verificar os arquivos contidos na branch `nova_funcionalidade`, vai ver que o a nova funcionalidade 
+O comando merge converte as mudanças feitas na branch, nesse caso a master, para a branch a qual que você está executando o comando. 
+
+Agora se você verificar os arquivos contidos na branch `nova_funcionalidade`, vai ver que a nova funcionalidade 
 inserida lá no projeto original pelo seu colega de equipe (o arquivo novafuncionalidade_usuário.txt) aparece na sua
-branch, pois usamos o comando rebase. 
+branch, pois usamos o comando master. 
 
 Agora então vá no Github, no fork do seu projeto, e veja se as atualizações da branch nova_funcionalidade (novo
 diretório criado objectos-dojo-seu usuário + o arquivo config.txt) estão na sua branch master. 
 
 Não? Porque?
 
-É necessário agora fazer um merge da branch nova_funcionalidade, com a sua branch master (fork do projeto). 
+É necessário agora fazer um merge de master com nova_funcionalidade, e um push dele para origin (a fork do projeto). 
 
 Vamos então voltar para a branch master:
 
@@ -292,7 +339,7 @@ E então vamos fazer o merge:
 
     $ git merge nova_funcionalidade
 
-E agora, por fim, vamos mandar essas alterações para a nossa branch master. 
+E agora, por fim, vamos mandar as atualizações da nossa branch master. 
 
     $ git push origin master
 
@@ -311,7 +358,7 @@ E agora vamos excluir remotamente:
     To git@github.com:hescarate/objectos-dojo.git
      - [deleted]         nova_funcionalidade
 
-Pronto, sua branch foi excluída. 
+Pronto, sua branch foi excluída!
 
 
 

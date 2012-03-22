@@ -377,7 +377,7 @@ O que, nesse caso são __e22f46c__ (vinda da cenario_revert e representada por 1
 
 Em caso de dúvida, cheque o log. Fica fácil ver que o commit anterior na branch em que estamos é o 1 (e22f46c3fb58bc2f382cdba5babd9b94fb300f29).
 
-Agora usamos a opção __-m__ para informar que o revert do merge deverá fazer com que voltem as alterações para o commit 1, proveniente da branch cenario_revert.
+Agora usamos a opção ``git revert <commit> -m <parent>`` para informar que o revert do merge deverá fazer com que voltem as alterações para o commit 1, proveniente da branch cenario_revert.
 
     $ git revert 37687b9de11e7f12dd0ba20f02ac90e219498b08 -m 1
 

@@ -7,7 +7,6 @@ date: 2012-03-12
 published: true 
 partof: faq-crud-entidade
 num: 2
-outof: 2
 ---
 
 ## Mini-Arquivos específicos

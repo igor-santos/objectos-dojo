@@ -134,6 +134,7 @@ Mini-arquivo
 		 ENDERECO="Rua Torre Azul, 345" 
 		 BAIRRO="Vila das Torres"
 		 CIDADE="São Paulo"
+	</dataset>
 
 Classe de teste
 

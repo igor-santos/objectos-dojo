@@ -1,6 +1,6 @@
 ---
 layout: post-alpha
-title: "Mini-Arquivos especifícos"
+title: "Mini-Arquivos Específicos"
 author: "Marcos Piazzolla"
 user: "MarcosPiazzolla"
 date: 2012-03-12
@@ -9,38 +9,47 @@ partof: faq-crud-entidade
 num: 2
 ---
 
-## Mini-Arquivos específicos
+##Introdução
 
 Algumas vezes ao criar testes de buscar/excluir percebemos que os dados de teste não são suficientes
-para que se possa testar o recurso de busca/exclusão que foi implementado, logo é preciso adicionar
-mais informações no mini-arquivo. Ao fazer isso alguns testes que utilizam o mini-arquivo alterado
-irão falhar por conta das alterações realizadas.
+ou não são razoáveis, um exemplo muito prático disso seria na criação de um teste que verificasse a 
+funcionalidade de um filtro de uma consulta SQL, mas infelizmente o único mini-arquivo existente para
+esta consulta possui apenas um registro, o que acabaria deixando o teste incompleto por conta da falta
+de dados a serem testados, com isso não temos nenhuma garantia de que o filtro funcionaria da maneira
+correta.
 
- Uma boa solução para resolver este tipo de problema seria criando um novo mini-arquivo e utilizar 
-este mini-arquivo em seu teste.
+Em casos como esse a solução seria criar um mini-arquivo específico, simplesmente por que, é inviável 
+confiar em um teste de um recurso como um filtro que possui pouquíssimos a serem testados e mais
+não há nenhum tipo de garantia da funcionalidade do recurso. 
 
-### Criando mini-arquivos
+### Crie o mini-arquivo
 
-Para criar um mini-arquivo basta criar um novo arquivo xml no diretório `src/test/resources/dbunit`, 
-nosso mini-arquivo será bem parecido com este :
+Para criar um mini-arquivo basta criar um  novo arquvo xml no diretório `src/test/resources/dbunit`, 
+lembrando que o mini-arquivo deverá ter um nome que indique seu uso, por exemplo:
 
-	<?xml version="1.0" encoding="UTF-8"?>
-	<dataset>
-		<PET_SHOP.PRODUTOS ID="1"
-		 CODIGO="PROD_A" 
-		 NOME="Shampoo" 
-		 FORNECEDOR="ABC" />
-		 
-		<PET_SHOP.PRODUTOS ID="2" 
-		CODIGO="PROD_B" 
-		NOME="Condicionador" 
-		FORNECEDOR="XYZ" />
-		
-		<PET_SHOP.PRODUTOS ID="3" 
-		CODIGO="PROD_C" 
-		NOME="Perfume" 
-		FORNECEDOR="XPT" />
-	</dataset>
+`mini-petshop-filtro-de-produto.xml` - indica que o mini-arquivo está sendo utilizado em uma
+consulta que tenha filtros;
+
+Após criar o mini-arquivo, basta adicionar dados no mesmo, lembrando que não é necessário adicionar inumeras
+linhas no novo mini-aquivo, adicione apenas o necessário para satisfazer o teste.
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <dataset>
+      <PET_SHOP.PRODUTOS ID="1"
+        CODIGO="PROD_A" 
+        NOME="Shampoo" 
+        FORNECEDOR="ABC" />
+      
+      <PET_SHOP.PRODUTOS ID="2" 
+        CODIGO="PROD_B" 
+        NOME="Condicionador" 
+        FORNECEDOR="XYZ" />
+
+      <PET_SHOP.PRODUTOS ID="3" 
+        CODIGO="PROD_C" 
+        NOME="Perfume" 
+        FORNECEDOR="XPT" />
+    </dataset>
 
 ### Criando a classe do mini-arquivo
 

@@ -77,7 +77,7 @@ Mas como esta String irá nos ajudar a fazer o nosso teste?
   
 Se observarmos a implementação do método __getNomeCompleto__ logo de cara percebemos uma chamada ao 
 método [format](http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#format%28java.lang.String,%20java.lang.Object...%29)
-da classe String, com ele é possível concatenar (juntar) duas Strings.
+da classe String, com ele é possível concatenar (juntar) Strings.
 
 Concluindo, toda vez que o método __getNomeCompleto()__ for chamado em nosso teste estamos testando
 indiretamente as propriedades `nome` e `sobrenome` de Pessoa que estão no BD. Depois de concluirmos o 

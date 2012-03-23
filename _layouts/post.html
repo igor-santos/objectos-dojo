@@ -3,9 +3,8 @@ layout: base
 styleClass: post
 ---
 <div class="container page">
-  <div class="row post">
-    <div class="offset1 span9">
-
+  <div class="post">
+    <div class="post-hd">
       <h1 class="title">{{ page.title }}</h1>
       <ul class="post-meta unstyled">
         {% if page.author %}
@@ -15,9 +14,10 @@ styleClass: post
         <li class="date">{{ page.date | date: "%d %B %Y" }}</li>
         {% endif %}
       </ul>
-
+    </div>
+    
+    <div class="post-bd">
       {{ content }}
-      
     </div>
   </div>
 </div>

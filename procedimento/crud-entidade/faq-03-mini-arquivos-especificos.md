@@ -18,9 +18,11 @@ esta consulta possui apenas um registro, o que acabaria deixando o teste incompl
 de dados, com isso não temos nenhuma garantia de que o filtro funcionaria da maneira
 correta.
 
-Em casos como esse a solução seria criar um mini-arquivo específico, simplesmente por que, é inviável 
-confiar em um teste de um recurso como um filtro que possui pouquíssimos dados a serem testados e mais,
-não há nenhum tipo de garantia da funcionalidade do recurso. 
+Uma alternativa para resolver este tipo de problema seria adicionar mais registros neste mini-arquivo
+e realizar o teste do filtro, isso seria o suficiente para garantir a funcionalidade do filtro, o
+problema em alterar mini-arquivos, está nos testes que utilizam o mini-arquivo e fazem asserts que
+verificam o número de registros na tabela, testes como este irão falhar após a alteração feita no mini-arquivo,
+para evitar que o desenvolvedor tenha de corrigir todos estes testes é mais fácil criar um mini-arquivo.
 
 ##Crie o mini-arquivo
 

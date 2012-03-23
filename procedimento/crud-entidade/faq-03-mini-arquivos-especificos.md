@@ -13,18 +13,18 @@ num: 2
 
 Algumas vezes ao criar testes de buscar/excluir percebemos que os dados de teste não são suficientes
 ou não são razoáveis, um exemplo muito prático disso seria na criação de um teste que verificasse a 
-funcionalidade de um filtro de uma consulta SQL, mas infelizmente o único mini-arquivo existente para
+funcionalidade de um filtro em uma consulta SQL, mas infelizmente o único mini-arquivo existente para
 esta consulta possui apenas um registro, o que acabaria deixando o teste incompleto por conta da falta
-de dados a serem testados, com isso não temos nenhuma garantia de que o filtro funcionaria da maneira
+de dados, com isso não temos nenhuma garantia de que o filtro funcionaria da maneira
 correta.
 
 Em casos como esse a solução seria criar um mini-arquivo específico, simplesmente por que, é inviável 
-confiar em um teste de um recurso como um filtro que possui pouquíssimos a serem testados e mais
+confiar em um teste de um recurso como um filtro que possui pouquíssimos dados a serem testados e mais,
 não há nenhum tipo de garantia da funcionalidade do recurso. 
 
-### Crie o mini-arquivo
+##Crie o mini-arquivo
 
-Para criar um mini-arquivo basta criar um  novo arquvo xml no diretório `src/test/resources/dbunit`, 
+Para criar um mini-arquivo basta criar um novo arquivo xml no diretório `src/test/resources/dbunit`, 
 lembrando que o mini-arquivo deverá ter um nome que indique seu uso, por exemplo:
 
 `mini-petshop-filtro-de-produto.xml` - indica que o mini-arquivo está sendo utilizado em uma
@@ -51,32 +51,37 @@ linhas no novo mini-aquivo, adicione apenas o necessário para satisfazer o test
         FORNECEDOR="XPT" />
     </dataset>
 
-### Criando a classe do mini-arquivo
+##Crie a classe do mini-arquivo
 
-Sempre que um mini-arquivo for criado é necessário criar uma classe que represente este 
-mini-arquivo, que devera ser análoga a esta:
+Sempre que um mini-arquivo for criado é necessário criar uma classe que represente o mesmo, pois quando 
+o mini-arquivo for chamado no teste a chamada será feita através da classe que representa o mini-arquivo.
+Lembrando que a classe do mini-arquivo deve se encontrar em `src/test/resources/pacote_de_mini_arquivos`,
+sua implementação será análoga ao seguinte bloco de código:
 
-    public class MiniPetShopModificadoXML extends DataSupplier {
-
-        @Override
-         public String getFilename() {
-             return "mini-pet-shop-modificado.xml";
-        }
-
+    public class MiniPetShopFiltroDeProdutoXML extends DataSupplier {
+    
+      @Override
+      public String getFilename() {
+        return "mini-petshop-filtro-de-produto.xml";
+      }
+      
     }
     
 Assim concluímos a criação de nosso mini-aquivo.
 
-### Chamando o novo mini-arquivo em seu teste
+##Referencie o novo mini-arquivo em seu teste
 
-Para chamar o mini-arquivo recém criado basta utilizar o DBUnit declarado em sua classe de teste:
+Para chamar o mini-arquivo em seu teste basta adicionar no método `prepararDBUnit()` em seu teste a chamada
+ao método `load()` e como parâmetro envie uma instância da classe que represente o mini-arquivo recém-criado.
 
     @Inject
     private DBUnit dbUnit;
 
     @BeforeClass
-    public void prepararClasse() {
-        dbUnit.loadDefaultDataSet();
-        dbUnit.load(new MiniPetShopModificadoXML());
+    public void prepararDBUnit() {
+      dbUnit.loadDefaultDataSet();
+      dbUnit.load(new MiniPetShopFiltroDeProdutoXML());
     }
-		
+
+Com isso o mini-arquivo anterior que não tinha um número suficiente de registros para o teste será sobrescrito
+pelo mini-arquivo criado anteriormente, possibilitanto que o teste do filtro seja realizado.

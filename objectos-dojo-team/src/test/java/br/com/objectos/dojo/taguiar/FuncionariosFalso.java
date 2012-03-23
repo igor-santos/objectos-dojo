@@ -22,6 +22,8 @@ import org.joda.time.LocalDate;
  */
 public class FuncionariosFalso {
   
+  private FuncionariosFalso() {}
+  
   public static final Funcionario FUNCIONARIO_1 = nova()
       .id(1)
       .nome("Alexandre")

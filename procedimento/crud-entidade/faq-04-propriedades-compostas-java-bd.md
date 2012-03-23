@@ -7,7 +7,6 @@ date: 2012-03-22
 published: true 
 partof: faq-crud-entidade
 num: 3
-outof: 3
 ---
 
 ##Introdução

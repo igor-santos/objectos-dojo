@@ -7,7 +7,6 @@ date: "2011-07-11"
 published: true
 partof: eclipse
 num: 0
-outof: 0
 ---
 
 ##Instalação 

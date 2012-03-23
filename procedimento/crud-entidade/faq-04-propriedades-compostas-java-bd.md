@@ -1,5 +1,5 @@
 ---
-layout: post-alpha
+layout: post
 title: "Implementado Buscadores: Propriedades Compostas"
 author: "Marcos Piazzolla"
 user: "MarcosPiazzolla"

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Instalação do Eclipse
+title: "Eclipse :: Instalação"
 author: "Hellen Carla Paixão Escarate"
 user: "hescarate"
 date: "2011-07-11"
@@ -10,7 +10,7 @@ num: 0
 outof: 0
 ---
 
-## Instalação do Eclipse 
+##Instalação 
 
 O Eclipse faz parte do KDO. Ele já deve estar instalado em sua máquina abra um terminal e verifique
 se o Eclipse está corretamente instalado.
@@ -28,7 +28,7 @@ como está abaixo:
      
 Como visto, o eclipse já está instalado.
 
-### Lançador GNOME
+##Lançador GNOME
 
 Você baixou o eclipse e descompactou, agora vamos fazer um lançador para que você possa sempre 
 acessar o Eclipse mais rapidamente sem precisar ficar procurando. Para facilitar a inicialização
@@ -50,7 +50,7 @@ outros ícones, de preferência deixe num lugar que esteja vago e solte.
 
 Pronto, agora você tem como acessar o ícone pelo desktop e pelo painel. 
 
-### Iniciando o Eclipse, Área de trabalho
+##Iniciando o Eclipse, Área de trabalho
 
 Quando você inicializa o Eclipse, ele pede o caminho onde você quer armazenar seus projetos. Por isso
 que criamos dentro de /kdo um diretório chamado projetos, para que todos os projetos que iremos
@@ -64,19 +64,23 @@ No caso da figura acima ele pergunta se eu quero usar o endereço como padrão e
 Para que você não tenha o trabalho de dar ok nessa tela toda vez que abrir o Eclipse, deixe essa 
 opção habilitada e clique em ok. 
 
+##Padronização
+
 Como já mencionado, a idéia do [KDO](http://rio.objectos.com.br/twiki/bin/view/Objectos/ObjectosKDO) 
 é a padronização. Assim, as preferências do Eclipse, em especial as de formatação de arquivos, também
 devem ser padronizadas.
 
 Faça o download dos arquivos listados abaixo: 
 
-+ [objectos-clean-up.xml] (http://rio.objectos.com.br/twiki/pub/Objectos/ObjectosKDOEclipse/objectos-clean-up.xml)
+[objectos-clean-up.xml] ({{site.baseurl}}/caixa/eclipse/objectos-clean-up.xml)
 
-+ [objectos-codetemplates.xml] (http://rio.objectos.com.br/twiki/pub/Objectos/ObjectosKDOEclipse/objectos-codetemplates.xml)
+[objectos-codetemplates.xml] ({{site.baseurl}}/caixa/eclipse/objectos-codetemplates.xml)
 
-+ [objectos-formatter.xml] (http://rio.objectos.com.br/twiki/pub/Objectos/ObjectosKDOEclipse/objectos-formatter.xml)
+[objectos-formatter.xml] ({{site.baseurl}}/caixa/eclipse/objectos-formatter.xml)
 
-+ [objectos-import.importorder] (http://rio.objectos.com.br/twiki/pub/Objectos/ObjectosKDOEclipse/objectos-import.importorder)
+[objectos-import.importorder] ({{site.baseurl}}/caixa/eclipse/objectos-import.importorder)
+
+[objectos-java-script-formatter.xml] ({{site.baseurl}}/caixa/eclipse/objectos-javascript-formatter.xml)
 
 (caso encontre dificuldade em baixar esses arquivos, clique com o botão direito no link, e escolha a
 opção **Salvar link como**).
@@ -102,7 +106,7 @@ verifique também se todas as opções do Save Actions estão habilitadas, confo
 
 Pronto, suas preferências, inclusive as de formatação de arquivos, devem estar padronizadas. 
 
-### Personalização de Autoria
+###Personalização de Autoria
 
 Se você ainda não sabe o que é, pesquise sobre [Accountability](http://pt.wikipedia.org/wiki/Accountability).
 Por isto, é necessário configurar a autoria dos arquivos Java.
@@ -126,7 +130,7 @@ Você deverá editar esse comentario substituindo pelo seu email da Objectos e s
 
 Clique em Ok nessa janela, retornará na janela de Code Templates, clique em `Apply` e `OK`. 
 
-### Assistente de imports estáticos 
+##Assistente de imports estáticos 
 
 Uma das novidades trazidas pelo Java 5 foi a possibilidade de realizar imports estáticos. No Eclipse é possível configurar o assistente para lembrar os seus imports estáticos favoritos.
 

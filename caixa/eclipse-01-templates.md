@@ -3,7 +3,7 @@ layout: post
 title: "Eclipse :: Templates"
 author: "Marcos Piazzolla"
 user: "MarcosPizzolla"
-date: "2012-23-03"
+date: "2012-03-23"
 published: true
 partof: eclipse
 num: 1

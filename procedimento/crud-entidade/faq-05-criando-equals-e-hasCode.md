@@ -16,9 +16,9 @@ outof: 4
 classes do tipo entidade que representem algo do mundo real, como por exemplo: pessoas, clientes,
 fornecedores, etc.
 
-Lembrando que toda classe do tipo entidade possui atributos e métodos, e dois métodos muito importantes
-que uma classe deve ter são: `equals()` e `hashCode()`, aqui mostrarei como utilizar o eclipse para
-criar estes métodos de forma mais legível e organizada.
+Lembrando que toda classe do tipo entidade possui atributos e métodos. E dois métodos muito importantes
+que uma classe deve ter são: `equals()` e `hashCode()`, aqui mostrarei como utilizar o eclipse para a
+criação destes métodos de forma mais legível e organizada.
 
 ##Criando equals e hashCode
 
@@ -49,3 +49,7 @@ implementação de ambos. Siga para `Source > generate hashCode and equals...`, 
 tela irá aparecer:
 
 ![hash-code-equals-eclipse] (http://i1245.photobucket.com/albums/gg582/img_repo/hashCode-equals/hasCode-equals.png)
+
+Para uma melhor distribuição do código marque as opções `Generate method comments`, `Use instanceof to compare types`
+e `Use blocks in 'if' statements`, marcando estas três opções que aparecem na imagem acima, a implementação
+do equals e do hashCode feita pelo eclipse estará bem mais organizada.

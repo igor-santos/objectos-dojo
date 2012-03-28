@@ -1,5 +1,0 @@
-o: config importante
-x: config ainda muito importante. MESMO!
-o: esta config não é tão importante assim...
-x: pensando bem... até que é!
-o: NÃO, NO e NÃO!!!

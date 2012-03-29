@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+		 
+	<BIBLIOTECA.LIVRO ID="2"
+	TITULO="Scjp Sun Certified Programmer For Java 6"
+	LOCALIZACAO="133" 
+	AUTOR_PRINCIPAL="Bates, Bert" 
+	PUBLICACAO="2008-01-01" />
+		
+	<BIBLIOTECA.LIVRO ID="1"
+	TITULO="Java - Como Programar"
+	LOCALIZACAO="123" 
+	AUTOR_PRINCIPAL="Deitel" 
+	PUBLICACAO="2010-01-01" />
+		
+</dataset>

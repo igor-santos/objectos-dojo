@@ -71,3 +71,17 @@ basta pressionar `ESC` para sair do modo texto e em seguida pressioanar `:w`
 ![salvar-w] (http://i1245.photobucket.com/albums/gg582/img_repo/vi/salvar-w.png)
 
 Como é mostrado acima o editor lança uma mensagem, indicando que as alterações foram gravadas no arquivo
+
+###Saindo do editor
+
+Chegou o momento de realizar um commit e enviar as informações ao GitHub para resolver os conflitos de 
+vez, antes disso devemos sair do editor através da função `q`, novamete basta pressionar `ESC` para sair do 
+modo texto caso esteja nele e pressionar `:q`, assim voltamos para o terminal.
+
+	 mpiazzolla@estacao003 ~/kdo/projetos/objectos-dojo $
+	 
+Em seguida basta adicionar o arquivo e realizar o commit:
+	
+	mpiazzolla@estacao003 ~/kdo/projetos/objectos-dojo $ git add config.txt
+	mpiazzolla@estacao003 ~/kdo/projetos/objectos-dojo $ git commit -m "Resolvido conflito em config.txt"
+	mpiazzolla@estacao003 ~/kdo/projetos/objectos-dojo $ git push origin mpiazzolla_conflitos

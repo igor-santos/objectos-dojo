@@ -5,7 +5,6 @@ author: "Caio Catanzaro Petreanu"
 published: true
 partof: git
 num: 4
-outof: 4
 ---
 
 ## Fiz um merge em uma branch que eu não deveria fazer, e agora?

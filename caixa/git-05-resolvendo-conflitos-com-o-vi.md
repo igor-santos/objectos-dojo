@@ -28,34 +28,46 @@ Primeiramente vamos abrir o arquivo `config.txt` utilizando o `VI`:
 
 	mpiazzolla@estacao003 ~/kdo/projetos/objectos-dojo $ vi config.txt
 	
-	<<<<<<< HEAD
-	A
-	B
-	C
-
-	=======
-	T
-	Z
-	Q
-	>>>>>>> mpiazzolla_conflitos_2
- 
+![editor-tela] (http://i1245.photobucket.com/albums/gg582/img_repo/vi/editor-tela.png)	
+	 
 A interface do `VI` é bem simples não há muito que comentar a seu respeito, seu forte está mesmo
 em suas funcionalidades que são muito úteis, mesmo o editor não disponibilizando uma interface gráfica 
 muito amigável, veremos isso utilizando o mesmo para resolução de conflitos. 
 
-Pois bem, como fora mostrado acima ao realizarmos um merge um conflito aconteceu, visualizamos o arquivo
-através do `VI`, em seguida resolvemos de vez o conflito. Agora devemos decidir o que está correto e 
-que deve ser removido, vamos supor que as informações que vem do `HEAD` estejam corretas e as informações
-abaixo devem ser removidas, para isso podemos navegar pelo documento e utilizar a função delete 
-pressionando duas vezes a tecla 'd'(`dd`), isso irá remover a linha onde o cursor está localizado, 
-repitada o processo para as outras linhas, remova também os sinais de `=` e a linha final com os
-sinais de `>>`
+###Selecionando linhas
 
-Pronto! resolvemos os conflitos, mas e agora como sair do editor para que o push possa ser realzado? Simples,
-basta utilizar outra das funções do editor, o `q` de quit (sair), lembrando que não podemos simplesmente
-sair do editor sem salvar as autualizações realizadas, por isso antes de sair utilize a função `w` write 
-para salvar as atualizações, em seguida podemos sair do editor e realizar o push para o GitHub.
+Como já sabemos quais linhas desejamos excluir, podemos alternar para o modo gráfico do editor pressioando
+`ESC` primeiramente para sair do modo texto caso esteja nele, em seguida pressione `Shift + v` com isso o
+editor passa para a seleção de linhas no modo gráfico, utilize as setas do teclado e selecione as linhas 
+a serem removidas, atente a imagem abaixo:
 
-Ao invés de efetuar um salvar: `w` e em seguida sair: `q`, podemos combinar estas funções chamando `wq`,
-assim salvamos nosso arquivo e voltamos para o terminal, com isso não é preciso ter que chamar uma 
-função por vez.
+![vi-shift-v] (http://i1245.photobucket.com/albums/gg582/img_repo/vi/shift-v.jpg)
+
+###Excluindo linhas
+
+Como já foi definido o que será removido, basta utilizar a operação de exclusão que é realizada através das
+teclas `d` ou `Delete`, fica a critério do desenvolvedor qual delas utilizar. Ao pressionarmos qualquer uma
+destas teclas o editor lança uma mensagem na parte inferior esquerda informando quantas linhas foram excluídas
+
+![linhas-excluidas] (http://i1245.photobucket.com/albums/gg582/img_repo/vi/linhas-excluidas.png)
+
+Ainda sobraram aas linhas indicando o `HEAD`, mova o cursor até esta linha e apague-a utilizando `dd`,
+como não temos nenhum texto selecionado temos de pressionar o `d` duas vezes.
+
+###Apaguei acidentamente uma linha que não devia, como corrgir isso?
+
+Em algum momento na correção do conflito pode ocorrer de o desenvolvedor acidentalmente apagar uma linha que
+não deveria ser removida, o `VI` não disponibiliza de recursos como `CTRL + Z` para desfazer ações, mas
+possui uma função muito prática que é o `undo`, que desfaz a última ação. Para utilizá-lo, basta pressionar 
+`ESC` para sair do modo texto e em seguida digite `:undo`, assim a última ação será desfeita.
+
+###Salvando as alterações no arquivo do conflito
+
+Existe um momento onde é preciso efetuar as alterações no arquivo do conflito, diferente dos outros editores 
+gráficos o `VI` não possui o tão conhecido `CTRL + S` para salvar as alterações no documento, para que seja 
+possível salvar as atualizações existe a função `w` que salva todas as alterações realizadas até o momento, 
+basta pressionar `ESC` para sair do modo texto e em seguida pressioanar `:w` 
+
+![salvar-w] (http://i1245.photobucket.com/albums/gg582/img_repo/vi/salvar-w.png)
+
+Como é mostrado acima o editor lança uma mensagem, indicando que as alterações foram gravadas no arquivo

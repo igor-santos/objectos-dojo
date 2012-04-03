@@ -11,7 +11,6 @@ num: 0
 ---
 
 ## Introdução
-
 O GIT (ou GitHub) é um sistema de controle de versão distribuído que tem o controle das alterações de
 um projeto, isto é, quando e o que foi alterado, além de poder voltar para a versão anterior e a vantagem
 de ter o código centralizado.<br>

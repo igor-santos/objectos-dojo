@@ -1,6 +1,6 @@
 ---
 layout: post-alpha
-title: "Git :: Adicionando arquivos"
+title: "Adicionando arquivos"
 author: "Hellen Carla Paixão Escarate"
 published: true
 tags:
@@ -10,27 +10,35 @@ partof: git
 num: 2
 ---
 
+# Introdução
+O principal objetivo do Github é lidar com os arquivos enviados pelos desenvolvedores de software.
+Nada adianta ter uma conta no Github e não saber adicionar arquivos, seja imagem, classes JAVA,
+arquivos HTML, entre outros.<br>
+Mostraremos os procedimentos para inserir um arquivo em um repositório do Github.
+
+
+## Praticando
 Depois de ter feito um fork do projeto, antes de adicionarmos arquivos, vamos começar criando uma branch. 
 
-Podemos entender o conceito de branch, como se traduz do inglês mesmo, algo como ramo ou braço do projeto. Mas nesse
-momento não vamos nos aprofundar nisso, esse assunto vai ser abordado mais a frente, apenas siga todos os passos
-corretamente e confie nas instruções, ok?!
+# Criando Branches
+Podemos entender o conceito de _branch_, como se traduz do inglês, algo como "ramo" ou "braço do projeto".
 
-Então vamos criar uma branch:
+Vamos criar uma _branch_:
 
     $ git branch nova_funcionalidade
 
-Muito bem, sua primeira branch está criada. É importante destacar que no nome da branch sempre deve ficar claro o que
+Muito bem, sua primeira _branch_ está criada. É importante destacar que no nome da _branch_ sempre deve ficar claro o que
 ela faz. 
 
-Agora, execute o comando git branch: 
+Agora, execute: 
 
     $ git branch
-    * master
-    nova_funcionalidade
-
+    
 Podemos ver que o comando acima lista todas as branches existentes, e a branch atual aparece com um asterisco. Isso
 significa que não estamos na branch que acabamos de criar, então vamos trocar de branch: 
+
+	* master
+    nova_funcionalidade
 
     $ git checkout nova_funcionalidade
 

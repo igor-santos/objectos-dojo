@@ -218,7 +218,7 @@ Se preferir, use aqui o ``git add -i`` e verá no menu:
 
 Podemos observar que no status aparece que esse arquivo foi modificado, e então precisamos adicionar essa alteração: 
 
-$ git add config.txt 
+	$ git add config.txt 
 
 Ou, usando o ``git add -i``, selecione ``2: [u]pdate`` depois aperte `Enter` para:
 

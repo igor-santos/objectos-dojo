@@ -1,6 +1,6 @@
 ---
 layout: post-alpha
-title: "Git :: Trabalhando em equipe"
+title: "Trabalhando em equipe"
 author: "Hellen Carla Paixão Escarate"
 published: true
 tags:
@@ -11,53 +11,33 @@ num: 3
 ---
 
 ## Introdução
+Como já mencionado anteriormente, quando trabalha-se em um projeto, é comum que um grupo de pessoas esteje participando. 
+Assim, você não será a única pessoa editando códigos, arquivos de configuração, scripts SQL, etc. Ainda que as boas práticas
+de desenvolvimento de software estimulem o _be decoupling_, por vezes, a situação de duas ou mais pessoas trabalharem no mesmo
+trecho de código ocorrerá. A princípio, pode parecer difícil, mas acredite, isto ocorrerá.
 
-Como já mencionado anteriormente, quando trabalha-se em um projeto "um pouco maior que aquele trabalho de faculdade", é
-normal que um grupo de pessoas esteja participando desse. Assim, você não será a única pessoa editando códigos,
-arquivos de configuração, scripts SQL, etc. Ainda que as boas práticas de desenvolvimento de software estimulem o "be
-decoupling", por vezes a situação de duas ou mais pessoas trabalharem no mesmo trecho de código ocorrerá. A princípio
-pode parecer difícil mas acredite: isto ocorrerá.
-
-São nesses momentos que os conflitos surgem. Conflitos no contexto de controle de versão, que fique claro isto; não
-aqueles conflitos entre países, nem aqueles com seu par afetivo (para isto cada um no seu quadrado, já dizia algum
-filósofo). Ainda que conflitos, de qualquer natureza, não sejam desejáveis, é preciso saber lidar com estes.
-
-Assim, o objetivo deste kata é simular um conflito, e o mais importante: aprender como resolvê-lo.
+São nesses momentos que os conflitos surgem.
 
 ## Conflitos
-Assume-se aqui que você esteja acompanhando a sequência de katas e que, portanto, já possui o fork do seu projeto
-importado na sua máquina. Caso contrário, volte aos katas e pratique-os.
+Assume-se aqui que você já possui o _for_k do seu projeto importado na sua máquina. Caso contrário, vá aos artigos anteriores 
+e pratique-os.
 
-Conflitos (em sistemas de controle de versão) surgem quando trabalhos feitos de maneira paralela encontram-se em um
-ponto futuro. Na verdade o correto é dizer **conlitos podem surgir**. Complicado? Por isso mesmo, o melhor a fazer é
-sentir os conflitos na prática. 
+Os conflitos (em sistemas de controle de versão) surgem quando os trabalhos são realizados paralelamente, isto é, por você
+e outro companheiro de equipe. Para tal situação, simularemos algum conflito para tornar este conceito mais prático.
 
 ### Uma tarefa: arquivos de configuração
-Suponha que foi dada a você a tarefa de configurar algum sistema ou serviço. Suponha também que este trabalho envolve
-editar arquivos de configuração em formato texto. Como você precisará realizar testes e para evitar que uma configuração
-incorreta interrompa o trabalho do restante de sua equipe, o melhor a fazer é realizar as alterações inicialmente em um
+Imagine que você recebeu a tarefa de configurar algum sistema ou serviço e que neste trabalho precise
+editar arquivos de configuração em formato texto. Para evitar que uma configuração incorreta interrompa o 
+trabalho do restante da equipe, o melhor a fazer é realizar as alterações inicialmente em um
 branch separada.
 
-Assim, o primeiro passo é criar uma nova branch **configuracoes\_conflituosas**. 
+Assim, o primeiro passo é criar uma nova _branch_ **configuracoes\_conflitos**. 
 
-(Caso não se lembre como criar uma branch, volte para o kata anterior).
-
-Antes de iniciar certifique-se de que esteja no fork do seu projeto:
+Antes de iniciar certifique-se de que esteje no _fork_ do seu projeto:
 
     cd ~/kdo/projetos/objectos-dojo
 
-Dentro do seu fork, certifique-se de que esteja dentro do seu módulo
-
-    cd objectos-dojo-login
-
-Substitua `login` apropriadamente.
-
-<div class="alert-message block-message info">
-O módulo deve ter sido criado no kata anterior.
-</div>
-
-O arquivo hipotético de configuração chamar-se-á (quem usa mesóclise nos dias de hoje?) `conflitos.txt` (agradável,
-não?). Terminada a diversão, é hora de trabalho. Suponha que a mega-configuração-master requer que três linhas sejam
+O arquivo terá o nome `conflitos.txt`. Terminada a diversão, é hora de trabalho. Suponha que a mega-configuração-master requer que três linhas sejam
 adicionadas no arquivo de configuração. Edite o arquivo `conflitos.txt` com o
 Vim e adicione o conteúdo.
 

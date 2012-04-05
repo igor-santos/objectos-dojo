@@ -46,10 +46,16 @@ Em seguida deve-se capturar os parâmetros que foram ajustados na QueryString no
 serão os dados a serem gravados no banco, para realizar esta tarefa será necessário a implementação 
 de uma inner class chamada Construtor.
 
+<div class="alert alert-warning">
+	Dica: Para cada tipo de form a ser implementado o método acima pode mudar, por exemplo, se o form 
+	for de atualização(Update) então o método se chamará put e será marcado com a anotação @Put. Ou
+	seja para cada operação CRUD utiliza-se um método HTTP para a operação específica. 
+</div>
+
 ###Implementando a inner class Construtor
 
-Todos os parâmetros que fornecemos na QueryString do teste estão contidos no objeto __Request__, que
-é parâmetro do método `post`, após realizarmos a conversão do __Request__, criamos uma classe que busca
+Todos os parâmetros que fornecemos na QueryString do teste estão contidos no objeto Request, que
+é parâmetro do método `post`, após realizarmos a conversão do Request, criamos uma classe que busca
 todos os parâmetros do QueryString e os adiciona em um objeto do tipo Aluno que será persistido 
 posteriormente, vamos a implementação da inner class Construtor:
 
@@ -79,9 +85,9 @@ posteriormente, vamos a implementação da inner class Construtor:
 		
 	}
 
-Observe que para acessar as propriedades que definimos no teste utilizamos o método `param` do __RequestWrapper__,
-podem existir casos onde é necessário extrair diferentes tipos de valores como double ou boolean por exemplo,
-para isso utilize os outros métodos da classe __RequestWrapper__.
+Observe que para acessar as propriedades que definimos no teste utilizamos o método `param` do RequestWrapper,
+podem existir casos onde será necessário extrair diferentes tipos de valores como double ou boolean por exemplo,
+para isso utilize os outros métodos da classe RequestWrapper.
 
 <div class="alert alert-warning">
 	Dica: Sempre que for preciso implementar a inner class Construtor, a mesma deve SEMPRE implementar
@@ -156,7 +162,7 @@ Chame o método `withCreateAction` logo abaixo de `newFormsFor(pojo)` e já defi
 	
 		.withCreateAction(new AlunoCreateAction());
 
-Um erro de compilação irá aparecer, isso por que a classe ainda não existe, basta criar-lá logo abaixo do método
+Um erro de compilação irá aparecer, isso por que a classe ainda não existe, basta cria-lá logo abaixo do método
 `post`, lembrando que a mesma deve implementar a interface `Form.CreateAction<Entidade>`, deve-se especificar
 no lugar de "Entidade" o tipo de entidade a ser persistida no banco, no nosso caso Aluno.
 
@@ -212,7 +218,7 @@ utilizado nos bancos de dados. Atente para sua implementação:
 
 ##De volta ao form - RedirectAction
 
-Agora que Aluno é um `Insertable`, podemos continuar a implementar o form e seguir para o próximo action que é
+Agora que Aluno é um __Insertable__, podemos continuar a implementar o form e seguir para o próximo action que é
 o RedirectAction. O procedimento para defini-lo é praticamente o mesmo que o de AlunoCreateAction. Ainda no 
 método `post` adicione a chamada ao método `withRedirectAction(new AlunoRedirectAction())`
 
@@ -233,7 +239,7 @@ onde "Entidade" é o tipo de entidade que estamos trabalhando, Aluno.
 
 Para realizar esta implementação precisamos de um objeto do tipo __Bricks__ que será responsável em capturar
 toda a URL base do sistema até o recurso que que deve ser redirecionado. Por isso defina logo acima da
-declaração de __Form__ a propriedade Bricks - __NomeDoProjetoBricks__, seu nome varia de acordo com o
+declaração de __Forms__ a propriedade Bricks - __NomeDoProjetoBricks__, seu nome varia de acordo com o
 projeto para facilitar sua declaração.
 
 	private FaculdadeBricks bricks;
@@ -255,8 +261,8 @@ Pronto, com isso após a criação de cada entidade do tipo Aluno no sistema, o 
 a página de detalhes da entidade.
 
 <div class="alert alert-warning"> 
-	Dica: Existem casos onde após o cadastro o sistema deve redirecionar o usuário para a mesma página que
-	está, pois não existe página de detalhes para a entidade. Em situações como esta, basta alterar o
+	Dica: Existem casos onde após o cadastro o sistema deve redirecionar o usuário para a página 
+	atual, pois não existe página de detalhes para a entidade. Em situações como esta, basta alterar o
 	rediectUrl para a página atual, em nosso caso basta remover o id de aluno no fim da URL.
 </div>
 

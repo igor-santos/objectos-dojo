@@ -12,227 +12,245 @@ num: 3
 
 ## Introdução
 Como já mencionado anteriormente, quando trabalha-se em um projeto, é comum que um grupo de pessoas esteje participando. 
-Assim, você não será a única pessoa editando códigos, arquivos de configuração, scripts SQL, etc. Ainda que as boas práticas
-de desenvolvimento de software estimulem o _be decoupling_, por vezes, a situação de duas ou mais pessoas trabalharem no mesmo
-trecho de código ocorrerá. A princípio, pode parecer difícil, mas acredite, isto ocorrerá.
+Assim, você não será a única pessoa editando códigos, arquivos de configuração, scripts SQL, etc. 
+A situação de duas ou mais pessoas trabalharem no mesmo trecho de código ocorrerá. A princípio, pode parecer difícil, mas acredite, isto ocorrerá.
 
 São nesses momentos que os conflitos surgem.
 
-## Conflitos
-Assume-se aqui que você já possui o _for_k do seu projeto importado na sua máquina. Caso contrário, vá aos artigos anteriores 
+##  Conflitos
+### Refatorando um arquivo
+Assume-se aqui que você já possui o _fork_ do seu projeto importado na sua máquina. Caso contrário, vá aos artigos anteriores 
 e pratique-os.
 
-Os conflitos (em sistemas de controle de versão) surgem quando os trabalhos são realizados paralelamente, isto é, por você
-e outro companheiro de equipe. Para tal situação, simularemos algum conflito para tornar este conceito mais prático.
+Imagine que você recebeu a tarefa de refatorar uma classe (em JAVA) chamada `ImovelJPA` onde
+o objetivo era alterar um determinado trecho de código de uma classe privada `Construtor` para
+uma classe privada `ConstrutorDeEndereco`.
 
-### Uma tarefa: arquivos de configuração
-Imagine que você recebeu a tarefa de configurar algum sistema ou serviço e que neste trabalho precise
-editar arquivos de configuração em formato texto. Para evitar que uma configuração incorreta interrompa o 
-trabalho do restante da equipe, o melhor a fazer é realizar as alterações inicialmente em um
-branch separada.
+Antes:
 
-Assim, o primeiro passo é criar uma nova _branch_ **configuracoes\_conflitos**. 
+	public class ImovelJPA implements Imovel {
+	
+	  // Construtores e métodos omitidos
+	 
+	  private class Construtor implements Propriedades {
+		
+	    // Métodos omitidos
+	  
+	  }
+	
+	}
 
-Antes de iniciar certifique-se de que esteje no _fork_ do seu projeto:
+Depois:
+	
+	public class ImovelJPA implements Imovel {
+	 
+	  // Construtores e métodos omitidos
+	 
+	  private class ConstrutorDeEndereco implements Endereco.Construtor {
+		
+		  // Métodos omitidos
+	  
+	  }
+	
+	}    
+ 
+Como você já deve saber, devemos realizar as alterações inicialmente em uma _branch_ separada.
+
+Assim, o primeiro passo é criar uma nova _branch_ **refatorar\_imovel**. 
+
+Antes de iniciar certifique-se de estar no diretório do projeto correto. Por exemplo:
 
     cd ~/kdo/projetos/objectos-dojo
 
-O arquivo terá o nome `conflitos.txt`. Terminada a diversão, é hora de trabalho. Suponha que a mega-configuração-master requer que três linhas sejam
-adicionadas no arquivo de configuração. Edite o arquivo `conflitos.txt` com o
-Vim e adicione o conteúdo.
+Neste momento você deduz que há a necessidade de fazer uma alteração na _interface_ `Imovel` no qual
+se encontra com a estrutura a seguir:
 
-    o: config importante
-    o: config mais importante ainda
-    o: esta config não é tão importante assim...
+	public interface Imovel {
+	
+	  interface Propriedades {
+	
+	    String getEndereco();
+	
+	    String getNumero();
+	
+	    String getComplemento();
+	
+	    String getCidade();
+	
+	    State getEstado();
+	
+	    String getCep();
+	
+	  }
+	
+	  interface Construtor extends br.com.objectos.comuns.base.Construtor<Imovel>, Propriedades {
+	
+	    Cliente getCliente();
+	
+	    String getHash();
+	
+	  }
+	  
+	  // Demais métodos omitidos	
+	
+	}
 
-Satisfeito com seu trabalho, você sincroniza suas alterações com seu repositório Git local através de um commit. 
+A alteração seria justamente a _interface_ `Propriedades`. Ok, então iremos alterar.
 
-<div class="alert-message block-message info">
-Novamente, caso não se lembre como fazer um <strong>commit</strong> volte aos katas anteriores e pratique-os.
-</div>
+    public interface Imovel {
 
-### Be open: receba alterações de sua equipe 
-Realizados todos os testes e com confiança de que as novas configurações não irão interromper o trabalho de ninguém da sua
-equipe, você prepara-se então para disponibilizar seu trabalho.
+	  interface Construtor extends br.com.objectos.comuns.base.Construtor<Imovel>, Endereco {
+	
+	    Cliente getCliente();
+	
+        String getHash();
+	
+	  }
+	
+	  // Demais métodos omitidos	
+	
+    }
 
-    git checkout master
+Satisfeito com seu trabalho, você sincroniza suas alterações com seu repositório Git através de um `add`, `commit` e `push`. 
 
-Sua ideia agora é, antes de disponibilizar seu trabalho, receber o trabalho feito por outros membros da equipe para que
-o seu próprio fique corretamente sincronizado.
+### Recebendo as alterações de sua equipe 
+Com as alterações realizadas, um membro da equipe notou que a sua alteração estava errada, isto é, a interface `Propriedades`
+não deveria ser apaga, ela não faz parte do escopo do Endereco, é uma outra funcionalidade que deve ser mantida (não 
+entraremos em detalhes nesta funcionalidade). Logo, o outro membro da equipe faz as alterações necessárias neste arquivo.
 
-Mas nem tudo são flores.
+No dia seguinte, você retorna ao trabalho e "traz" as atualizações do projeto (a partir da _branch master_).
 
-Neste meio tempo, no entanto, o gerente de projetos um tanto quanto atrapalhado, passou a mesma tarefa para outro
-integrante da sua equipe. Ou alguém da sua equipe, impaciente com sua demora (isto nunca acontece), resolveu realizar
-ele mesmo as alterações. Por motivos didáticos, você mesmo simulará isto. 
+Até agora foi realizado os seguintes passos:
 
-Certifique-se novamente que esteja na branch master:
+1. Você criou uma _branch_ de trabalho `refatorar_imovel`
+2. Você refatorou
+3. Outra pessoa da sua equipe editou e adicionou o arquivo a _branch master_
 
-    git checkout master
+Você agora irá sincronizar o trabalho dos demais membros com o seu próprio:
 
-Verifique que, nesta branch, suas alterações não existem:
+	$ git checkout refatorar_imovel
+	$ git fetch origin
+	$ git merge origin/master
 
-    cat conflitos.txt
+O resultado será algo como
 
-Edite novamente o arquivo e adicione as configurações. Porém, como as alterações estão sendo simuladas para que tenham
-sido feitas por outra pessoa, o conteúdo é um pouco diferente:
-
-    o: config importante
-    x: config ainda muito importante. MESMO!
-    o: esta config não é tão importante assim...
-
-Depois de alterado o arquivo, não esqueça de salvar (se você tiver alguma dificuldade consulte o tutorial sobre o VIM),
-adicionar o arquivo e fazer o commit.
-
-Deve ficar muito claro aqui o que foi simulado:
-
-1. Criou-se um branch de trabalho `configuracoes_conflituosas`
-2. Você codificou
-3. Outra pessoa da sua equipe editou e adicionou as mesmas configurações e 'enviou-as' para a branch master
-4. Você recebeu (em sua branch master) as alterações do item anterior
-5. Você agora irá sincronizar o trabalho dos demais membros com o seu próprio
-
-Certo, volte para a branch **configuracoes\_conflituosas**. Um merge será feito.
-
-    $ git merge master
-    Auto-merging conflitos.txt
-    CONFLICT (add/add): Merge conflict in conflitos.txt
+    Auto-merging src/main/java/br/com/projeto/Imovel.java
+    CONFLICT (add/add): Merge conflict in src/main/java/br/com/projeto/Imovel.java
     Automatic merge failed; fix conflicts and then commit the result.
 
-Uh-oh. E agora?
+Surge então o conflito.
 
-### Solucionando o conflito
-Certo, precisamos então aprender a solucionar o conflito.
+### Entendendo e solucionando o conflito
+Os conflitos foram ocasionados justamente pela inserção da interface `Propriedades` e `Endereco`.
+Em curtas palavras seria um mesmo arquivo com alterações diferentes por pessoas diferentes.
 
-O primeiro passo é editar o arquivo com o conflito:
- 
-    o: config importante
-    <<<<<<< HEAD
-    x: config ainda muito importante. MESMO!
-    =======
-    o: config mais importante ainda
-    >>>>>>> Paz: sem conflitos
-    o: esta config não é tão importante assim...
+Para solucionar estes conflitos, você deve ter certeza de quais alterações devem ser mantidas e excluídas, para isso, discuta com
+o seu companheiro de equipe o motivo das alterações dele, verifique quais alterações são realmente necessárias
+(a sua ou a dele). O que queremos dizer é que, não basta excluir algumas linhas para resolver o conflito, é 
+preciso entender os fatos para tomar qualquer decisão.
 
-Observe abaixo apenas o que está em conflito (a parte entre sinais de maior e menor), é o que vamos editar: 
+Neste caso, suponhamos que discutimos as causas e realmente nossas alterações na interface `Imovel` não eram
+necessárias, apenas em `ImovelJPA` era necessário.
 
-    <<<<<<< HEAD
-    x: config ainda muito importante. MESMO!
-    =======
-    o: config mais importante ainda
-    >>>>>>> Paz: sem conflitos
+A parte com os sinais de __menor__ `<<<` indica as alterações recebidas e qual a _branch_ de origem. 
+A parte com os sinais de __maior__ `>>>` indica seu trabalho original.
 
-A parte com os sinais de 'menor' `<<<` indica as alterações recebidas e qual a
-branch de origem. A parte com os sinais de 'maior' `>>>` indica seu trabalho
-original, ou a branch que está recebendo as alterações.
+O primeiro passo é editar o arquivo com o conflito (utilizando o Vim).
 
-Quando chegarmos nesse ponto, precisamos entender qual foi o erro, e o que gerou o conflito. Nesse caso, estamos
-trabalhando com texto e fica simples de resolver, mas logo mais vamos estar fazendo esse mesmo procedimento com código
-de produção, e não podemos simplesmente sair excluindo a linha de código que outra pessoa fez, e então vamos precisar
-ver com a outra pessoa o que deve ser feito, em alguns casos.  
+	public interface Imovel {
+	
+	  <<<<<<< HEAD
+	  interface Propriedades {
+	
+	    String getEndereco();
+	
+	    String getNumero();
+	
+	    String getComplemento();
+	
+	    String getCidade();
+	
+	    State getEstado();
+	
+	    String getCep();
+	
+	  }
+	  	
+	  interface Construtor extends br.com.objectos.comuns.base.Construtor<Imovel>, Propriedades {
+	  =======
+	  interface Construtor extends br.com.objectos.comuns.base.Construtor<Imovel>, Endereco {
+	  >>>>>>> Paz: sem conflitos
+	  
+	    Cliente getCliente();
+	
+	    String getHash();
+	
+	  }
+		  
+	  // Demais métodos omitidos	
+		
+	}
 
-Neste exemplo, vamos assumir que a versão correta final seja uma mistura das duas versões. Edite o arquivo para que
-conteúdo seja: 
 
-    o: config importante
-    o: config mais importante ainda. MESMO!
-    o: esta config não é tão importante assim...
+Como já discutimos o que deve ser mantido, manteremos os itens que se referem a interface `Propriedades`
+apagando nossa alteração e as linhas com os sinais de maior e menor.<br>
 
-Certo, depois que alteramos o arquivo o que deve ser feito?
+Nota: Para mais informações sobre __resolver conflitos com Vim__, acesse [aqui](http://dojo.objectos.com.br/caixa/git-05-resolvendo-conflitos-com-o-vi.html).
 
-Execute agora o ``git add -i``:
-
-     git add -i
-                staged     unstaged path
-       1:        +0/-0        +0/-0 conflitos.txt
-     
-     *** Commands ***
-       1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
-       5: [p]atch	  6: [d]iff	      7: [q]uit	      8: [h]elp
-     What now> 
-
-E escolha a opção ``2: [u]pdate`` para o arquivo conflitos.txt, conforme
-
-     *** Commands ***
-       1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
-       5: [p]atch	  6: [d]iff	      7: [q]uit	      8: [h]elp
-     What now> 2
-                staged     unstaged path
-       1:        +0/-0        +0/-0 [c]onflitos.txt
-     Update>> *
-     updated one path
-
-E use o `q` para sair.
-
-     *** Commands ***
-       1: [s]tatus	  2: [u]pdate	  3: [r]evert	  4: [a]dd untracked
-       5: [p]atch	  6: [d]iff	      7: [q]uit	      8: [h]elp
-     What now> q
-     Bye.
-
-__Importante__: Faça também um commit desse passo com algo como "Resolvidos conflitos".
-
-E qual é o próximo passo?
-
-Podemos ver que a nossa alteração do arquivo foi aplicada. Pra ter certeza mesmo, execute o comando abaixo: 
-
-    $ cat conflitos.txt
-    o: config importante
-    o: config mais importante ainda. MESMO!
-    o: esta config não é tão importante assim...
+Após sair do Vim, execute `add`, `commit` (com a mensagem sobre o conflito resolvido) e `push`.
 
 O conflito foi solucionado. Ou seja, edições em um mesmo trecho de um mesmo arquivo que originalmente haviam sido feitas
 em paralelo foram, agora, incorporadas. Você pode, assim, continuar com o processo:
 
     $ git checkout master
-    $ git merge configuracoes_conflituosas
+    $ git merge refatorar_imovel
     $ git push
 
 Pronto, suas alterações foram enviadas para o repositório remoto e (poderão) ser incorporadas ao fork principal
 (futuramente). É seguro agora remover a branch de trabalho:
 
-    $ git branch -d configuracoes_conflituosas
+    $ git branch -d refatorar_imovel
 
 ### Nem todas alterações geram conflitos
 
 É interessante notar que alterações em um mesmo arquivo não implicam necessarimente em conflitos. Esta seção irá
 demonstrar isto.
 
-Certifique-se que você esteja no seu fork do projeto e dentro do seu módulo. Além disso, certifique-se de que esteja na
-branch master.
+Certifique-se que você esteja no seu _fork_ do projeto e dentro do seu módulo. Além disso, certifique-se de que esteja na
+_branch master_.
 
     $ cd ~/kdo/projetos/objectos-dojo
     $ cd objectos-dojo-login
     $ git checkout master
 
-Na branch master, edite um arquivo `config.txt` com o seguinte conteúdo:
+Na _branch master_, edite um arquivo `config.txt` com o seguinte conteúdo:
 
     1. config a 
     2. config b 
     3. config c
     4. config d
 
-Novamente faça os procedimentos necessários, salvando o arquivo, adicionado a modificação e fazendo o commit. 
+Novamente faça os procedimentos necessários, salvando o arquivo, adicionado a modificação e fazendo o _commit push_. 
 
-De maneira análoga à seção anterior, crie uma nova branch de trabalho.
+De maneira análoga à seção anterior, crie uma nova _branch_ de trabalho.
 
     $ git checkout -b config_sem_conflito
 
-Agora na branch de trabalho, altere a última linha do arquivo `config.txt` com o seguinte conteúdo:
+Agora na _branch_ de trabalho, altere a última linha do arquivo `config.txt` com o seguinte conteúdo:
 
     1. config a 
     2. config b 
     3. config c
     4. config d+
 
-Em seguida, volte à branch master e altere o mesmo arquivo, mas ao invés da última linha, altere a primeira linha:
+Em seguida, volte à _branch master_ e altere o mesmo arquivo, mas ao invés da última linha, altere a primeira linha:
 
     1. config a- 
     2. config b 
     3. config c
     4. config d
 
-Volte agora para a branch de trabalho. Faça um merge:
+Volte agora para a _branch_ de trabalho. Faça um _merge_:
 
     $ git merge config_sem_conflito
     Already up-to-date.
@@ -245,23 +263,14 @@ E se você verificar o conteúdo do arquivo:
     3. config c
     4. config d+
 
-Podemos perceber então que ao alterar o mesmo arquivo em seções diferentes, o GIT não reconheceu isso como um
-conflito, pois ele tem algoritmos que identificam esse tipo de situação. No caso anterior, como o próprio GIT não
+Podemos perceber então que ao alterar o mesmo arquivo em seções diferentes, o Github não reconheceu isso como um
+conflito, pois ele tem algoritmos que identificam esse tipo de situação. No caso anterior, como o próprio Github não
 encontrou a solução, foi gerado o conflito, para nós mesmos resolvermos, lembrando que o conflito precisa ser entendido
-e não simplemente substituir linhas de  código ou apagar o que seu colega escreveu, é necessário entender o que o
+e não simplemente substituir linhas de  código ou apagar o que outra pessoa escreveu, é necessário entender o que o
 ocasionou o conflito para que ele seja resolvido.
 
 E para terminar, sincronize seu trabalho com o GitHub.
 
     $ git checkout master
-    $ git merge config_sem_conflitos
+    $ git merge config_sem_conflito
     $ git push
-
-## Conclusão
-
-Com este kata você um pouco sobre os conflitos no Git, e você deve ter uma base mínima para:
-
-1. Identificar em quais situações conflitos podem ocorrer
-2. Identificar em quais situações conflitos não ocorrem
-3. Sincronizar branches de trabalho com a branch master através do merge e
-4. Resolver conflitos que podem ocorrer com o merge

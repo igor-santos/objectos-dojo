@@ -1,6 +1,6 @@
 ---
 layout: post-alpha
-title: "Git :: Fiz um merge incorreto. E agora, como resolvo?"
+title: "Resolvendo merge incorreto"
 author: "Caio Catanzaro Petreanu"
 published: true
 partof: git
@@ -8,119 +8,49 @@ num: 4
 outof: 4
 ---
 
-## Fiz um merge em uma branch que eu não deveria fazer, e agora?
+## Introdução
 
-Digamos que, por acidente, você pode acabar fazendo merges ou pulls de uma branch para outra completamente distinta..
+Digamos que, por acidente, você pode acabar fazendo _merge_ ou _pull_ de uma _branch_ para outra completamente distinta.
 
-E você acaba mandando um Pull Request com essas atualizações. Bem, isso não pode ocorrer! De forma alguma essas atualizações podem ser aceitas e integradas no projeto original!
+E você acaba mandando um _Pull Request_ com essas atualizações. Bem, isso não pode ocorrer! De forma alguma essas atualizações podem ser aceitas e integradas no projeto original!
 
-<div class="alert alert-info">
-  Obs. Um git pull nada mais é que um <b>fetch e um merge no mesmo comando</b>.
-</div>
+Se você já presenciou uma das situações abaixo, este artigo lhe ajudará!
 
-Bom, o dano estám feito. Correto..?
+- Fiz várias alterações erradas em um _commit_
+- Fiz um _push_ de uma _feature_ pro lugar errado
+- Fiz um _merge_ com uma _branch_ totalmente diferente da que estou
+- Removi arquivos muito grandes, mas eles aparecem em _commits_ anteriores
+- Fiz muitas alterações erradas em vários _commits_
 
-Não, cabe a você arrumar isso! E eu estou aqui para guiá-lo na resolução dessa lasqueira. Então mãos-a-obra!
+Importante: Um _pull_ nada mais é que um _fetch_ e um _merge_ no mesmo comando.
 
-### 1. Casos de uso
+## Fiz um merge em uma branch que eu não deveria, e agora?
 
-Se você se consegue marcar uma das opções abaixo, está no lugar certo!
+As formas de solucionar esse problema são diversas e possuem características próprias, mas é importante fazer uma breve explicação delas para que fique claro quais são as mais adequadas em quais situações. Primeiro, vamos entender de __histórico__:<br> 
 
-<table class="table table-striped">
- <tr>
-   <td class="tac col2em">
-    <input type="checkbox" />
-   </td>
-   <td>
-    Fiz várias alterações erradas em um commit
-   </td>
-   <td>
-    <a href="#revert">help!</a>
-   </td>
- </tr>
- <tr>
-   <td class="tac col2em">
-    <input type="checkbox" />
-   </td>
-   <td>
-    Mandei um push de uma feature pro lugar errado
-   </td>
-   <td>
-    <a href="#outros">help!</a>
-   </td>
- </tr>
- <tr>
-   <td class="tac col2em">
-    <input type="checkbox" />
-   </td>
-   <td>
-    Fiz um merge com uma branch totalmente diferente da que estou
-   </td>
-   <td>
-    <a href="#outros">help!</a>
-   </td>
- </tr>
- <tr>
-   <td class="tac col2em">
-    <input type="checkbox" />
-   </td>
-   <td>
-    Removi arquivos muito grandes que haviam em meu projeto, mas eles aparecem em commits anteriores
-   </td>
-   <td>
-    <a href="#outros">help!</a>
-   </td>
- </tr>
- <tr>
-   <td class="tac col2em">
-    <input type="checkbox" />
-   </td>
-   <td>
-    Fiz muitas alterações erradas em vários commits
-   </td>
-   <td>
-    <a href="#outros">help!</a>
-   </td>
- </tr>
-</table>
+O histórico mantém registrado a sequência de todas as atualizações realizadas no projeto local e remoto ( _fork_ e original).
 
-### 2. Introdução
+### 1ª Opção
+Com o `git revert` é feito um novo _commit_ contendo as atualizações inversas aos _commits_ selecionados. E esse _commit_ ainda é reversível! Usá-lo, manterá todo o histórico anterior, mas em alguns casos pode não ser o que queremos.
 
-Entenda, as formas de solucionar esse problema são diversas e possuem características próprias, mas é importante fazer uma breve explicação delas para que fique claro quais são adequadas a qual situação.
+Basicamente, ele serve para todos os casos em que manter os _commits_ anteriores no histórico não representam um problema.
 
-Primeiro, vamos entender de __histórico__. Ele é aquele cara que mantém registrada a sequência de todas as atualizações realizadas no projeto local e remoto (fork e original).
+### 2ª Opção
+Nos demais casos podemos usar um dos 3 procedimentos/comandos: `git checkout`, `git reset --hard` e `git rebase -i`. Com eles, remontamos o histórico da _branch_, sendo necessário um `push --force` para ser mandado ao Github. Essas ações não podem ser revertidas e, por causa disso, devem ser usadas com muita cautela e em situações específicas!
 
-Entendeu? Então vamos aos comandos!
+Nota: Tudo que está no histórico é mantido. Imagine que toda vez que alguém for acessar, ou fazer _download_ do seu projeto e ter que "pegar" 800mb a mais. O que você acha disso?
 
-* No ``git revert`` é feito um novo commit, contendo as atualizações inversas aos commits selecionados. E esse commit ainda é reversível! Usar ele mantém todo o histórico anterior, mas em alguns casos pode não ser o que queremos;
+É por isso que nesses casos devemos alterar o histórico, para remover presenças indesejáveis nos diretórios do projeto.
 
-<div class="alert alert-info">
+### Importante
 
- Ele é praticamente mandatório para todos os casos em que manter os commits anteriores no histórico não representa um problema.
+Uma outra solução, porém, menos recomendada é refazer a _fork_ do projeto e recuperar os _backups_.
 
-</div>
-
-* No entanto, nos demais casos podemos usar um dos 3 procedimentos/comandos:``git checkout``, ``git reset --hard`` e ``git rebase -i``. Com eles, "quebramos" ou remontamos o histórico da branch, sendo necessário fazer um ``push --force`` para ser mandado para o Github. Essas ações não podem ser revertidas e por causa disso, devem ser usadas com muita cautela e em situações claras e específicas!
-
-<div class="alert alert-info">
-
- <p>Caso você não saiba, fique sabendo: tudo que está no histórico é mantido. Imagine que toda vez que alguem for de alguma forma acessar, ou fazer download, do seu projeto, ele tenha que pegar meros 800 mb a mais, desnecessários.</p>
- <p>O que você acha disso?</p>
- <p>É por isso que nesses casos, em especial quando lidamos com a presença de históricos indesejados como uma legião de arquivos e/ou arquivos <i>colossus</i> (muito grandes).</p>
- <p>Por isso, nesses casos <b>devemos</b> alterar o histórico, para remover presenças indesejaveis em nossos diretórios do projeto.</p>
- <p>Repetindo: Eles representam tarefas simples, mas devem ser usados com <b>extrema cautela</b>! Afinal, agora estaremos lidando mais diretamente com o histórico.</p>
- 
-</div>
-
-# Importante!!!
-
-__Por apagar histórico, nas situações de trabalho apenas faça o ``push --force``, e somente apenas se você tiver absoluta certeza, sem qualquer sombra de dúvidas e de preferência certo de um alinhamento estrelar favorável.__
-
-* E a solução menos recomendada, mas mais prática é refazer a fork do projeto e recuperar os backups. É mantido o histórico do projeto original e os backups serão adicionados em um ou mais commits novos.
+Por fim, esses procedimentos representam tarefas simples, mas devem ser usadas com extrema cautela! Afinal, agora estaremos lidando mais diretamente com o histórico.
 
 <div id="revert"> </div>
 
-#### Antes de começar
+## Praticando: O primeiro cenário
 
 * Faça um novo repositório chamado __repo__ no Github;
 

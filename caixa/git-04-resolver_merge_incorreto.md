@@ -179,11 +179,11 @@ Importante: Sempre cheque seus arquivos na _branch_, e seus _Pull Requests_ com 
 
 #### 1.2 Solução
 
-Devemos encontrar o _commit_ incorreto e reverte-lo. Para isso você pode usar o Github. Se preferir faça como eu e use o ``git log`` assim:
+Devemos encontrar o _commit_ incorreto e reverte-lo. Para isso você pode usar o Github. Se preferir use o ``git log`` assim:
 
     $ git log
 
-Que retornará uma série de registros dos commits feitos, como os meus:
+Que retornará uma série de registros dos commits feitos, como estes:
 
     commit 51283b9dee534378c6dba77e12c7e0adfb29493e
     Author: Caio Petreanu <caio.petreanu@objectos.com.br>
@@ -227,17 +227,20 @@ Que retornará uma série de registros dos commits feitos, como os meus:
     
         first commit
 
-<div class="alert alert-info">
- No caso de você ter feito muitos logs após o commit errôneo, tente usar o <code>git log -10</code> para listar os 10 últimos commits (ou o número que desejar).
-</div>
+No caso de você ter feito muitos _logs_ após o _commit_ errôneo, tente usar o `git log -10` para listar os 10 últimos _commits_ (ou o número que desejar).
 
-Usando o Github ou olhando com calma o log, podemos ver que o commit que precisamos reverter é o "Arquivos pares".
+Usando o Github ou olhando com calma o _log_, podemos ver que o _commit_ que precisamos reverter é o "Arquivos pares".
 
-Muito bem. Copie o hash do commit (que no meu caso é 51283b9dee534378c6dba77e12c7e0adfb29493e) e aperte a tecla __Q__ para sair dessa tela.
+Muito bem. Copie o hash do _commit_ que neste caso é o primeiro `0b31782b35e1c80ba03ae4ae9da2c96b63e7c6fc` e aperte a tecla __Q__ para sair dessa tela.
 
-Agora faça o revert conforme:
+Agora faça o _revert_ duas vezes, _commit_ e _push_ 
 
-    git revert 51283b9dee534378c6dba77e12c7e0adfb29493e
+    $ git revert 0b31782b35e1c80ba03ae4ae9da2c96b63e7c6fc
+    $ git revert 0b31782b35e1c80ba03ae4ae9da2c96b63e7c6fc
+    $ git commit -m "reverter commit"
+    $ git push origin cenario_revert
+
+###Continua
 
 Será aberto um editor de texto (no meu caso o VIM) contendo informação do revert a ser realizado. Para cada linha de atualização do próprio revert existe um __#__. Você deve remover todos os __#__ das novas atualizações dele que devem estar no novo commit.
 

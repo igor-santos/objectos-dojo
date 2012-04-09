@@ -52,20 +52,17 @@ Por fim, esses procedimentos representam tarefas simples, mas devem ser usadas c
 
 ## Praticando: O primeiro cenário
 
-* Faça um novo repositório chamado __repo__ no Github;
+1. Faça um novo repositório chamado __repo__ no Github;
+2. Siga o procedimento do Github ( _Global setup_ e _Next steps_ ) para criar a _branch master_
 
-<p></p>
+3. Acesse o diretório em seu computador onde você criou o __repo__.
 
-* Coloque-o diretório /tmp/repo.
-
-### 3. Cenário alfa
-
-A partir da master crie uma branch chamada __cenario__.
+A partir da master crie uma branch chamada __letras__.
 
     $ git checkout master
     $ git checkout -b letras
 
-Nela crie, adicione, faça commit e push, __para cada__ um de 5 arquivos de texto (distintos).
+Nela crie, adicione, faça _commit_ e _push_, para cada um dos 5 arquivos de texto abaixo
 
     $ touch A.txt
     $ git add A.txt 
@@ -92,7 +89,7 @@ Nela crie, adicione, faça commit e push, __para cada__ um de 5 arquivos de text
     $ git commit -m "Add: E.txt"
     $ git push origin letras
 
-Volte a master e crie uma branch chamada numeros, entre nela, e execute os comandos abaixo.
+Volte a _master_ e crie uma _branch_ chamada __numeros__, entre nela, e execute os comandos abaixo.
 
     $ git checkout master
     $ git checkout -b numeros
@@ -122,9 +119,9 @@ Volte a master e crie uma branch chamada numeros, entre nela, e execute os coman
     $ git commit -m "Add: 5.txt"
     $ git push origin numeros
 
-Cheque no Github se todos os arquivos estão presentes. Viu?! Ok, blz! Então volte para o terminal.
+Cheque no Github se todos os arquivos foram adicionados. Então volte para o terminal.
 
-Crie a partir da master 3 novas branches usando os comandos:
+Crie a partir da _master_ 4 novas _branches_ usando os comandos:
 
     $ git checkout master
     $ git checkout -b cenario_revert
@@ -132,59 +129,57 @@ Crie a partir da master 3 novas branches usando os comandos:
     $ git checkout -b cenario_reset
     $ git checkout -b cenario_rebase
 
-### 4. O git revert
+### 1. O git revert
 
-Como dito anteriormente, o revert:
+Como dito anteriormente, o _revert_:
 
-* É feito a partir de um novo commit;
+* É feito a partir de um novo _commit_;
 
-* Mantém o histórico anterior a esse commit;
+* Mantém o histórico anterior a esse _commit_;
 
-* Pode reverter um ou mais commits;
+* Pode reverter um ou mais _commits_;
 
-* Pode ser revertido por outro revert.
+* Pode ser revertido por outro _revert_.
 
-Portanto, ele é indicado nos casos em que são poucos os arquivos indesejáveis enviados, representando um histórico cujo tamanho não é significantemente grande a ponto de termos de alterá-lo ou removê-lo. 
+Portanto, ele é indicado nos casos em que são poucos os arquivos indesejáveis, representando um histórico cujo tamanho não é significantemente grande a ponto de termos de alterá-lo ou removê-lo. 
 
 Antes de continuarmos para a solução, por que não simularmos algo dando errado?
 
-#### 4.1 Simulando um erro
+#### 1.1 Simulando um erro
 
-Entre na branch do tópico e faça um merge dela com numeros.
+Entre na _branch_ do tópico e faça um _merge_ dela com __numeros__.
 
     $ git checkout cenario_revert
     $ git merge numeros
 
-Ok! Agora você terá os arquivos de textos do 1.txt ao 5.txt na sua branch. Faça um push.
+Ok! Agora você terá os arquivos de textos do 1.txt ao 5.txt na sua _branch_. Faça um _push_.
 
     $ git push origin cenario_revert
 
-Verifique lá no Github, sua branch agora contém 5 arquivos. Certo?
+Verifique no Github, se a _branch_  __cenario\_revert__ contém 5 arquivos.
 
 Muito bem! Agora remova os arquivos pares, ou seja 2.txt e 4.txt. Crie também o 7.txt.
 
     $ rm 2.txt 4.txt
     $ touch 7.txt
 
-Adicione os arquivos com __add__, faça o commit e o push.
+Adicione o novo arquivo com _add_ e remova os dois pares com _rm_, depois um _commit_ e o _push_.
 
-    $ git add 2.txt
-    $ git add 4.txt
+    $ git rm 2.txt
+    $ git rm 4.txt
     $ git add 7.txt
     $ git commit -m "Arquivos pares"
     $ git push origin cenario_revert
 
 Verifique no Github se sua branch está apenas com arquivos ímpares.
 
-Agora, imagine que você não podia ter adcionado o arquivo 7.txt e muito menos removido o 4.txt. E agora, como fazemos para reverter isso?
+Agora, imagine que você não podia ter adcionado o arquivo 7.txt e muito menos removido o 4.txt. E agora, como reverter isso?
 
-<div class="alert alert-info">
- Observação: Sempre cheque seus arquivos na branch, e seus Pull Requests com o <b>Diff</b> na página do Github para identificar aquilo que foi mandado para origin, ou que está sendo mandado para o projeto original. Se não souber verificar o problema, de nada adianta saber solucioná-lo!
-</div>
+Importante: Sempre cheque seus arquivos na _branch_, e seus _Pull Requests_ com o __Diff__ na página do Github para identificar aquilo que foi mandado para _origin_, ou que está sendo mandado para o projeto original. Se não souber verificar o problema, de nada adianta saber solucioná-lo!
 
-#### 4.2 Solução
+#### 1.2 Solução
 
-Devemos encontrar o commit incorreto e revertê-lo. Para isso você pode usar o Github. Se preferir faça como eu e use o ``git log`` assim:
+Devemos encontrar o _commit_ incorreto e reverte-lo. Para isso você pode usar o Github. Se preferir faça como eu e use o ``git log`` assim:
 
     $ git log
 

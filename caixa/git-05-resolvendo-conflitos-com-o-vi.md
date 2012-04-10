@@ -1,6 +1,6 @@
 ---
 layout: post-alpha
-title: "Git :: Resolvendo conflitos com o VI"
+title: "Resolvendo conflitos com o VI"
 author: "Marcos Piazzolla"
 published: true
 partof: git
@@ -46,7 +46,7 @@ em suas funcionalidades que são muito úteis, veremos isso utilizando o mesmo p
 
 Vamos supor que as informações que vem do HEAD estejam corretas e as informações abaixo dele devem
 ser removidas. Como já sabemos quais linhas desejamos excluir, podemos alternar para o modo gráfico do
-editor pressionando ESC primeiramente para sair do modo texto, caso esteja nele, em seguida pressione
+editor pressionando `esc` primeiramente para sair do modo texto, caso esteja nele, em seguida pressione
 `Shift + v` com isso o editor passa para a seleção de linhas no modo gráfico, utilize as setas do 
 teclado e selecione as linhas a serem removidas, atente a imagem abaixo:
 
@@ -68,14 +68,14 @@ como não temos nenhum texto selecionado temos de pressionar o `d` duas vezes.
 Em algum momento na correção do conflito o desenvolvedor pode acidentalmente apagar uma linha que
 não deveria ser removida, o VI não disponibiliza recursos como CTRL + Z para desfazer ações, mas
 possui uma função muito prática que é o `undo`, que desfaz a última ação. Para utilizá-lo, basta pressionar 
-ESC para sair do modo texto e em seguida digite `:undo`, assim a última ação será desfeita.
+`esc` para sair do modo texto e em seguida digite `:undo`, assim a última ação será desfeita.
 
 ###Salvando as alterações no arquivo do conflito
 
 Existe um momento onde é preciso efetuar as alterações no arquivo do conflito, diferente dos outros editores 
 o VI não possui o tão conhecido CTRL + S para salvar as alterações no documento, para que seja
 possível salvar as atualizações existe a função `w` que salva todas as alterações realizadas até o momento, 
-basta pressionar ESC para sair do modo texto e em seguida pressionar `:w`.
+basta pressionar `esc` para sair do modo texto e em seguida pressionar `:w`.
 
 	"config" 11L, 66C gravado(s)
 
@@ -84,10 +84,10 @@ Como é mostrado acima o editor lança uma mensagem, indicando que as alteraçõ
 ###Saindo do editor
 
 Chegou o momento de realizar um commit e enviar as informações ao [GitHub] (https://github.com) para
-resolver os conflitos de vez, antes disso devemos sair do editor através da função `q`, novamete, basta
-pressionar ESC para sair do modo texto caso esteja nele e pressionar `:q`, assim voltamos para o terminal.
+resolver os conflitos de vez, antes disso devemos sair do editor através da função `q`, novamente, basta
+pressionar `esc` para sair do modo texto caso esteja nele e pressionar `:q`, assim voltamos para o terminal.
 
-Em seguida basta adicionar o arquivo e realizar o commit:
+Em seguida basta adicionar o arquivo e realizar o _commit_:
 	
 	$ git add config.txt
 	$ git commit -m "Merge: Resolvido conflito com origin/mpiazzolla_conflitos_2 em config.txt"

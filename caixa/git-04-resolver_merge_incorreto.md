@@ -294,17 +294,17 @@ Agora usamos a opção ``git revert <commit> -m <parent>`` para informar que o r
 Entre na branch __cenario_procedimento_de_checkout__ e execute os comandos ``git remote`` e ``git pull gh-pages`` abaixo. Ah, e não se esqueça de fazer. um push para origin disso!
 
     $ git checkout cenario_procedimento_de_checkout
-    $ git remote add objectos https:github.com/objectos/objectos-dojo.git
+    $ git remote add objectos https://github.com/objectos/objectos-dojo.git
     $ git pull objectos gh-pages
     $ git push origin cenario_procedimento_de_checkout
 
-Irão vir todos os arquivos de gh-pages para sua branch local e remota. Veja lá no Github ver a quantidade de arquivos que entraram no seu projeto com esse commit.
+Aparecerão todos os arquivos de _gh-pages_ para sua _branch_ local e remota. Veja no Github a quantidade de arquivos que entraram no seu projeto com esse _commit_.
 
 E o log?
 
     $ git log
 
-Nossa! Parece que ele está cheio de registros tanto da __cenario_procedimento_de_checkout__ quanto da __gh-pages__. Não é? Olhe o seu commit gerado pelo pull também, ele deve estar assim:
+Parece que ele está cheio de registros tanto em __cenario_procedimento_de_checkout__ quanto em __gh-pages__. Olhe o seu _commit_ gerado pelo _pull_ também, ele deve estar assim:
 
     commit 280fde94001ab2b8f89276c6a076d1e3f66ab019
     Merge: 426bca1 a5f651f
@@ -313,19 +313,15 @@ Nossa! Parece que ele está cheio de registros tanto da __cenario_procedimento_d
 
     Merge branch 'gh-pages' of https://github.com/objectos/objectos-dojo into cenario_procedimento_de_checkout
 
-Ok, viu!? E agora? O que fazer? 
+Bom, como todo bom leitor você não pulou o tópico de `git revert` e me sugere: 
 
-Bom, como todo bom leitor você não pulou o tópico de ``git revert`` e me sugere: 
+> "Podemos dar um revert que volte as alterações desses que estão todos resolvidos!"
 
-> "Podemos dar um revert que volte as alterações desses  e está tudo resolvido!"
+Muito bem! Concordo que é uma possibilidade. Mas, você não concorda que todos esses arquivos que vieram continuarão mantidos no __histórico__?
 
-Muito bem! Concordo que é uma possibilidade. Maaass.. você não concorda comigo que todos esses arquivos que vieram continuarão mantidos no __histórico__?
+O revert resolve? Com certeza! Mas devemos usá-lo sabendo que toda vez que for feito _merge_, _pull_ ou _clone_ do projeto (ou _fork_ ) será baixado o _gh-pages_ inteiro? Não mesmo!!!
 
-E aí, o que você? O revert resolve? Com certeza!! Mas devemos usá-lo sabendo que toda vez que for feito merge, pull ou clone do projeto (ou fork) será baixado o gh-pages inteiro? Não mesmo!!!
-
-É aí que entram os capítulos 6, 7 e 8!
-
-Antes de ir para eles, faça um merge com direito a push das branches __cenario_reset__ e __cenario_rebase__ com a que estamos.
+Antes de avançar, faça um _merge_ , _push_ das _branches_ __cenario_reset__ e __cenario_rebase__ com a que estamos.
 
     $ git checkout cenario_reset
     $ git merge cenario_procedimento_de_checkout
@@ -335,17 +331,17 @@ Antes de ir para eles, faça um merge com direito a push das branches __cenario_
     $ git merge cenario_procedimento_de_checkout
     $ git push origin cenario_rebase
 
-### 6. O procedimento do git checkout -b
+### 1. O procedimento do git checkout -b
 
-Entre na branch __cenario_procedimento_de_checkout__ e se preferir, use o ``git log``.
+Entre na _branch_ __cenario_procedimento_de_checkout__ e se preferir, use o `git log`.
 
     $ git checkout cenario_procedimento_de_checkout
 
-Como pudemos ver ao montar o cenário, o merge feito com gh-pages ocorreu no commit 280fde94001ab2b8f89276c6a076d1e3f66ab019. Mas não é ele que usaremos para reverter o histórico.
+Como podemos ver ao montar o cenário, o _merge_ feito com gh-pages ocorreu no commit `280fde94001ab2b8f89276c6a076d1e3f66ab019`. Mas não é ele que usaremos para reverter o histórico.
 
-Precisamos __do último commit válido antes do merge__. E, como gh-pages veio com vários outros commits, __esse commit não poderá ter vindo dela__.
+Precisamos do último commit válido antes do _merge_. E, como _gh-pages_ veio com vários outros commits, esse commit não poderá ter vindo dela.
 
-Então consulte o Github e/ou o log e encontre esse commit. Seguindo o conceito de que o histórico é sequencial (como as pilhas de estrutura de dados), e com um pouco de memória, não tão será difícil assim.
+Então consulte o Github e/ou o _log_ e encontre esse _commit_. Seguindo o conceito de que o histórico é sequencial (como as pilhas de estrutura de dados), e com um pouco de memória, não será tão difícil assim.
 
 No nosso caso, trabalharemos o nosso primeiro commit.
 
@@ -355,21 +351,19 @@ No nosso caso, trabalharemos o nosso primeiro commit.
     
         first commit
 
-<div class="alert alert-info">
- Lembre-se que a identificação do seu provavelmente será diferente.
-</div>
+ Lembre-se: A identificação do seu provavelmente será diferente.
 
-Bom, chega de ladainha. Faça o ``checkout -b`` para uma branch nova chamada __bkp__ pelo commit! Assim:
+Faça o `checkout -b` para uma _branch_ nova chamada __bkp__ pelo _commit_:
 
     $ git checkout -b bkp 426bca1b80fd19e22d5f3fb31f49b3f15698142f
     Switched to a new branch 'bkp'
 
-Remova a branch __cenario_procedimento_de_checkout__ e renomeie __bkp__ para cenario_procedimento_de_checkout.
+Remova a _branch_ __cenario_procedimento_de_checkout__ e renomeie __bkp__ para __cenario\_procedimento\_de\_checkout__.
 
     $ git branch -D cenario_procedimento_de_checkout
     $ git branch -M cenario_procedimento_de_checkout
 
-E ai..? O que temos agora?? Aha! Isso mesmo, pelo visto a branch __cenario_procedimento_de_checkout__ já não é mais a mesma... ela é, digamos, o commit "first commit".
+Pelo visto a _branch_ __cenario_procedimento_de_checkout__ já não é mais a mesma... ela é, digamos, o _commit_ "first commit".
 
 Mas pra que isso? Se você quiser descobrir, faça esse comando:
 
@@ -381,11 +375,11 @@ Mas pra que isso? Se você quiser descobrir, faça esse comando:
     Merge the remote changes (e.g. 'git pull') before pushing again.  See the
     'Note about fast-forwards' section of 'git push --help' for details.
 
-Eita!! Não funcionou? O que houve aí?!
+O que houve aí?!
 
 > To prevent you from losing history, non-fast-forward updates were rejected
 
-Parece pra mim que você está recebendo um alerta.. E pelo visto é porque estamos pra alterar o histórico. E agora?
+Estamos recebendo uma alerta, pelo visto, é porque estamos pra alterar o histórico. E agora?
 
 __Force seu push__, ignorando o aviso:
 
@@ -394,9 +388,9 @@ __Force seu push__, ignorando o aviso:
     To git@github.com:cpetreanu/repo.git
      + 280fde9...426bca1 cenario_procedimento_de_checkout -> cenario_procedimento_de_checkout (forced update)
 
-Veja só.... __(forced update)__. Ah, mas será que funcionou? Vá lá ver no Github e depois volte aqui.
+Veja: __(forced update)__. Ah, mas será que funcionou? Vá ao Github e depois volte.
 
-Aqui parece que funcionou, veja como ficou todo o meu git log:
+Funcionou! veja como ficou todo o git _log_:
 
     commit 426bca1b80fd19e22d5f3fb31f49b3f15698142f
     Author: Caio Petreanu <caio.petreanu@objectos.com.br>
@@ -404,61 +398,47 @@ Aqui parece que funcionou, veja como ficou todo o meu git log:
     
         first commit
 
-Beleza, entendeu como funciona?
+Você entrou em um _commit_ (de preferência o último válido) e substituiu a _branch_ "corrompida" por ele. Por fim, realizarou um ``push --force`` para a origem, revertendo todo o histórico para o estado desse _commit_.
 
-#### 6.1 Resumo
-
-<p></p>
-
-__Você entrou em um commit - de preferência o último válido - e substituiu a branch "corrompida" por ele. Por fim, realizarou um ``push --force`` para a origem, revertendo todo o histórico para o estado desse commit.__
-
-### 7. O git reset --hard
+### 2. O git reset --hard
 
 Entre na branch __cenario_reset__.
 
     $ git checkout cenario_reset
 
-Estaremos usando o cenário criado no capítulo 2. Ao invés de fazer o procedimento de checkout do capítulo anterior, existe a opção de executar todo ele em apenas 2 comandos! O ``git reset --hard`` e o ``git push --force``.
+Ao invés de fazer o procedimento de checkout do capítulo anterior, existe a opção de executar todo ele em apenas 2 comandos! O ``git reset --hard`` e o ``git push --force``.
 
-Sabemos já o último commit válido (426bca1b80fd19e22d5f3fb31f49b3f15698142f). Use o comando abaixo para que ele se torne o HEAD (último commit) da sua branch.
+Sabemos já que o último _commit_ válido é `426bca1b80fd19e22d5f3fb31f49b3f15698142f`. Use o comando abaixo para que ele se torne o `HEAD` (último _commit_ ) da sua _branch_.
 
     $ git reset --hard 426bca1b80fd19e22d5f3fb31f49b3f15698142f
     HEAD is now at 426bca1 first commit
 
-<div class="alert alert-info">
- A opção <code>--hard</code> faz com que todos os arquivos no stage, que ainda não foram para um commit, sejam apagados. Em contraposição a ela, existe a opção <code>--soft</code>.
-</div>
+ A opção `--hard` faz com que todos os arquivos no _stage_, que ainda não foram para um _commit_, sejam apagados. Em contrapartida, existe a opção `--soft`.
 
-Feita a alteração do HEAD, faça o push para origin. Claro que você só conseguirá isso usando o argumento __--force__.
+Feita a alteração do `HEAD`, faça o _push_ para _origin_. Claro que você só conseguirá isso usando o argumento `--force`.
 
     $ git push --force origin cenario_reset
     Total 0 (delta 0), reused 0 (delta 0)
     To git@github.com:cpetreanu/repo.git
      + 280fde9...426bca1 cenario_reset -> cenario_reset (forced update)
 
-Feito isso, verifique no Github por traços da gh-pages nas sua branch.
+Feito isso, verifique no Github.
 
-Nada né? Perfeito!
+Nesse caso, você apontou o _commit_ HEAD de sua _branch_ para o último _commit_ válido antes do _merge_, e mandou essa alteração de histórico para a origem remota. Pode-se concluir que trata-se uma solução análoga à de checkout.__
 
-#### 7.1 Resumo
-
-__Nesse caso, você apontou o commit HEAD de sua branch para o último commit válido antes do merge, e mandou essa alteraçõa de histórico para a origem remota. Pode-se concluir que trata-se uma solução análoga à de checkout.__
-
-### 8. O git rebase -i
+### 3. O git rebase -i
 
 Entre na sua branch __cenario_rebase__.
 
-    
+Novamente estaremos no mesmo cenário. Faça `ls -l` e confira se quiser!
 
-Novamente estaremos no mesmo cenário. Dê um __ls -l__ e confira se quiser!
-
-Temos o cenário e o commit 426bca1b80fd19e22d5f3fb31f49b3f15698142f. Vamos usar o rebase no modo interativo (<b>-i</b>, que abre um editor de texto) ver as atualizações de todos os commits entre "first commit" e o HEAD (cenario_rebase).
+Temos o cenário e o _commit_ `426bca1b80fd19e22d5f3fb31f49b3f15698142f`. Vamos usar o _rebase_ no modo interativo ( __-i__ , que abre um editor de texto) e ver as atualizações de todos os _commits_ entre "first commit" e o `HEAD` (cenario_rebase).
 
     $ git rebase -i 426bca1b80fd19e22d5f3fb31f49b3f15698142f cenario_rebase
 
-Note os vários commits vindos de gh-pages. Aqui podemos modificar aqueles que serão mantidos ou removidos do histórico, __remontando-o__.
+Note os _commits_ vindos de _gh-pages_. Aqui podemos modificar aqueles que serão mantidos ou removidos do histórico, __remontando-o__.
 
-Apague todos os commits menos um (não importa qual seja). Salve e feche o arquivo. Como podemos ver, o rebase parou por causa de conflitos de path. Faça um git status.
+Apague todos os _commits_ menos um (não importa qual seja). Salve e feche o arquivo. Como podemos ver, o _rebase_ parou por causa de conflitos de _path_. Faça um `git status`.
 
     $ git checkout cenario_rebase
     error: could not apply b82ad6a... Finalizado objetos falsos
@@ -476,7 +456,7 @@ Apague todos os commits menos um (não importa qual seja). Salve e feche o arqui
     #
     no changes added to commit (use "git add" and/or "git commit -a")
 
-Existe um path incorreto/inexistente para o arquivo mostrado. Para resolver isso vamos remover essa atualização, e por fim dar continuidade ao rebase.
+Existe um _path_ incorreto/inexistente para o arquivo mostrado. Para resolver isso vamos remover essa atualização, e por fim dar continuidade ao _rebase_.
 
     $ git checkout -f
     
@@ -487,19 +467,17 @@ Existe um path incorreto/inexistente para o arquivo mostrado. Para resolver isso
     $ git rebase --continue
     Successfully rebased and updated refs/heads/cenario_rebase.
 
-Faça um ``push --force`` e vejá no Github os resultados. E o log também só pra ter certeza!
+Faça um ``push --force`` e vejá no Github os resultados. E o _log_ também só para ter certeza!
 
     $ git push origin cenario_rebase
 
 Pronto! Trabalho realizado com sucesso!
 
-#### 8.1 Resumo
+Assim, você consegue reverter o _merge_ (e histórico) ao remover todos os _commits_ (menos 1), entre o "first commit" e o `HEAD` da _branch_ com o _merge_ e _gh-pages_. Na sequência removeu as alterações desse _commit_, fazendo com que o único remanescente fosse o `426bca1b80fd19e22d5f3fb31f49b3f15698142f`.
 
-__Assim, você conseguiu reverter o merge (e histórico) ao remover todos os commits (menos 1), entre o "first commit" e o HEAD da branch com o merge com gh-pages. Na sequência removeu as alterações desse commit, fazendo com que o único remanescente fosse o nosso querido 426bca1b80fd19e22d5f3fb31f49b3f15698142f.__
+### 4. Refazer a fork?
 
-### 9. Refazer a fork?
-
-Em alguns casos, quando seu trabalho na branch acabou de começar, existem poucos arquivos no projeto original ou existem uma série de erros na execução dos comandos anteriores, uma opção simples é refazer a fork do projeto original.
+Em alguns casos, quando seu trabalho na branch acabou de começar, existem poucos arquivos no projeto original ou existem uma série de erros na execução dos comandos anteriores, uma opção simples é refazer a _fork_ do projeto original.
 
 Para isso, você pode seguir os seguintes passos:
 
@@ -507,21 +485,17 @@ Para isso, você pode seguir os seguintes passos:
 
 * Remova a pasta do projeto da sua máquina, usando um comando como:
 
-<p></p>
+       $ rm -f -R /tmp/repo/
 
-        rm -f -R /tmp/repo/
+* Vá no repositório do _fork_ __repo__ em sua página.
 
-* Vá no repositório do fork __repo__ em sua página.
+* Clique no botão "Admin", na parte superior à direita da página
 
-* Clique no botão "Admin", na parte superior direita da página
+* Clique no botão "Delete this repository" ... e confirme a remoção do _fork_ clicando em "I understand, delete this repository"
 
-* Clique no botão "Delete this repository" ... e confirme a remoção do fork clicando em "I understand, delete this repository"
-
-* Acesse a página do projeto original e faça novamente um fork e clone ele (se não lembrar como fazer clique [aqui][1])
+* Acesse a página do projeto original e faça novamente um _fork_ e clone dele (se não lembrar como fazer clique [aqui][1])
 
 * Use os comandos:
-
-<p></p>
 
         mkdir /tmp/repo/
         cd /tmp/repo
@@ -530,23 +504,13 @@ Se necessário configure a url do projeto original usando
 
     $git remote add <alias-da-url> <url-do-projeto-original>
 
-Seu fork estará agora idêntico a última versão do projeto
+Seu _fork_ estará idêntico a última versão do projeto.
 
-* Entre na branch correta e recupere os backups feitos.
+* Entre na _branch_ correta e recupere os _backups_ feitos.
 
-* Pronto, você acaba de desfazer os comandos errados usando uma das formas mais árduas (tirando os possíveis erros nos comandos citados nas outras seções!)
+* Pronto, você acaba de desfazer os comandos errados usando uma das formas mais árduas (tirando os possíveis erros nos comandos citados nas outras seções).
 
-### 10. Finalizando
-
-Obrigado aos meus leitores pela paciência e espero que tenham com este trabalho aprendido coisas novas, mas principalmente úteis no dia-a-dia de cada um.
-
-Caso não precisem mais, não se esqueçam de remover os arquivos, branchs, forks criados aqui para aprendizado.
-
-<div id="referencias"> </div>
-
-### 11. Referências<div id="referencias"> </div>
-
-<p></p>
+## Referências
 
 [objectos-dojo :: Tutorial gh-pages][1]
 

@@ -289,8 +289,6 @@ Agora usamos a opção ``git revert <commit> -m <parent>`` para informar que o r
     $ git commit -m "reverter merge"
     $ git push origin cenario_revert
 
-#### 4.4 Resumo
-
 ## Praticando: O segundo cenário
 
 Entre na branch __cenario_procedimento_de_checkout__ e execute os comandos ``git remote`` e ``git pull gh-pages`` abaixo. Ah, e não se esqueça de fazer. um push para origin disso!

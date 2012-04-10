@@ -240,29 +240,6 @@ Agora faça o _revert_ duas vezes, _commit_ e _push_
     $ git commit -m "reverter commit"
     $ git push origin cenario_revert
 
-###Continua
-
-Será aberto um editor de texto (no meu caso o VIM) contendo informação do revert a ser realizado. Para cada linha de atualização do próprio revert existe um __#__. Você deve remover todos os __#__ das novas atualizações dele que devem estar no novo commit.
-
-Portanto, o texto que está assim:
-
-    Revert "Arquivos pares"
-    
-    This reverts commit 51283b9dee534378c6dba77e12c7e0adfb29493e.
-    
-    # Please enter the commit message for your changes. Lines starting
-    # with '#' will be ignored, and an empty message aborts the commit.
-    # On branch cenario_revert
-    # Changes to be committed:
-    #   (use "git reset HEAD <file>..." to unstage)
-    #
-    #       copied:     7.txt -> 2.txt
-    #       renamed:    7.txt -> 4.txt
-
-Feche o arquivo, faça o push e veja tanto no git log quanto no site do Github as mudanças que ocorreram.
-
-    $ git push origin cenario_revert
-
 Você verá que há no histórico um novo commit que reverte as atualizações daquele que foi selecionado. 
 
     commit e22f46c3fb58bc2f382cdba5babd9b94fb300f29
@@ -276,11 +253,11 @@ Você verá que há no histórico um novo commit que reverte as atualizações d
             copied:     7.txt -> 2.txt
             renamed:    7.txt -> 4.txt
 
-Simples, não? Mas e se precisarmos reverter um merge?
+Simples, não? Mas e se precisarmos reverter um _merge_?
 
-#### 4.3 Resolvendo um merge indesejado com revert
+#### 1.3 Resolvendo um merge indesejado com revert
 
-Faça um merge "acidental" com letras. Por acidental, quero dizer que esse merge não poderia ter sido feito, e muito menos mandado para a origin.
+Faça um _merge_ "acidental" com letras. Por acidental, quero dizer que esse merge não poderia ter sido feito, e muito menos mandado para a origin.
 
 Vamos usar o que aprendemos para resolver isso:
 
@@ -295,7 +272,7 @@ Você porderá ver que apareceu um novo commit.
     
         Merge branch 'letras' into cenario_revert
 
-Vamos reverter ele?
+Vamos reverte-lo
 
     git revert 37687b9de11e7f12dd0ba20f02ac90e219498b08
 
@@ -308,39 +285,13 @@ Em caso de dúvida, cheque o log. Fica fácil ver que o commit anterior na branc
 Agora usamos a opção ``git revert <commit> -m <parent>`` para informar que o revert do merge deverá fazer com que voltem as alterações para o commit 1, proveniente da branch cenario_revert.
 
     $ git revert 37687b9de11e7f12dd0ba20f02ac90e219498b08 -m 1
-
-O VIM será aberto. Feche-o.
-
-    Revert "Merge branch 'letras' into cenario_revert"
-    
-    This reverts commit 37687b9de11e7f12dd0ba20f02ac90e219498b08, reversing
-    changes made to e22f46c3fb58bc2f382cdba5babd9b94fb300f29.
-    
-    # Please enter the commit message for your changes. Lines starting
-    # with '#' will be ignored, and an empty message aborts the commit.
-    # On branch cenario_revert
-    # Changes to be committed:
-    #   (use "git reset HEAD <file>..." to unstage)
-    #
-    #       deleted:    A.txt
-    #       deleted:    B.txt
-    #       deleted:    C.txt
-    #       deleted:    D.txt
-    #       deleted:    E.txt
-
+    $ git revert 37687b9de11e7f12dd0ba20f02ac90e219498b08 -m 1
+    $ git commit -m "reverter merge"
     $ git push origin cenario_revert
-
- E faça o push. Voilá! Revertemos o merge!
 
 #### 4.4 Resumo
 
-<p></p>
-
-__Você selecionou um ou mais commits em sequência, e a partir deles gerou um novo capaz de selecionar e reverter as atualizações dos anteriores e o enviou à origem.__
-
-<div id="outros"> </div>
-
-### 5. Cenário beta
+## Praticando: O segundo cenário
 
 Entre na branch __cenario_procedimento_de_checkout__ e execute os comandos ``git remote`` e ``git pull gh-pages`` abaixo. Ah, e não se esqueça de fazer. um push para origin disso!
 

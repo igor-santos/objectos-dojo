@@ -189,7 +189,7 @@ autorizado a efetuar aquela operação (mesmo tendo um _login_ )
 
     public void acesso_a_usuario_nao_autorizado_deve_ser_negado() {
       Map<String, String> cookies = login("user");
-      WebResponse response = webClientOf(urlOf(planoKey), cookies).post("");
+      WebResponse response = webClientOf(URL, cookies).post("");
 
       assertThat(response.status(), equalTo(HttpServletResponse.SC_UNAUTHORIZED));
     }
@@ -222,8 +222,8 @@ variável). Evite adicionar valores diretamente nos argumentos dos métodos.
 
     public void form_deve_gravar_aluno_no_bd() {
 	  String nome = "Robson de Souza";
-	  String matricula = "20120001"
-	  Curso curso = Curso.Direito;
+	  String matricula = "20120001";
+	  Curso curso = Curso.DIREITO;
 	  LocalDate dataDeCriacao = new LocalDate();
 
       List<Aluno> antes = buscarAluno.porCurso(curso);
@@ -246,8 +246,8 @@ Após o teste da gravação dos dados, iremos comparar se estes dados foram real
 seguinte, isto é, se há 901 alunos neste momento e se seus dados são equivalentes aos definidos nas
 variáveis. Vejamos:
 
-      List<Aluno> antes = buscarAluno.porCurso(curso);
-        assertThat(antes.size(), equalTo(901));
+      List<Aluno> res = buscarAluno.porCurso(curso);
+        assertThat(res.size(), equalTo(901));
 
       Aluno r900 = res.get(900);
       assertThat(r900.getNome(), equalTo(nome));
@@ -267,8 +267,7 @@ no primeiro teste e o aluno gravado com `id = 902` no segundo teste, porém a va
 Por fim, testaremos o `redirectUrl` que será definida mais a frente no `ModuloFaculdadeUI`.
 
       String redirectUrl = json.getRedirectUrl();
-      assertThat(redirectUrl,
-          containsString("faculdade/curso/direito/aluno"));
+      assertThat(redirectUrl, containsString("faculdade/curso/direito/aluno"));
     }
     
 No `ModuloFaculdadeUI` defina a url no método `bindApiCrud()`:
@@ -288,8 +287,8 @@ mente a especificação bem definida para tomar decisões quanto a situações d
 
 Para mais informações acesse os códigos nos links abaixo:
 
-[TesteDeFormDeAlunoCreate.java]()<br>
-[ModuloFaculdadeUI.java]()<br>
+[TesteDeFormDeAlunoCreate.java](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/test/java/br/com/objectos/dojo/taguiar/TesteDeFormDeAlunoCreate.java)<br>
+[ModuloFaculdadeUI.java](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/main/java/br/com/objectos/dojo/taguiar/ModuloFaculdadeUI.java)<br>
 
-Siga para o próximo passo. Os Forms! <a href="{{ site.baseurl }}/procedimento/crud-forms/" class="btn btn-success">Continuar!</a><br>
+Siga para o próximo passo. Os Forms! <a href="{{ site.baseurl }}/procedimento/crud-forms/00-form-implementando-form.html" class="btn btn-success">Continuar!</a><br>
 Leia mais uma vez! <a href="#TOPO" class="btn btn-warning">Revisar!</a>

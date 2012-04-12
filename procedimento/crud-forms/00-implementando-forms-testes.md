@@ -74,7 +74,7 @@ Para tal exemplo, cadastraremos os seguintes dados:
 
 - Nome
 - Matricula
-- Curso
+- Código do Curso
 - Data de criação
 
 Selecionamos estes dados (supondo que já exista a tabela e o banco de dados com estes 
@@ -202,13 +202,16 @@ Iniciaremos com uma busca que retorna todos os alunos do curso de Direito confor
 URL, para tal, utilizaremos um _buscador de aluno_. Para mais informações sobre buscadores, veja 
 [aqui](http://dojo.objectos.com.br/procedimento/crud-entidade/01.0-implementando_buscador_testes.html).
 
-Defina a variável `BuscarAluno` no inicio da classe.
+Defina a variável `BuscarAluno` e `BuscarCurso` no inicio da classe.
 
 	@Test
 	public class TesteDeFormDeAlunoCreate extends TesteDeIntegracaoWeb {
 	
 	  @Inject
 	  private BuscarAluno buscarAluno;
+	  
+	  @Inject
+      private BuscarCurso buscarCurso;
 	
 	}
 	
@@ -223,16 +226,17 @@ variável). Evite adicionar valores diretamente nos argumentos dos métodos.
     public void form_deve_gravar_aluno_no_bd() {
 	  String nome = "Robson de Souza";
 	  String matricula = "20120001";
-	  String curso = "Direito";
+	  String codigo = "568";
 	  LocalDate dataDeCriacao = new LocalDate();
 
+	  Curso curso = buscarCurso.porCodigo(codigo);
       List<Aluno> antes = buscarAluno.porCurso(curso);
       assertThat(antes.size(), equalTo(900));
 
       String url = new QueryString(URL)
         .param("nome", nome)
         .param("matricula", matricula)
-        .param("curso", curso)
+        .param("curso", curso.getCodigo())
         .param("dataDeCriacao", dataDeCriacao)
         .get();
 
@@ -252,7 +256,7 @@ variáveis. Vejamos:
       Aluno r900 = res.get(900);
       assertThat(r900.getNome(), equalTo(nome));
       assertThat(r900.getMatricula(), equalTo(matricula));
-      assertThat(r900.getCurso(), equalTo(curso));
+      assertThat(r900.getCurso().getCodigo(), equalTo(codigo));
       assertThat(r900.getDataDeCriacao(), equalTo(dataDeCriacao));
       
 Nota 3: NÃO utilize o `assertThat` para o ID. Isto porque os ids, geralmente possuem um _auto increment_,

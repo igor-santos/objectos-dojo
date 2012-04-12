@@ -28,7 +28,7 @@ public interface Aluno {
 
   String getMatricula();
 
-  Curso getCurso();
+  String getCurso();
 
   LocalDate getDataDeCriacao();
 

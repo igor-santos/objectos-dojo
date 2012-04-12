@@ -62,7 +62,7 @@ public class TesteDeFormDeAlunoCreate extends TesteDeIntegracaoWeb {
   public void form_deve_gravar_aluno_no_bd() {
     String nome = "Robson de Souza";
     String matricula = "20120001";
-    Curso curso = Curso.DIREITO;
+    String curso = "Direito";
     LocalDate dataDeCriacao = new LocalDate();
 
     List<Aluno> antes = buscarAluno.porCurso(curso);

@@ -24,6 +24,6 @@ import br.com.objectos.comuns.relational.Buscador;
  */
 public interface BuscarAluno extends Buscador<Aluno> {
 
-  List<Aluno> porCurso(Curso curso);
+  List<Aluno> porCurso(String curso);
 
 }

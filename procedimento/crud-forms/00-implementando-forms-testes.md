@@ -13,14 +13,14 @@ num: 0
 Quase todos os sites possuem páginas que podem ser exibidas somente a usuários cadastrados. Estes
 cadastros são realizados através de formulários preenchidos pelo usuário no próprio site que
 lhe concederá algumas permissões não disponíveis antes do cadastro como por exemplo, 
-consultas da _Nota Fiscal Paulista_ no site da _Secretaria da Fazenda_, realizar compras em um site 
+consultar a _Nota Fiscal Paulista_ no site da _Secretaria da Fazenda_, realizar compras em um site 
 de vendas e até mesmo um _upload_ de seus videos à um site como o _YouTube_.
 
 Os responsáveis por realizarem os cadastros no "site", isto é, no banco de dados, são conhecidos 
 aqui como __Forms__. São os _forms_ que gerenciam estes cadastros no banco de dados do sistema.
 
-Os _forms_ não se limitam a cadastros de usuários, eles podem ser utilizados para gravar dados de um
-livro, de um aluno, de uma organização e etc.
+É importante entender que os _forms_ não se limitam a cadastros de usuários, eles podem ser utilizados
+para gravar dados de um livro, de um aluno, de uma organização e etc.
 
 ## Antes de iniciar 
 Este item exige conhecimentos sobre:
@@ -51,25 +51,25 @@ Siga o checklist abaixo:
 </table>
 
 ### <a id="0_0"> </a>Quais dados devem ser cadastrados?
-Semelhante ao artigo [Implementando Consultas: Testes]({{ site.baseurl }}/procedimento/crud-entidade/02.0-implementando-consultas-testes.html),
-isto dependerá de cada cliente/situação. Podemos ter diversas situações como cadastrar um novo aluno 
+Semelhante ao artigo [Implementando Consultas: Testes]({{ site.baseurl }}/procedimento/crud-entidade/02.0-implementando-consultas-testes.html) ,
+isto dependerá de cada situação. Podemos ter diversas situações como cadastrar um novo aluno 
 em uma faculdade, cadastrar um usuário em um _e-commerce_, cadastrar um número de celular para 
 concorrer aos prêmios daquele site, entre outras mais. Lembrando que um cadastro talvez exiga 
 campos obrigatórios ou não como um nome e CEP respectivamente.
 
-Contudo, os dados que devem ser cadastrados dependerá muito PARA QUE eles servirão futuramente. Por
+Contudo, o _form_ dependerá muito PARA QUE aqueles dados gravados servirão no futuro. Por
 exemplo:
 
-Precisamos do endereço no cadastro se quisermos comprar um eletrodoméstico pela internet?<br>
+Precisamos do endereço no _form_ se quisermos comprar um eletrodoméstico pela internet?<br>
 R: Sim! Precisamos para realizar a entrega do produto.
 
-Precisamos do endereço no cadastro se quisermos comprar um _E-Book_?<br>
+Precisamos do endereço no _form_ se quisermos comprar um _E-Book_?<br>
 R: Não! Neste caso é necessário/obrigatório o e-mail do cliente para enviar o _link_ do _E-Book_.
 
 __Por isso, é muito importante ter a especificação bem definida para evitar manutenção em códigos já
 escritos e o aumento no tempo de finalização do projeto.__
 
-Citaremos o exemplo de cadastro de alunos que ingressaram em uma faculdade.<br>
+Citaremos o exemplo de um _form_ para alunos que ingressaram em uma faculdade.<br>
 Para tal exemplo, cadastraremos os seguintes dados:
 
 - Nome
@@ -81,11 +81,11 @@ Selecionamos estes dados (supondo que já exista a tabela e o banco de dados com
 atributos mais o ID), pois através deles os funcionários da faculdade poderão realizar futuras 
 consultas como: 
 
-- Todos os alunos da faculdade em ordem alfabética;
+- Todos os alunos daquele curso em ordem alfabética;
 - Alunos com débitos em mensalidades (através da matrícula);
-- Alunos que ingressaram na univerdade no ano de 2011.
+- Alunos que ingressaram na faculdade no ano de 2011.
 
-Nota 1: Não entraremos em detalhes quanto ao endereço, idade, grau de escolaridade, etc.<br>
+Nota 1: Não entraremos em detalhes quanto ao endereço, data de nascimento, grau de escolaridade, etc.<br>
 Nota 2: Os cadastrados deste tipo (aluno, funcionário, livro, etc) são geralmente efetuados por um
 administrador do sistema que deve ter permissão/autenticação para estas funções.<br>  
 
@@ -97,10 +97,8 @@ situações:
 2. Redirecionar o usuário para uma nova URL, `faculdade/curso/direito/aluno/20`;
 
 A primeira situação seria interessante para realizar um novo cadastro imediatamente.<br>
-Já a segunda situação, seria interessante caso já quisessemos visualizar todos os alunos cadastrados
-até aquele momento.
-
-Na dúvida, confirme com seu líder de projeto como será definida a URL!
+Já a segunda situação, seria interessante caso já quisessemos visualizar os dados daquele aluno cadastrado
+recentemente.
   
 ## Implementação
 

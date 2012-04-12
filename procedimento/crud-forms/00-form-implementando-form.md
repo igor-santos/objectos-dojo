@@ -26,9 +26,22 @@ artigo anterior, provalvelmente deve ter criado a classe do form e o método `po
 parecido com este:
 	
 	@Post
-	public Reply<?> post(Request request) {
+	public Reply<?> post(Request request, @Named("curso") String curso) {
 		return Reply.saying().ok();
 	}
+
+###O que é @Named?
+
+Repare que o método post é composto por dois parâmetros, o primeiro um objeto Request e o segundo
+uma String anotada com `@Named`, esta anotação serve para informar ao método post que o tipo de 
+dado após esta declaração é um parâmetro capturado da URL do form. O nome do parâmetro da anotação
+equivale ao coringa definido na URL do módulo quando o teste foi implementado, ou seja este parâmetro
+é o coringa que definimos no módulo na hora de realizar o teste.
+
+Lembrando que quanto mais coringas forem definidos na URL do form, mais parâmetros o form deve
+capturar.
+
+###De volta a implementação do form
 
 Pois bem, remova o retorno do método e por hora deixe que o método retorne `null`, em seguida será 
 preciso converter o parâmetro Request do método para um RequestWrapper, para isso utilizamos uma 
@@ -36,7 +49,7 @@ classe auxiliar que faz esta conversão, procure pela classe __NomeDoProjetoRequ
 instancie esta classe e envie o parâmetro do método a ela:
 
 	@Post
-	public Reply<?> post(Request request) {
+	public Reply<?> post(Request request, @Named("curso") String curso) {
 		FaculdadeRequestWrapper wrapper = new FaculdadeRequestWrapper(request);
 				
 		return null;
@@ -204,7 +217,7 @@ utilizado nos bancos de dados. Atente para sua implementação:
 
 	public Insert getInsert() {
 		return Insert.into("FACULDADE.ALUNO")
-			.value("NOME", id)
+			.value("NOME", nome)
 			.value("MATRICULA, matricula")
 			.value("DATA_CRIACAO", dataCriacao)
 			

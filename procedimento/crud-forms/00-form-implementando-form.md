@@ -26,7 +26,7 @@ artigo anterior, provalvelmente deve ter criado a classe do form e o método `po
 parecido com este:
 	
 	@Post
-	public Reply<?> post(Request request, @Named("curso") String curso) {
+	public Reply<?> post(Request request, @Named("curso") String _curso) {
 		return Reply.saying().ok();
 	}
 
@@ -49,9 +49,27 @@ classe auxiliar que faz esta conversão, procure pela classe __NomeDoProjetoRequ
 instancie esta classe e envie o parâmetro do método a ela:
 
 	@Post
-	public Reply<?> post(Request request, @Named("curso") String curso) {
+	public Reply<?> post(Request request, @Named("curso") String _curso) {
 		FaculdadeRequestWrapper wrapper = new FaculdadeRequestWrapper(request);
-				
+		
+		return null;
+	}
+
+Após adicionar o FaculdadeRequestWrapper, devemos lembrar que para cadastrar um Aluno é preciso
+fornecer o curso do mesmo, por isso o form captura o parâmetro __curso__ e como o mesmo é único é
+possível conseguir um objeto do tipo Curso utilizando um buscador. Basta declarar `BuscarCurso` no
+início da classe:
+
+	private BuscarCurso buscar;
+
+Com isso é so buscar um Curso através do parâmetro curso:
+
+	@Post
+	public Reply<?> post(Request request, @Named("curso") String _curso) {
+		FaculdadeRequestWrapper wrapper = new FaculdadeRequestWrapper(request);
+		
+		Curso curso = buscarCurso.porCodigo(_curso);
+		
 		return null;
 	}
 

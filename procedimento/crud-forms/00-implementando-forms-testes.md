@@ -19,6 +19,9 @@ de vendas e até mesmo um _upload_ de seus videos à um site como o _YouTube_.
 Os responsáveis por realizarem os cadastros no "site", isto é, no banco de dados, são conhecidos 
 aqui como __Forms__. São os _forms_ que gerenciam estes cadastros no banco de dados do sistema.
 
+Os _forms_ não se limitam a cadastros de usuários, eles podem ser utilizados para gravar dados de um
+livro, de um aluno, de uma organização e etc.
+
 ## Antes de iniciar 
 Este item exige conhecimentos sobre:
 

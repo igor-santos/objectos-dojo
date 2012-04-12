@@ -93,37 +93,43 @@ posteriormente, vamos a implementação da inner class Construtor:
 	private class Construtor implements Aluno.Construtor {
 		
 		private final RequestWrapper wrapper;
+		private final Curso curso;
 		
-		public Construtor(RequestWrapper wrapper) {
+		public Construtor(RequestWrapper wrapper, Curso curso) {
 			this.wrapper = wrapper;
+			this.curso = curso;
 		}
 		
+		@Override
 		public Aluno novaInstancia() {
 			return new AlunoJdbc(this);
 		}
 		
+		@Override
+		public Curso getCurso() {
+			return curso;
+		}
+		
+		@Override
 		public String getNome() {
 			return wrapper.param("nome");
 		}
 		
+		@Override
 		public String getMatricula() {
 			return wrapper.param("matricula");
 		}
 		
+		@Override
 		public DateTime getDataDeCriacao() {
 			return new DateTime();
 		}
 		
 	}
-
-Observe que para acessar as propriedades que definimos no teste utilizamos o método `param` do RequestWrapper,
+	
+Observe que para acessar as propriedades que definimos no teste utilizamos o método `param` de RequestWrapper,
 podem existir casos onde será necessário extrair diferentes tipos de valores como double ou boolean por exemplo,
 para isso utilize os outros métodos da classe RequestWrapper.
-
-<div class="alert alert-warning">
-	Dica: Sempre que for preciso implementar a inner class Construtor, a mesma deve SEMPRE implementar
-	a interface Construtor da entidade a ser gravada no banco.
-</div>
 
 ###Para outros tipos de dados utilize os seguintes métodos:
 
@@ -146,6 +152,11 @@ Para tipos longos:
 Para enums:
 
 	wrapper.enumParam(MinhaEnum.class, "enumParam");
+
+<div class="alert alert-warning">
+	Dica: Sempre que for preciso implementar a inner class Construtor, a mesma deve SEMPRE implementar
+	a interface Construtor da entidade a ser gravada no banco.
+</div>
 
 ##De volta ao método post
 

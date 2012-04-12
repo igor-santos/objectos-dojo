@@ -212,7 +212,13 @@ Defina a variável `BuscarAluno` no inicio da classe.
 	
 	}
 	
-Os códigos a seguir testam a situação atual da tabela `ALUNO` no banco de dados		
+Os códigos a seguir inserem os dados definidos nas variáveis da tabela `ALUNO` no banco de dados.
+
+Nota 1: Se possível, sempre utilize para o teste uma entidade que não possua nenhum registro, por exemplo,
+um curso que ainda não tenha nenhum aluno cadastrado (diferente do mostrado aqui, onde todos os cursos já
+possuem pelo menos um aluno).<br>
+Nota 2: Faça a extração da variável para que futuramente possamos alterar algum valor em um único ponto (a
+variável). Evite adicionar valores diretamente nos argumentos dos métodos.
 
     public void form_deve_gravar_aluno_no_bd() {
 	  String nome = "Robson de Souza";
@@ -238,7 +244,7 @@ Os códigos a seguir testam a situação atual da tabela `ALUNO` no banco de dad
     
 Após o teste da gravação dos dados, iremos comparar se estes dados foram realmente gravados no item
 seguinte, isto é, se há 901 alunos neste momento e se seus dados são equivalentes aos definidos nas
-variáveis. Vejamos:      
+variáveis. Vejamos:
 
       List<Aluno> antes = buscarAluno.porCurso(curso);
         assertThat(antes.size(), equalTo(901));
@@ -248,6 +254,15 @@ variáveis. Vejamos:
       assertThat(r900.getMatricula(), equalTo(matricula));
       assertThat(r900.getCurso(), equalTo(curso));
       assertThat(r900.getDataDeCriacao(), equalTo(dataDeCriacao));
+      
+Nota 3: NÃO utilize o `assertThat` para o ID. Isto porque os ids, geralmente possuem um _auto increment_,
+o que causará uma falha na segunda execução do teste em diante. Por exemplo, um aluno gravado com `id = 901`
+no primeiro teste e o aluno gravado com `id = 902` no segundo teste, porém a variável possui o valor 901:      
+
+	  int id = 901;	
+
+      Aluno r900 = res.get(900);
+      assertThar(r900.getId(), equalTo(id));
 
 Por fim, testaremos o `redirectUrl` que será definida mais a frente no `ModuloFaculdadeUI`.
 
@@ -260,7 +275,7 @@ No `ModuloFaculdadeUI` defina a url no método `bindApiCrud()`:
 
     @Override
     protected void bindApiCrud() {
-      at("api/faculdade/crud/curso/:curso/aluno/:aluno").serve(FormDeAlunoCreate.class);
+      at("api/crud/faculdade/curso/:curso/aluno/:aluno").serve(FormDeAlunoCreate.class);
     }
     
 Note que haverá erros pois a classe `FormDeAlunoCreate` ainda não existe. Vamos implementá-la a

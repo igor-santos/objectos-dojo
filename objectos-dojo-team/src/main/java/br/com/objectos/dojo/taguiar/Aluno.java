@@ -15,7 +15,7 @@
 */
 package br.com.objectos.dojo.taguiar;
 
-import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 
 /**
  * @author tiago.aguiar@objectos.com.br (Tiago Aguiar)
@@ -30,7 +30,7 @@ public interface Aluno {
 
     Curso getCurso();
 
-    LocalDate getDataDeCriacao();
+    DateTime getDataDeCriacao();
 
   }
 
@@ -42,6 +42,6 @@ public interface Aluno {
 
   Curso getCurso();
 
-  LocalDate getDataDeCriacao();
+  DateTime getDataDeCriacao();
 
 }

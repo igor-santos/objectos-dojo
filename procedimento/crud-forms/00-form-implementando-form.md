@@ -126,7 +126,16 @@ posteriormente, vamos a implementação da inner class Construtor:
 		}
 		
 	}
-	
+
+Para cadastrar Aluno é preciso informar a qual Curso o Aluno pertence, se voltarmos ao teste
+e analizarmos a URL que foi definida percebemos que não é necessário fornecer dados de Curso no
+QueryString, pois de acordo com a URL, já sabemos em qual curso estamos, é por conta disso que foi
+utilizado um buscador. Para saber qual o curso que o Aluno será cadastrado.
+
+É preciso criar um objeto do tipo Aluno e gravá-lo no banco de dados, para isso a classe Construtor
+é implementada, assim além de capturtar os parâmetros do QueryString, captura o resultado do 
+buscador para poder criar a entidade Aluno.
+
 Observe que para acessar as propriedades que definimos no teste utilizamos o método `param` de RequestWrapper,
 podem existir casos onde será necessário extrair diferentes tipos de valores como double ou boolean por exemplo,
 para isso utilize os outros métodos da classe RequestWrapper.
@@ -166,10 +175,11 @@ e efetuar a gravação do mesmo, para isso crie uma instância da classe Constru
 form.
 
 	@Post
-	public Reply<?> post(Request request) {
+	public Reply<?> post(Request request, @Named("curso") String _curso) {
 		FaculdadeRequestWrapper wrapper = new FaculdadeRequestWrapper(request);
-
-		Aluno pojo = new Construtor(request).novaInstancia();
+		Curso curso = buscarCurso.porCodigo(_curso);
+		
+		Aluno pojo = new Construtor(request, curso).novaInstancia();
 		
 		return null;
 	}
@@ -188,7 +198,7 @@ Após declarar Forms, altere o retorno do método e chame o método `newFormsFor
 o mesmo o <a href="http://pt.wikipedia.org/wiki/Plain_Old_Java_Objects">pojo</a> que foi gerado pela 
 inner class criada anteriormente.
 
-	Aluno pojo = new Construtor(request).novaInstancia();
+	Aluno pojo = new Construtor(request, curso).novaInstancia();
 		
 	return newFormsFor(pojo);
 	
@@ -247,6 +257,7 @@ utilizado nos bancos de dados. Atente para sua implementação:
 	public Insert getInsert() {
 		return Insert.into("FACULDADE.ALUNO")
 			.value("NOME", nome)
+			.value("CURSO_ID", curso.getId())
 			.value("MATRICULA, matricula")
 			.value("DATA_CRIACAO", dataCriacao)
 			
@@ -295,7 +306,8 @@ Após os esclarecimentos acima implemente o RedirectAction:
 		@Override 
 		public String getUrl(Aluno pojo) {
 			String baseUrl = bricks.getBaseUrl();
-			return String.format("%s/faculdade/aluno/%d", baseUrl, pojo.getId());
+			Curso curso = pojo.getCurso();
+			return String.format("%s/faculdade/curso/%s/aluno/%d", baseUrl, curso.getCodigo(), pojo.getId());
 		}
 	} 
 	
@@ -314,10 +326,11 @@ Após finalizar nosso último Action vamos seguir para o método `post` e finali
 Action chame o método `create` e finalize o método:
 
 	@Post
-	public Reply<?> post(Request request) {
+	public Reply<?> post(Request request, @Named("curso") String _curso) {
 		FaculdadeRequestWrapper wrapper = new FaculdadeRequestWrapper(request);
 
-		Aluno pojo = new Construtor(request).novaInstancia();
+		Curso curso = buscarCurso.porCodigo(_curso);
+		Aluno pojo = new Construtor(request, curso).novaInstancia();
 		
 		return forms.newFormsFor(pojo)
 
@@ -338,6 +351,7 @@ banco de dados, atente a declaração correta de propriedades da classe:
 	private final FaculdadeBricks bricks;
 	private final Forms forms;
 	
+	private final BuscarCurso buscarCurso;
 	private final NativeSqlFactory sqlFactory;
 	
 Como finalizamos o form podemos marcar as propriedades da classe como final e gerar o construtor:

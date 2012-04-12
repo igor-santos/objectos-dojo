@@ -163,7 +163,7 @@ com este mesmo nome!
 
 Defina a URL atual a partir de `faculdade`.
 
-    public static final String URL = "api/faculdade/crud/curso/direito/aluno";
+    public static final String URL = "api/crud/faculdade/curso/direito/aluno";
 
 Esta será a URL onde "estaremos preenchendo" o formulário. 	
 
@@ -199,8 +199,8 @@ Após os métodos acima que se referem as permissões do sistema, iremos criar u
 se os dados inseridos no formulário serão gravados no banco de dados.
 
 Iniciaremos com uma busca que retorna todos os alunos do curso de Direito conforme definido na
-URL, para tal, utilizaremos um _buscador de aluno_. Para mais informações sobre buscadores, veja 
-[aqui](http://dojo.objectos.com.br/procedimento/crud-entidade/01.0-implementando_buscador_testes.html).
+URL, para tal, utilizaremos o _buscador de aluno_ e _buscador de curso_. Para mais informações sobre 
+buscadores, veja [aqui](http://dojo.objectos.com.br/procedimento/crud-entidade/01.0-implementando_buscador_testes.html).
 
 Defina a variável `BuscarAluno` e `BuscarCurso` no inicio da classe.
 
@@ -213,8 +213,6 @@ Defina a variável `BuscarAluno` e `BuscarCurso` no inicio da classe.
 	  @Inject
       private BuscarCurso buscarCurso;
 	
-	}
-	
 Os códigos a seguir inserem os dados definidos nas variáveis da tabela `ALUNO` no banco de dados.
 
 Nota 1: Se possível, sempre utilize para o teste uma entidade que não possua nenhum registro, por exemplo,
@@ -226,8 +224,7 @@ variável). Evite adicionar valores diretamente nos argumentos dos métodos.
     public void form_deve_gravar_aluno_no_bd() {
 	  String nome = "Robson de Souza";
 	  String matricula = "20120001";
-	  String codigo = "568";
-	  LocalDate dataDeCriacao = new LocalDate();
+	  String codigo = "direito";
 
 	  Curso curso = buscarCurso.porCodigo(codigo);
       List<Aluno> antes = buscarAluno.porCurso(curso);
@@ -236,8 +233,6 @@ variável). Evite adicionar valores diretamente nos argumentos dos métodos.
       String url = new QueryString(URL)
         .param("nome", nome)
         .param("matricula", matricula)
-        .param("curso", curso.getCodigo())
-        .param("dataDeCriacao", dataDeCriacao)
         .get();
 
       Map<String, String> cookies = login("admin");
@@ -246,6 +241,8 @@ variável). Evite adicionar valores diretamente nos argumentos dos métodos.
       FormResponseJson json = response.to(FormResponseJson.class).using(Json.class);
       assertThat(json.isValid(), is(true));
     
+A responsabilidade de gravar o código do curso e a data de criação é da classe do _Form_.
+     
 Após o teste da gravação dos dados, iremos comparar se estes dados foram realmente gravados no item
 seguinte, isto é, se há 901 alunos neste momento e se seus dados são equivalentes aos definidos nas
 variáveis. Vejamos:
@@ -256,19 +253,18 @@ variáveis. Vejamos:
       Aluno r900 = res.get(900);
       assertThat(r900.getNome(), equalTo(nome));
       assertThat(r900.getMatricula(), equalTo(matricula));
-      assertThat(r900.getCurso().getCodigo(), equalTo(codigo));
-      assertThat(r900.getDataDeCriacao(), equalTo(dataDeCriacao));
       
 Nota 3: NÃO utilize o `assertThat` para o ID. Isto porque os ids, geralmente possuem um _auto increment_,
 o que causará uma falha na segunda execução do teste em diante. Por exemplo, um aluno gravado com `id = 901`
-no primeiro teste e o aluno gravado com `id = 902` no segundo teste, porém a variável possui o valor 901:      
+na primeira execução do teste e o aluno gravado com `id = 902` na segunda execução teste, porém a 
+variável possui o valor 901:      
 
 	  int id = 901;	
 
       Aluno r900 = res.get(900);
       assertThar(r900.getId(), equalTo(id));
 
-Por fim, testaremos o `redirectUrl` que será definida mais a frente no `ModuloFaculdadeUI`.
+Por fim, testaremos o `redirectUrl`.
 
       String redirectUrl = json.getRedirectUrl();
       assertThat(redirectUrl, containsString("faculdade/curso/direito/aluno"));

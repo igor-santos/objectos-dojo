@@ -46,6 +46,9 @@ public class TesteDeFormDeAlunoCreate extends TesteDeIntegracaoWeb {
   @Inject
   private BuscarAluno buscarAluno;
 
+  @Inject
+  private BuscarCurso buscarCurso;
+
   public void acesso_a_usuario_nao_autenticado_deve_ser_negado() {
     WebResponse response = webClientOf(URL).post("");
 
@@ -62,16 +65,17 @@ public class TesteDeFormDeAlunoCreate extends TesteDeIntegracaoWeb {
   public void form_deve_gravar_aluno_no_bd() {
     String nome = "Robson de Souza";
     String matricula = "20120001";
-    String curso = "Direito";
+    String codigo = "568";
     LocalDate dataDeCriacao = new LocalDate();
 
+    Curso curso = buscarCurso.porCodigo(codigo);
     List<Aluno> antes = buscarAluno.porCurso(curso);
     assertThat(antes.size(), equalTo(900));
 
     String url = new QueryString(URL)
         .param("nome", nome)
         .param("matricula", matricula)
-        .param("curso", curso)
+        .param("curso", curso.getCodigo())
         .param("dataDeCriacao", dataDeCriacao)
         .get();
 
@@ -87,7 +91,7 @@ public class TesteDeFormDeAlunoCreate extends TesteDeIntegracaoWeb {
     Aluno r900 = res.get(900);
     assertThat(r900.getNome(), equalTo(nome));
     assertThat(r900.getMatricula(), equalTo(matricula));
-    assertThat(r900.getCurso(), equalTo(curso));
+    assertThat(r900.getCurso().getCodigo(), equalTo(codigo));
     assertThat(r900.getDataDeCriacao(), equalTo(dataDeCriacao));
 
     String redirectUrl = json.getRedirectUrl();

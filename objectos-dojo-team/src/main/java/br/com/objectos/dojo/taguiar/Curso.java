@@ -15,22 +15,16 @@
 */
 package br.com.objectos.dojo.taguiar;
 
-import org.joda.time.LocalDate;
-
 /**
- * @author tiago.aguiar@objectos.com.br (Tiago Aguiar)
+ * @author afonso.filgueiras@objectos.com.br (Afonso J. Filgueiras)
  */
-public interface Aluno {
+public interface Curso {
 
-  interface Construtor extends br.com.objectos.comuns.base.Construtor<Aluno> {
+  interface Construtor extends br.com.objectos.comuns.base.Construtor<Curso> {
 
     String getNome();
 
-    String getMatricula();
-
-    Curso getCurso();
-
-    LocalDate getDataDeCriacao();
+    String getCodigo();
 
   }
 
@@ -38,10 +32,6 @@ public interface Aluno {
 
   String getNome();
 
-  String getMatricula();
-
-  Curso getCurso();
-
-  LocalDate getDataDeCriacao();
+  String getCodigo();
 
 }

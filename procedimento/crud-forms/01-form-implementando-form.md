@@ -18,7 +18,91 @@ o que é preciso ser feito e como deve ser feito para a implementação do form.
 Antes de iniciar a leitura deste artigo é de suma importância que você tenha implementado de forma
 correta o <a href="">teste</a> do form.
 
-##Alterando o método post
+## Acesso rápido
+
+Para acessar os tópicos do artigo siga o checklist abaixo:
+
+<table class="table table-bordered">
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_0"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Alterando o método post
+    </td>
+    <td>
+      <a href="#0_0">help!</a>
+    </td>    
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      De volta ao método post
+    </td>
+    <td>
+      <a href="#0_1">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Criando Actions
+    </td>
+    <td>
+      <a href="#0_2">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      De volta ao form - RedirectAction
+    </td>
+    <td>
+      <a href="#0_3">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Implementando o RedirectAction
+    </td>
+    <td>
+      <a href="#0_4">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Terminando o método post
+    </td>
+    <td>
+      <a href="#0_5">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Declarações da classe e Construtor
+    </td>
+    <td>
+      <a href="#0_6">help!</a>
+    </td>
+  </tr>
+</table>
+
+##<a id="0_0"> </a> Alterando o método post
 
 Lembrando que ao implementar o form sempre devemos começar pelo método `post`, que trata a solicitação
 realizada no teste para o form. Se você está seguindo este artigo desde a implementação do teste no 
@@ -174,7 +258,7 @@ Para enums:
 	a interface Construtor da entidade a ser gravada no banco.
 </div>
 
-##De volta ao método post
+## <a id="0_1"> </a> De volta ao método post
 
 Após realizar a implementação do método `post` é preciso criar o objeto a ser gravado no banco de dados
 e efetuar a gravação do mesmo, para isso crie uma instância da classe Construtor, chamando o método 
@@ -207,7 +291,7 @@ inner class criada anteriormente.
 Em seguida serão criadas outras duas inner classes responsáveis em efetuar a criação da entidade no banco de
 dados e o redireciomento para a página de detalhes da entidade após o cadastro da mesma.
 
-##Criando Actions
+## <a id="0_2"> </a> Criando Actions
 
 Chame o método `withCreateAction(new AlunoCreateAction())` logo abaixo de `newFormsFor(pojo)`
 e já defina a primeira inner class:  __AlunoCreateAction__
@@ -271,7 +355,7 @@ utilizado nos bancos de dados. Atente para sua implementação:
 			});	
 	}
 
-##De volta ao form - RedirectAction
+## <a id="0_3"> </a> De volta ao form - RedirectAction
 
 Agora que Aluno é um __Insertable__, podemos continuar a implementar o form e seguir para o próximo action que é
 o RedirectAction. O procedimento para defini-lo é praticamente o mesmo que o de AlunoCreateAction. Ainda no 
@@ -300,7 +384,7 @@ projeto para facilitar sua declaração.
 	private FaculdadeBricks bricks;
 
 
-##Implementando o RedirectAction
+## <a id="0_4"> </a> Implementando o RedirectAction
 
 Após os esclarecimentos acima implemente o RedirectAction:
 
@@ -322,7 +406,7 @@ a página de detalhes da entidade.
 	rediectUrl para a página atual, em nosso caso basta remover o id de aluno no fim da URL.
 </div>
 
-##Terminando o método post
+## <a id="0_5"> </a> Terminando o método post
 
 Após finalizar nosso último Action vamos seguir para o método `post` e finalizá-lo. Após adicionar o último 
 Action chame o método `create` e finalize o método:
@@ -343,7 +427,7 @@ Action chame o método `create` e finalize o método:
 			.create();
 	}
 
-##Declarações da classe e Construtor
+## <a id="0_6"> </a> Declarações da classe e Construtor
 
 O form está praticamente pronto, basta apenas organizar as declarações e gerar o construtor da classe. Nas
 declarações sempre crie dois blocos de definição de propriedades, o primeiro deve conter apenas propriedades

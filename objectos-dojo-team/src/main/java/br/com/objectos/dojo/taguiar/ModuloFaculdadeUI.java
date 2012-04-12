@@ -16,7 +16,7 @@
 package br.com.objectos.dojo.taguiar;
 
 /**
- * @author afonso.filgueiras@objectos.com.br (Afonso J. Filgueiras)
+ * @author tiago.aguiar@objectos.com.br (Tiago Aguiar)
  */
 public class ModuloFaculdadeUI extends SubModuloFaculdadeUI {
 

@@ -18,7 +18,7 @@ o que é preciso ser feito e como deve ser feito para a implementação do form.
 Antes de iniciar a leitura deste artigo é de suma importância que você tenha implementado de forma
 correta o <a href="">teste</a> do form.
 
-##Alterando o método post 
+##Alterando o método post
 
 Lembrando que ao implementar o form sempre devemos começar pelo método `post`, que trata a solicitação
 realizada no teste para o form. Se você está seguindo este artigo desde a implementação do teste no 
@@ -60,7 +60,13 @@ fornecer o curso do mesmo, por isso o form captura o parâmetro __curso__ e como
 possível conseguir um objeto do tipo Curso utilizando um buscador. Basta declarar `BuscarCurso` no
 início da classe:
 
-	private BuscarCurso buscar;
+	private BuscarCurso buscarCurso;
+
+<div class="alert alert-warning">
+	Dica: Deixe a propriedade marcada como private ainda e não gere o construtor da classe, pois serão adicionadas novas
+	propriedades ao decorer do form. Defina o construtor apenas quando finalizar o form.
+</div>
+
 
 Com isso é so buscar um Curso através do parâmetro curso:
 
@@ -93,6 +99,7 @@ posteriormente, vamos a implementação da inner class Construtor:
 	private class Construtor implements Aluno.Construtor {
 		
 		private final RequestWrapper wrapper;
+		
 		private final Curso curso;
 		
 		public Construtor(RequestWrapper wrapper, Curso curso) {
@@ -129,12 +136,12 @@ posteriormente, vamos a implementação da inner class Construtor:
 
 Para cadastrar Aluno é preciso informar a qual Curso o Aluno pertence, se voltarmos ao teste
 e analizarmos a URL que foi definida percebemos que não é necessário fornecer dados de Curso no
-QueryString, pois de acordo com a URL, já sabemos em qual curso estamos, é por conta disso que foi
+QueryString, pois de acordo com a URL, já sabemos em qual curso estamos, e é por conta disso que foi
 utilizado um buscador. Para saber qual o curso que o Aluno será cadastrado.
 
 É preciso criar um objeto do tipo Aluno e gravá-lo no banco de dados, para isso a classe Construtor
-é implementada, assim além de capturtar os parâmetros do QueryString, captura o resultado do 
-buscador para poder criar a entidade Aluno.
+é implementada, assim além de capturtar os parâmetros do QueryString, ela também captura o resultado
+do buscador para poder criar a entidade Aluno.
 
 Observe que para acessar as propriedades que definimos no teste utilizamos o método `param` de RequestWrapper,
 podem existir casos onde será necessário extrair diferentes tipos de valores como double ou boolean por exemplo,
@@ -189,11 +196,6 @@ __Forms__, por isso, declare uma propriedade deste tipo no início da classe:
 
 	private Forms forms;
 
-<div class="alert alert-warning">
-	Dica: Deixe a propriedade marcada como private ainda e não gere o construtor da classe, pois serão adicionadas novas
-	propriedades ao decorer do form. Defina o construtor apenas quando finalizar o form.
-</div>
-
 Após declarar Forms, altere o retorno do método e chame o método `newFormsFor(pojo)` de forms e passe para 
 o mesmo o <a href="http://pt.wikipedia.org/wiki/Plain_Old_Java_Objects">pojo</a> que foi gerado pela 
 inner class criada anteriormente.
@@ -207,8 +209,8 @@ dados e o redireciomento para a página de detalhes da entidade após o cadastro
 
 ##Criando Actions
 
-Chame o método `withCreateAction` logo abaixo de `newFormsFor(pojo)` e já defina a primeira inner class:
- __AlunoCreateAction__
+Chame o método `withCreateAction(new AlunoCreateAction())` logo abaixo de `newFormsFor(pojo)`
+e já defina a primeira inner class:  __AlunoCreateAction__
 
 	return newFormsFor(pojo)
 	
@@ -243,7 +245,7 @@ gravar uma entidade no banco de dados, vamos fazer uma pausa no form e realizar 
 
 ##Implementando Insertable
 
-Abra a interface de Aluno e implemente a interface `Insertable`, salve a alteração. Todas as implementações de 
+Abra a interface de Aluno e extenda a interface `Insertable`, salve a alteração. Todas as implementações de 
 Aluno além de AlunoJdbc reclamarão que não há implementação para o método `getInsert`, faça as devidas correções
 e adicione o `getInsert` em AlunoJdbc logo abaixo do construtor da classe.
 
@@ -357,9 +359,11 @@ banco de dados, atente a declaração correta de propriedades da classe:
 Como finalizamos o form podemos marcar as propriedades da classe como final e gerar o construtor:
 
 	@Inject
-	public FormDeAlunoCreate(FaculdadeBricks bricks, Forms forms, NativeSqlFactory sqlFactory) {
+	public FormDeAlunoCreate(FaculdadeBricks bricks, Forms forms, BuscarCurso buscarCurso,
+	  NativeSqlFactory sqlFactory) {
 		this.bricks = bricks;
 		this.forms = forms;
+		this.buscarCurso = curso;
 		this.sqlFactory = sqlFactory; 
 	}
 <div class="alert alert-warning">

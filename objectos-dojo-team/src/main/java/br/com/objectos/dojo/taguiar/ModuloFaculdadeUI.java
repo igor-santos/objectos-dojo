@@ -21,7 +21,7 @@ package br.com.objectos.dojo.taguiar;
 public class ModuloFaculdadeUI extends SubModuloFaculdadeUI {
 
   @Override
-  protected void bindApi() {
+  protected void bindApiCrud() {
     at("api/crud/faculdade/curso/:curso/aluno/:aluno").serve(FormDeAlunoCreate.class);
   }
 

@@ -18,7 +18,7 @@ package br.com.objectos.dojo.taguiar;
 import br.com.objectos.comuns.relational.Buscador;
 
 /**
- * @author afonso.filgueiras@objectos.com.br (Afonso J. Filgueiras)
+ * @author tiago.aguiar@objectos.com.br (Tiago Aguiar)
  */
 public interface BuscarCurso extends Buscador<Curso> {
 

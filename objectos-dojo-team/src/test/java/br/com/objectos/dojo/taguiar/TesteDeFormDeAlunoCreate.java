@@ -25,7 +25,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.joda.time.LocalDate;
 import org.testng.annotations.Test;
 
 import br.com.objectos.comuns.sitebricks.form.FormResponseJson;
@@ -65,8 +64,7 @@ public class TesteDeFormDeAlunoCreate extends TesteDeIntegracaoWeb {
   public void form_deve_gravar_aluno_no_bd() {
     String nome = "Robson de Souza";
     String matricula = "20120001";
-    String codigo = "568";
-    LocalDate dataDeCriacao = new LocalDate();
+    String codigo = "direito";
 
     Curso curso = buscarCurso.porCodigo(codigo);
     List<Aluno> antes = buscarAluno.porCurso(curso);
@@ -75,8 +73,6 @@ public class TesteDeFormDeAlunoCreate extends TesteDeIntegracaoWeb {
     String url = new QueryString(URL)
         .param("nome", nome)
         .param("matricula", matricula)
-        .param("curso", curso.getCodigo())
-        .param("dataDeCriacao", dataDeCriacao)
         .get();
 
     Map<String, String> cookies = login("admin");
@@ -91,8 +87,6 @@ public class TesteDeFormDeAlunoCreate extends TesteDeIntegracaoWeb {
     Aluno r900 = res.get(900);
     assertThat(r900.getNome(), equalTo(nome));
     assertThat(r900.getMatricula(), equalTo(matricula));
-    assertThat(r900.getCurso().getCodigo(), equalTo(codigo));
-    assertThat(r900.getDataDeCriacao(), equalTo(dataDeCriacao));
 
     String redirectUrl = json.getRedirectUrl();
     assertThat(redirectUrl, containsString("faculdade/curso/direito/aluno"));

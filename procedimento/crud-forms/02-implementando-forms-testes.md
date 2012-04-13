@@ -52,8 +52,8 @@ devem, de fato, resolver o problema do cliente. Por exemplo, imagine que alguns 
 uma bolsa de estudos. E todo ano a faculdade precisa atualizar a _renda do grupo familiar_ a pedido
 do _MEC_. É fato que este tipo de dado DEVE estar neste _form_, já uma data de nascimento não, 
 porque uma data de nascimento nunca será mudada (lembrando que isto não é uma regra, é um caso de uso
-específico, neste caso, da faculdade). 
-  
+específico da faculdade).
+
 ## Implementação
 
 Siga o checklist abaixo:

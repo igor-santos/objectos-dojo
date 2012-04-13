@@ -9,7 +9,7 @@ num: 1
 outof: 1
 ---
 
-## Assertion Error com Login
+## Failed com Login
 
 É comum no teste de gravação de dados de um _form_ haver uma autenticação de usuário para realizar
 aquela operação.

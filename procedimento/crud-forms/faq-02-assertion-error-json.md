@@ -11,7 +11,7 @@ outof: 2
 
 ## Assertion Error em Json
 
-Este tipo de erro acontece no processo de gravação dos dados no banco de dados. Por exemplo, um campo
+Este tipo de erro acontece no processo de gravação de dados no banco de dados. Por exemplo, um campo
 escrito de forma errada, tipos de dados incompatíveis, valores adicionados a colunas que não existam,
 entre outros.
 
@@ -82,7 +82,7 @@ Para o primeiro exemplo, altere o método `.value`
 
 	.value("HASH", getHash())
 
-A partir de agora, o teste passará.	 	  	
+A partir de agora, o teste passará em cada um dos exemplos.	 	  	
 	
 	PASSED: form_deve_gravar_imovel
 	

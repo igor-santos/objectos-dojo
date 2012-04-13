@@ -36,6 +36,7 @@ form não captura nenhum Curso, apenas um valor que representa sua chave primár
 
 	public class Construtor implements Aluno.Construtor {
 	
+		@Override
 		public Curso getCurso() {
 			return null;
 		}
@@ -55,7 +56,8 @@ as entidades do projeto, por padrão seu nome será __EntidadeVazio__, onde enti
 ser implementada, atente a amostra de código:
 
 	public class CursoVazio implements Curso.Construtor {
-
+	
+		@Override
 		public int getId() {
 			throw new UnsupportedOperationException();
 		}
@@ -67,11 +69,12 @@ Lance uma UnsupportedOperationException para cada método da classe e salve as a
 ## Utilizando a classe no Form
 
 Para utilizar a classe Vazia no form e resolver o problema de getCurso basta alterar o retorno do
-método getCurso para new CursoVazio e em seguida sobrescrever o método getId() de Curso, atente ao
+método getCurso para `new CursoVazio` e em seguida sobrescrever o método getId() de Curso, atente ao
 código abaixo:
 
 	public class Construtor implements Aluno.Construtor {
 	
+		@Override
 		public Curso getCurso() {
 			return new Curso Vazio {
 				@Override
@@ -88,5 +91,4 @@ método necessário para cadastrar Curso, getId() e fornecer o valor da URL refe
 form captura. Lembrando que para isso é necessário passar o valor da URL como parâmetro do 
 construtor da classe Construtor.
 
-		FaculdadeRequestWrapper wrapper = new FaculdadeRequestWrapper(request); 
 		Aluno pojo = new Conatrutor(wrapper, _curso).novaInstancia();		

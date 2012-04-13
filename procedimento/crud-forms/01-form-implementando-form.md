@@ -1,6 +1,6 @@
 ---
 layout: post-alpha
-title: "Implementado Form Create: Form"
+title: "Implementando Form Create: Form"
 author: "Marcos Piazzolla"
 user: "MarcosPiazzolla"
 date: "2012-04-04"

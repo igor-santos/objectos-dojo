@@ -29,9 +29,9 @@ do tipo __Update__, este método estará bem parecido com este:
 
 	@Put
 	public Reply<?> put(Request request, @Named("curso") String _curso, 
-		@Named("aluno") int _aluno) {
+	  @Named("aluno") int _aluno) {
 		
-		return Reply.saying().ok();
+	  return Reply.saying().ok();
 	}
 
 Repare que o método put é composto por um número maior de parâmetros, diferente do método post que 
@@ -45,10 +45,10 @@ variável chamada `reply`, defina esta propriedade como retorno do método.
 
 	@Put
 	public Reply<?> put(Request request, @Named("curso") String _curso, 
-		@Named("aluno") int _aluno) {
-		Reply<?> reply = Reply.saying().notFound();
+	  @Named("aluno") int _aluno) {
+	  Reply<?> reply = Reply.saying().notFound();
 		
-		return reply;
+	  return reply;
 	}
 
 Em seguida será necessário definir um buscador de Aluno, que será responsável em capturar no banco de 
@@ -58,15 +58,15 @@ atualizar algo inexistente no banco de dados.
 
 	@Put
 	public Reply<?> put(Request request, @Named("curso") String _curso, 
-		@Named("aluno") int _aluno) {
-		Reply<?> reply = Reply.saying().notFound();
+	  @Named("aluno") int _aluno) {
+	  Reply<?> reply = Reply.saying().notFound();
 	
-		Aluno existente = buscarAluno.porId(_aluno);
-		if(existente != null) {
+	  Aluno existente = buscarAluno.porId(_aluno);
+	  if(existente != null) {
 			
-		}
+	  }
 		
-		return reply;
+	  return reply;
 	} 
 
 Se o Aluno existir será realizado um processo de atualização do mesmo, caso contrário o form irá 
@@ -80,8 +80,8 @@ do método.
 
 	Aluno existente = buscarAluno.porId(_aluno);
 	if(existente != null) {
-		FaculdadeRequestWrapper wrapper = new FaculdadeRequestWrapper(request);
-		reply = reply(wrapprer, existente);
+	  FaculdadeRequestWrapper wrapper = new FaculdadeRequestWrapper(request);
+	  reply = reply(wrapprer, existente);
 	}
 
 ##Criando o método reply
@@ -90,7 +90,7 @@ Como o método `reply` não foi criado ainda, um erro de compilação será lan�
 método put e deixe o retorno definido como null.
 
 	public Reply<?>reply(RequestWrapper wrapper, Aluno existente){
-		return null;
+	  return null;
 	}
 
 Será preciso criar um objeto do tipo Aluno e eniviá-lo ao banco de dados para que seja realizado um 
@@ -106,39 +106,39 @@ para a realização do Update. Atente à sua implementação.
 
 	private class Construtor implements Aluno.Construtor {
 		
-		private final RequestWrapper wrapper;
+	private final RequestWrapper wrapper;
 		
-		private final Aluno existente;
+	private final Aluno existente;
 		
-		public Construtor(RequestWrapper wrapper, Aluno existente) {
-			this.wrapper = wrapper;
-			this.curso = curso;
-		}
+	  public Construtor(RequestWrapper wrapper, Aluno existente) {
+	    this.wrapper = wrapper;
+	    this.curso = curso;
+	  }
 		
-		@Override
-		public Aluno novaInstancia() {
-			return new AlunoJdbc(this);
-		}
+	  @Override
+	  public Aluno novaInstancia() {
+	    return new AlunoJdbc(this);
+	  }
 		
-		@Override
-		public Curso getCurso() {
-			return existente.getCurso();
-		}
+	  @Override
+	  public Curso getCurso() {
+	    return existente.getCurso();
+	  }
 		
-		@Override
-		public String getNome() {
-			return wrapper.param("nome");
-		}
+	  @Override
+	    public String getNome() {
+	      return wrapper.param("nome");
+	  }
 		
-		@Override
-		public String getMatricula() {
-			return wrapper.param("matricula");
-		}
+	  @Override
+	  public String getMatricula() {
+	    return wrapper.param("matricula");
+	  }
 		
-		@Override
-		public DateTime getDataDeCriacao() {
-			return new DateTime();
-		}
+	  @Override
+	    public DateTime getDataDeCriacao() {
+		return new DateTime();
+	  }
 		
 	}
 
@@ -154,9 +154,9 @@ de dados, para isso basta instanciar a classe Construtor e chamar `novaInstancia
 Aluno.
 
 	public Reply<?>reply(RequestWrapper wrapper, Aluno existente){
-		Aluno pojo = new Construtor(wrapper, existente).novaInstancia();
+	  Aluno pojo = new Construtor(wrapper, existente).novaInstancia();
 	
-		return null;
+	  return null;
 	}
 
 Agora é preciso atualizar nosso objeto no banco de dados, para isso utilizaremos uma implementação da
@@ -169,7 +169,7 @@ o mesmo o <a href="http://pt.wikipedia.org/wiki/Plain_Old_Java_Objects">pojo</a>
 inner class criada anteriormente.
 
 	Aluno pojo = new Construtor(wrapper, existente).novaInstancia();
-		
+	
 	return newFormsFor(pojo);
 	
 Em seguida serão criadas outras duas inner classes responsáveis em efetuar a alteração da entidade no banco de
@@ -181,8 +181,8 @@ Chame o método `withUpdateAction(new AlunoUpdateAction())` logo abaixo de `newF
 e já defina a primeira inner class:  __AlunoUpdateAction__
 
 	return newFormsFor(pojo)
-	
-		.withUpdateAction(new AlunoUpdateAction(existente));
+
+	  .withUpdateAction(new AlunoUpdateAction(existente));
 
 Um erro de compilação irá aparecer, isso por que a classe ainda não existe, basta cria-lá logo abaixo do método
 `reply`, lembrando que a mesma deve implementar a interface `Form.UpdateAction<Entidade>`, deve-se especificar
@@ -190,22 +190,21 @@ no lugar de "Entidade" o tipo de entidade a ser atualizada no banco, no nosso ca
 
 	private class AlunoUpdateAction implements Form.UpdateAction<Aluno> {
 
-		private final Aluno existente;
+	private final Aluno existente;
 
-		public AlunoUpdateAction(Aluno existente) {
-		  this.existente = existente;
-		}
+	  public AlunoUpdateAction(Aluno existente) {
+	    this.existente = existente;
+	  }
 	
-		@Override
-		public Aluno execute(Aluno pojo) {
-		  return null;
-		}	
-	}
+	  @Override
+	  public Aluno execute(Aluno pojo) {
+	    return null;
+	  }	
 
-		@Override
-		public Aluno execute(Aluno pojo) {
-		  return null;
-		}
+	  @Override
+	  public Aluno execute(Aluno pojo) {
+        return null;
+	  }
 
 	}
 
@@ -218,10 +217,12 @@ inner class Construtor que contém as informações atualizadas de Aluno, para i
 o método `atualizarCom(Aluno pojo)` na interface Aluno, atente a implementação do método em AlunoJdbc.
 
 	@Override
-	public CadastroDeCedulaDeCreditoBancario atualizarCom(CadastroDeCedulaDeCreditoBancario pojo) {
-	  this.completo = pojo.isCompleto();
-	  this.coobrigacao = pojo.getCoobrigacao();
-
+	  public Aluno atualizarCom(Aluno pojo) {
+		this.nome = pojo.getNome();
+		this.matricula = pojo.getMatricula();
+		this.curso = pojo.getCurso();
+		this.dataCriacao = pojo.getdataCriacao();
+		
 	    return this;
 	}
 
@@ -229,10 +230,10 @@ Corrija os erros de compilação que aparecerem por conta das novas atualizaçõ
 agora é possível realizar a sincronização entre os objetos em `AlunoUpdateAction`, atente a código
 abaixo.
 
-		@Override
-		public Aluno execute(Aluno pojo) {
-          Aluno atualizado = existente.atualizarCom(pojo);
-          sqlFactory.update(atualizado).execute();
-          return atualizado;
-		}	
-	}
+	@Override
+	public Aluno execute(Aluno pojo) {
+		Aluno atualizado = existente.atualizarCom(pojo);
+		sqlFactory.update(atualizado).execute();
+		
+		return atualizado;
+	}	

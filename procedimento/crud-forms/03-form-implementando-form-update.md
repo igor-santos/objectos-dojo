@@ -101,14 +101,138 @@ criar um objeto do tipo Aluno dado um RequestWrapper e uma ou mais entidades.
 
 Lembrando que todos os parâmetros que foram fornecidos na QueryString do teste estão contidos no 
 objeto Request que foi convertido em um RequestWrapper, a seguir será implementada uma classe auxiliar
-chamada Construtor, com ela é possível criar o novo objeto aluno que será enviado ao banco de dados
+chamada Construtor, com ela é possível criar o novo objeto Aluno que será enviado ao banco de dados
+para a realização do Update. Atente à sua implementação.
 
-Todos os parâmetros que fornecemos na QueryString do teste estão contidos no objeto Request, que
-é parâmetro do método `post`, após realizarmos a conversão do Request, criamos uma classe que busca
-todos os parâmetros do QueryString e os adiciona em um objeto do tipo Aluno que será persistido 
-posteriormente, vamos a implementação da inner class Construtor:
+	private class Construtor implements Aluno.Construtor {
+		
+		private final RequestWrapper wrapper;
+		
+		private final Aluno existente;
+		
+		public Construtor(RequestWrapper wrapper, Aluno existente) {
+			this.wrapper = wrapper;
+			this.curso = curso;
+		}
+		
+		@Override
+		public Aluno novaInstancia() {
+			return new AlunoJdbc(this);
+		}
+		
+		@Override
+		public Curso getCurso() {
+			return existente.getCurso();
+		}
+		
+		@Override
+		public String getNome() {
+			return wrapper.param("nome");
+		}
+		
+		@Override
+		public String getMatricula() {
+			return wrapper.param("matricula");
+		}
+		
+		@Override
+		public DateTime getDataDeCriacao() {
+			return new DateTime();
+		}
+		
+	}
 
+A novidade aqui é que não é preciso buscar um Curso ou utilizar uma classe Vazia como nos forms create,
+pois Curso já está contido no objeto Aluno que foi capturado do banco através do buscador, por isso
+que Aluno é enviado ao construtor, assim em `getCurso()` basta retornar o curso do Aluno que foi 
+enviado como parâmetro ao construtor da classe.
 
+##De volta ao método reply
 
+Após definir a inner class Construtor, é preciso criar o novo objeto Aluno que será enviado ao banco
+de dados, para isso basta instanciar a classe Construtor e chamar `novaInstancia()` para retornar um
+Aluno.
 
+	public Reply<?>reply(RequestWrapper wrapper, Aluno existente){
+		Aluno pojo = new Construtor(wrapper, existente).novaInstancia();
+	
+		return null;
+	}
 
+Agora é preciso atualizar nosso objeto no banco de dados, para isso utilizaremos uma implementação da
+interface Forms, por isso, declare uma propriedade deste tipo no início da classe:
+
+	private Forms forms;
+
+Após declarar Forms, altere o retorno do método e chame o método `newFormsFor(pojo)` de forms e passe para 
+o mesmo o <a href="http://pt.wikipedia.org/wiki/Plain_Old_Java_Objects">pojo</a> que foi gerado pela 
+inner class criada anteriormente.
+
+	Aluno pojo = new Construtor(wrapper, existente).novaInstancia();
+		
+	return newFormsFor(pojo);
+	
+Em seguida serão criadas outras duas inner classes responsáveis em efetuar a alteração da entidade no banco de
+dados e o redireciomento para a página de detalhes da entidade após o update da mesma.
+
+##Criando Actions
+
+Chame o método `withUpdateAction(new AlunoUpdateAction())` logo abaixo de `newFormsFor(pojo)`
+e já defina a primeira inner class:  __AlunoUpdateAction__
+
+	return newFormsFor(pojo)
+	
+		.withUpdateAction(new AlunoUpdateAction(existente));
+
+Um erro de compilação irá aparecer, isso por que a classe ainda não existe, basta cria-lá logo abaixo do método
+`reply`, lembrando que a mesma deve implementar a interface `Form.UpdateAction<Entidade>`, deve-se especificar
+no lugar de "Entidade" o tipo de entidade a ser atualizada no banco, no nosso caso Aluno.
+
+	private class AlunoUpdateAction implements Form.UpdateAction<Aluno> {
+
+		private final Aluno existente;
+
+		public AlunoUpdateAction(Aluno existente) {
+		  this.existente = existente;
+		}
+	
+		@Override
+		public Aluno execute(Aluno pojo) {
+		  return null;
+		}	
+	}
+
+		@Override
+		public Aluno execute(Aluno pojo) {
+		  return null;
+		}
+
+	}
+
+Assim como no processo de gravação será preciso um objeto do tipo NativeSqlFactory para nos auxiliar
+no processo de update, declare o mesmo logo abaixo da propriedade Form no início da classe.
+
+Antes de atualizar Aluno no banco de dados é preciso atualizar as informações do objeto Aluno que foi 
+capturado do banco a partir do buscador com as informações do objeto Aluno que foi criado a partir da
+inner class Construtor que contém as informações atualizadas de Aluno, para isso é preciso implementar 
+o método `atualizarCom(Aluno pojo)` na interface Aluno, atente a implementação do método em AlunoJdbc.
+
+	@Override
+	public CadastroDeCedulaDeCreditoBancario atualizarCom(CadastroDeCedulaDeCreditoBancario pojo) {
+	  this.completo = pojo.isCompleto();
+	  this.coobrigacao = pojo.getCoobrigacao();
+
+	    return this;
+	}
+
+Corrija os erros de compilação que aparecerem por conta das novas atualizações. Voltando ao form
+agora é possível realizar a sincronização entre os objetos em `AlunoUpdateAction`, atente a código
+abaixo.
+
+		@Override
+		public Aluno execute(Aluno pojo) {
+          Aluno atualizado = existente.atualizarCom(pojo);
+          sqlFactory.update(atualizado).execute();
+          return atualizado;
+		}	
+	}

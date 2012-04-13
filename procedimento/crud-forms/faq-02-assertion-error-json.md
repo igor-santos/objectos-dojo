@@ -6,7 +6,6 @@ user: "taguiar"
 published: true
 partof: faq-crud-forms
 num: 2
-outof: 2
 ---
 
 ## Assertion Error em Json

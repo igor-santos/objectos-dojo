@@ -139,7 +139,7 @@ Mais um método idêntico ao _Form Create_.
 
 	public void acesso_a_usuario_nao_autorizado_deve_ser_negado() {
 	  Map<String, String> cookies = login("user");
-	  WebResponse response = webClientOf(URL, cookies).post("");
+	  WebResponse response = webClientOf(URL, cookies).put("");
 	
 	  assertThat(response.status(), equalTo(HttpServletResponse.SC_UNAUTHORIZED));
 	}

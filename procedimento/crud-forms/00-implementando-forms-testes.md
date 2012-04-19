@@ -272,11 +272,16 @@ No `ModuloFaculdadeUI` defina a url no método `bindApiCrud()`:
 
     @Override
     protected void bindApiCrud() {
-      at("api/crud/faculdade/curso/:curso/aluno/:aluno").serve(FormDeAlunoCreate.class);
+      at("api/crud/faculdade/curso/:curso/aluno").serve(FormDeAlunoCreate.class);
     }
     
-Note que haverá erros pois a classe `FormDeAlunoCreate` ainda não existe. Vamos implementá-la a
-seguir.        
+Você entenderá esta URL quando implementar o _Form_.    
+    
+Note que haverá erros de compilação pois a classe `FormDeAlunoCreate` ainda não existe. Utilize o
+atalho `Ctrl + 1` e crie esta classe no pacote `ui.api.crud` do diretório principal do projeto 
+`/src/main/java`.
+
+Implementaremos o _Form_ a seguir.	
 
 __Importante: Retomando a idéia da especificação, poderiamos ter uma situação onde quisessemos separar
 os alunos por curso e período desta forma:__ `faculdade/curso/direito/periodo/noturno/aluno`. __Assim toda
@@ -288,5 +293,5 @@ Para mais informações acesse os códigos nos links abaixo:
 [TesteDeFormDeAlunoCreate.java](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/test/java/br/com/objectos/dojo/taguiar/TesteDeFormDeAlunoCreate.java)<br>
 [ModuloFaculdadeUI.java](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/main/java/br/com/objectos/dojo/taguiar/ModuloFaculdadeUI.java)<br>
 
-Siga para o próximo passo. Os Forms! <a href="{{ site.baseurl }}/procedimento/crud-forms/00-form-implementando-form.html" class="btn btn-success">Continuar!</a><br>
+Siga para o próximo passo. O Form! <a href="{{ site.baseurl }}/procedimento/crud-forms/00-form-implementando-form.html" class="btn btn-success">Continuar!</a><br>
 Leia mais uma vez! <a href="#TOPO" class="btn btn-warning">Revisar!</a>

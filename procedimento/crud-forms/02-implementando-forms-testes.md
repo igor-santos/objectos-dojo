@@ -128,7 +128,7 @@ atualizações.
 ### <a id="0_4"> </a>Preparar o método de teste: acesso a um usuário não autenticado
 Idêntico ao método do _Form Create e com o mesmo objetivo.
 
-    public void sem_autenticacao_deve_ser_desautorizado() {
+    public void acesso_a_usuario_nao_autenticado_deve_ser_negado() {
       WebResponse response = webClientOf(URL).put("");
 
       assertThat(response.status(), equalTo(HttpServletResponse.SC_UNAUTHORIZED));

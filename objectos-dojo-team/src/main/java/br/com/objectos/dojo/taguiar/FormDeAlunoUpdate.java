@@ -18,12 +18,6 @@ package br.com.objectos.dojo.taguiar;
 /**
  * @author tiago.aguiar@objectos.com.br (Tiago Aguiar)
  */
-public class ModuloFaculdadeUI extends SubModuloFaculdadeUI {
-
-  @Override
-  protected void bindApiCrud() {
-    at("api/crud/faculdade/curso/:curso/aluno").serve(FormDeAlunoCreate.class);
-    at("api/crus/faculdade/curso/:curso/aluno/:aluno").serve(FormDeAlunoUpdate.class);
-  }
+public class FormDeAlunoUpdate {
 
 }

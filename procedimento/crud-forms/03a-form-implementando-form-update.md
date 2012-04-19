@@ -124,7 +124,7 @@ verifique se o mesmo é diferente de null, ou seja se ele existe no banco de dad
 	  }
 
 Caso o Aluno exista será realizado o processo de __Update__, caso contrário será lançado um erro
-<a href="http://pt.wikipedia.org/wiki/HTTP_404>">404</a>.
+<a href="http://pt.wikipedia.org/wiki/HTTP_404">404</a>.
 
 Sabendo que o Aluno existe no banco de dados, instancie um __NomeDoProjetoRequestWrapper__ e converta
 o objeto __Request__ do método, em um __RequestWrapper__, em seguida atribua a propriedade `reply`
@@ -135,8 +135,8 @@ o retorno do método `reply(existente, wrapper)` que ainda não existe.
 	  reply = reply(wrapprer, existente);
 	}
 
-Corrija os erros de compilação criando o método `reply(existente, wrapper)` logo abaixo de put, deixe
-o que o método retorne null por hora, sua implementação será discutida no próximo tópico.
+Corrija os erros de compilação criando o método `reply(existente, wrapper)` logo abaixo de `put`,
+deixe o que o método retorne null por hora, sua implementação será discutida no próximo tópico.
 
 	private Reply<?> reply(Aluno existente, FaculdadeRequestWrapper wrapper ) {
 	  return null;
@@ -196,6 +196,11 @@ Atente a implementação da classe Construtor abaixo:
 	  }
 		
 	}
+	
+<div class="alert alert-warning">
+	Dica: Não se esqueça de que 'existente' possui as informações do Aluno com as informações 
+	desatualizadas no banco.
+</div>
 
 Para cada propriedade de Aluno que não deve ser atualizada basta retornar a propriedade atual do 
 Aluno que está sendo enviado no construtor da classe no método em questão, por exemplo, se __Curso__
@@ -205,11 +210,6 @@ não for atualizado basta retornar:
 	  public Curso getCurso() {
 	    return existente.getCurso();
 	  }
-
-<div class="alert alert-warning">
-	Dica: Não se esqueça de que 'existente' possui as informações do Aluno com as informações 
-	desatualizadas no banco.
-</div>
 
 ###<a id="0_4"> </a> De volta ao método reply
 
@@ -228,17 +228,16 @@ interface Forms, por isso, declare uma propriedade deste tipo no início da clas
 
 	private Forms forms;
 
-Após declarar Forms, altere o retorno do método e chame o método `newFormsFor(pojo)` de forms e passe para 
-o mesmo o <a href="http://pt.wikipedia.org/wiki/Plain_Old_Java_Objects">pojo</a> que foi gerado pela 
-inner class criada anteriormente.
+Após declarar Forms, altere o retorno do método e chame o método `newFormsFor(pojo)` de `forms`
+e passe para o mesmo o <a href="http://pt.wikipedia.org/wiki/Plain_Old_Java_Objects">pojo</a> que
+foi gerado pela inner class criada anteriormente.
 
 	Aluno pojo = new Construtor(wrapper, existente).novaInstancia();
 	
 	return newFormsFor(pojo);
 	
-Em seguida serão criadas outras duas inner classes responsáveis em efetuar a alteração da entidade no banco de
-dados e o redireciomento para a página de detalhes da entidade após o update da mesma.
+Em seguida serão criadas outras duas inner classes responsáveis em efetuar a alteração da entidade 
+no banco de dados e o redirecionamento para a página de detalhes da entidade após o update da mesma.
 
-
-<p><b>Continuar com os Actions ? </b><a href="{{ site.baseurl }}/procedimento/crud-forms/03b-form-implementando-form-update.html" 
-class="btn btn-warning">Parte 2</a></p>.
+<p><b> Continuar com os Actions ? </b><a href="{{ site.baseurl }}/procedimento/crud-forms/03b-form-implementando-form-update.html" 
+class="btn btn-success">Parte 2</a></p>.

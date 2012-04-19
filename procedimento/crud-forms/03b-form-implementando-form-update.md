@@ -119,6 +119,8 @@ seguinte implementação.
 Declare um __NativeSqlFactory__ logo abaixo de Form no topo da classe, este objeto nos ajudará 
 futuramente na realização do Update.
 
+	private NativeSqlFactory sqlFactory;
+
 Antes de atualizar as propriedades de Aluno no banco de dados é preciso enviar as informações para
 um objeto e gravar no banco todas as propriedades do mesmo, para isso serão criados dois métodos
 `atualizarCom(MinhaEntidade)` e `getUpdate()` que serão abordados no próximo tópico.
@@ -133,7 +135,7 @@ No método `execute` atualize as informações de Aluno utilizando o método `at
 	  }
 
 Um erro de compilação ocorrerá indicando que o método `atualizarCom(Aluno pojo)` não existe, adicione
-o método na interface de Aluno e realize as devidas correções caso erros ocorram. Em seguida  
+o método na interface Aluno e realize as devidas correções caso erros ocorram. Em seguida  
 basta implementar `atualizarCom(Aluno pojo)` em AlunoJdbc.
 
 	@Override
@@ -161,7 +163,7 @@ NativeSqlFactory para realizar o processo de Update, por isso declare o mesmo lo
 	}	
 
 Ao chamar o método `execute` um erro de compilação será lançado indicando que Aluno não implementa
-a interface __Updatable__, na interface de Aluno faça o mesmo extender __Updatable__, será preciso
+a interface __Updatable__, na interface Aluno faça o mesmo extender __Updatable__, será preciso
 adicionar o método `getUpdate` em AlunoJdbc, atente a sua implementação:
 
     @Override
@@ -172,6 +174,8 @@ adicionar o método `getUpdate` em AlunoJdbc, atente a sua implementação:
         .add("set ALUNO.NOME = ?").param(nome)
         .add(", ALUNO.CURSO_ID = ?").param(curso.getId())
         .add(", ALUNO.MATRICULA = ?").param(matricula)
+        
+        .add("where ALUNO.ID = ?").param(id);
   }
 
 Após as alterações acima, podemos seguir para o próximo Action, AlunoRedirectAction.

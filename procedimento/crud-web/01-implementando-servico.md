@@ -6,8 +6,8 @@ user: "taguiar"
 date: "2012-04-19"
 published: true
 partof: procedimento-crud-web
-num: 5
-outof: 5
+num: 1
+outof: 1
 ---
 
 ## <a id="TOPO"> </a>Introdução
@@ -81,7 +81,7 @@ Utilize o atalho `Ctrl + 1` para criar a classe `TabelaDeAluno` no pacote `ui.br
 será responsável por "enviar" os dados a página `TabelaDeAluno.html` que criaremos futuramente. 
 
 ## <a id="0_1"> </a>Criando a classe Tabela
-Esquecendo por um momento a classe de serviço, vamos definir os atributos e métodos da classe `TabelaDeAluno`.<br>
+Vamos definir os atributos e métodos da classe `TabelaDeAluno`.<br>
 Com a classe criada, acrescente a _annotation_ `@Show` onde definimos a qual página _html_ os dados
 serão listados. Por padrão, utilizamos o mesmo nome da classe à página, seguido da extensão `.html`
 

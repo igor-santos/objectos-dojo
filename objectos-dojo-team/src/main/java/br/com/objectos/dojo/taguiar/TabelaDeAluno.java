@@ -31,4 +31,8 @@ public class TabelaDeAluno {
     this.dtos = dtos;
   }
 
+  public List<ConsultaDeAlunoDTO> getDtos() {
+    return dtos;
+  }
+
 }

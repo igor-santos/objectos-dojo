@@ -21,6 +21,7 @@ import com.google.inject.name.Named;
 import com.google.sitebricks.headless.Reply;
 import com.google.sitebricks.headless.Request;
 import com.google.sitebricks.headless.Service;
+import com.google.sitebricks.http.Get;
 
 /**
  * @author tiago.aguiar@objectos.com.br (Tiago Aguiar)
@@ -34,6 +35,7 @@ public class ServicoDeAluno {
     this.consulta = consulta;
   }
 
+  @Get
   public Reply<?> get(Request request, @Named("curso") String _curso) {
     FaculdadeRequestWrapper wrapper = new FaculdadeRequestWrapper(request);
 

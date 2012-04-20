@@ -18,6 +18,10 @@ package br.com.objectos.dojo.taguiar;
 /**
  * @author tiago.aguiar@objectos.com.br (Tiago Aguiar)
  */
-public class ConsultaDeAlunoDTO {
+public interface ConsultaDeAlunoDTO {
+
+  String getNome();
+
+  String getMatricula();
 
 }

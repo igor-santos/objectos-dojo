@@ -3,11 +3,10 @@ layout: post-alpha
 title: "Erros ao habilitar páginas na web"
 author: "Marcos Piazzolla"
 user: "MarcosPiazzolla"
-date: "2012-03-09"
+date: "2012-04-20"
 published: true 
 partof: faq-crud-web
 num: 1
-outof: 1
 ---
 
 ##Introdução

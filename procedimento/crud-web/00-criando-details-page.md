@@ -28,14 +28,15 @@ em uma página de detalhes, mas este não é o objetivo deste artigo.
 
 Assim como na criação de páginas de listagem, é preciso criar uma classe java que represente a
 página de detalhes a ser implementada posteriormente, no exemplo abaixo será implementada uma página
-que todas as informações de um curso de uma faculdade. Mãos à obra!
+que lista todas as informações de um curso de uma faculdade. Mãos à obra!
 
 Primeiramente crie a classe que representa a página de detalhes no pacote `br.com.faculdade.ui.page`
 e dê o nome de CursoDetailsPage.
 
 <div class="alert alert info">
-	Para cada details page criado lembre-se que seu nome deve conter o nome da entidade seguido de
-	details page, da mesma forma como fora feito acima em Curso, CursoDetailsPage
+	Dica: Lembre-se que para cada classe de details page criada o nome da mesma deve conter as 
+	seguintes informações: __Entidade__ + DetailsPage, em nosso exemplo de curso nossa classe
+	seria definida como __CursoDetailsPage__. 
 </div>
 
 Adicione a anotação `@Decorated` na classe para ligá-la ao arquivo html que será responsável em 
@@ -45,13 +46,56 @@ realizar a exibição dos dados da entidade, não se esqueça de estender a clas
 	public class CursoDetailsPage extends BasePage {
 	}
 
+Provavelemte sua IDE irá lançar alguns erros de compilação corrijá-os adicionando o construtor da
+classe sem a propriedade Curso e o método getMetaPage(), deixe retornando __null__ por hora.
+
+	@Inject
+	public CursoDetailsPage(FaculdadeBricks bricks, BuscarCurso buscarCurso) {
+	  super(bricks);
+	  this.buscarCurso = buscarCurso;
+	}
+	
+	protected MetaPageScript getMetaPage() {
+	  return null;
+	}
+
+<div class="alert alert info">
+	Importante: Não se esqueça de adicionar a anotação @Inject no construtor da classe para evitar
+	que NullPointerExceptions ocorram.
+</div>
+
 Para que seja possível listar os detalhes de um curso em específico é preciso buscar este curso no
 banco de dados através de algum parâmetro que vem da url, por conta disso utilizaremos um buscador
 de curso.
 
 	private BuscarCurso buscarCurso;
 
-Declare também uma entidade do tipo Curso, pois a página html irá acessar e exibir todas as
-propriedades desta entidade.
+Declare também uma entidade do tipo Curso e um getter para a mesma, pois a página html irá acessar e
+exibir todas as propriedades desta entidade através de seu getter.
 
 	private Curso curso;
+	
+	public Curso getCurso() {
+	  return curso;
+	}
+
+##Implementando o método get
+
+Este método é responsável em capturar parâmetros da url e utilizá-los para buscar um entidade no
+banco de dados, sempre que uma página de detalhes for acessada a classe java que representa esta
+página será chamada e o método get será o primeiro método a ser carregado, pois o mesmo é responsável
+em popular a propriedade curso declarada no topo da classe.
+
+	@Get
+	public void get(){
+	}
+
+<div class="alert alert info">
+	Dica ao implementar o método get é muito importante que o mesmo possua a anotação @Get, com esta
+	anotação todas as vezes que o link da página for acessado o método que for anotado com get será
+	carregado.
+</div>
+
+Para que seja possível exibir todas as informações de um Curso em sua página de detalhes é preciso
+buscar um curso no banco de dados dado algum tipo de valor que virá da url, não se esqueça que este
+valor deve ser único no banco de dados, caso contrário não será possível exibir os dados de curso.

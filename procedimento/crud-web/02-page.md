@@ -7,7 +7,6 @@ date: "2012-04-26"
 published: true
 partof: procedimento-crud-web
 num: 2
-outof: 2
 ---
 
 ## <a id="TOPO"> </a> Introdução
@@ -270,5 +269,5 @@ Mais informações acesse os códigos nos links abaixo:
 [CursoPageMeta.java](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/main/java/br/com/objectos/dojo/taguiar/CursoPageMeta.java)<br>
 [ModuloFaculdadeUI.java](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/main/java/br/com/objectos/dojo/taguiar/ModuloFaculdadeUI.java)<br>
  
-Siga para o próximo passo. Details Page! <a href="{{ site.baseurl }}/procedimento/crud-web/" class="btn btn-success">Continuar!</a><br>
+Siga para o próximo passo. Details Page! <a href="{{ site.baseurl }}/procedimento/crud-web/03-criando-details-page.html" class="btn btn-success">Continuar!</a><br>
 Leia mais uma vez! <a href="#TOPO" class="btn btn-warning">Revisar!</a>

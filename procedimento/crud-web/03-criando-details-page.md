@@ -203,4 +203,39 @@ sempre deve chamar um page meta anterior ao page meta atual, tome como exemplo C
 que deve chamar CursoPageMeta que provavelmente chamará IndexPageMeta definindo o caminho até a raiz
 da aplicação.
 
-Já o método display é responsável em exibir todo o caminho até a página atual, 
+Já o método display é responsável em exibir todo o caminho até a página atual, Basta uma leitura
+rápida no bloco onde o método é chamado para perceber o que o mesmo faz.
+
+##Implementando DetailsPage.html
+
+Tudo está praticamente pronto basta implementar o arquivo html responsável em exibir as informações 
+de um curso na tela. Crie o arquivo CursoDetailsPage.html no mesmo pacote onde foi criada a classe
+CursoDetailsPage, atente a forma como o arquivo html exibe as propriedades de curso na tela.
+
+	<!doctype html>
+	<html>
+	<body>
+	  <div class="content-details">
+	    <h3>Detalhes</h3>
+	
+	    <div class="row">
+	      <div class="span6">
+	        <dl>
+	          <dt>Código</dt>
+	          <dd>${curso.codigo}</dd>
+	          <dt>Nome</dt>
+	          <dd>${curso.nome}</dd>
+	          <dt>Código</dt>
+	          <dd>${curso.codigo}</dd>
+	        </dl>
+	      </div>
+	        
+	  </div>
+	</body>
+	</html>
+
+<div class="alert alert info">
+    Importante: As propriedades são acessadas na classe CursoDetailsPage através do método getCurso(),
+    no html prefixo get é omitido é utilizado apenas o nome da propriedade a ser acessada, repare
+    que todas as propriedades que estão sendo exibidas possuem getters na interface da entidade.
+</div>

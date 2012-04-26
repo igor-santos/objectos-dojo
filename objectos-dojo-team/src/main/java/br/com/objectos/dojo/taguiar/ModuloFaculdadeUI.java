@@ -26,4 +26,16 @@ public class ModuloFaculdadeUI extends SubModuloFaculdadeUI {
     at("api/crus/faculdade/curso/:curso/aluno/:aluno").serve(FormDeAlunoUpdate.class);
   }
 
+  @Override
+  protected void bindApi() {
+    at("/api/bd/faculdade/curso").serve(ServicoDeCurso.class);
+    at("/api/bd/faculdade/curso/:curso/aluno").serve(ServicoDeAluno.class);
+  }
+
+  @Override
+  protected void bindPages() {
+    at("/").show(IndexPage.class);
+    at("/faculdade/curso").show(CursoPage.class);
+  }
+
 }

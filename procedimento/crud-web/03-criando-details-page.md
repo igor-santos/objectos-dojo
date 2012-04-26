@@ -3,28 +3,123 @@ layout: post-alpha
 title: "Habilitando páginas de detalhe na web"
 author: "Marcos Piazzolla"
 user: "MarcosPiazzolla"
-date: "2012-03-09"
+date: "2012-04-26"
 published: true 
 partof: procedimento-crud-web
 num: 3
 outof: 3
 ---
 
-#Introdução
+##<a id="topo"> </a> Introdução
 
 Ao trabalhar com aplicações web é muito comum a implementação de views, componentes gráficos que
 são responsáveis em dar um feedback ao usuário, as views são páginas html que contém listagens ou
 algum tipo de informação que vem do banco de dados tome como exemplo de view as páginas de detalhes 
-no artigo implementando pasges.
+no artigo: <a href="{{ site.baseurl }}/procedimento/crud-web/02-page.html">Implementando pages</a>.
 
-##Details Page?
+## Acesso rápido
+
+Para acessar os tópicos do artigo siga o checklist abaixo:
+
+<table class="table table-bordered">
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_0"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Details Page?
+    </td>
+    <td>
+      <a href="#0_0">help!</a>
+    </td>    
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Criando a classe que representa a página
+    </td>
+    <td>
+      <a href="#0_1">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Implementando o método get
+    </td>
+    <td>
+      <a href="#0_2">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Alterando o módulo do projeto
+    </td>
+    <td>
+      <a href="#0_3">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Finalizando o método get
+    </td>
+    <td>
+      <a href="#0_4">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Implementando o método getMetaPage
+    </td>
+    <td>
+      <a href="#0_5">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Implementando DetailsPageMeta
+    </td>
+    <td>
+      <a href="#0_6">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Implementando DetailsPage.html
+    </td>
+    <td>
+      <a href="#0_7">help!</a>
+    </td>
+  </tr>
+</table>
+
+##<a id="0_0"> </a> Details Page?
 
 Neste artigo será tratado a implementação de uma página de detalhes de uma entidade, páginas de
 detalhes contém informações mais específicas de uma entidade, tudo aquilo que não é necessaŕio ser 
 exibido em uma página alimentada por um serviço, é possível adicionar listagens de outras entidades
 em uma página de detalhes, mas este não é o objetivo deste artigo.
 
-##Criando a classe que representa a página
+##<a id="0_1"> </a> Criando a classe que representa a página
 
 Assim como na criação de páginas de listagem, é preciso criar uma classe java que represente a
 página de detalhes a ser implementada posteriormente, no exemplo abaixo será implementada uma página
@@ -35,8 +130,8 @@ e dê o nome de CursoDetailsPage.
 
 <div class="alert alert info">
 	Dica: Lembre-se que para cada classe de details page criada o nome da mesma deve conter as 
-	seguintes informações: __Entidade__ + DetailsPage, em nosso exemplo de curso nossa classe
-	seria definida como __CursoDetailsPage__. 
+	seguintes informações: Entidade + DetailsPage, em nosso exemplo de curso nossa classe
+	seria definida como CursoDetailsPage. 
 </div>
 
 Adicione a anotação `@Decorated` na classe para ligá-la ao arquivo html que será responsável em 
@@ -79,7 +174,7 @@ exibir todas as propriedades desta entidade através de seu getter.
 	  return curso;
 	}
 
-###Implementando o método get
+###<a id="0_2"> </a> Implementando o método get
 
 Este método é responsável em capturar parâmetros da url e utilizá-los para buscar uma entidade no
 banco de dados, sempre que uma página de detalhes for acessada a classe java que representa esta
@@ -132,7 +227,7 @@ adicione um link em uma propriedade única de curso, código em nosso caso.
 	lançada reclamando que o método em questão não existe.
 </div>
 
-###Alterando o módulo do projeto
+###<a id="0_3"> </a> Alterando o módulo do projeto
 
 Após adicionar o link para a página de detalhes de Curso na __TabelaDeCurso__ é preciso adicionar
 um bind no módulo para o link definido na tabela, com este bind será possível ligar a classe java ao 
@@ -148,7 +243,7 @@ realize a seguinte alteração.
 Repare que foi adicionado um caracter coringa após curso, o valor de `:curso` será alterado de
 acordo com o tipo de página de curso que for acessada.
 
-###Finalizando o método get
+###<a id="0_4"> </a> Finalizando o método get
 
 De volta ao método get adicione como parâmetro do mesmo o caracter coringa da url recém adicionada
 no módulo, em seguida faça uma busca de curso por este critério e atribua o resultado a propriedade
@@ -159,7 +254,7 @@ no módulo, em seguida faça uma busca de curso por este critério e atribua o r
       curso = buscarCurso.porCodigo(_curso);
     }
 
-##Implementando o método getMetaPage
+##<a id="0_5"> </a> Implementando o método getMetaPage
 
 Este método é responsável em exibir na parte superior da página informações referentes a entidade,
 formando uma trilha desde a entidade atual até a raiz do sistema, esta trilha é conhecida como
@@ -173,7 +268,7 @@ criando a classe no pacote `br.com.faculdade.ui.page`, atente ao retorno do mét
       return new CursoDetailsPageMeta(curso);
     }
 
-###Implementando DetailsPageMeta
+###<a id="0_6"> </a> Implementando DetailsPageMeta
 
 Ao criar a classe faça com que a mesma extenda AbstractPageMeta, declare um objeto do tipo curso,
 gere o construtor da classe e sobrescreva o método `pageMetaFor`.
@@ -203,7 +298,7 @@ da aplicação.
 Já o método display é responsável em exibir todo o caminho até a página atual, Basta uma leitura
 rápida no bloco onde o método é chamado para perceber o que o mesmo faz.
 
-##Implementando DetailsPage.html
+##<a id="0_7"> </a> Implementando DetailsPage.html
 
 Tudo está praticamente pronto basta implementar o arquivo html responsável em exibir as informações 
 de um curso na tela. Crie o arquivo CursoDetailsPage.html no mesmo pacote onde foi criada a classe
@@ -236,3 +331,5 @@ CursoDetailsPage, atente a forma como o arquivo html exibe as propriedades de cu
     no html o prefixo get é omitido utilizando-se apenas o nome da propriedade a ser acessada, repare
     que todas as propriedades que estão sendo exibidas possuem getters na interface da entidade Curso.
 </div>
+
+<p>Leia mais uma vez! <a href="#topo" class="btn btn-warning">Revisar!</a></p>

@@ -81,7 +81,7 @@ exibir todas as propriedades desta entidade através de seu getter.
 
 ##Implementando o método get
 
-Este método é responsável em capturar parâmetros da url e utilizá-los para buscar um entidade no
+Este método é responsável em capturar parâmetros da url e utilizá-los para buscar uma entidade no
 banco de dados, sempre que uma página de detalhes for acessada a classe java que representa esta
 página será chamada e o método get será o primeiro método a ser carregado, pois o mesmo é responsável
 em popular a propriedade curso declarada no topo da classe.
@@ -92,10 +92,44 @@ em popular a propriedade curso declarada no topo da classe.
 
 <div class="alert alert info">
 	Dica ao implementar o método get é muito importante que o mesmo possua a anotação @Get, com esta
-	anotação todas as vezes que o link da página for acessado o método que for anotado com get será
-	carregado.
+	anotação todas as vezes que o link da página for acessado ou seja uma solicitação http do tipo
+	get for realizada o método que for anotado com get será carregado.
 </div>
 
-Para que seja possível exibir todas as informações de um Curso em sua página de detalhes é preciso
-buscar um curso no banco de dados dado algum tipo de valor que virá da url, não se esqueça que este
-valor deve ser único no banco de dados, caso contrário não será possível exibir os dados de curso.
+É necessário criar um link na página de curso que redirecione o usuário do sistema para a página de
+detalhes de curso, para isso abra a tabela de curso criada ao implementar o serviço de Curso e 
+adicione um link em uma propriedade única de curso.
+
+<html>
+<body>
+  @ShowIf(dtos.isEmpty())
+  <p>Nenhum resultado encontrado.</p>
+
+  @ShowIf(!dtos.isEmpty())
+  <table>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Quantidade de Turmas</th>
+      </tr>
+    </thead>
+    <tbody>
+      @Repeat(items=dtos, var="dto")
+      <tr>
+        <td><a href="faculdade/curso/${dto.codigo}">${dto.codigo}</a></td>
+        <td>${dto.nome}</td>
+        <td>${dto.numTurmas}</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
+
+<div class="alert alert info">
+	Importante: A propriedade ${dto.codigo} que foi adicionada no link deve existir na interface
+	ConsultaDeCursoDTO, caso contrário uma excessão será lançada reclamando que o método em questão
+	não existe.
+</div>
+
+##Implementando o método get - parte 2

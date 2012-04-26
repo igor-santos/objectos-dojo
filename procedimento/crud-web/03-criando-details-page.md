@@ -6,8 +6,8 @@ user: "MarcosPiazzolla"
 date: "2012-03-09"
 published: true 
 partof: procedimento-crud-web
-num: 1
-outof: 1
+num: 3
+outof: 3
 ---
 
 #Introdução
@@ -79,7 +79,7 @@ exibir todas as propriedades desta entidade através de seu getter.
 	  return curso;
 	}
 
-##Implementando o método get
+###Implementando o método get
 
 Este método é responsável em capturar parâmetros da url e utilizá-los para buscar uma entidade no
 banco de dados, sempre que uma página de detalhes for acessada a classe java que representa esta
@@ -100,31 +100,31 @@ em popular a propriedade curso declarada no topo da classe.
 detalhes de curso, para isso abra a tabela de curso criada ao implementar o serviço de Curso e 
 adicione um link em uma propriedade única de curso.
 
-<html>
-<body>
-  @ShowIf(dtos.isEmpty())
-  <p>Nenhum resultado encontrado.</p>
-
-  @ShowIf(!dtos.isEmpty())
-  <table>
-    <thead>
-      <tr>
-        <th>Código</th>
-        <th>Nome</th>
-        <th>Quantidade de Turmas</th>
-      </tr>
-    </thead>
-    <tbody>
-      @Repeat(items=dtos, var="dto")
-      <tr>
-        <td><a href="faculdade/curso/${dto.codigo}">${dto.codigo}</a></td>
-        <td>${dto.nome}</td>
-        <td>${dto.numTurmas}</td>
-      </tr>
-    </tbody>
-  </table>
-</body>
-</html>
+	<html>
+	<body>
+	  @ShowIf(dtos.isEmpty())
+	  <p>Nenhum resultado encontrado.</p>
+	
+	  @ShowIf(!dtos.isEmpty())
+	  <table>
+	    <thead>
+	      <tr>
+	        <th>Código</th>
+	        <th>Nome</th>
+	        <th>Quantidade de Turmas</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      @Repeat(items=dtos, var="dto")
+	      <tr>
+	        <td><a href="faculdade/curso/${dto.codigo}">${dto.codigo}</a></td>
+	        <td>${dto.nome}</td>
+	        <td>${dto.numTurmas}</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</body>
+	</html>
 
 <div class="alert alert info">
 	Importante: A propriedade ${dto.codigo} que foi adicionada no link deve existir na interface
@@ -132,4 +132,75 @@ adicione um link em uma propriedade única de curso.
 	não existe.
 </div>
 
-##Implementando o método get - parte 2
+###Alterando o módulo do projeto
+
+<div class="alert alert-danger">Melhore isso.</div>
+
+Abra o módulo do projeto e...
+
+Após adiocionar o link para a página de detalhes de Curso na __TabelaDeCurso__ é preciso adicionar
+um bind no módulo para o link definido na tabela, com este bind será possível ligar a classe java ao 
+arquivo html, ou seja, sempre que for realizada uma solicitação a URL definida na tabela, existirá
+uma classe java que será responsável em fazer algo em relação a solicitção, por exemplo, popular
+uma entidade e alimentar uma página html. Atente a alteração realizada no módulo.
+
+    protected void bindPage() {
+      at(/faculdade/curso/:curso).show(CursoDetailsPage.class);
+    }
+
+Repare que foi adicionado um caracter coringa após curso, o valor de `:curso` será alterado de
+acordo com o tipo de página de curso que for acessada.
+
+###Finalizando o método get
+
+De volta ao método get adicione como parâmetro do mesmo o caracter coringa da url recém adicionada
+no método, em seguida faça uma busca de curso por este critério e atribua o resultado a propriedade
+`curso` definida anteriormente.
+
+    @Get
+    public void get(@Named("curso") String _curso){
+      curso = buscarCurso.porCodigo(_curso);
+    }
+
+##Implementando o método getMetaPage
+
+Este método é responsável em exibir na parte superior da página informações referentes a entidade,
+formando uma trilha desde a entidade atual até a raiz do sistema, esta trilha é conhecida como
+breadcrumb.
+
+Ajuste o retorno do método para que o mesmo retorne uma __CursoDetailsPageMeta__ e certifique-se de
+enviar um curso como parâmetro do construtor da classe a ser criada, corrija o erro de compilação 
+criando a classe no pacote `br.com.faculdade.ui.page`, atente ao retorno do método 
+
+    public MetaPageScript getMetaPage() {
+      return new CursoDetailsPageMeta(curso);
+    }
+
+###Implementando DetailsPageMeta
+
+Ao criar a classe faça com que a mesma extenda AbstractPageMeta, declare um objeto do tipo curso,
+gere o construtor da classe e sobrescreva o método `pageMetaFor`.
+
+    public class CursoDetailsPageMeta extends AbstractPageMeta {
+      
+      private final Curso curso;
+      
+      public CursoDetailsPageMeta(Curso curso) {
+        this.curso = curso;
+      }
+      
+      @Override
+      public void pageMetaFor() {
+        install(new CursoPageMeta());
+        
+        display(curso.getNome()).onClick("faculdade", "curso", curso.getCodigo);
+      }
+      
+    }
+
+Atenção aos métodos install e display, ambos responsáveis na exibição dos breadcrumbs, install
+sempre deve chamar um page meta anterior ao page meta atual, tome como exemplo CursoDetailsPageMeta 
+que deve chamar CursoPageMeta que provavelmente chamará IndexPageMeta definindo o caminho até a raiz
+da aplicação.
+
+Já o método display é responsável em exibir todo o caminho até a página atual, 

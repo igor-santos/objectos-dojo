@@ -11,8 +11,8 @@ outof: 2
 ---
 
 ## <a id="TOPO"> </a> Introdução
-Qualquer _website_ possui uma página (em geral) com a extensão _.html_ responsáveis por modelar o 
-seu design. Elas também possuem boa parte de códigos _JavaScript (JQuery)_ que possibilitam o ]
+Qualquer _website_ possui uma página (em geral) com a extensão _.html_ responsável por modelar o 
+seu design. Elas também possuem boa parte de códigos _JavaScript (JQuery)_ que possibilitam o 
 entendimento dos serviços descritos no artigo anterior e outras funcionalidades.
 
 É muito importante que o _design_ das páginas seja bem elaborado e elegante, lembre-se que, em 
@@ -27,28 +27,28 @@ Para acessar os tópicos siga o checklist abaixo:
       <a id="topo_0_0"><input type="checkbox" /></a>
     </td>
     <td>
-      <a href="#0_0">Criando a classe BasePage</a>
+      <a href="#0_0">Criando a BasePage</a>
     </td>
   </tr>
-    <tr>
+  <tr>
     <td class="tac col2em">
       <a id="topo_0_1"><input type="checkbox" /></a>
     </td>
     <td>
-      <a href="#0_1">Criando a página BasePage</a>
+      <a href="#0_1">Criando a IndexPage</a>
     </td>
   </tr>
-      <tr>
+  <tr>
     <td class="tac col2em">
       <a id="topo_0_2"><input type="checkbox" /></a>
     </td>
     <td>
-      <a href="#0_2">Criando a classe IndexPage</a>
+      <a href="#0_2">Criando o CursoPage</a>
     </td>
   </tr>
 </table>
 
-## <a id="0_0"> </a>Criando a classe BasePage
+## <a id="0_0"> </a>Criando a BasePage
 Utilizaremos o mesmo exemplo dos artigos anteriores para maior entendimento (Aluno, curso e faculdade)
 Semelhante as classes de serviço, devemos criar um classe base junto a _annotation_ `@Show`
 
@@ -61,7 +61,7 @@ URL base, entre outros itens.
 
 Defina uma constante que será o nosso tipo de arquivo ( _html_ ) e uma variável `Bricks`
 
-Nota 1: As classes e páginas a serem criadas devem estar no pacote `ui.page` do projeto
+Nota 1: As classes e páginas a serem criadas devem estar no pacote `ui.page` do projeto<br>
 Nota 2: Se no projeto em que estiver trabalhando já existir um _Bricks_ como `FaculdadeBricks` por
 exemplo, utilize-o (estas classes podem ter métodos de autenticação conforme comentamos)
 
@@ -89,7 +89,6 @@ e suas páginas
 
 	protected abstract MetaPageScript getPageMeta();
  
-## <a id="0_1"> </a>Criando a página BasePage
 Com a classe criada, definiremos o layout da página. Crie um arquivo `BasePage.html` no pacote
 `ui.page`
 
@@ -112,8 +111,8 @@ Com a classe criada, definiremos o layout da página. Crie um arquivo `BasePage.
 Desta forma, nossos códigos e páginas que obtiverem a _annotation_ `@Decorated` deverão aparecer
 dentro da _tag div_ descrito acima, sendo assim, manteremos um padrão do layout das páginas 	
 
-## <a id="0_2"> </a>Criando a classe IndexPage
-Da mesma do _BasePage_, definiremos a página que será exibida ( _IndexPage.html_ ) 
+## <a id="0_1"> </a>Criando IndexPage
+Da mesma forma que em _BasePage_, definiremos a página que será exibida ( _IndexPage.html_ ) 
 
 	@Show("IndexPage.html")
 	public class IndexPage {
@@ -130,3 +129,146 @@ Da mesma do _BasePage_, definiremos a página que será exibida ( _IndexPage.htm
 	  }
 	
 	}
+	
+E uma classe `IndexPageMeta` que estende a `AbstractPageMeta`  (as _Pages_ sempre irão precisar destas duas classes)
+	
+	public class IndexPageMeta extends AbstractPageMeta {
+	
+	  @Override
+	  protected void pageMetaFor() {
+	    display("Faculdade").onClick("");
+	  }
+	
+	}
+	
+E também o arquivo _.html_ `IndexPage.html` que será nossa página principal da Faculdade
+
+	<!doctype html>
+	<html>
+	
+	<head>
+	<script type="text/javascript"></script>
+	<title>Faculdade</title>
+	</head>
+	
+	<body>
+	
+	    <div>
+	      <ul>
+	        <li>
+	          <a href="${bricks.baseUrl}">Faculdade</a>
+	        </li>
+	      </ul>
+	    </div>
+	
+	</body>
+
+    </html>
+
+Note que agora usamos aquele métogo _get_ de _bricks_ na página.
+
+## <a id="0_2"> </a>Criando o CursoPage
+Partiremos para a construção de uma página que poderá listar os cursos desta faculdade e, futuramente,
+listar os alunos de um determinado curso (utilizaremos este exemplo no próximo artigo)
+
+É importante ressaltar que para realizar uma consulta, devemos ter um serviço.<br> 
+Adotaremos como  existente o `ServicoDeCurso`.
+
+Crie a classe CursoPage, torne-a subclasse de BasePage definida anteriormente e implemente os seus métodos
+
+	@Decorated
+	public class CursoPage extends BasePage {
+	
+	  @Inject
+	  public CursoPage(Bricks bricks) {
+	    super(bricks);
+	  }
+	
+	  @Override
+	  protected MetaPageScript getPageMeta() {
+	    return new CursoPageMeta();
+	  }
+	
+	}
+
+Neste código você verá a _annotation_ `@Decorated` comentada na página do item anterior.
+
+Utilize o atalho para criação da nova classe `CursoPageMeta`, isto é, `Ctrl + 1`.
+
+Estando na classe `CursoPageMeta` torne-a subclasse de `AbstractPageMeta` da mesma forma que 
+`IndexPageMeta`
+
+
+	public class CursoPageMeta extends AbstractPageMeta {
+	
+	  @Override
+	  protected void pageMetaFor() {
+	    install(new IndexPageMeta());
+	
+	    display("Curso").onClick("curso");
+	  }
+	
+	}
+	
+No método _install_ criamos um objeto _IndexPageMeta_ que será a origem desta página atual. O mesmo
+pode ocorrer quando definirmos o `CursoDetailsPageMeta` que, irá instanciar `CursoPageMeta`.
+
+Para finalizar, criaremos a _Page_ `CursoPage.html`
+
+	<!doctype html>
+	<html>
+	<head>
+	@Require
+	<script type="text/javascript">
+	  window.addEvent('domready', function() {
+	    new Page({
+ 	      panels : [ {
+            id : 'content',
+	
+	        url : Bricks.baseUrl + 'api/bd/faculdade/curso'
+	      } ]
+	    });
+	  });
+	</script>
+	</head>
+	<body>
+	
+	  <div id="content" class="content"></div>
+	
+	</body>
+	</html>
+	
+Quando esta _Page_ for acessada pela URL que definiremos no módulo, ela executará o serviço de curso
+(existente) e ele, por sua vez, listará todos os cursos desta faculdade através das tabelas do serviço.
+ 
+ Só nos resta definir estas classes no módulo `ModuloFaculdadeUI`
+ 
+	@Override
+	protected void bindApi() {
+	  at("/api/bd/faculdade/curso").serve(ServicoDeCurso.class);
+	  at("/api/bd/faculdade/curso/:curso/aluno").serve(ServicoDeAluno.class);
+	}
+	
+	@Override
+	protected void bindPages() {
+	  at("/").show(IndexPage.class);
+	  at("/faculdade/curso").show(CursoPage.class);
+	}	
+ 
+ Para conseguirmos listar todos os alunos de um determinado curso (nosso objetivo principal) devemos criar
+ uma página de detalhes do curso.
+ 
+Mais informações acesse os códigos nos links abaixo:
+
+[BasePage.html](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/main/java/br/com/objectos/dojo/taguiar/BasePage.html)<br>
+[BasePage.java](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/main/java/br/com/objectos/dojo/taguiar/BasePage.java)<br>
+[IndexPage.html](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/main/java/br/com/objectos/dojo/taguiar/IndexPage.html)<br>
+[IndexPage.java](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/main/java/br/com/objectos/dojo/taguiar/IndexPage.java)<br>
+[IndexPageMeta.java](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/main/java/br/com/objectos/dojo/taguiar/IndexPageMeta.java)<br>
+[CursoPage.html](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/main/java/br/com/objectos/dojo/taguiar/CursoPage.html)<br>
+[CursoPage.java](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/main/java/br/com/objectos/dojo/taguiar/CursoPage.java)<br>
+[CursoPageMeta.java](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/main/java/br/com/objectos/dojo/taguiar/CursoPageMeta.java)<br>
+[ModuloFaculdadeUI.java](https://github.com/objectos/objectos-dojo/tree/master/objectos-dojo-team/src/main/java/br/com/objectos/dojo/taguiar/ModuloFaculdadeUI.java)<br>
+ 
+Siga para o próximo passo. Details Page! <a href="{{ site.baseurl }}/procedimento/crud-web/" class="btn btn-success">Continuar!</a><br>
+Leia mais uma vez! <a href="#TOPO" class="btn btn-warning">Revisar!</a>

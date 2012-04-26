@@ -15,7 +15,7 @@ outof: 3
 Ao trabalhar com aplicações web é muito comum a implementação de views, componentes gráficos que
 são responsáveis em dar um feedback ao usuário, as views são páginas html que contém listagens ou
 algum tipo de informação que vem do banco de dados tome como exemplo de view as páginas de detalhes 
-no artigo de implementação de pages.
+no artigo implementando pasges.
 
 ##Details Page?
 
@@ -40,14 +40,14 @@ e dê o nome de CursoDetailsPage.
 </div>
 
 Adicione a anotação `@Decorated` na classe para ligá-la ao arquivo html que será responsável em 
-realizar a exibição dos dados da entidade, não se esqueça de estender a classe __BasePage__.
+realizar a exibição dos dados da entidade e não se esqueça de estender a classe __BasePage__.
 
 	@Decorated
 	public class CursoDetailsPage extends BasePage {
 	}
 
 Provavelemte sua IDE irá lançar alguns erros de compilação corrijá-os adicionando o construtor da
-classe sem a propriedade Curso e o método getMetaPage(), deixe retornando __null__ por hora.
+classe sem a propriedade Curso e o método getMetaPage(), deixe-o retornando __null__ por hora.
 
 	@Inject
 	public CursoDetailsPage(FaculdadeBricks bricks, BuscarCurso buscarCurso) {
@@ -83,8 +83,8 @@ exibir todas as propriedades desta entidade através de seu getter.
 
 Este método é responsável em capturar parâmetros da url e utilizá-los para buscar uma entidade no
 banco de dados, sempre que uma página de detalhes for acessada a classe java que representa esta
-página será chamada e o método get será o primeiro método a ser carregado, pois o mesmo é responsável
-em popular a propriedade curso declarada no topo da classe.
+página será chamada, em seguida o método get será carregado, pois o mesmo é responsável em popular
+a propriedade `curso` declarada no topo da classe.
 
 	@Get
 	public void get(){
@@ -92,13 +92,13 @@ em popular a propriedade curso declarada no topo da classe.
 
 <div class="alert alert info">
 	Dica ao implementar o método get é muito importante que o mesmo possua a anotação @Get, com esta
-	anotação todas as vezes que o link da página for acessado ou seja uma solicitação http do tipo
-	get for realizada o método que for anotado com get será carregado.
+	anotação todas as vezes que o link da página for acessado, ou seja, uma solicitação HTTP do tipo
+	Get for realizada o método que for anotado com @Get será carregado.
 </div>
 
 É necessário criar um link na página de curso que redirecione o usuário do sistema para a página de
 detalhes de curso, para isso abra a tabela de curso criada ao implementar o serviço de Curso e 
-adicione um link em uma propriedade única de curso.
+adicione um link em uma propriedade única de curso, código em nosso caso.
 
 	<html>
 	<body>
@@ -127,22 +127,19 @@ adicione um link em uma propriedade única de curso.
 	</html>
 
 <div class="alert alert info">
-	Importante: A propriedade ${dto.codigo} que foi adicionada no link deve existir na interface
-	ConsultaDeCursoDTO, caso contrário uma excessão será lançada reclamando que o método em questão
-	não existe.
+	Importante: A propriedade ${dto.codigo} que foi adicionada no link deve existir na interface, ou
+	seja deve existir um getCodgio na interface ConsultaDeCursoDTO, caso contrário uma excessão será
+	lançada reclamando que o método em questão não existe.
 </div>
 
 ###Alterando o módulo do projeto
 
-<div class="alert alert-danger">Melhore isso.</div>
-
-Abra o módulo do projeto e...
-
-Após adiocionar o link para a página de detalhes de Curso na __TabelaDeCurso__ é preciso adicionar
+Após adicionar o link para a página de detalhes de Curso na __TabelaDeCurso__ é preciso adicionar
 um bind no módulo para o link definido na tabela, com este bind será possível ligar a classe java ao 
 arquivo html, ou seja, sempre que for realizada uma solicitação a URL definida na tabela, existirá
 uma classe java que será responsável em fazer algo em relação a solicitção, por exemplo, popular
-uma entidade e alimentar uma página html. Atente a alteração realizada no módulo.
+uma entidade e alimentar uma página html. Abra o módulo do projeto __ModuloFaculdadeUI__ e
+realize a seguinte alteração.
 
     protected void bindPage() {
       at(/faculdade/curso/:curso).show(CursoDetailsPage.class);
@@ -154,7 +151,7 @@ acordo com o tipo de página de curso que for acessada.
 ###Finalizando o método get
 
 De volta ao método get adicione como parâmetro do mesmo o caracter coringa da url recém adicionada
-no método, em seguida faça uma busca de curso por este critério e atribua o resultado a propriedade
+no módulo, em seguida faça uma busca de curso por este critério e atribua o resultado a propriedade
 `curso` definida anteriormente.
 
     @Get
@@ -166,11 +163,11 @@ no método, em seguida faça uma busca de curso por este critério e atribua o r
 
 Este método é responsável em exibir na parte superior da página informações referentes a entidade,
 formando uma trilha desde a entidade atual até a raiz do sistema, esta trilha é conhecida como
-breadcrumb.
+__breadcrumb__.
 
-Ajuste o retorno do método para que o mesmo retorne uma __CursoDetailsPageMeta__ e certifique-se de
+Ajuste o retorno do método para que o mesmo retorne um __CursoDetailsPageMeta__ e certifique-se de
 enviar um curso como parâmetro do construtor da classe a ser criada, corrija o erro de compilação 
-criando a classe no pacote `br.com.faculdade.ui.page`, atente ao retorno do método 
+criando a classe no pacote `br.com.faculdade.ui.page`, atente ao retorno do método.
 
     public MetaPageScript getMetaPage() {
       return new CursoDetailsPageMeta(curso);
@@ -199,7 +196,7 @@ gere o construtor da classe e sobrescreva o método `pageMetaFor`.
     }
 
 Atenção aos métodos install e display, ambos responsáveis na exibição dos breadcrumbs, install
-sempre deve chamar um page meta anterior ao page meta atual, tome como exemplo CursoDetailsPageMeta 
+sempre deve chamar um page meta anterior ao page meta atual, tome como exemplo CursoDetailsPageMeta
 que deve chamar CursoPageMeta que provavelmente chamará IndexPageMeta definindo o caminho até a raiz
 da aplicação.
 
@@ -236,6 +233,6 @@ CursoDetailsPage, atente a forma como o arquivo html exibe as propriedades de cu
 
 <div class="alert alert info">
     Importante: As propriedades são acessadas na classe CursoDetailsPage através do método getCurso(),
-    no html prefixo get é omitido é utilizado apenas o nome da propriedade a ser acessada, repare
-    que todas as propriedades que estão sendo exibidas possuem getters na interface da entidade.
+    no html o prefixo get é omitido utilizando-se apenas o nome da propriedade a ser acessada, repare
+    que todas as propriedades que estão sendo exibidas possuem getters na interface da entidade Curso.
 </div>

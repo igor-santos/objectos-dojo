@@ -313,7 +313,7 @@ CursoDetailsPage, atente a forma como o arquivo html exibe as propriedades de cu
 	    <div class="row">
 	      <div class="span6">
 	        <dl>
-	          <dt>Código</dt>
+	          <dt>C&oacute;digo</dt>
 	          <dd>${curso.codigo}</dd>
 	          <dt>Nome</dt>
 	          <dd>${curso.nome}</dd>

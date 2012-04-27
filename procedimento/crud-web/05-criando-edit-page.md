@@ -12,12 +12,12 @@ outof: 5
 
 ## Introdução
 
+<div class="alert alert-danger">Melhore a introdução, mencione que o edit page chama o form, etc.</div>
+
 Em aplicações que trabalham com banco de dados é muito comum a realização de rotinas do tipo update 
 pois as informações tendem a mudar com o passar do tempo, para realização deste tipo de operação
 existem componentes gráficos como formulários, que são responsáveis em armazenar informações que
 futuramente serão enviadas ao banco de dados onde será realizado o processo de update.
-
-<div class="alert alert-danger">Melhore a introdução, mencione que o edit page chama o form, etc.</div>
 
 ## Edit Page ?
 
@@ -27,6 +27,8 @@ parecido com uma página de criação, a única diferença entre ambos é a oper
 edição é acessada em relação à página de criação.
 
 ## Criando a classe java que representa a página html
+
+<div class="alert alert-danger">Diminua o tamanho disso, seja mais direto e claro!.</div>
 
 Primeiramente crie a classe __CursoEditPage__ no pacote `br.com.projeto.ui.page`, o mesmo pacote
 onde foram definidas as outras pages, certifique-se de que sua classe extenda a página de detalhes
@@ -92,10 +94,34 @@ utilizado para uma navegação simples entre os recursos do sistema.
 Não se esqueça de enviar um curso como parâmetro ao construtor da classe, ele será utilizado na
 exibição de informações de curso na parte superior da página de edição.
 
-### Implementando a classe EditPageMeta
+## Implementando a classe EditPageMeta
 
-Ao criar a classe faça com que a mesma extenda o details page da entidade que será atualizada no
-banco de dados, em nosso caso CursoEditPageMeta extenderá CursoDetailsPageMeta
+Ao criar a classe certifique-se de que a mesma extenda AbstractPageMeta, corrija os erros de
+compilação adicionando métodos e construtor da classe não se esquecendo de declarar uma propriedade
+do tipo curso.
 
-	public class CursoEditPageMeta extends CursoDetailsPageMeta {
-	} 
+	public class CursoEditPageMeta extends AbstractPageMeta {
+	  
+	  private final Curso curso;
+	  
+	  public CursoEditPageMeta(Curso curso) {
+	    this.curso = curso;
+	  }
+	  
+	  protected void pageMetaFor() {
+	    install(new CursoDetailsPageMeta(curso));
+	    
+	    display("Editar").onClick("faculdade", "curso", curso.getCodigo(), "editar");
+	  }
+	  
+	}
+
+Atenção as chamadas aos métodos `install` e `display` em pageMetaFor, ambos são responsáveis em
+exibir na tela o caminho até a página atual, equanto install exibe todo o caminho até
+__CursoDetailsPage__, display exibe o restante do caminho até a página atual.
+
+<div class="alert alert info">
+	Dica: Sempre que implementar um Edit Page certifique-se de que o método install chame o
+	DetailsPageMeta da entidade que estiver trabalhando.
+</div>
+

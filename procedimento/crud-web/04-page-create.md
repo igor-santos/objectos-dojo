@@ -190,7 +190,7 @@ Esta classe terá todos os métodos definidos em `CursoPage`, porém, com um mé
 	  }
 	
 	  public String getFormAction() {
-	    return bricks.getBaseUrl() + "/api/crud/curso";
+	    return getBricks().getBaseUrl() + "/api/crud/curso";
 	  }
 	
 	  @Override

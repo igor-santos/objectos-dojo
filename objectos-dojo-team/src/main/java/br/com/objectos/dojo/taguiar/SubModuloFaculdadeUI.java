@@ -28,4 +28,6 @@ public abstract class SubModuloFaculdadeUI extends SitebricksModule {
 
   protected abstract void bindPages();
 
+  protected abstract void bindBricks();
+
 }

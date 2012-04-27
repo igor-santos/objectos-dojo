@@ -22,6 +22,7 @@ public class ModuloFaculdadeUI extends SubModuloFaculdadeUI {
 
   @Override
   protected void bindApiCrud() {
+    at("api/crud/faculdade/curso").serve(FormDeCursoCreate.class);
     at("api/crud/faculdade/curso/:curso/aluno").serve(FormDeAlunoCreate.class);
     at("api/crus/faculdade/curso/:curso/aluno/:aluno").serve(FormDeAlunoUpdate.class);
   }
@@ -36,6 +37,12 @@ public class ModuloFaculdadeUI extends SubModuloFaculdadeUI {
   protected void bindPages() {
     at("/").show(IndexPage.class);
     at("/faculdade/curso").show(CursoPage.class);
+    at("/faculdade/curso/criar").show(CursoCreatePage.class);
+  }
+
+  @Override
+  protected void bindBricks() {
+    embed(FormDeCurso.class).as("FormDeCurso");
   }
 
 }

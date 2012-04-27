@@ -24,17 +24,6 @@ Para acessar os tópicos do artigo siga o checklist abaixo:
 <table class="table table-bordered">
   <tr>
     <td class="tac col2em">
-      <a id="topo_0_0"><input type="checkbox" /></a>
-    </td>
-    <td>
-      Edit Page ?
-    </td>
-    <td>
-      <a href="#0_0">help!</a>
-    </td>    
-  </tr>
-  <tr>
-    <td class="tac col2em">
       <a id="topo_0_1"><input type="checkbox" /></a>
     </td>
     <td>
@@ -132,9 +121,20 @@ Para acessar os tópicos do artigo siga o checklist abaixo:
       <a href="#0_9">help!</a>
     </td>
   </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Finalizando
+    </td>
+    <td>
+      <a href="#0_10">help!</a>
+    </td>
+  </tr>
 </table>
 
-## <a id="0_0"> </a> Edit Page ?
+## Edit Page ?
 
 Este artigo tem como objetivo a implementação de páginas de edição, este tipo de página é bem
 parecido com uma página de criação, a única diferença entre ambos é a operação
@@ -330,5 +330,30 @@ Abra o módulo do projeto e adicione os binds para os arquivos criados nos segui
 	private void bindPages() {
 	  at("/bd/faculdade/curso/:curso/editar").show(CursoEditPage.class);
 	}
+
+## <a id="0_10"> </a> Finalizando
+
+Agora basta adicionar o botão que acessa o edit page em CursoDetailsPage, abra o arquivo html
+correspondente e adicione o botão logo acima da exibição dos detalhes de Curso.
+
+      <div class="span4">
+        <div class="meta">
+          <h3>Detalhes</h3>
+
+          <ul class="unstyled meta-actions">
+            <li>
+              <a id="edit-btn" href="${curso.codigo}/editar" class="btn small danger">editar</a>
+            </li>
+          </ul>
+        </div>
+        <dl>
+          <dt>Código</dt>
+          <dd>${curso.codigo}</dd>
+          <dt>Nome</dt>
+          <dd>${curso.nome}</dd>
+        </dl>
+      </div>
+
+    </div>
 
 <p>Leia mais uma vez! <a href="#topo" class="btn btn-warning">Revisar!</a></p>

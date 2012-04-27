@@ -7,7 +7,6 @@ date: "2012-04-26"
 published: true
 partof: procedimento-crud-web
 num: 2
-outof: 2
 ---
 
 ## <a id="TOPO"> </a> Introdução
@@ -24,6 +23,7 @@ Este item exige conhecimentos sobre:
 
 - HTML
 - SiteBricks
+- Serviço
 
 ## Especificação
 
@@ -111,7 +111,7 @@ Para acessar os tópicos siga o checklist abaixo:
 </table>
 
 ## <a id="0_2"> </a>Criando a BasePage
-Utilizaremos o mesmo exemplo dos artigos anteriores para maior entendimento (Aluno, curso e faculdade)
+Utilizaremos o mesmo exemplo dos artigos anteriores para maior entendimento (Aluno, curso e faculdade).<br>
 Semelhante as classes de serviço, devemos criar um classe base junto a _annotation_ `@Show`
 
 	@Show("BasePage.html")
@@ -124,8 +124,9 @@ URL base, entre outros itens.
 Defina uma constante que será o nosso tipo de arquivo ( _html_ ) e uma variável `Bricks`
 
 Nota 1: As classes e páginas a serem criadas devem estar no pacote `ui.page` do projeto<br>
-Nota 2: Se no projeto em que estiver trabalhando já existir um _Bricks_ como `FaculdadeBricks` por
-exemplo, utilize-o (estas classes podem ter métodos de autenticação conforme comentamos)
+Nota 2: Se no projeto em que estiver trabalhando já existir um _NomeDoProjetoBricks_ como 
+`FaculdadeBricks`, utilize-o (estas classes podem ter métodos de autenticação das páginas
+conforme comentamos na especificação).
 
 	@Show("BasePage.html")
 	public abstract class BasePage {
@@ -136,14 +137,14 @@ exemplo, utilize-o (estas classes podem ter métodos de autenticação conforme 
 	
 	}
 	
-Utilize o atalho `Alt + S` depois a tecla `A` para criar o construtor	
+Utilize o atalho `Alt + S` depois a tecla `A` para criar o construtor.	
 
 	protected BasePage(Bricks bricks) {
 	  this.bricks = bricks;
 	}
 	
 Crie um método _get_ para _bricks_ e um método abstrato no qual será utilizado pelas subclasses	
-e suas páginas 
+e suas páginas. 
 
 	public Bricks getBricks() {
 	  return bricks;
@@ -171,10 +172,10 @@ Com a classe criada, definiremos o layout da página. Crie um arquivo `BasePage.
 	</html>
 	
 Desta forma, nossos códigos e páginas que obtiverem a _annotation_ `@Decorated` deverão aparecer
-dentro da _tag div_ descrito acima, sendo assim, manteremos um padrão do layout das páginas 	
+dentro da _tag div_ descrito acima, sendo assim, conseguimos manter um padrão do layout das páginas. 	
 
 ## <a id="0_3"> </a>Criando IndexPage
-Da mesma forma que em _BasePage_, definiremos a página que será exibida ( _IndexPage.html_ ) 
+Da mesma forma que em _BasePage_, definiremos a página inicial que será exibida ( _IndexPage.html_ ). 
 
 	@Show("IndexPage.html")
 	public class IndexPage {
@@ -231,12 +232,13 @@ Note que agora usamos aquele métogo _get_ de _bricks_ na página.
 
 ## <a id="0_4"> </a>Criando o CursoPage
 Partiremos para a construção de uma página que poderá listar os cursos desta faculdade e, futuramente,
-listar os alunos de um determinado curso (utilizaremos este exemplo no próximo artigo)
+listar os alunos de um determinado curso e seus detalhes (utilizaremos este exemplo no próximo artigo).
 
-É importante ressaltar que para realizar uma consulta, devemos ter um serviço.<br> 
-Adotaremos como  existente o `ServicoDeCurso`.
+É importante ressaltar que para realizar uma listagem de uma entidade, devemos ter um serviço, uma
+consulta e uma tabela. Adotaremos como  existente o `ServicoDeCurso`.
 
-Crie a classe CursoPage, torne-a subclasse de BasePage definida anteriormente e implemente os seus métodos
+Crie a classe `CursoPage`, torne-a subclasse de `BasePage` definida anteriormente e implemente os
+seguinte métodos:
 
 	@Decorated
 	public class CursoPage extends BasePage {
@@ -253,9 +255,9 @@ Crie a classe CursoPage, torne-a subclasse de BasePage definida anteriormente e 
 	
 	}
 
-Neste código você verá a _annotation_ `@Decorated` comentada na página do item anterior.
+Neste código você verá a _annotation_ `@Decorated` comentada no arquivo _.html_ do item anterior.
 
-Utilize o atalho para criação da nova classe `CursoPageMeta`, isto é, `Ctrl + 1`.
+Utilize o atalho para criação da nova classe `CursoPageMeta`, `Ctrl + 1`.
 
 Estando na classe `CursoPageMeta` torne-a subclasse de `AbstractPageMeta` da mesma forma que 
 `IndexPageMeta`
@@ -315,8 +317,9 @@ Quando esta _Page_ for acessada pela URL que definiremos no módulo, ela executa
 	protected void bindPages() {
 	  at("/").show(IndexPage.class);
 	  at("/faculdade/curso").show(CursoPage.class);
-	}	
- 
+	}
+	
+
  Para conseguirmos listar todos os alunos de um determinado curso (nosso objetivo principal) devemos criar
  uma página de detalhes do curso.
  

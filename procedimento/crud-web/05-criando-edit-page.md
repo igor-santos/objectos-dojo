@@ -71,3 +71,31 @@ módulo do projeto para o form de update da entidade.
 	  
 	  return String.format("%s/api/crud/faculdade/curso/%s", baseUrl, curso.getCodigo());
 	}
+
+Como foi definida uma url para acessar um recurso da aplicação é essencial a utilização de uma
+propriedade do tipo __Bricks__ para capturar a url base do sistema, além do mais estamos definindo
+no método uma url que utiliza um caracter coringa por conta disso o método `getCurso` de
+CursoDetailsPage foi chamado, para que seja possível capturar a propriedade `codigo` e criar a url através
+do método<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html#format%28java.util.Locale,%20java.lang.String,%20java.lang.Object...%29">
+format</a> da classe String.
+
+### Implementando o método getMetaPage
+
+Este método vem da superclasse e deve ser sobrescrito para que retorne um CursoEditPageMeta que é
+responsável em exibir na página web o caminho do recurso que está sendo acessado no momento, isso é
+utilizado para uma navegação simples entre os recursos do sistema.
+
+	public MetaPageScript getMetaPage() {
+	  return new CursoEditPageMeta(getCurso());
+	}
+
+Não se esqueça de enviar um curso como parâmetro ao construtor da classe, ele será utilizado na
+exibição de informações de curso na parte superior da página de edição.
+
+### Implementando a classe EditPageMeta
+
+Ao criar a classe faça com que a mesma extenda o details page da entidade que será atualizada no
+banco de dados, em nosso caso CursoEditPageMeta extenderá CursoDetailsPageMeta
+
+	public class CursoEditPageMeta extends CursoDetailsPageMeta {
+	} 

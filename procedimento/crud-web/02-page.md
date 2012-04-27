@@ -7,6 +7,7 @@ date: "2012-04-26"
 published: true
 partof: procedimento-crud-web
 num: 2
+outof: 2
 ---
 
 ## <a id="TOPO"> </a> Introdução
@@ -14,40 +15,102 @@ Qualquer _website_ possui uma página (em geral) com a extensão _.html_ respons
 seu design. Elas também possuem boa parte de códigos _JavaScript (JQuery)_ que possibilitam o 
 entendimento dos serviços descritos no artigo anterior e outras funcionalidades.
 
-É muito importante que o _design_ das páginas seja bem elaborado e elegante, lembre-se que, em 
+É muito importante que o _design_ das páginas fiquem bem elaborado e elegante, lembre-se que, em 
 determinadas situações o site poderá ser o reflexo de seu trabalho, da sua personalidade, e ninguém 
 se sentirá confortável em navegar em um site "feio".
+
+## Antes de iniciar 
+Este item exige conhecimentos sobre:
+
+- HTML
+- SiteBricks
+
+## Especificação
+
+Siga o checklist abaixo:
+<table class="table table-bordered">
+ <tr>
+   <td class="tac col2em">
+    <a id="topo_0_0"><input type="checkbox" /></a>
+   </td>
+   <td>
+	<a href="#0_0">O que deve ser exibido nas páginas?</a>  
+   </td>
+ </tr>
+ <tr>
+   <td class="tac col2em">
+    <a id="topo_0_1"><input type="checkbox" /></a>
+   </td>
+   <td>
+	<a href="#0_1">Precisamos detalhar estas páginas?</a>  
+   </td>
+ </tr>
+</table>
+
+## <a id="0_0"> </a>O que deve ser exibido nas páginas?
+Chegamos em um item crucial, isto é, a partir de agora, tudo que for inserido nas páginas o seu 
+cliente poderá ver, em outras palavras, o resultado de seu trabalho (algo mais concreto daquilo 
+que ele esperava).
+
+Para evitar diversos problemas como manutenção em códigos, é importante saber o que o cliente
+deseja/espera visualizar na página (além da funcionalidade).
+
+Tais questões como as seguintes devem estar claras para o desenvolvedor:
+- A página poderá ter acesso a todos usuários?
+- A página terá botões como _Incluir_ , _Excluir_ ou _Editar_ a entidade em questão?
+- Terá os detalhes (características) daquela determinada entidade?
+
+Você poderá absorver (ou não) de seu cliente tais respostas que facilitem o seu trabalho desde o
+primeiro procedimento (entender o problema de  seu cliente de uma forma mais abstrata) até o último
+passo que são as páginas concretas junto a funcionalidade.
+
+## <a id="0_1"> </a>Precisamos detalhar estas páginas?
+As páginas de detalhes possibilitam o usuário visualizar informações mais específicas de uma entidade.
+Imagine o seguinte cenário: Uma página de internet já possue a listagem de todos os cursos de uma
+determinada faculdade e cada curso possui um _link_ para as suas respectivas páginas de detalhes onde
+listam os alunos que fazem aquele curso mais os seus detalhes que poderiam ser:
+
+- Nome do curso
+- Disciplinas
+- Tempo
+- Ranking no MEC
+
+Em outros casos, não há a necessidade de detalhes como a página inicial do site, a página de cadastro,
+entre outras.
+
+Procure se informar o tipo de exibição primeiro para depois decidir se haverá a necessidade de uma
+página de detalhes conhecida como _DetailsPage_.
 
 ## Acesso rápido
 Para acessar os tópicos siga o checklist abaixo:
 <table class="table table-bordered">
   <tr>
     <td class="tac col2em">
-      <a id="topo_0_0"><input type="checkbox" /></a>
-    </td>
-    <td>
-      <a href="#0_0">Criando a BasePage</a>
-    </td>
-  </tr>
-  <tr>
-    <td class="tac col2em">
-      <a id="topo_0_1"><input type="checkbox" /></a>
-    </td>
-    <td>
-      <a href="#0_1">Criando a IndexPage</a>
-    </td>
-  </tr>
-  <tr>
-    <td class="tac col2em">
       <a id="topo_0_2"><input type="checkbox" /></a>
     </td>
     <td>
-      <a href="#0_2">Criando o CursoPage</a>
+      <a href="#0_2">Criando a BasePage</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_3"><input type="checkbox" /></a>
+    </td>
+    <td>
+      <a href="#0_3">Criando a IndexPage</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_4"><input type="checkbox" /></a>
+    </td>
+    <td>
+      <a href="#0_4">Criando o CursoPage</a>
     </td>
   </tr>
 </table>
 
-## <a id="0_0"> </a>Criando a BasePage
+## <a id="0_2"> </a>Criando a BasePage
 Utilizaremos o mesmo exemplo dos artigos anteriores para maior entendimento (Aluno, curso e faculdade)
 Semelhante as classes de serviço, devemos criar um classe base junto a _annotation_ `@Show`
 
@@ -110,7 +173,7 @@ Com a classe criada, definiremos o layout da página. Crie um arquivo `BasePage.
 Desta forma, nossos códigos e páginas que obtiverem a _annotation_ `@Decorated` deverão aparecer
 dentro da _tag div_ descrito acima, sendo assim, manteremos um padrão do layout das páginas 	
 
-## <a id="0_1"> </a>Criando IndexPage
+## <a id="0_3"> </a>Criando IndexPage
 Da mesma forma que em _BasePage_, definiremos a página que será exibida ( _IndexPage.html_ ) 
 
 	@Show("IndexPage.html")
@@ -166,7 +229,7 @@ E também o arquivo _.html_ `IndexPage.html` que será nossa página principal d
 
 Note que agora usamos aquele métogo _get_ de _bricks_ na página.
 
-## <a id="0_2"> </a>Criando o CursoPage
+## <a id="0_4"> </a>Criando o CursoPage
 Partiremos para a construção de uma página que poderá listar os cursos desta faculdade e, futuramente,
 listar os alunos de um determinado curso (utilizaremos este exemplo no próximo artigo)
 

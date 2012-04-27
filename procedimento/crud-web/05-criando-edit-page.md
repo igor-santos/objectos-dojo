@@ -10,21 +10,138 @@ num: 5
 outof: 5
 ---
 
-## Introdução
+##<a id="topo"> </a> Introdução
 
 Em aplicações que utilizam banco de dados é muito comum a realização de rotinas do tipo update,
 pois as informações tendem a mudar com o passar do tempo, para a realização deste tipo de operação
 existem componentes gráficos como formulários, responsáveis em armazenar informações que futuramente
 serão enviadas ao banco de dados onde será realizado o processo de update
 
-## Edit Page ?
+## Acesso rápido
+
+Para acessar os tópicos do artigo siga o checklist abaixo:
+
+<table class="table table-bordered">
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_0"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Edit Page ?
+    </td>
+    <td>
+      <a href="#0_0">help!</a>
+    </td>    
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Criando a classe java que representa a página html
+    </td>
+    <td>
+      <a href="#0_1">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Implementando o método getFormAction
+    </td>
+    <td>
+      <a href="#0_2">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Implementando o método getMetaPage
+    </td>
+    <td>
+      <a href="#0_3">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Implementando a classe EditPageMeta
+    </td>
+    <td>
+      <a href="#0_4">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Habilitando a página na web
+    </td>
+    <td>
+      <a href="#0_5">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Crie a classe que corresponde ao form
+    </td>
+    <td>
+      <a href="#0_6">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Crie o formulário html
+    </td>
+    <td>
+      <a href="#0_7">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Crie o html do edit page
+    </td>
+    <td>
+      <a href="#0_8">help!</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="tac col2em">
+      <a id="topo_0_1"><input type="checkbox" /></a>
+    </td>
+    <td>
+      Alterando o módulo
+    </td>
+    <td>
+      <a href="#0_9">help!</a>
+    </td>
+  </tr>
+</table>
+
+## <a id="0_0"> </a> Edit Page ?
 
 Este artigo tem como objetivo a implementação de páginas de edição, este tipo de página é bem
 parecido com uma página de criação, a única diferença entre ambos é a operação
 <a href="http://pt.wikipedia.org/wiki/CRUD">CRUD</a> que é realizada e a forma como a página de
 edição é acessada em relação à página de criação.
 
-## Criando a classe java que representa a página html
+## <a id="0_1"> </a> Criando a classe java que representa a página html
 
 Crie a classe __CursoEditPage__ no pacote `br.com.faculdade.ui.page`, e certifique-se de que a mesma
 extenda a página de detalhes da entidade na qual será realizada o update, em nosso caso Curso.
@@ -49,7 +166,7 @@ quando a página for chamada.
 	tipo curso que será utilizada em CursoEditPageMeta.
 </div>
 
-### Implementando o método getFormAction
+### <a id="0_2"> </a> Implementando o método getFormAction
 
 Ainda em CursoEditPage é preciso implementar o método getFormAction que é responsável em definir a
 url para o form que será responsável em realizar o processo de update de curso, repare que esta url
@@ -69,7 +186,7 @@ CursoDetailsPage foi chamado, para que seja possível capturar a propriedade `co
 do método<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html#format%28java.util.Locale,%20java.lang.String,%20java.lang.Object...%29">
 format</a> da classe String.
 
-### Implementando o método getMetaPage
+### <a id="0_3"> </a> Implementando o método getMetaPage
 
 Este método vem da superclasse e deve ser sobrescrito para que retorne um CursoEditPageMeta que é
 responsável em exibir na página web o caminho do recurso que está sendo acessado no momento.
@@ -81,7 +198,7 @@ responsável em exibir na página web o caminho do recurso que está sendo acess
 Não se esqueça de enviar um curso como parâmetro ao construtor da classe, ele será utilizado na
 exibição de informações de curso na parte superior da página de edição.
 
-### Implementando a classe EditPageMeta
+### <a id="0_4"> </a> Implementando a classe EditPageMeta
 
 Ao criar a classe certifique-se de que a mesma extenda AbstractPageMeta, corrija os erros de
 compilação adicionando métodos e construtor da classe não se esquecendo de declarar uma propriedade
@@ -112,13 +229,13 @@ __CursoDetailsPage__, display exibe o restante do caminho até a página atual.
 	DetailsPageMeta da entidade que estiver trabalhando.
 </div>
 
-## Habilitando a página na web
+## <a id="0_5"> </a> Habilitando a página na web
 
 Após implementar as classes que representão o __EditPage__ é preciso habilitar o form na web, para
 isso é preciso implementar o form html, uma classe auxiliar que representa o form e o arquivo html
 que equivale ao edit page de curso, essas três implementações foram separadas em tópicos abaixo. 
 
-### Crie a classe que corresponde ao form
+### <a id="0_6"> </a> Crie a classe que corresponde ao form
 
 Antes de criar o arquivo html correspondente ao form crie a classe que representa o form em
 `br.com.faculdade.ui.api.crud` e certifique-se de que a classe extenda FormAbstrato, como esta
@@ -143,7 +260,7 @@ de adicionar a validação no retorno do método como é feito acima.
 </div>
 
 
-### Crie o formulário html
+### <a id="0_7"> </a> Crie o formulário html
 
 No pacote `br.com.faculdade.ui.api.crud` crie o html correspondente ao form, atente a sua implementação.
 
@@ -177,7 +294,7 @@ No pacote `br.com.faculdade.ui.api.crud` crie o html correspondente ao form, ate
 	</body>
 	</html>
 
-### Crie o html do edit page
+### <a id="0_8"> </a> Crie o html do edit page
 
 Crie no pacote `br.com.faculdade.ui.page.bd` o html que corresponde a página de edição
 
@@ -202,7 +319,7 @@ Crie no pacote `br.com.faculdade.ui.page.bd` o html que corresponde a página de
 	será lançada dizendo que o método em questão não existe.
 </div>
 
-## Alterando o módulo
+## <a id="0_9"> </a> Alterando o módulo
 
 Abra o módulo do projeto e adicione os binds para os arquivos criados nos seguintes métodos
 
@@ -213,3 +330,5 @@ Abra o módulo do projeto e adicione os binds para os arquivos criados nos segui
 	private void bindPages() {
 	  at("/bd/faculdade/curso/:curso/editar").show(CursoEditPage.class);
 	}
+
+<p>Leia mais uma vez! <a href="#topo" class="btn btn-warning">Revisar!</a></p>

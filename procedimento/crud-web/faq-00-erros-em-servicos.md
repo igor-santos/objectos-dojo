@@ -7,7 +7,6 @@ date: "2012-03-09"
 published: true 
 partof: faq-crud-web
 num: 0
-outof: 1
 ---
 
 ## Erros em Serviços

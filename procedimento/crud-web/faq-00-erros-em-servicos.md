@@ -33,9 +33,9 @@ Para este FAQ considere a seguinte a seguinte amostra de código
 
          List<String> res = new ToTableRow(response).get();
          assertThat(res.size(), equalTo(2));
-         assertThat(res.get(0), equalTo("Produto Código"));
-         assertThat(res.get(1), equalTo("Pizza PIZ"));
-         assertThat(res.get(2), equalTo("Refrigerante REF"));
+         assertThat(res.get(0), equalTo("Produto Código Promoção"));
+         assertThat(res.get(1), equalTo("Pizza PIZ true"));
+         assertThat(res.get(2), equalTo("Refrigerante REF false"));
        }
     
     }
@@ -94,7 +94,7 @@ Verifique no terminal se o Jetty ou o jekyll estão em uso, se sim o seguinte _s
 De acordo com o _stacktrace_ a exceção ocorre por conta das aplicações em uso no terminal, basta
 encerrá-las para que o problema seja resolvido.
 
-### Erro 401 - O login fornecido no teste está correto ? 
+### Erro 401: O login fornecido no teste está correto ? 
 
 Verifique se o login fornecido no teste está correto
 
@@ -123,6 +123,23 @@ na classe de teste
     
 Caso o login estiver incorreto, basta substituir o mesmo pelo login correto.
 
+### Erro com html: Conceitos de JavaBeans
 
+Em alguns casos, você pode se deparar com um erro em uma tabela html, com o seguinte _StackTrace_:
 
+	[Near : {... dto.promocao ....}]
+	             ^
+	[Line: 1, Column: 1]
+	at org.mvel2.optimizers.impl.refl.ReflectiveAccessorOptimizer.getBeanProperty(ReflectiveAccessorOptimizer.java
+	at org.mvel2.optimizers.impl.refl.ReflectiveAccessorOptimizer.compileGetChain(ReflectiveAccessorOptimizer.java
+	
+Isto acontece quando o método não utiliza os conceitos de _JavaBeans_ , ou seja, este método
+está com a assinatura `boolean promocao();` ao invés de `boolean isPromocao();`.
 
+Isto se aplica também aos tipos diferentes de _boolean_ (int, Object, long, etc). Porém, a assinatura 
+destes métodos devem ser `getNomeDoMetodo();`
+
+Importante: Apesar das convenções da _Oracle_ aceitar a assinatura `get` para tipos  _boolean_ , algumas _frameworks_ 
+podem não funcionar corretamente, por esta razão, sempre utilize `isNomeDoMetodo` para _boolean_.	
+
+Leia mais sobre _JavaBeans_ [aqui](http://en.wikipedia.org/wiki/JavaBeans#JavaBean_conventions).

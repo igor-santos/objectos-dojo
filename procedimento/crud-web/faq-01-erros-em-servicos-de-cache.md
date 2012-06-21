@@ -48,6 +48,8 @@ Para este FAQ considere a seguinte amostra de código
 
 ###java.lang.AssertionError:Expected: &lt;2L&gt; got: &lt;1L&gt;
 
+### Causa 1
+
 Verifique em seu teste se o método `webClientOf(URL, cookies).post("")` está sendo chamado da maneira 
 correta, não invocando outro método por engano, como:`webClientOf(URL, cookies).get()`.
 
@@ -66,3 +68,25 @@ Caso contrário o seguinte _stacktrace_ aparecerá:
 	  at br.com.objectos.dojo.cache.TesteDeServicoDeCacheDeCliente.servico_deve_invalidar_cache(TesteDeServicoDeCacheDeCliente.java:70)
 
 Assim percebemos que o erro estava na chamada incorreta ao método `webClientOf(URL, cookies).post("")`.
+
+### Causa 2
+
+Verifique na classe que corresponde a cache na qual o serviço invalida se a mesma foi anotada com
+`@Singleton`.
+
+	@Singleton
+	class CacheDeClienteGuice implements CacheDeCliente {
+		
+	}
+
+Caso contrário o seguinte _stacktrace_ aparecerá:
+
+    java.lang.AssertionError: 
+    Expected: <2L>
+    got: <1L>
+
+  	  at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:21)
+	  at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
+	  at br.com.objectos.dojo.cache.TesteDeServicoDeCacheDeCliente.servico_deve_invalidar_cache(TesteDeServicoDeCacheDeCliente.java:70)
+
+Percebemos que o erro ocorria por conta da ausência da anotação `@Singleton` na cache.

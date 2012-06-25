@@ -14,7 +14,7 @@ outof: 2
 ### O que é grep ?
 
 Grep é uma ferramenta Unix que busca palavras em um arquivo dado uma série de parâmetros, através
-do grep é possível buscar linhas ou até mesmo blocos contendo a(s) palavra(s) especificadas.
+do grep é possível buscar linhas ou até mesmo blocos contendo a(s) palavra(s) especificada(s).
 
 ### Antes de começar
 
@@ -55,7 +55,8 @@ nos interessam.
 ## Filtrando suas buscas com o grep
 
 Algumas vezes ao procurar uma palavra em um arquivo é possível que o grep acabe retornando linhas
-que contém parte da informação especificada no comando, resultando em uma busca ruim, atente abaixo.
+que contém parte da informação especificada no comando, resultando em uma busca ruim, atente
+a saída abaixo.
 
 	$grep "Lucas Andre" lista.txt
 	
@@ -64,7 +65,7 @@ que contém parte da informação especificada no comando, resultando em uma bus
 	Lucas Andre
 
 Para evitar este tipo de resultado utilize o parâmetro `-w` que retorna todas as linhas que batem
-com o parâmetro fornecido.
+com o parâmetro fornecido na busca.
 	
 	$grep -w "Lucas Andre" lista.txt
 	
@@ -79,3 +80,8 @@ utilize o operador `>`.
 	grep "Lucas Andre" lista.txt > exit.txt
 	
 Com isso um novo arquivo será criado contendo o resultado da busca realizada pelo grep.
+
+	cat exit.txt
+	
+	Lucas Andre
+	Lucas Andre

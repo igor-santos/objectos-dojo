@@ -5,7 +5,6 @@ author: "Marcos Piazzolla"
 published: true
 partof: processo
 num: 3
-outof: 3
 ---
 
 ##Introdução

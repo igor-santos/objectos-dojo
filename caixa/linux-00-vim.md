@@ -6,7 +6,6 @@ user: "mpiazzolla"
 published: true
 partof: linux
 num: 0
-outof: 0
 ---
 
 ## Um pouco de História 

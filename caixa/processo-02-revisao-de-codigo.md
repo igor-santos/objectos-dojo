@@ -5,7 +5,6 @@ author: "Hellen Carla Paixão Escarate"
 published: true
 partof: processo
 num: 2
-outof: 2
 ---
 
 No tópico anterior, você praticou exercícios sobre integração contínua, e antes disso, praticou o dojo de TDD. 

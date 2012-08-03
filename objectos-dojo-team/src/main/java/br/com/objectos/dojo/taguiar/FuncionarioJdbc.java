@@ -15,9 +15,15 @@
  */
 package br.com.objectos.dojo.taguiar;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.validation.constraints.NotNull;
 
 import org.joda.time.LocalDate;
+
+import br.com.objectos.comuns.relational.jdbc.GeneratedKeyCallback;
+import br.com.objectos.comuns.relational.jdbc.Insert;
 
 /**
  * @author tiago.aguiar@objectos.com.br (Tiago Aguiar)
@@ -51,8 +57,24 @@ public class FuncionarioJdbc implements Funcionario {
     dataDeDemissao = construtor.getDataDeDemissao();
     regimeDeContratacao = construtor.getRegimeDeContratacao();
   }
-
+  
   @Override
+  public Insert getInsert() {
+    return Insert.into("BANCO.TABELA")
+      .value("NOME", nome)
+      .value("DATA_NASCIMENTO", dataDeNascimento)
+      .value("DATA_ADMISSAO", dataDeAdmissao)
+      .value("REGIME", regimeDeContratacao.name())
+      
+      .onGeneratedKey(new GeneratedKeyCallback() {
+		@Override
+		public void set(ResultSet rs) throws SQLException {
+	      id = rs.next() ? rs.getInt(1) : 0;
+		}
+	});
+  }
+
+@Override
   public int getId() {
     return id;
   }

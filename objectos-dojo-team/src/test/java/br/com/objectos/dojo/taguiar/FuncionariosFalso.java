@@ -15,14 +15,16 @@
 */
 package br.com.objectos.dojo.taguiar;
 
+import java.util.List;
+
 import org.joda.time.LocalDate;
+
+import static com.google.common.collect.Lists.newArrayList;;
 
 /**
  * @author tiago.aguiar@objectos.com.br (Tiago Aguiar)
  */
 public class FuncionariosFalso {
-  
-  private FuncionariosFalso() {}
   
   public static final Funcionario FUNCIONARIO_1 = nova()
       .id(1)
@@ -41,7 +43,25 @@ public class FuncionariosFalso {
       .dataDeAdmissao(new LocalDate(2012, 2, 1))
       .regimeDeContratacao(Contrato.CLT)
       .novaInstancia();
+  
+  private static final List<Funcionario> todos = newArrayList();
+
+  static {
+    reset();
+  }
+
+  public static void reset() {
+    todos.clear();
+    todos.add(FUNCIONARIO_1);
+    todos.add(FUNCIONARIO_2);
+  }
       
+  private FuncionariosFalso() {}
+	  
+  public static List<Funcionario> getTodos() {
+    return todos;
+  }
+	  
   private static ConstrutorDeFuncionarioFalso nova() {
     return new ConstrutorDeFuncionarioFalso();
   }

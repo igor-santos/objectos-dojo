@@ -106,6 +106,6 @@ public class ConstrutorDeFuncionarioFalso implements Funcionario.Construtor {
   @Override
   public Contrato getRegimeDeContratacao() {
     return regimeDeContratacao;
-  }             
+  }
 
 }

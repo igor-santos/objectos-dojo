@@ -17,10 +17,12 @@ package br.com.objectos.dojo.taguiar;
 
 import org.joda.time.LocalDate;
 
+import br.com.objectos.comuns.relational.jdbc.Insertable;
+
 /**
  * @author tiago.aguiar@objectos.com.br (Tiago Aguiar)
  */
-public interface Funcionario {
+public interface Funcionario extends Insertable {
 
   interface Construtor extends br.com.objectos.comuns.base.Construtor<Funcionario> {
  

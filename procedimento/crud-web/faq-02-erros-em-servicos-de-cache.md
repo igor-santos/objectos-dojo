@@ -6,8 +6,7 @@ user: "MarcosPiazzolla"
 date: "2012-06-06"
 published: true 
 partof: faq-crud-web
-num: 1
-outof: 1
+num: 2
 ---
 
 ## Erros em Serviços de Cache

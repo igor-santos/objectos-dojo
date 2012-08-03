@@ -405,14 +405,17 @@ Entre na branch __cenario_reset__.
 
     $ git checkout cenario_reset
 
-Ao invés de fazer o procedimento de checkout do capítulo anterior, existe a opção de executar todo ele em apenas 2 comandos! O ``git reset --hard`` e o ``git push --force``.
+Ao invés de fazer o procedimento de checkout do capítulo anterior, existe a opção de executar todo ele em apenas 2 comandos!
+O ``git reset --hard`` e o ``git push --force``.
 
-Sabemos já que o último _commit_ válido é `426bca1b80fd19e22d5f3fb31f49b3f15698142f`. Use o comando abaixo para que ele se torne o `HEAD` (último _commit_ ) da sua _branch_.
+Sabemos já que o último _commit_ válido é `426bca1b80fd19e22d5f3fb31f49b3f15698142f`. Use o comando abaixo para que ele se 
+torne o `HEAD` (último _commit_ ) da sua _branch_.
 
     $ git reset --hard 426bca1b80fd19e22d5f3fb31f49b3f15698142f
     HEAD is now at 426bca1 first commit
 
- A opção `--hard` faz com que todos os arquivos no _stage_, que ainda não foram para um _commit_, sejam apagados. Em contrapartida, existe a opção `--soft`.
+A opção `--hard` faz com que todos os arquivos no _stage_, que ainda não foram para um _commit_, sejam apagados. Em contrapartida, 
+existe a opção `--soft`.
 
 Feita a alteração do `HEAD`, faça o _push_ para _origin_. Claro que você só conseguirá isso usando o argumento `--force`.
 
@@ -423,7 +426,8 @@ Feita a alteração do `HEAD`, faça o _push_ para _origin_. Claro que você só
 
 Feito isso, verifique no Github.
 
-Nesse caso, você apontou o _commit_ HEAD de sua _branch_ para o último _commit_ válido antes do _merge_, e mandou essa alteração de histórico para a origem remota. Pode-se concluir que trata-se uma solução análoga à de checkout.__
+Nesse caso, você apontou o _commit_ HEAD de sua _branch_ para o último _commit_ válido antes do _merge_, e mandou essa alteração de
+histórico para a origem remota. Pode-se concluir que trata-se uma solução análoga à de checkout.
 
 ### 3. O git rebase -i
 

@@ -6,8 +6,8 @@ user: "MarcosPiazzolla"
 date: 2012-04-12
 published: true 
 partof: faq-crud-forms
-num: 3
-outof: 3
+num: 4
+outof: 4
 ---
 
 ## Utilizando classes vazias na implementação dos forms

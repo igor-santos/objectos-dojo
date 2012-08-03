@@ -6,8 +6,7 @@ user: "taguiar"
 date: "2012-04-05"
 published: true
 partof: procedimento-crud-forms
-num: 1
-outof: 1
+num: 2
 ---
 
 ## <a id="TOPO"> </a> Introdução
@@ -126,7 +125,7 @@ atualizações.
 	private static final String URL = "api/crud/faculdade/curso/direito/aluno/11";
 	
 ### <a id="0_4"> </a>Preparar o método de teste: acesso a um usuário não autenticado
-Idêntico ao método do _Form Create e com o mesmo objetivo.
+Idêntico ao método do _Form Create_ e com o mesmo objetivo.
 
     public void acesso_a_usuario_nao_autenticado_deve_ser_negado() {
       WebResponse response = webClientOf(URL).put("");

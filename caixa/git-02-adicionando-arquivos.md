@@ -26,11 +26,11 @@ Podemos entender o conceito de _branch_, como se traduz do inglês, algo como "r
 
 Vamos criar uma _branch_:
 
-    $ git branch nova_funcionalidade
+    $ git branch novafuncionalidade
 
 Muito bem, sua primeira _branch_ está criada. É importante destacar que no nome da _branch_ sempre deve ter 
 seu login de rede + o número da "atividade" ficando claro o que ela faz.<br> 
-Exemplo: `Usuario_01: nova_funcionalidade`. Para os exemplos a seguir, omitiremos o nome do usuário. 
+Exemplo: `Usuario_01: novafuncionalidade`. Para os exemplos a seguir, omitiremos o nome do usuário. 
 
 Agora, execute: 
 
@@ -40,24 +40,24 @@ Podemos ver que o comando acima lista todas as _branches_ existentes, e a _branc
 significa que não estamos na _branch_ que acabamos de criar, então vamos trocar de _branch_: 
 
 	* master
-    nova_funcionalidade
+    novafuncionalidade
 
 Para trocar a _branch_ faça:
 
-    $ git checkout nova_funcionalidade
+    $ git checkout novafuncionalidade
 
 Para confirmar se estamos nessa _branch_ mesmo, execute novamente: 
 
     $ git branch
     master
-    * nova_funcionalidade
+    * novafuncionalidade
 
 Agora sim, estamos na _branch_ que desejamos, e podemos trabalhar.
 
 Há como cria a _branch_ e já deixá-la selecionada para uso, assim fazemos os dois passos acima usando apenas uma
 linha!
 
-	$ `git checkout -b nova_funcionalidade`
+	$ `git checkout -b novafuncionalidade`
 
 # Criando arquivos
 Vamos então criar um novo diretório, onde vamos adicionar arquivos. Esse diretório deve ter o nome do projeto,
@@ -85,7 +85,7 @@ Digite o código abaixo:
 Como podemos ver na mensagem abaixo, o `git status` nos mostra o _status_ do diretório em que
 estamos trabalhando. 
 
-    # On branch nova_funcionalidade
+    # On branch novafuncionalidade
     # Untracked files:
     #   (use "git add <file>..." to include in what will be committed)
     #
@@ -99,7 +99,7 @@ Podemos ver que existem arquivos que ainda não foram adicionados ao controle de
 Agora execute novamente o comando `git status`:
 
     $ git status
-    # On branch nova_funcionalidade
+    # On branch novafuncionalidade
     # Changes to be committed:
     #   (use "git reset HEAD <file>..." to unstage)
     #
@@ -154,7 +154,7 @@ então, se listarmos os _commits_ saberemos exatamente o que cada atualização 
 Vamos ao Github no _fork_ do nosso projeto. Veja se aparece esse arquivo que acabamos de criar, o config.txt. 
 
 Não esqueça que você precisa selecionar a _branch_ na qual está fazendo essas atualizações, como podemos observar na
-imagem abaixo, provavelmente a _branch_ selecionada deve ser a _master_, então escolha a branch _nova_funcionalidade_
+imagem abaixo, provavelmente a _branch_ selecionada deve ser a _master_, então escolha a branch _novaFuncionalidade_
 
 ![selecionando branch](https://github.com/objectos/objectos-dojo-img/blob/master/github/14_escolhendobranch.png?raw=true)
 
@@ -178,13 +178,13 @@ Esse é o nosso próximo passo!
  
 Pra adicionar as alterações e/ou criações de arquivos, precisamos do `add`, `commit` e `push`: 
 
-    $ git push origin nova_funcionalidade
+    $ git push origin novafuncionalidade
     
 Importante: Ao realizar o `git push` a senha cadastrada anteriormente será solicitada. Digite-a para
 concluir o `push`.    
 
-Como vc pode observar no comando acima, estamos especificando que o _push_ deve ser apenas na _branch_ nova_funcionalidade.
-Dessa forma o _fork_ original que fizemos do projeto não será alterado, apenas a _branch_ nova_funcionalidade. 
+Como vc pode observar no comando acima, estamos especificando que o _push_ deve ser apenas na _branch_ novafuncionalidade.
+Dessa forma o _fork_ original que fizemos do projeto não será alterado, apenas a _branch_ novafuncionalidade. 
 
 Agora volte ao Github, e confira se realmente essas atualizações aparecem!
 
@@ -197,7 +197,7 @@ Você lembra qual o próximo passo que devemos dar?
 Isso mesmo, verificar o status:
 
     $ git status
-    # On branch nova_funcionalidade
+    # On branch novafuncionalidade
     # Changed but not updated:
     #   (use "git add <file>..." to update what will be committed)
     #   (use "git checkout -- <file>..." to discard changes in working directory)
@@ -235,7 +235,7 @@ E `1` ou `*` para mandar o config.txt para o sistema seguido de `Enter` e depois
 Execute o `git status` novamente: 
 
     $ git status
-    # On branch nova_funcionalidade
+    # On branch novafuncionalidade
     # Changes to be committed:
     #   (use "git reset HEAD <file>..." to unstage)
     #
@@ -253,7 +253,7 @@ Não? Então o que precisamos fazer em seguida?
 
 Isso mesmo, executar o push: 
 
-    $ git push origin nova_funcionalidade
+    $ git push origin novafuncionalidade
 
 E agora, se você verificar no Github está atualizado, ok?
 
@@ -282,8 +282,8 @@ está trabalhando, e uma forma de evitar um pouco os conflitos é trazer essas a
 seu fork do projeto, no qual você está trabalhando, antes de implementar novas funcionalidades. 
 
 Para ficar mais claro, peça para alguém da sua equipe inserir um novo arquivo no projeto original, que deve ser
-chamado de __nova_funcionalidade.txt__, seguido do nome de usuário de quem for criar esse arquivo (no meu caso ficou
-__nova_funcionalidade_hescarate.txt__). 
+chamado de __novafuncionalidade.txt__, seguido do nome de usuário de quem for criar esse arquivo (no meu caso ficou
+__novafuncionalidade_hescarate.txt__). 
 
 A idéia de inserir esse arquivo, é simular como se realmente fosse uma nova funcionalidade no projeto, como uma nova 
 classe, interface, etc. Como comentamos acima, num ambiente de desenvolvimento de software isto acontece com muita
@@ -292,7 +292,7 @@ frequência, pois várias pessoas estão trabalhando em um projeto ao mesmo temp
 Feito isso, vamos usar o `pull`, para trazer as novas atualizações do projeto original para o nosso _fork_ do
 projeto. 
 
-Como estamos trabalhando com a branch __nova_funcionalidade__, se executamos o `pull`, receberemos as atualizações do nosso
+Como estamos trabalhando com a branch __novafuncionalidade__, se executamos o `pull`, receberemos as atualizações do nosso
 próprio _fork_ do projeto, e esse não é o nosso objetivo agora, e sim trazer as atualizações do projeto original. 
 
 Vamos então para a _branch master_ ( _fork_ do nosso projeto):
@@ -313,36 +313,36 @@ a nossa _branch master_ (o _fork_ que demos do projeto original).
 
 Agora as atualizações do projeto original vieram para o nosso _fork_ do projeto. 
 
-Certo, mas como ficam as atualizações que eu fiz na _branch_ __nova_funcionalidade__ (quando criamos o arquivo __config.txt__)?
+Certo, mas como ficam as atualizações que eu fiz na _branch_ __novafuncionalidade__ (quando criamos o arquivo __config.txt__)?
 
 Esse é o nosso próximo passo!
 
-Volte então para a _branch_ __nova_funcionalidade__: 
+Volte então para a _branch_ __novafuncionalidade__: 
 
-    $ git checkout nova_funcionalidade
+    $ git checkout novafuncionalidade
 
-Agora precisamos atualizar o _fork_ do projeto ( _master_ ) com a nova funcionalidade criada na _branch_ __nova_funcionalidade__,
+Agora precisamos atualizar o _fork_ do projeto ( _master_ ) com a nova funcionalidade criada na _branch_ __novafuncionalidade__,
 pra isso vamos usar o `merge`: 
 
     $ git merge master
     Updating e78af0d..91ab9cd
     Fast-forward
-     novafuncionalidade_usuário.txt |    3 +++
-     1 files changed, 3 insertions(+), 0 deletions(-)
-     create mode 100644 config.txt
+    novafuncionalidade_usuário.txt |    3 +++
+    1 files changed, 3 insertions(+), 0 deletions(-)
+    create mode 100644 config.txt
 
 O `merge` converte as mudanças feitas na _branch_, nesse caso a _master_, para a _branch_ a qual que você está executando o comando. 
 
-Agora se você verificar os arquivos contidos na _branch_ __nova_funcionalidade__, vai ver que a nova funcionalidade 
+Agora se você verificar os arquivos contidos na _branch_ __novafuncionalidade__, vai ver que a nova funcionalidade 
 inserida lá no projeto original pelo seu colega de equipe (o arquivo __novafuncionalidade_usuário.txt__) aparece na sua
 branch, pois usamos o `merge`. 
 
-Vá ao Github, no _fork_ do seu projeto, e veja se as atualizações da _branch_ __nova_funcionalidade__ (novo
+Vá ao Github, no _fork_ do seu projeto, e veja se as atualizações da _branch_ __novafuncionalidade__ (novo
 diretório criado _objectos-dojo-seu-usuário_ mais o arquivo config.txt) estão na sua _branch master_. 
 
 Não? Porque?
 
-É necessário agora fazer um `merge` da _master_ com __nova_funcionalidade__, e um `push` dele para _origin_ (a _fork_ do projeto). 
+É necessário agora fazer um `merge` da _master_ com __novafuncionalidade__, e um `push` dele para _origin_ (a _fork_ do projeto). 
 
 Vamos então voltar para a _branch master_:
 
@@ -350,7 +350,7 @@ Vamos então voltar para a _branch master_:
 
 E então vamos fazer o `merge`: 
 
-    $ git merge nova_funcionalidade
+    $ git merge novafuncionalidade
 
 Por fim, vamos mandar as atualizações da nossa _branch master_. 
 
@@ -358,17 +358,17 @@ Por fim, vamos mandar as atualizações da nossa _branch master_.
 
 Vá ao Github e veja se as atualizações realmente estão na _branch master_. 
 
-Certo, agora que você fez o `merge`, não vamos mais precisar da _branch_ __nova_funcionalidade__. Então podemos excluí-la. 
+Certo, agora que você fez o `merge`, não vamos mais precisar da _branch_ __novafuncionalidade__. Então podemos excluí-la. 
 
 Primeiro vamos excluir localmente, mas pra isso você precisa ir para a _branch master_, caso não esteja nela: 
 
-    $ git branch -d nova_funcionalidade
-    Deleted branch nova_funcionalidade (was cb80eee).
+    $ git branch -d novafuncionalidade
+    Deleted branch novafuncionalidade (was cb80eee).
 
 E agora vamos excluir remotamente: 
 
-    $ git push origin :nova_funcionalidade
+    $ git push origin :novafuncionalidade
     To git@github.com:hescarate/objectos-dojo.git
-     - [deleted]         nova_funcionalidade
+     - [deleted]         novafuncionalidade
 
 Pronto, sua branch foi excluída!

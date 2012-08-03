@@ -6,8 +6,8 @@ user: "MarcosPiazzolla"
 date: "2012-04-20"
 published: true 
 partof: faq-crud-web
-num: 2
-outof: 2
+num: 3
+outof: 3
 ---
 
 ##Introdução

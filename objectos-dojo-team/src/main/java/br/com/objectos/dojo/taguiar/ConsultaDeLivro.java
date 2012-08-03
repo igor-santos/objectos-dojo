@@ -85,27 +85,27 @@ public class ConsultaDeLivro {
 
     @Override
     public String getTitulo() {
-      return rs.getString("TITULO");
+      return rs.getString("LIVRO.TITULO");
     }
 
     @Override
     public int getLocalizacao() {
-      return rs.getInt("LOCALIZACAO");
+      return rs.getInt("LIVRO.LOCALIZACAO");
     }
 
     @Override
     public String getAutorPrincipal() {
-      return rs.getString("AUTO_PRINCIPAL");
+      return rs.getString("LIVRO.AUTO_PRINCIPAL");
     }
 
     @Override
     public LocalDate getPublicacao() {
-      return rs.getLocalDate("PUBLICACAO");
+      return rs.getLocalDate("LIVRO.PUBLICACAO");
     }
 
   }
 
-  private class DTO implements ConsultaDeLivroDTO {
+  private static class DTO implements ConsultaDeLivroDTO {
 
     private final String titulo;
     private final int localizacao;

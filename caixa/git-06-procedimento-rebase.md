@@ -10,18 +10,21 @@ outof: 6
 
 ##Introdução
 
-No git temos básicamente duas formas de juntar duas branchs ao projeto principal.
-Neste procedimento vamos utilizar o comando rebase e merge par atualizar nosso projeto.
+No git temos basicamente duas formas de juntar duas ou mais branches ao projeto principal.
+Neste procedimento vamos utilizar o comando rebase e merge para atualizar nosso projeto.
 
 #Estado da branch atual
 
 Nunca é demais verificar se tudo está correto antes de fazermos o rebase.
 Antes de iniciar o processo vamos verificar o estado de nossa branch com o comando `git status`:
 
-    $ On branch rmurad_20_teste
-    $nothing to commit (working directory clean)
+	$ git status
 
-Após verificarmos que não há nada pendente é que vamos fazer push e rodar o jenkis para verificar se há erros na branch:
+    On branch rmurad_20_teste
+    nothing to commit (working directory clean)
+
+Após verificarmos que não há nada pendente é que vamos fazer push e rodar o jenkis para verificar
+se há erros na branch:
 
     ========================
     Tests run: 169, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.836 sec
@@ -37,7 +40,6 @@ Ok não há nehum erro. Vamos para o master para atualizar o repositório local:
 
 	$ git checkout master
 
-    M src/main/webapp/projeto-teste-js/js/objectos-js
     Switched to branch 'master'
 
 Para atualizar o repositório digite:
@@ -46,19 +48,21 @@ Para atualizar o repositório digite:
 
 Resultado:
 
-	From github.com:objectos/factoring
+	From github.com:objectos/projeto-teste
 	 * branch            master     -> FETCH_HEAD
 	Already up-to-date.
 
 
-O próximo passo é voltar para nossa branch e aplicar o comando git rebase que tras os comits do master para nossa branch.
+O próximo passo é voltar para nossa branch e aplicar o comando git rebase que traz os commits do
+master para nossa branch.
 
-	git checkout rmurad_20_teste 
+	$ git checkout rmurad_20_teste
+	 
 	Switched to branch 'rmurad_20_teste'
 
 	$ git rebase master -i
 
-O editor vi para que possamos selecionar os commits que desejamos utilizar no rebase.
+O editor vi será utilizado para que possamos selecionar os commits que desejamos utilizar no rebase.
 
 Exemplo:
 
@@ -86,7 +90,7 @@ Exemplo:
 	
 	 Note that empty commits are commented out
 	~                                                                               
-	<jetos/factoring/.git/rebase-merge/git-rebase-todo" 22L, 792C 2,1          Tudo
+	<objetos/projeto_teste/.git/rebase-merge/git-rebase-todo" 22L, 792C 2,1          Tudo
 	=================================================================================
 
 Esta é a tela do rebase interativo.
@@ -101,22 +105,20 @@ Exemplo:
 	squash 466c221 revisao de codigo
 	squash df70f7c - revisao de código
 
-Ao salvar (:wq no vi) e sair do editor o vi vai reabrir novamente para que possamos fazer a
+Ao salvar (:wq no vi) e sair do editor, o vi vai reabrir novamente para que possamos fazer a
 alteração da mensagem de commit.
 
-Ao sair do vi ainda estamos dentro do processo de rebase. Podemos constatar isso pela mensagem no prompt:
+Ao sair do vi ainda estamos dentro do processo de rebase. Podemos constatar isso pela mensagem no
+prompt:
 
-	(rmurad_20_teste|REBASE-i)
+    (rmurad_20_teste|REBASE-i)
 
-Caso haja conflitos no projeto temos que utilizar a ferramente git diff.
-
-# Testes antes do merge final
-
+Caso existam conflitos no projeto temos que utilizar a ferramente git diff e corrigir os conflitos.
 Feito isso vamos fazer um push do commit e verificar novamente os testes nos jenkis.
 
 	$ git push origin rmurad_20_test --force
 
-Rodamos novamente e teste no jenkis e constatamos que não houveram falhas
+Rodamos novamente os testes no jenkis e constatamos que não houveram falhas
 
 	========================
 	Tests run: 169, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.836 sec
@@ -128,4 +130,12 @@ Rodamos novamente e teste no jenkis e constatamos que não houveram falhas
 	[JENKINS] Gravando resultados de teste# Deploying the attached artifact {0}
 	==============================
 
-Somente após ter certeza que não há nenhum erro na branch podemos ir ao github e fazer o merge do projeto na master.
+Somente após ter certeza que não há nenhum erro na branch podemos ir ao github e fazer o merge
+do projeto na branch master.
+Para realizar o merge siga até a aba _Pull Requests_ no repostitório do projeto no github, clique
+em seu pull request e siga atá o botão _Merge Pull Request_, a seguinte mensagem surgirá:
+
+    Merge pull request #147 from RicardoMurad/rmurad_01_rebase
+    RMURAD_01: habilita artigo de rebase.
+    
+Se tudo estiver correto basta clicar no botão _Confirm Merge_.

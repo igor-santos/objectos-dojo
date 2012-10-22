@@ -5,7 +5,6 @@ author: "Marcos Piazzolla"
 published: true
 partof: git
 num: 5
-outof: 5
 ---
 
 ##Introdução

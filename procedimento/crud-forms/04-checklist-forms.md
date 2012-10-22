@@ -98,9 +98,6 @@ outof: 5
    </td>   
  </tr>
 
-<!-- Forms - implementação -->
-
-
  <tr>
    <td class="tac col2em">
     <a id="topo_0_0"><input type="checkbox" /></a>
@@ -209,9 +206,6 @@ outof: 5
    </td>   
  </tr>
  
- 
- <!-- Html -->
-
  <tr>
    <td class="tac col2em">
     <a id="topo_0_0"><input type="checkbox" /></a>

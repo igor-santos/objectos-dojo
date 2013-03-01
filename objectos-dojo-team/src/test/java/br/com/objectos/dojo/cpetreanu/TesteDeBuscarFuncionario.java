@@ -37,7 +37,7 @@ import com.google.inject.Inject;
  * @author caio.petreanu@objectos.com.br (Caio Petreanu)
  */
 @Test
-@Guice(modules = { ModuloDeTesteObjectosDojo.class })
+@Guice(modules = { DeprecatedModuloDeTesteObjectosDojo.class })
 public class TesteDeBuscarFuncionario {
 
   @Inject

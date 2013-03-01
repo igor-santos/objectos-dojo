@@ -20,7 +20,7 @@ import com.google.inject.AbstractModule;
 /**
  * @author caio.petreanu@objectos.com.br (Caio Petreanu)
  */
-public class ModuloDeTesteObjectosDojo extends AbstractModule {
+public class DeprecatedModuloDeTesteObjectosDojo extends AbstractModule {
 
   @Override
   protected void configure() {

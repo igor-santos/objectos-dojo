@@ -28,7 +28,7 @@ import org.testng.annotations.Test;
 
 import br.com.objectos.comuns.sitebricks.FakeRequestWrapper;
 import br.com.objectos.comuns.testing.dbunit.DBUnit;
-import br.com.objectos.dojo.cpetreanu.ModuloDeTesteObjectosDojo;
+import br.com.objectos.dojo.cpetreanu.DeprecatedModuloDeTesteObjectosDojo;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -37,7 +37,7 @@ import com.google.inject.Inject;
  * @author tiago.aguiar@objectos.com.br (Tiago Aguiar)
  */
 @Test
-@Guice(modules = ModuloDeTesteObjectosDojo.class)
+@Guice(modules = DeprecatedModuloDeTesteObjectosDojo.class)
 public class TesteDeConsultaDeLivro {
   
   @Inject

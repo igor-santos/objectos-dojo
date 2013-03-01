@@ -15,10 +15,12 @@
  */
 package br.com.objectos.dojo.igor;
 
+import br.com.objectos.comuns.relational.jdbc.Insertable;
+
 /**
  * @author igor.santos@objectos.com.br (Igor Vinicius Pereira dos Santos)
  */
-public interface Cliente {
+public interface Cliente extends Insertable {
 
 	interface Construtor extends
 			br.com.objectos.comuns.base.Construtor<Cliente> {

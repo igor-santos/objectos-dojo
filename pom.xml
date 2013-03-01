@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>br.com.objectos</groupId>
 		<artifactId>objectos-comuns-parent</artifactId>
-		<version>2.0.5</version>
+		<version>2.99.10</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>objectos-dojo</artifactId>
@@ -15,11 +15,17 @@
 		<module>objectos-dojo-team</module>
 	</modules>
 	<properties>
-		<objectos.comuns.base.version>2.0.4</objectos.comuns.base.version>
-		<objectos.comuns.dbunit.version>2.0.3</objectos.comuns.dbunit.version>
-		<objectos.comuns.io.version>2.0.1</objectos.comuns.io.version>
-		<objectos.comuns.jdbc.version>2.0.26</objectos.comuns.jdbc.version>
-		<objectos.comuns.sitebricks.version>2.0.14</objectos.comuns.sitebricks.version>
+		<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+		<jdbc.baseUrl>${jdbc.server}:${jdbc.port}</jdbc.baseUrl>
+		<jdbc.db>OBJ_DOJO</jdbc.db>
+		<jdbc.url>${jdbc.baseUrl}/${jdbc.db}</jdbc.url>
+		<jdbc.user>tatu</jdbc.user>
+		<jdbc.password>tatu</jdbc.password>
+		<jetty.home>/opt/jetty</jetty.home>
+		<jetty.version>7.5.4.v20111024</jetty.version>
+		<objectos.comuns.version>2.99.10</objectos.comuns.version>
+		<schema.dir.name>/var/lib/obj</schema.dir.name>
+		<schema.file.name>${project.artifactId}</schema.file.name>
 	</properties>
 	<build>
 		<plugins>
@@ -69,6 +75,12 @@
 			<artifactId>objectos-comuns-sitebricks</artifactId>
 			<version>${objectos.comuns.sitebricks.version}</version>
 			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.objectos</groupId>
+			<artifactId>objectos-comuns-sqlunit</artifactId>
+			<version>${objectos.comuns.sqlunit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

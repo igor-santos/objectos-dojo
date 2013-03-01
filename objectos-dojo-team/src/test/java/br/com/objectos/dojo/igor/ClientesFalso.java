@@ -55,7 +55,14 @@ public class ClientesFalso implements EntitySet {
 			.add(CLIENTE_03)
 			
 			.build();
-			
+
+	ClientesFalso() {
+	}
+
+	public static List<Cliente> getTodos() {
+		return todos;
+	}
+	
 	@Override
 	public void load(SqlUnit sqlUnit) {
 		sqlUnit.batchInsert(todos);
